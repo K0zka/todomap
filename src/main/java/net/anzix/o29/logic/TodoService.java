@@ -6,12 +6,14 @@ import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
 import net.anzix.o29.beans.Todo;
 import net.anzix.o29.beans.TodoCollection;
 
 @Path("/todos/")
+@Produces("application/json")
 public interface TodoService {
 
 	@GET
