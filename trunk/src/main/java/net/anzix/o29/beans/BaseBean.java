@@ -7,10 +7,13 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -20,6 +23,8 @@ import javax.persistence.Transient;
 @Table(name="base")
 public abstract class BaseBean {
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="base_seq")
+	@SequenceGenerator(name="base_seq", allocationSize=1, initialValue=0, sequenceName="base_seq")
 	long id;
 	@OneToMany
 	List<Comment> comments;
