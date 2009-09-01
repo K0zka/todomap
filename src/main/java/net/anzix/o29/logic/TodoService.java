@@ -10,18 +10,17 @@ import javax.ws.rs.Produces;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
 import net.anzix.o29.beans.Todo;
-import net.anzix.o29.beans.TodoCollection;
 
 @Path("/todos/")
 @Produces("application/json")
 public interface TodoService {
 
 	@GET
-	@Path("/todos/{nwx},{nwy},{sex},{sey}")
+	@Path("/area/{nex},{ney},{swx},{swy}")
 	@XmlElementWrapper(name="todos")
-	List<Todo> getTodos(@PathParam("nwx") long nwx,
-			@PathParam("nwy") long nwy, @PathParam("sex") long sex,
-			@PathParam("sey") long sey);
+	List<Todo> getTodos(@PathParam("nex") double nex,
+			@PathParam("ney") double ney, @PathParam("swx") double swx,
+			@PathParam("swy") double swy);
 	
 	@PUT
 	@Path("/new")
@@ -29,6 +28,7 @@ public interface TodoService {
 	
 	@GET
 	@Path("/all")
-	TodoCollection getAllTodos();
+	@XmlElementWrapper(name="todos")
+	List<Todo> getAllTodos();
 
 }
