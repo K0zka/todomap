@@ -17,11 +17,14 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Todo> getTodos(double nex, double ney, double swx, double swy) {
-		//TODO: this is completely wrong, need an implementation.
-		return getAllTodos();
-//		return getJpaTemplate().find(
-//				"select a from " + Todo.class.getName() + " a where a.location.longitude between ? and ? and a.location.latitude between ? and ?", (double)nex,
-//				(double)ney, (double)swx, (double)swy);
+		//TODO: Still not correct implementation, but works until I get a GIS up and running.
+		return getJpaTemplate()
+				.find(
+						"select a from "
+								+ Todo.class.getName()
+								+ " a "
+								+ "where a.location.longitude between ? and ? and a.location.latitude between ? and ?",
+						(double) nex, (double) swx, (double) ney, (double) swy);
 	}
 
 	@Override
