@@ -9,7 +9,6 @@
 <link rel="stylesheet" type="text/css"
 	href="style/jquery-ui-1.7.2.custom.css" media="all" />
 
-<script type="text/javascript" src="scripts/fckeditor-2.6.4.1.js"></script>
 <script type="text/javascript" src="scripts/jquery-1.3.2.js">
 </script>
 <script type="text/javascript" src="scripts/jquery-ui-1.7.2.js">
@@ -52,8 +51,8 @@
         
         map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-		google.maps.event.addListener(map, "dblclick", function() {
-			
+		google.maps.event.addListener(map, "rightclick", function() {
+			$("#newTodo").dialog('open');
         });
 	    
 		google.maps.event.addListener(map, "bounds_changed", function() {
@@ -81,16 +80,23 @@
             //do not close this dialog
         	beforeclose: function(event, ui) { return false; }
            });
-        $("#newTodo").dialog({
+        $("#helpWindow").dialog({
            });
+        $("#helpWindow").dialog('close');
+        $("#newTodo").dialog({
+            modal: true
+           });
+        $("#newTodo").dialog('close');
       });
 
-/*
-var editor = new FCKeditor('newTodoDescription');
-editor.BasePath = "";
-editor.Create();
-*/
-    
+	function submitNewTodo() {
+		console.log('submit new todo');
+	}
+
+	function goHome() {
+		console.log('go home');
+	}
+	
 </script>
 
 
@@ -105,14 +111,18 @@ editor.Create();
 <button id="searchCriteriasButton"><img src="img/search32.png"/></button>
 <button id="infoButton"><img src="img/info32.png"/></button>
 <button id="statisticsButton"><img src="img/math32.png"/></button>
-<button id="helpButton"><img src="img/help32.png"/></button>
+<button id="helpButton" onclick="$(helpWindow).dialog('open')"><img src="img/help32.png"/></button>
+</div>
+
+<div id="helpWindow" title="Help">
+	<iframe src="help.html" style="width: 100%; height: 100%"></iframe>
 </div>
 
 <div id="newTodo" title="New Todo">
 	<form>
 		<textarea id="newTodoDescription" name="newTodoDesription" style="width: 100%; height: 50%"></textarea>
 	</form>
-	<button id="submitNewTodoButton"><img src="img/gear32.png"/></button>
+	<button id="submitNewTodoButton" onclick="submitNewTodo()"><img src="img/gear32.png"/></button>
 </div>
 
 </body>
