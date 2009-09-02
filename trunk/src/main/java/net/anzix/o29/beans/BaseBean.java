@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,9 +27,9 @@ public abstract class BaseBean {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="base_seq")
 	@SequenceGenerator(name="base_seq", allocationSize=1, initialValue=0, sequenceName="base_seq")
 	long id;
-	@OneToMany
+	@OneToMany(fetch=FetchType.LAZY)
 	List<Comment> comments;
-	@OneToMany
+	@OneToMany(fetch=FetchType.LAZY)
 	List<Rating> ratings;
 	
 	@Transient
