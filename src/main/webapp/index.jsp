@@ -9,6 +9,8 @@
 <link rel="stylesheet" type="text/css"
 	href="style/jquery-ui-1.7.2.custom.css" media="all" />
 
+<script type="text/javascript" src="scripts/json.js">
+</script>
 <script type="text/javascript" src="scripts/jquery-1.3.2.js">
 </script>
 <script type="text/javascript" src="scripts/jquery-ui-1.7.2.js">
@@ -17,7 +19,7 @@
 	src="http://maps.google.com/maps/api/js?sensor=false">
 </script>
 <script type="text/javascript">
-    
+
     var map;
 
     (function () {
@@ -90,7 +92,27 @@
       });
 
 	function submitNewTodo() {
+		//TODO: fill the form with real data!
+		var submitData = {todo:{
+			shortDescr: 'TEST',
+			description: 'A TEST todo.',
+			location: {
+				longitude : 1,
+				latitude :  2
+				}
+			}};
+		var strData = JSON.stringify(submitData);
 		console.log('submit new todo');
+		$.ajax({
+			type : 'PUT',
+			url : 'services/todos/new',
+			data: strData,
+			success: function(msg){
+				console.log('Submit ready');
+			},
+			contentType: 'application/json',
+			dataType : 'json'
+			});
 	}
 
 	function goHome() {
