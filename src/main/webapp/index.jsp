@@ -53,7 +53,11 @@
         
         map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-		google.maps.event.addListener(map, "rightclick", function() {
+		google.maps.event.addListener(map, "rightclick", function(event) {
+			document.getElementById("newTodoLat").value = event.latLng.lat();
+			document.getElementById("newTodoLng").value = event.latLng.lng();
+			console.log('lng: '+$("#newTodoLat").val());
+			console.log('lat: '+$("#newTodoLng").val());
 			$("#newTodo").dialog('open');
         });
 	    
@@ -94,11 +98,11 @@
 	function submitNewTodo() {
 		//TODO: fill the form with real data!
 		var submitData = {todo:{
-			shortDescr: 'TEST',
-			description: 'A TEST todo.',
+			shortDescr: $('#newTodoShortDescr').val(),
+			description: $('#newTodoDescription').val(),
 			location: {
-				longitude : 1,
-				latitude :  2
+				longitude : $('#newTodoLng').val(),
+				latitude :  $('#newTodoLat').val()
 				}
 			}};
 		var strData = JSON.stringify(submitData);
@@ -124,16 +128,17 @@
 
 </head>
 <body onload="initialize()" style="margin: 0px; padding: 0px;">
+
 <div style="width: 100%; height: 100%">
-<div id="map_canvas" style="width: 100%; height: 100%"></div>
+	<div id="map_canvas" style="width: 100%; height: 100%"></div>
 </div>
 
 <div id="toolsWindow" title="Tools">
-<button id="homeButton"><img src="img/gohome32.png"/></button>
-<button id="searchCriteriasButton"><img src="img/search32.png"/></button>
-<button id="infoButton"><img src="img/info32.png"/></button>
-<button id="statisticsButton"><img src="img/math32.png"/></button>
-<button id="helpButton" onclick="$(helpWindow).dialog('open')"><img src="img/help32.png"/></button>
+	<button id="homeButton"><img src="img/gohome32.png"/></button>
+	<button id="searchCriteriasButton"><img src="img/search32.png"/></button>
+	<button id="infoButton"><img src="img/info32.png"/></button>
+	<button id="statisticsButton"><img src="img/math32.png"/></button>
+	<button id="helpButton" onclick="$(helpWindow).dialog('open')"><img src="img/help32.png"/></button>
 </div>
 
 <div id="helpWindow" title="Help">
@@ -142,7 +147,15 @@
 
 <div id="newTodo" title="New Todo">
 	<form>
-		<textarea id="newTodoDescription" name="newTodoDesription" style="width: 100%; height: 50%"></textarea>
+		<div>
+			<label for="newTodoShortDescr">Short description</label> <input type="text" name="newTodoShortDescr" id="newTodoShortDescr"/>
+			</div>
+		<div>
+			<label for="newTodoDescription">Details</label>
+			<textarea id="newTodoDescription" name="newTodoDesription" style="width: 100%; height: 50%"></textarea>
+		</div>
+		<input type="hidden" id="newTodoLat" name="newTodoLat"/>
+		<input type="hidden" id="newTodoLng" name="newTodoLng"/>
 	</form>
 	<button id="submitNewTodoButton" onclick="submitNewTodo()"><img src="img/gear32.png"/></button>
 </div>
