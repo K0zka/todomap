@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -17,6 +18,7 @@ public class Todo extends BaseBean {
 	@Column(nullable=false, name="shdsc")
 	String shortDescr;
 	@Column(nullable=false, name="dsc")
+	@Lob
 	String description;
 	public Coordinate getLocation() {
 		return location;
