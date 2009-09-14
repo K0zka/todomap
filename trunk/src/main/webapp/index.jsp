@@ -4,6 +4,7 @@
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link REL="SHORTCUT ICON" HREF="img/earth.ico"/>
 <title>O29</title>
 
 <link rel="stylesheet" type="text/css"
@@ -44,7 +45,7 @@
 
     
     function initialize() {
-        var myLatlng = new google.maps.LatLng(33.956461,118.396225);
+        var myLatlng = new google.maps.LatLng(0,0);
         var myOptions = {
           zoom: 4,
           center: myLatlng,
@@ -56,8 +57,8 @@
 		google.maps.event.addListener(map, "rightclick", function(event) {
 			document.getElementById("newTodoLat").value = event.latLng.lat();
 			document.getElementById("newTodoLng").value = event.latLng.lng();
-			console.log('lng: '+$("#newTodoLat").val());
-			console.log('lat: '+$("#newTodoLng").val());
+//			console.log('lng: '+$("#newTodoLat").val());
+//			console.log('lat: '+$("#newTodoLng").val());
 			$("#newTodo").dialog('open');
         });
 	    
@@ -93,10 +94,17 @@
             modal: true
            });
         $("#newTodo").dialog('close');
+        $("#loginWindow").dialog({
+        });
       });
 
 	function submitNewTodo() {
-		//TODO: fill the form with real data!
+
+//		console.log('submit new todo');
+//		console.log('latitude : ' + $('#newTodoLat').val());
+//		console.log('longitude : ' + $('#newTodoLng').val());
+
+		
 		var submitData = {todo:{
 			shortDescr: $('#newTodoShortDescr').val(),
 			description: $('#newTodoDescription').val(),
@@ -106,21 +114,31 @@
 				}
 			}};
 		var strData = JSON.stringify(submitData);
-		console.log('submit new todo');
+//		console.log('submit new todo');
 		$.ajax({
 			type : 'PUT',
 			url : 'services/todos/new',
 			data: strData,
 			success: function(msg){
-				console.log('Submit ready');
+				$("#newTodo").dialog('close');
 			},
-			contentType: 'application/json',
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				handleErrors(XMLHttpRequest);
+			},
+			processData : false,
+			contentType : 'application/json',
 			dataType : 'json'
 			});
 	}
 
 	function goHome() {
-		console.log('go home');
+//		console.log('go home');
+	}
+
+	function handleErrors(XMLHttpRequest) {
+		if(XMLHttpRequest.status == 401) {
+			$("#loginWindow").dialog('open');
+		}
 	}
 	
 </script>
@@ -143,6 +161,10 @@
 
 <div id="helpWindow" title="Help">
 	<iframe src="help.html" style="width: 100%; height: 100%"></iframe>
+</div>
+
+<div id="loginWindow" title="Log in">
+	<iframe src="openidlogin.jsp" style="width: 100%; height: 100%"></iframe>
 </div>
 
 <div id="newTodo" title="New Todo">
