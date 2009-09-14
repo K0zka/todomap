@@ -50,7 +50,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 								+ Todo.class.getName()
 								+ " a "
 								+ "where a.location.longitude between ? and ? and a.location.latitude between ? and ?",
-						(double) nex, (double) swx, (double) ney, (double) swy)) {
+						(double) ney, (double) swy, (double) nex, (double) swx)) {
 			final TodoSummary todoSummary = new TodoSummary();
 			todoSummary.setId((Long) ((Object[]) row)[0]);
 			todoSummary.setShortDescr((String) ((Object[]) row)[1]);
