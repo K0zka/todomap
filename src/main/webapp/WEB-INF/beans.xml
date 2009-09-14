@@ -20,6 +20,7 @@
 		<jaxrs:serviceBeans>
 			<ref bean="todos"/>
 			<ref bean="users"/>
+			<ref bean="homes"/>
 		</jaxrs:serviceBeans>
 		<!-- 
 		<jaxrs:extensionMappings>
@@ -33,6 +34,10 @@
 	</bean>
 
 	<bean id="users" class="net.anzix.o29.logic.JpaUserServiceImpl">
+		<property name="entityManagerFactory" ref="entityManager" />
+	</bean>
+	
+	<bean id="homes" class="net.anzix.o29.logic.JpaHomeServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
 	</bean>
 
