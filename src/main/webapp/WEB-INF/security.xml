@@ -10,7 +10,7 @@
 		<sec:intercept-url pattern="/"/>
 		<sec:intercept-url pattern="/index.jsp"/>
 		<sec:intercept-url pattern="/login.jsp"/>
-		<sec:openid-login login-page="/openidlogin.jsp" authentication-failure-url="/openidlogin.jsp?error=true"/>
+		<sec:openid-login login-page="/openidlogin.jsp" default-target-url="/login.jsp" authentication-failure-url="/openidlogin.jsp?error=true"/>
 		<sec:remember-me />
 	</sec:http>
 
