@@ -21,6 +21,7 @@
 			<ref bean="todos"/>
 			<ref bean="users"/>
 			<ref bean="homes"/>
+			<ref bean="ratings"/>
 		</jaxrs:serviceBeans>
 		<!-- 
 		<jaxrs:extensionMappings>
@@ -34,6 +35,10 @@
 	</bean>
 
 	<bean id="users" class="net.anzix.o29.logic.JpaUserServiceImpl">
+		<property name="entityManagerFactory" ref="entityManager" />
+	</bean>
+	
+	<bean id="ratings" class="net.anzix.o29.logic.JpaRatingServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
 	</bean>
 	
