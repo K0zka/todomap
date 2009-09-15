@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt' %>
+
 <html>
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
@@ -76,7 +78,16 @@
 					        map: map,
 					        title:val['descr']
 					    });
-						
+					    google.maps.event.addListener(marker, 'click', function() {
+						    $.get("services/todos/byid/"+val['id'], function(data){
+							    var todo = eval("("+data+")");
+						    	var infowindow = new google.maps.InfoWindow({
+						            content: '<h2>'+todo['todo']['shortDescr'] + '</h2><p>' + todo['todo']['description'] + '</p>'
+						        });
+						        infowindow.open(map,marker);
+							})
+				        });
+
 					});
 				});
         });
