@@ -82,7 +82,12 @@
 						    $.get("services/todos/byid/"+val['id'], function(data){
 							    var todo = eval("("+data+")");
 						    	var infowindow = new google.maps.InfoWindow({
-						            content: '<h2>'+todo['todo']['shortDescr'] + '</h2><p>' + todo['todo']['description'] + '</p>'
+						            content: '<h2>'+todo['todo']['shortDescr'] + '</h2><div>' + todo['todo']['description'] + '</div>'
+						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',1)"/>'
+						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',2)"/>'
+						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',3)"/>'
+						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',4)"/>'
+						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',5)"/>'
 						        });
 						        infowindow.open(map,marker);
 							})
@@ -150,6 +155,25 @@
 		if(XMLHttpRequest.status == 401) {
 			$("#loginWindow").dialog('open');
 		}
+	}
+
+	function postRating(todoId, ratingValue) {
+		var data = {rating:{
+			rate : ratingValue,
+			comment : ''
+			}};
+		var strData = JSON.stringify(data);
+		$.ajax({
+			type	: 'PUT',
+			url		: 'services/rating/add/' + todoId,
+			data	: strData,
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				handleErrors(XMLHttpRequest);
+			},
+			processData : false,
+			contentType : 'application/json',
+			dataType : 'json'
+			});
 	}
 	
 </script>
