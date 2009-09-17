@@ -1,15 +1,16 @@
 package net.anzix.o29.logic;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
+
+import net.anzix.o29.beans.Rating;
 
 @Consumes("application/json")
 @Path("/rating/")
 public interface RatingService {
-	@POST
+	@PUT
 	@Path("/add/{id}")
-	void addRating(@PathParam("id") long id, @QueryParam("rating") short rating, @QueryParam("comment") String comment);
+	void addRating(@PathParam("id") long id, Rating rating);
 }
