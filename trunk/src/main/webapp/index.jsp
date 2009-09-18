@@ -198,6 +198,12 @@
 			<button id="helpButton" onclick="$(helpWindow).dialog('open')"><img src="img/help32.png"/></button>
 			</p>
 			</div>
+			<h3><a href="#">Search</a></h3>
+			<div>
+			</div>
+			<h3><a href="#">Bookmarks</a></h3>
+			<div>
+			</div>
 		</div>
 	</span>
 	<span style="width: 80%; height: 100%; position: absolute; right: 0px;">
