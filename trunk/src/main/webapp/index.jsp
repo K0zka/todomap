@@ -99,9 +99,7 @@
         
     }
     $(document).ready(function(){
-        $("#toolsWindow").dialog({
-            //do not close this dialog
-        	beforeclose: function(event, ui) { return false; }
+        $("#toolsAccordion").accordion({
            });
         $("#helpWindow").dialog({
            });
@@ -182,17 +180,31 @@
 </head>
 <body onload="initialize()" style="margin: 0px; padding: 0px;">
 
-<div style="width: 100%; height: 100%">
-	<div id="map_canvas" style="width: 100%; height: 100%"></div>
+<div style="width: 100%; height: 100%;">
+	<span style="width: 20%; height: 100%; position: absolute; left: 0px;">
+		<div id="toolsAccordion">
+			<h3><a href="#">Tools</a></h3>
+			<div>
+			<p>
+			<button id="homeButton"><img src="img/gohome32.png"/></button>
+			<button id="searchCriteriasButton"><img src="img/search32.png"/></button>
+			</p>
+			</div>
+			<h3><a href="#">Info</a></h3>
+			<div>
+			<p>
+			<button id="infoButton"><img src="img/info32.png"/></button>
+			<button id="statisticsButton"><img src="img/math32.png"/></button>
+			<button id="helpButton" onclick="$(helpWindow).dialog('open')"><img src="img/help32.png"/></button>
+			</p>
+			</div>
+		</div>
+	</span>
+	<span style="width: 80%; height: 100%; position: absolute; right: 0px;">
+		<div id="map_canvas" style="width: 100%; height: 100%"></div>
+	</span>
 </div>
 
-<div id="toolsWindow" title="Tools">
-	<button id="homeButton"><img src="img/gohome32.png"/></button>
-	<button id="searchCriteriasButton"><img src="img/search32.png"/></button>
-	<button id="infoButton"><img src="img/info32.png"/></button>
-	<button id="statisticsButton"><img src="img/math32.png"/></button>
-	<button id="helpButton" onclick="$(helpWindow).dialog('open')"><img src="img/help32.png"/></button>
-</div>
 
 <div id="helpWindow" title="Help">
 	<iframe src="help.html" style="width: 100%; height: 100%"></iframe>
