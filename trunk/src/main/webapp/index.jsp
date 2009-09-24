@@ -12,6 +12,8 @@
 <link rel="stylesheet" type="text/css"
 	href="style/jquery-ui-1.7.2.custom.css" media="all" />
 
+<script type="text/javascript" src="http://www.google.com/jsapi">
+</script>
 <script type="text/javascript" src="scripts/json.js">
 </script>
 <script type="text/javascript" src="scripts/jquery-1.3.2.js">
@@ -47,9 +49,9 @@
 
     
     function initialize() {
-        var myLatlng = new google.maps.LatLng(0,0);
+        var myLatlng = new google.maps.LatLng(google.loader.ClientLocation['latitude'], google.loader.ClientLocation['longitude']);
         var myOptions = {
-          zoom: 4,
+          zoom: 8,
           center: myLatlng,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
