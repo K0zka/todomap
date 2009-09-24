@@ -47,11 +47,28 @@
     	  };
     	})();
 
+
+	function ipBasedLocation() {
+		if(typeof google.loader.ClientLocation != 'undefined') {
+			return new google.maps.LatLng(google.loader.ClientLocation['latitude'], google.loader.ClientLocation['longitude']);
+		} else {
+			return new google.maps.LatLng(0, 0);
+		}
+	}
+
+	function zoomLevel() {
+		if(typeof google.loader.ClientLocation == 'undefined') {
+			return 4;
+		} else {
+			return 8;
+		}
+	}
     
     function initialize() {
-        var myLatlng = new google.maps.LatLng(google.loader.ClientLocation['latitude'], google.loader.ClientLocation['longitude']);
+        var myLatlng = ipBasedLocation();
+        var zoomL = zoomLevel();
         var myOptions = {
-          zoom: 8,
+          zoom: zoomL,
           center: myLatlng,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
