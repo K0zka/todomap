@@ -65,8 +65,20 @@
 	}
     
     function initialize() {
+<%
+if(request.getParameter("lat") == null) {
+%>
         var myLatlng = ipBasedLocation();
         var zoomL = zoomLevel();
+<%
+} else {
+%>
+		var myLatlng = new google.maps.LatLng(<%=request.getParameter("lat")%>,<%=request.getParameter("lng")%>);
+		var zoomL = <%= request.getParameter("zoom") %>
+<% 
+}
+%>
+
         var myOptions = {
           zoom: zoomL,
           center: myLatlng,
