@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt' %>
 
 <html>
 <head>
@@ -24,6 +23,8 @@
 	src="http://maps.google.com/maps/api/js?sensor=false">
 </script>
 <script type="text/javascript">
+
+	var pageLocation = '<%= request.getRequestURL() %>';
 
     var map;
 
@@ -96,6 +97,12 @@ if(request.getParameter("lat") == null) {
         });
 	    
 		google.maps.event.addListener(map, "bounds_changed", function() {
+
+			var center = map.getCenter();
+			//update the link content
+			$('#linkToThisMap').val(pageLocation+'lat='+center.lat()+'&lng='+center.lng()+"&zoom="+map.getZoom());
+
+			//update the todos on the map
 			var bounds = map.get_bounds();
 			var sw = bounds.getSouthWest();
 			var ne = bounds.getNorthEast();
@@ -141,7 +148,11 @@ if(request.getParameter("lat") == null) {
         $("#newTodo").dialog('close');
         $("#loginWindow").dialog({
         });
-      });
+        $("#linksWindow").dialog({
+        });
+        $("#linksWindow").dialog('close');
+
+    });
 
 	function submitNewTodo() {
 
@@ -217,16 +228,16 @@ if(request.getParameter("lat") == null) {
 			<h3><a href="#">Tools</a></h3>
 			<div>
 			<p>
-			<button id="homeButton"><img src="img/gohome32.png"/></button>
-			<button id="searchCriteriasButton"><img src="img/search32.png"/></button>
+			<button id="homeButton"><img src="img/gohome32.png"/> Go Home </button>
+			<button id="embedButton" onclick="$(linksWindow).dialog('open')"><img src="img/gear32.png"/> Link to this map </button>
 			</p>
 			</div>
 			<h3><a href="#">Info</a></h3>
 			<div>
 			<p>
-			<button id="infoButton"><img src="img/info32.png"/></button>
-			<button id="statisticsButton"><img src="img/math32.png"/></button>
-			<button id="helpButton" onclick="$(helpWindow).dialog('open')"><img src="img/help32.png"/></button>
+			<button id="infoButton"><img src="img/info32.png"/> About todomap </button>
+			<button id="statisticsButton"><img src="img/math32.png"/> Statistics </button>
+			<button id="helpButton" onclick="$(helpWindow).dialog('open')"><img src="img/help32.png"/> Help </button>
 			</p>
 			</div>
 			<h3><a href="#">Search</a></h3>
@@ -246,6 +257,12 @@ if(request.getParameter("lat") == null) {
 <div id="helpWindow" title="Help">
 	<iframe src="help.html" style="width: 100%; height: 100%"></iframe>
 </div>
+
+<div id="linksWindow" title="Links to this map">
+	<label for="linkToThisPage" >Link to this map</label>
+	<input type="text" id="linkToThisMap" value=""/>
+</div>
+
 
 <div id="loginWindow" title="Log in">
 	<iframe src="openidlogin.jsp" style="width: 100%; height: 100%"></iframe>
