@@ -10,6 +10,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
+			WEB-INF/controllers.xml
 			WEB-INF/beans.xml
 			WEB-INF/transactions.xml
 			WEB-INF/security.xml
@@ -60,6 +61,17 @@
 		</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+
+	<servlet>
+		<servlet-name>springDispatch</servlet-name>
+		<servlet-class>
+			org.springframework.web.servlet.DispatcherServlet
+	</servlet-class>
+	</servlet>
+		<servlet-mapping>
+			<servlet-name>springDispatch</servlet-name>
+			<url-pattern>*.htm</url-pattern>
+	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>CXFServlet</servlet-name>
