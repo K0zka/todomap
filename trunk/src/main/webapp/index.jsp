@@ -27,6 +27,8 @@
 	var pageLocation = '<%= request.getRequestURL() %>';
 
     var map;
+    var myLatlng;
+    var zoomL;
 
     (function () {
 
@@ -69,20 +71,20 @@
 <%
 if(request.getParameter("lat") == null) {
 %>
-        var myLatlng = ipBasedLocation();
-        var zoomL = zoomLevel();
+        myLatlng = ipBasedLocation();
+        zoomL = zoomLevel();
 <%
 } else {
 %>
-		var myLatlng = new google.maps.LatLng(<%=request.getParameter("lat")%>,<%=request.getParameter("lng")%>);
-		var zoomL = <%= request.getParameter("zoom") %>
+		myLatlng = new google.maps.LatLng(<%=request.getParameter("lat")%>,<%=request.getParameter("lng")%>);
+		zoomL = <%= request.getParameter("zoom") %>
 <% 
 }
 %>
 
         var myOptions = {
           zoom: zoomL,
-          center: myLatlng,
+          center: new google.maps.LatLng(myLatlng.lat(), myLatlng.lng()),
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         
@@ -188,7 +190,8 @@ if(request.getParameter("lat") == null) {
 	}
 
 	function goHome() {
-//		console.log('go home');
+		map.panTo(myLatlng);
+		map.setZoom(zoomL);
 	}
 
 	function handleErrors(XMLHttpRequest) {
@@ -228,7 +231,7 @@ if(request.getParameter("lat") == null) {
 			<h3><a href="#">Tools</a></h3>
 			<div>
 			<p>
-			<button id="homeButton"><img src="img/gohome32.png"/> Go Home </button>
+			<button id="homeButton"  onclick="goHome()"><img src="img/gohome32.png"/> Go Home </button>
 			<button id="embedButton" onclick="$(linksWindow).dialog('open')"><img src="img/gear32.png"/> Link to this map </button>
 			</p>
 			</div>
