@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<html>
+
+<%@page import="net.anzix.o29.utils.VersionUtil"%><html>
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -10,6 +11,9 @@
 
 <link rel="stylesheet" type="text/css"
 	href="style/jquery-ui-1.7.2.custom.css" media="all" />
+
+<link rel="stylesheet" type="text/css"
+	href="style/default.css" media="all" />
 
 <script type="text/javascript" src="http://www.google.com/jsapi">
 </script>
@@ -249,6 +253,9 @@ if(request.getParameter("lat") == null) {
 			<h3><a href="#">Bookmarks</a></h3>
 			<div>
 			</div>
+		</div>
+		<div class="versionInfo">
+			<span>Version: <%= VersionUtil.getVersionNumber() %></span>
 		</div>
 	</span>
 	<span style="width: 80%; height: 100%; position: absolute; right: 0px;">
