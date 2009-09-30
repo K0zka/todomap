@@ -6,6 +6,7 @@
 	<persistence-unit name="o29">
 		<class>net.anzix.o29.beans.BaseBean</class>
 		<class>net.anzix.o29.beans.Comment</class>
+		<class>net.anzix.o29.beans.Attachment</class>
 		<class>net.anzix.o29.beans.Rating</class>
 		<class>net.anzix.o29.beans.Todo</class>
 		<class>net.anzix.o29.beans.User</class>
