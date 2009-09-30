@@ -5,9 +5,10 @@ import org.junit.Test;
 
 public class VersionUtilTest {
 	@Test
-	public void getVersionNumber() {
+	public void testGetVersionNumber() {
 		String versionNumber = VersionUtil.getVersionNumber();
 		Assert.assertNotNull(versionNumber);
 		Assert.assertFalse(versionNumber.contains("/"));
 	}
+
 }
