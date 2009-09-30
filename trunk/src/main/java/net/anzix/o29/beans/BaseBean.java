@@ -38,6 +38,20 @@ public abstract class BaseBean {
 	@Column(updatable=false, nullable=false)
 	Date created = new Date();
 	
+	@OneToMany(fetch=FetchType.LAZY)
+	List<Attachment> attachments;
+	public RatingSummary getRatingSummary() {
+		return ratingSummary;
+	}
+	public void setRatingSummary(RatingSummary ratingSummary) {
+		this.ratingSummary = ratingSummary;
+	}
+	public List<Attachment> getAttachments() {
+		return attachments;
+	}
+	public void setAttachments(List<Attachment> attachments) {
+		this.attachments = attachments;
+	}
 	public Date getCreated() {
 		return created;
 	}
