@@ -63,14 +63,14 @@
 	</servlet>
 
 	<servlet>
-		<servlet-name>springDispatch</servlet-name>
-		<servlet-class>
-			org.springframework.web.servlet.DispatcherServlet
-	</servlet-class>
+		<servlet-name>todoFullPageServlet</servlet-name>
+		<servlet-class>net.anzix.o29.utils.TodoFullPageServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
 	</servlet>
-		<servlet-mapping>
-			<servlet-name>springDispatch</servlet-name>
-			<url-pattern>*.htm</url-pattern>
+
+	<servlet-mapping>
+		<servlet-name>todoFullPageServlet</servlet-name>
+		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
