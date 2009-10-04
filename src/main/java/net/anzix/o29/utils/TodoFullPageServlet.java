@@ -2,22 +2,16 @@ package net.anzix.o29.utils;
 
 import java.io.IOException;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.anzix.o29.beans.Todo;
-import net.anzix.o29.logic.TodoService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
-public class TodoFullPageServlet extends HttpServlet {
-
-	TodoService todoService = null;
+public class TodoFullPageServlet extends SpringServlet {
 
 	private final static Logger logger = LoggerFactory
 			.getLogger(TodoFullPageServlet.class);
@@ -49,13 +43,6 @@ public class TodoFullPageServlet extends HttpServlet {
 			String idStr = requestURI.substring(slashPos == -1 ? 0 : slashPos + 1, separatorPos);
 			return Long.parseLong(idStr);
 		}
-	}
-
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		todoService = (TodoService) WebApplicationContextUtils
-				.getWebApplicationContext(getServletContext()).getBean("todos");
 	}
 
 }

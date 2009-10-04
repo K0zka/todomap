@@ -67,6 +67,16 @@
 		<servlet-class>net.anzix.o29.utils.TodoFullPageServlet</servlet-class>
 		<load-on-startup>2</load-on-startup>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>rssServlet</servlet-name>
+		<servlet-class>net.anzix.o29.utils.RssServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>rssServlet</servlet-name>
+		<url-pattern>rss.xml/*</url-pattern>
+	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>todoFullPageServlet</servlet-name>
@@ -82,12 +92,10 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 	
-	<!-- 
 	<resource-ref>
 		<res-ref-name>jdbc/o29ds</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>CONTAINER</res-auth>
 	</resource-ref>
-	 -->
 	
 </web-app>

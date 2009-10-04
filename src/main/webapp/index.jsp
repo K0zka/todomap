@@ -105,13 +105,15 @@ if(request.getParameter("lat") == null) {
 		google.maps.event.addListener(map, "bounds_changed", function() {
 
 			var center = map.getCenter();
-			//update the link content
-			$('#linkToThisMap').val(pageLocation+'?lat='+center.lat()+'&lng='+center.lng()+"&zoom="+map.getZoom());
-
-			//update the todos on the map
 			var bounds = map.get_bounds();
 			var sw = bounds.getSouthWest();
 			var ne = bounds.getNorthEast();
+
+			//update the link content
+			$('#linkToThisMap').val(pageLocation+'?lat='+center.lat()+'&lng='+center.lng()+"&zoom="+map.getZoom());
+			$('#rssLinkToThisMap').val(pageLocation.replace(/index.jsp/,'')+'rss.xml/' + ne.lat() + ',' + ne.lng() + ',' + sw.lat() + ',' + sw.lng() );
+
+			//update the todos on the map
 			$.get("services/todos/area.sht/"+sw.lat() + "," + sw.lng() + "," + ne.lat() + "," + ne.lng(), function(data){
 					var response = eval("("+data+")");
 					map.clearMarkers();
@@ -284,6 +286,8 @@ if(request.getParameter("lat") == null) {
 <div id="linksWindow" title="Links to this map">
 	<label for="linkToThisPage" >Link to this map</label>
 	<input type="text" id="linkToThisMap" value=""/>
+	<label for="rssLinkToThisMap" >RSS to this map</label>
+	<input type="text" id="rssLinkToThisMap" value=""/>
 </div>
 
 
