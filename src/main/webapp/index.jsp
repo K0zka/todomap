@@ -152,10 +152,13 @@ if(request.getParameter("lat") == null) {
             modal: true
            });
         $("#newTodo").dialog('close');
-        $("#loginWindow").dialog({
-        });
-        $("#linksWindow").dialog({
-        });
+        $("#productInfoWindow").dialog({
+            modal: true
+            
+           });
+        $("#productInfoWindow").dialog('close');
+        $("#loginWindow").dialog();
+        $("#linksWindow").dialog();
         $("#linksWindow").dialog('close');
 
     });
@@ -242,7 +245,7 @@ if(request.getParameter("lat") == null) {
 			<h3><a href="#">Info</a></h3>
 			<div>
 			<p>
-			<button id="infoButton"><img src="img/info32.png"/> About todomap </button>
+			<button id="infoButton" onclick="$(productInfoWindow).dialog('open')"><img src="img/info32.png"/> About todomap </button>
 			<button id="statisticsButton"><img src="img/math32.png"/> Statistics </button>
 			<button id="helpButton" onclick="$(helpWindow).dialog('open')"><img src="img/help32.png"/> Help </button>
 			</p>
@@ -276,6 +279,23 @@ if(request.getParameter("lat") == null) {
 
 <div id="loginWindow" title="Log in">
 	<iframe src="openidlogin.jsp" style="width: 100%; height: 100%"></iframe>
+</div>
+
+<div id="productInfoWindow" title="Product info">
+	<h2>
+	Todomap - development version
+	</h2>
+	<p>
+	This site is runngin todomap version <%= VersionUtil.getVersionNumber() %>.
+	</p>
+	<p>
+	Please note that this is an <strong>early beta</strong> version of the application under active development since Q3 2009.
+	</p>
+	<p>
+	To find out more about the software, please visit the project page at 
+	<a target="new" href="http://code.google.com/p/todomap/">google code</a>! Your contribution 
+	to todomap's success is highly appreciated!
+	</p>
 </div>
 
 <div id="newTodo" title="New Todo">
