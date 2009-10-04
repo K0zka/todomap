@@ -146,22 +146,23 @@ if(request.getParameter("lat") == null) {
         $("#toolsAccordion").accordion({
            });
         $("#helpWindow").dialog({
+            autoOpen : false
            });
-        $("#helpWindow").dialog('close');
         $("#newTodo").dialog({
-            modal: true
+            modal: true,
+            autoOpen : false
            });
-        $("#newTodo").dialog('close');
         $("#productInfoWindow").dialog({
             modal: true,
             width: 600,
             height: 600,
-            show: 'slide'
+            show: 'slide',
+            autoOpen : false
            });
-        $("#productInfoWindow").dialog('close');
         $("#loginWindow").dialog();
-        $("#linksWindow").dialog();
-        $("#linksWindow").dialog('close');
+        $("#linksWindow").dialog({
+            autoOpen : false
+            });
 
     });
 
