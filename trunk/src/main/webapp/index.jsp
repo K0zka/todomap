@@ -268,7 +268,10 @@ if(request.getParameter("lat") == null) {
 
 
 <div id="helpWindow" title="Help">
+	TODO.
+<!-- 
 	<iframe src="help.html" style="width: 100%; height: 100%"></iframe>
+	 -->
 </div>
 
 <div id="linksWindow" title="Links to this map">
