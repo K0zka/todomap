@@ -106,7 +106,7 @@ if(request.getParameter("lat") == null) {
 
 			var center = map.getCenter();
 			//update the link content
-			$('#linkToThisMap').val(pageLocation+'lat='+center.lat()+'&lng='+center.lng()+"&zoom="+map.getZoom());
+			$('#linkToThisMap').val(pageLocation+'?lat='+center.lat()+'&lng='+center.lng()+"&zoom="+map.getZoom());
 
 			//update the todos on the map
 			var bounds = map.get_bounds();
