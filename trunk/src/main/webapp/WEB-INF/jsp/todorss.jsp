@@ -18,7 +18,7 @@ final List<Todo> todos = (List<Todo>)request.getAttribute("todos");
 	<% for(Todo todo : todos)  {%>
     <item>
       <title><%= todo.getShortDescr() %></title>
-      <link><%= todo.getId() + "-" + todo.getShortDescr() + ".html" %></link>
+      <link><%= "../"+todo.getId() + "-" + todo.getShortDescr() + ".html" %></link>
       <description> <%= todo.getDescription() %> </description>
       <pubDate><%= sdf.format(todo.getCreated()) %></pubDate>
       <guid><%= todo.getId() + "-" + todo.getShortDescr() + ".html" %></guid>
