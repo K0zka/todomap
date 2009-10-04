@@ -258,7 +258,9 @@ if(request.getParameter("lat") == null) {
 			</div>
 		</div>
 		<div class="versionInfo">
-			<span>Version: <%= VersionUtil.getVersionNumber() %></span>
+			<span>
+			<img alt="logo" src="img/todomap-logo.jpg" width="80%"><br/>
+			Version: <%= VersionUtil.getVersionNumber() %></span>
 		</div>
 	</span>
 	<span style="width: 80%; height: 100%; position: absolute; right: 0px;">
