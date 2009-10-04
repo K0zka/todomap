@@ -153,8 +153,10 @@ if(request.getParameter("lat") == null) {
            });
         $("#newTodo").dialog('close');
         $("#productInfoWindow").dialog({
-            modal: true
-            
+            modal: true,
+            width: 600,
+            height: 600,
+            show: 'slide'
            });
         $("#productInfoWindow").dialog('close');
         $("#loginWindow").dialog();
@@ -300,6 +302,9 @@ if(request.getParameter("lat") == null) {
 	To find out more about the software, please visit the project page at 
 	<a target="new" href="http://code.google.com/p/todomap/">google code</a>! Your contribution 
 	to todomap's success is highly appreciated!
+	</p>
+	<p>
+		<img alt="todomap logo" src="img/todomap-logo.jpg">
 	</p>
 </div>
 
