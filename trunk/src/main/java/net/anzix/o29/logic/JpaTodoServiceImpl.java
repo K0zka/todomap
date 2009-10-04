@@ -26,7 +26,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 						"select a from "
 								+ Todo.class.getName()
 								+ " a "
-								+ "where a.location.longitude between ? and ? and a.location.latitude between ? and ?",
+								+ "where a.location.longitude between ? and ? and a.location.latitude between ? and ? order by created desc",
 						(double) nex, (double) swx, (double) ney, (double) swy);
 	}
 
