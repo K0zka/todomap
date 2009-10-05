@@ -24,6 +24,7 @@
 			<map>
 
 				<entry key="hibernate.show_sql" value="true" />
+				<entry key="hibernate." value="true" />
 				<entry key="hibernate.format_sql" value="true" />
 				<entry key="hibernate.hbm2ddl.auto" value="update" />
 
