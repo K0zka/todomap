@@ -34,6 +34,18 @@
     var myLatlng;
     var zoomL;
 
+	function isDefined(variable) {
+		return (typeof(window[variable]) != 'undefined');
+	}
+
+	function debug(message) {
+		if(isDefined(console)) {
+			//skip!
+		} else {
+			console.log(message)
+		}
+	}
+
     (function () {
 
     	  google.maps.Map.prototype.markers = new Array();
@@ -56,19 +68,24 @@
 
 
 	function ipBasedLocation() {
-		if(typeof google.loader.ClientLocation != 'undefined') {
+		try {
 			return new google.maps.LatLng(google.loader.ClientLocation['latitude'], google.loader.ClientLocation['longitude']);
-		} else {
+		} catch (fubar) {
+			debug(fubar);
 			return new google.maps.LatLng(0, 0);
 		}
 	}
 
 	function zoomLevel() {
-		if(typeof google.loader.ClientLocation == 'undefined') {
-			return 4;
-		} else {
-			return 8;
-		}
+		try {
+			if(isDefined(google.loader.ClientLocation)) {
+				return 4;
+			}
+		} catch (fubar) {
+			debug(fubar);
+		} 
+		return 8;
+
 	}
     
     function initialize() {
@@ -97,8 +114,8 @@ if(request.getParameter("lat") == null) {
 		google.maps.event.addListener(map, "rightclick", function(event) {
 			document.getElementById("newTodoLat").value = event.latLng.lat();
 			document.getElementById("newTodoLng").value = event.latLng.lng();
-//			console.log('lng: '+$("#newTodoLat").val());
-//			console.log('lat: '+$("#newTodoLng").val());
+			debug('lng: '+$("#newTodoLat").val());
+			debug('lat: '+$("#newTodoLng").val());
 			$("#newTodo").dialog('open');
         });
 	    
@@ -172,10 +189,7 @@ if(request.getParameter("lat") == null) {
 
 	function submitNewTodo() {
 
-//		console.log('submit new todo');
-//		console.log('latitude : ' + $('#newTodoLat').val());
-//		console.log('longitude : ' + $('#newTodoLng').val());
-
+		debug('submit new todo');
 		
 		var submitData = {todo:{
 			shortDescr: $('#newTodoShortDescr').val(),
@@ -186,7 +200,6 @@ if(request.getParameter("lat") == null) {
 				}
 			}};
 		var strData = JSON.stringify(submitData);
-//		console.log('submit new todo');
 		$.ajax({
 			type : 'PUT',
 			url : 'services/todos/new',
