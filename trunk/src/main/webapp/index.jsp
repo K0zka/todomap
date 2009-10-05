@@ -308,7 +308,7 @@ if(request.getParameter("lat") == null) {
 	<iframe src="openidlogin.jsp" style="width: 100%; height: 100%"></iframe>
 </div>
 
-<div id="productInfoWindow" title="Product info">
+<div id="productInfoWindow" title="About todomap">
 	<h2>
 	Todomap - development version
 	</h2>
