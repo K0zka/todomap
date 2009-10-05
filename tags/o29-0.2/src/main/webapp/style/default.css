@@ -1,0 +1,45 @@
+
+/**
+ * 
+ */
+
+h1 {
+	color: #010101;
+	font-family: sans-serif;
+}
+
+p.startquote {
+	font-style: italic;
+	text-align: justify;
+	position: relative;
+	width: 4cm;
+	background-color: #f0fefe;
+	border-bottom: thin;
+}
+
+thead {
+	font-weight: bold;
+	font-style: italic;
+}
+
+th {
+	background-color: gray;
+	
+}
+
+td {
+	background-image: url("../img/camera.png");
+	background-position: left;
+	background-repeat: no-repeat;
+}
+
+.highligh {
+	background: transparent; color: orange;
+}
+
+div.versionInfo {
+	text-align: center;
+	color: gray;
+	font-size: small;
+	font-family: monospace;
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.1.xsd">
+
+	<sec:http>
+		<sec:intercept-url pattern="/"/>
+		<sec:intercept-url pattern="/index.jsp"/>
+		<sec:intercept-url pattern="/login.jsp"/>
+		<sec:openid-login login-page="/openidlogin.jsp" default-target-url="/login.jsp" authentication-failure-url="/openidlogin.jsp?error=true"/>
+		<sec:remember-me />
+	</sec:http>
+
+	<sec:authentication-manager alias="authenticationManager"/>
+
+	<sec:authentication-provider>
+		<sec:user-service>
+			<sec:user name="http://iwillworkforfood.blogspot.com/" authorities="ROLE_USER" password="tiger"/>
+		</sec:user-service>
+	</sec:authentication-provider>
+
+</beans>
