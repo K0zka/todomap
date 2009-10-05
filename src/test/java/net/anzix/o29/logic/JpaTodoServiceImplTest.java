@@ -42,6 +42,17 @@ public class JpaTodoServiceImplTest extends UnitilsJUnit4 {
 				location.setLongitude(123);
 				todo.setLocation(location);
 				todoService.addTodo(todo);
+
+				Todo todo2 = new Todo();
+				todo2.setDescription("more test");
+				todo2.setShortDescr("lorem ipsum");
+				Coordinate location2 = new Coordinate();
+				location2.setLatitude(121);
+				location2.setLongitude(121);
+				todo2.setLocation(location2);
+				todoService.addTodo(todo2);
+
+				
 				return null;
 			}
 		});
