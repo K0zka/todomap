@@ -3,7 +3,7 @@
 	<groupId>net.anzix.o29</groupId>
 	<artifactId>o29</artifactId>
 	<packaging>war</packaging>
-	<version>0.2-SNAPSHOT</version>
+	<version>0.2</version>
 	<name>o29</name>
 	<dependencies>
 		<dependency>
@@ -188,9 +188,9 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:svn:http://todomap.googlecode.com/svn/trunk/</connection>
-		<developerConnection>scm:svn:https://todomap.googlecode.com/svn/trunk/</developerConnection>
-		<url>http://code.google.com/p/todomap/source/browse/</url>
+		<connection>scm:svn:http://todomap.googlecode.com/svn/tags/o29-0.2</connection>
+		<developerConnection>scm:svn:https://todomap.googlecode.com/svn/tags/o29-0.2</developerConnection>
+		<url>http://code.google.com/p/todomap/source/browse/tags/o29-0.2</url>
 	</scm>
 	<build>
 		<plugins>
