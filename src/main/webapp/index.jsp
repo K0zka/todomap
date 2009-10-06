@@ -47,22 +47,34 @@
 	}
 
     (function () {
+    	google.maps.Marker.prototype.todoId = -1;
+
+    	google.maps.Marker.prototype.getTodoId = function() {
+        	return this.todoId;
+        }
+    	google.maps.Marker.prototype.setTodoId = function(todoId) {
+        	this.todoId = todoId;
+        }
+    })();
+
+    (function () {
 
     	  google.maps.Map.prototype.markers = new Array();
-    	    
+
     	  google.maps.Map.prototype.addMarker = function(marker) {
+    		  debug('add'+this.markers.length);
     	    this.markers[this.markers.length] = marker;
     	  };
-    	    
+
     	  google.maps.Map.prototype.getMarkers = function() {
     	    return this.markers
     	  };
     	    
     	  google.maps.Map.prototype.clearMarkers = function() {
-    	    
     	    for(var i=0; i<this.markers.length; i++){
     	      this.markers[i].set_map(null);
     	    }
+    	    this.markers = new Array();
     	  };
     	})();
 
@@ -133,31 +145,46 @@ if(request.getParameter("lat") == null) {
 			//update the todos on the map
 			$.get("services/todos/area.sht/"+sw.lat() + "," + sw.lng() + "," + ne.lat() + "," + ne.lng(), function(data){
 					var response = eval("("+data+")");
-					map.clearMarkers();
 					$.each(response['todo-sum'], function(i, val) {
-						var mLatlng = new google.maps.LatLng(val['location']['latitude'], val['location']['longitude']);
-					    var marker = new google.maps.Marker({
-					        position: mLatlng, 
-					        map: map,
-					        title:val['descr']
-					    });
-					    google.maps.event.addListener(marker, 'click', function() {
-						    $.get("services/todos/byid/"+val['id'], function(data){
-							    var todo = eval("("+data+")");
-						    	var infowindow = new google.maps.InfoWindow({
-						            content: '<h2>'+todo['todo']['shortDescr'] + '</h2><div>' + todo['todo']['description'] + '</div>'
-						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',1)"/>'
-						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',2)"/>'
-						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',3)"/>'
-						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',4)"/>'
-						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',5)"/> <br/>'
-						            	+ '<a target="new" href="' + todo['todo']['id'] + '-' + todo['todo']['shortDescr'] + '.html">'
-				            			+ 'more...</a>'
-						        });
-						        infowindow.open(map,marker);
-							})
-				        });
 
+						debug('find the marker by ID on the map');
+						markers = map.getMarkers();
+						found = false;
+						for(i = 0; i < markers.length; i++) {
+							if(markers[i].getTodoId() == val['id']) {
+								debug('todo '+val['id']+' found on the map');
+								found = true;
+								break;
+							}
+						}
+						
+						if(!found) {
+							var mLatlng = new google.maps.LatLng(val['location']['latitude'], val['location']['longitude']);
+						    var marker = new google.maps.Marker({
+						        position: mLatlng, 
+						        map: map,
+						        title:val['descr']
+						    });
+						    marker.setTodoId(val['id']);
+						    map.addMarker(marker);
+						    google.maps.event.addListener(marker, 'click', function() {
+							    $.get("services/todos/byid/"+val['id'], function(data){
+								    var todo = eval("("+data+")");
+							    	var infowindow = new google.maps.InfoWindow({
+							            content: '<h2>'+todo['todo']['shortDescr'] + '</h2><div>' + todo['todo']['description'] + '</div>'
+							            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',1)"/>'
+							            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',2)"/>'
+							            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',3)"/>'
+							            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',4)"/>'
+							            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',5)"/> <br/>'
+							            	+ '<a target="new" href="' + todo['todo']['id'] + '-' + todo['todo']['shortDescr'] + '.html">'
+					            			+ 'more...</a>'
+							        });
+							        infowindow.open(map,marker);
+								})
+					        });
+
+						}
 					});
 				});
         });
