@@ -208,7 +208,10 @@ if(request.getParameter("lat") == null) {
             show: 'slide',
             autoOpen : false
            });
-        $("#loginWindow").dialog();
+        $("#loginWindow").dialog({
+        	modal: true,
+            autoOpen : false
+            });
         $("#linksWindow").dialog({
             autoOpen : false
             });
