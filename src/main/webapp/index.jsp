@@ -39,10 +39,11 @@
 	}
 
 	function debug(message) {
-		if(isDefined(console)) {
-			//skip!
-		} else {
+		try {
+			//the good old firebug console
 			console.log(message)
+		} catch (fubar) {
+			//do nothing. No console, no log.
 		}
 	}
 
