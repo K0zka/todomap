@@ -328,10 +328,14 @@ if(request.getParameter("lat") == null) {
 </div>
 
 <div id="linksWindow" title="Links to this map">
-	<label for="linkToThisPage" >Link to this map</label>
-	<input type="text" id="linkToThisMap" value=""/>
-	<label for="rssLinkToThisMap" >RSS to this map</label>
-	<input type="text" id="rssLinkToThisMap" value=""/>
+	<div style="width: 100%" onclick="javascript:linkToThisMap.select()">
+		<label for="linkToThisPage" style="width: 40%">Link to this map</label>
+		<input type="text" id="linkToThisMap" value="" style="width: 40%" />
+	</div>
+	<div style="width: 100%" onclick="javascript:rssLinkToThisMap.select()">
+		<label for="rssLinkToThisMap" style="width:40%" >RSS to this map</label>
+		<input type="text" id="rssLinkToThisMap" value="" style="width: 40%"/>
+	</div>
 </div>
 
 
@@ -344,7 +348,7 @@ if(request.getParameter("lat") == null) {
 	Todomap - development version
 	</h2>
 	<p>
-	This site is runngin todomap version <%= VersionUtil.getVersionNumber() %>.
+	This site is running todomap version <%= VersionUtil.getVersionNumber() %>.
 	</p>
 	<p>
 	Please note that this is an <strong>early beta</strong> version of the application under active development since Q3 2009.
