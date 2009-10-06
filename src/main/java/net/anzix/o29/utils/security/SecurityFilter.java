@@ -40,7 +40,7 @@ public class SecurityFilter implements Filter {
 			((HttpServletResponse) response).setContentType("application/json");
 			response.getWriter().write("{errors:['login-required']}");
 		} else {
-			logger.info(authentication == null ? "[anon]" : authentication.getName());
+			logger.debug(authentication == null ? "[anon]" : authentication.getName());
 			chain.doFilter(request, response);
 		}
 
