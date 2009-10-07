@@ -25,12 +25,20 @@ public class TodoFullPageServlet extends SpringServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		final long todoId = extractTodoId(req.getRequestURI());
-		logger.debug("Requested todo" + todoId);
-		final Todo todo = todoService.getById(todoId);
-		logger.debug("Found todo:" + todo.getShortDescr());
-		req.setAttribute("todo", todo);
-		req.getRequestDispatcher("/WEB-INF/jsp/todo.jsp").forward(req, resp);
+		try {
+			final long todoId = extractTodoId(req.getRequestURI());
+			logger.debug("Requested todo" + todoId);
+			final Todo todo = todoService.getById(todoId);
+			if(todo != null) {
+				logger.debug("Found todo:" + todo.getShortDescr());
+				req.setAttribute("todo", todo);
+				req.getRequestDispatcher("/WEB-INF/jsp/todo.jsp").forward(req, resp);
+			} else {
+				resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			}
+		} catch (NumberFormatException nfe) {
+			resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
 	}
 
 	long extractTodoId(final String requestURI) {
