@@ -27,13 +27,17 @@ public interface HomeService {
 			this.zoomLevel = zoomLevel;
 		}
 	}
+
+	@Path("/auth")
+	@GET
+	boolean isAuthenticated();
 	
 	@Path("/loc")
 	@GET
-	public HomeLocation getHome();
+	HomeLocation getHome();
 
 	@Path("/set")
 	@PUT
-	public void setHome(HomeLocation loc);
+	void setHome(HomeLocation loc);
 	
 }
