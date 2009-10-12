@@ -392,7 +392,7 @@ if(request.getParameter("lat") == null) {
 	</div>
 	
 	<div style="width: 100%; height: 80%">
-	    <label for="j_username">Your OpenID Identity:</label> <input id="" type='text' name='j_username' value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>'/>
+	    <label for="j_username">Your <a href="https://openid.org/home">OpenID</a> Identity:</label> <input id="" type='text' name='j_username' value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>'/>
 	
 	    <input name="submit" type="submit">
 	    <input name="reset" type="reset">
