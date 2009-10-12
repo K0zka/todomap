@@ -3,20 +3,26 @@ package net.anzix.o29.beans;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@Table(name="rating", uniqueConstraints={@UniqueConstraint(columnNames={"user_id", "bean_id"})})
 @XmlRootElement(name="rating")
 public class Rating {
 	@Id
 	long id;
 	
 	@ManyToOne
+	@JoinColumn(name="bean_id", nullable=false)
 	BaseBean bean;
 	@ManyToOne
+	@JoinColumn(name="user_id", nullable=false)
 	User user;
-	@Column
+	@Column(nullable=false, name="rate")
 	short rate;
 	@Column
 	String comment;
