@@ -17,7 +17,16 @@ Todo todo = (Todo)request.getAttribute("todo");
 	src="http://maps.google.com/maps/api/js?sensor=false">
 </script>
 
+<link rel="stylesheet" type="text/css"
+	href="style/jquery-ui-1.7.2.custom.css" media="all" />
+<link rel="stylesheet" type="text/css"
+	href="style/default.css" media="all" />
+
 <script type="text/javascript" src="scripts/json.js">
+</script>
+<script type="text/javascript" src="scripts/jquery-1.3.2.js">
+</script>
+<script type="text/javascript" src="scripts/jquery-ui-1.7.2.js">
 </script>
 
 
@@ -39,18 +48,41 @@ function initialize() {
         title:'-'
     });
 
+    $(document).ready(function(){
+        $("#todoDetails").accordion({
+           });
+    });
+	
+    
 }
 </script>
 
 </head>
 <body onload="initialize()">
 
-<div class="todoDescription">
-	<%= todo.getDescription() %>
+<div id="todoDetails">
+
+	<h3><a href="#">Details</a></h3>
+	<div>
+		<h1><%= todo.getShortDescr() %></h1>
+		
+		<div id="map_canvas" style="width: 300px; height: 300px"></div>
+		
+		<span class="todoDescription">
+			<%= todo.getDescription() %>
+		</span>
+	</div>
+	<h3><a href="#">Attachments</a></h3>
+	<div>
+	</div>
+	<h3><a href="#">Comments</a></h3>
+	<div>
+	</div>
+	<h3><a href="#">Ratings details</a></h3>
+	<div>
+	</div>
+
 </div>
-
-
-<div id="map_canvas" style="width: 300px; height: 300px"></div>
 
 </body>
 </html>
