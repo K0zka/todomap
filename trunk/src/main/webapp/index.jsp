@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt' %>
+
+<%@ page import="org.springframework.security.ui.AbstractProcessingFilter" %>
+<%@ page import="org.springframework.security.ui.webapp.AuthenticationProcessingFilter" %>
+<%@ page import="org.springframework.security.AuthenticationException" %>
 
 <%@page import="net.anzix.o29.utils.VersionUtil"%><html>
 <head>
@@ -63,7 +68,6 @@
     	  google.maps.Map.prototype.markers = new Array();
 
     	  google.maps.Map.prototype.addMarker = function(marker) {
-    		  debug('add'+this.markers.length);
     	    this.markers[this.markers.length] = marker;
     	  };
 
@@ -127,8 +131,6 @@ if(request.getParameter("lat") == null) {
 		google.maps.event.addListener(map, "rightclick", function(event) {
 			document.getElementById("newTodoLat").value = event.latLng.lat();
 			document.getElementById("newTodoLng").value = event.latLng.lng();
-			debug('lng: '+$("#newTodoLat").val());
-			debug('lat: '+$("#newTodoLng").val());
 			$("#newTodo").dialog('open');
         });
 	    
@@ -148,12 +150,10 @@ if(request.getParameter("lat") == null) {
 					var response = eval("("+data+")");
 					$.each(response['todo-sum'], function(i, val) {
 
-						debug('find the marker by ID on the map');
 						markers = map.getMarkers();
 						found = false;
 						for(i = 0; i < markers.length; i++) {
 							if(markers[i].getTodoId() == val['id']) {
-								debug('todo '+val['id']+' found on the map');
 								found = true;
 								break;
 							}
@@ -276,6 +276,36 @@ if(request.getParameter("lat") == null) {
 			dataType : 'json'
 			});
 	}
+
+	function checkLoginStatus() {
+		debug('checkLoginStatus()');
+		$.ajax({
+			type	: 'GET',
+			url		: 'services/home/auth',
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				handleErrors(XMLHttpRequest);
+			},
+			success: function(msg){
+				debug('login status:'+msg);
+				var isLoggedIn = eval("("+msg+")");
+				if(isLoggedIn) {
+					$("#loginWindow").dialog('close');
+					$(".authOnly").show(1000);
+					$(".noAuthOnly").hide(1000);
+				} else {
+					$(".authOnly").hide(1000);
+					$(".noAuthOnly").show(1000);
+				}
+			},
+			processData : false,
+			contentType : 'application/json',
+			dataType : 'json'
+		});
+		
+		setTimeout("checkLoginStatus()",20000);
+	}
+
+	checkLoginStatus();
 	
 </script>
 
@@ -289,8 +319,14 @@ if(request.getParameter("lat") == null) {
 			<h3><a href="#">Tools</a></h3>
 			<div>
 			<p>
+			<span class="authOnly">
 			<button id="homeButton"  onclick="goHome()"><img src="img/gohome32.png"/> Go Home </button>
-			<button id="embedButton" onclick="$(linksWindow).dialog('open')"><img src="img/gear32.png"/> Link to this map </button>
+			<button id="logoutButton"  onclick="logOut()"><img src="img/lock32.png"/> Log out </button>
+			</span>
+			<span class="noAuthOnly">
+			<button id="loginButton" onclick="$(loginWindow).dialog('open')"><img src="img/keys32.png"/> Log in </button>
+			</span>
+			<button id="embedButton" onclick="$(linksWindow).dialog('open')"><img src="img/external-link.png"/> Link to this map </button>
 			</p>
 			</div>
 			<h3><a href="#">Info</a></h3>
@@ -340,7 +376,29 @@ if(request.getParameter("lat") == null) {
 
 
 <div id="loginWindow" title="Log in">
-	<iframe src="openidlogin.jsp" style="width: 100%; height: 100%"></iframe>
+	<c:if test="${not empty param.login_error}">
+	  <font color="red">
+	
+	    Your login attempt was not successful, try again.<br/><br/>
+	    Reason: <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>.
+	  </font>
+	</c:if>
+	
+	
+	<form name="f" action="<c:url value='j_spring_openid_security_check'/>" method="POST">
+	
+	<div style="width: 100%; height: 20%">
+		<img src="img/logo_openid.png"/>
+	</div>
+	
+	<div style="width: 100%; height: 80%">
+	    <label for="j_username">Your OpenID Identity:</label> <input id="" type='text' name='j_username' value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>'/>
+	
+	    <input name="submit" type="submit">
+	    <input name="reset" type="reset">
+	</div>
+	
+	</form>
 </div>
 
 <div id="productInfoWindow" title="About todomap">
