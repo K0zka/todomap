@@ -19,12 +19,21 @@
 	</tx:advice>
 
 	<aop:config>
+	
 		<aop:pointcut id="todoServiceMethods"
 			expression="execution(* net.anzix.o29.logic.TodoService.*(..))" />
 		<aop:pointcut id="userServiceMethods"
 			expression="execution(* net.anzix.o29.logic.UserService.*(..))" />
+		<aop:pointcut id="ratingServiceMethods"
+			expression="execution(* net.anzix.o29.logic.RatingService.*(..))" />
+		<aop:pointcut id="homeServiceMethods"
+			expression="execution(* net.anzix.o29.logic.HomeService.*(..))" />
+		
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="todoServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="userServiceMethods" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="ratingServiceMethods" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="homeServiceMethods" />
+
 	</aop:config>
 
 </beans>
