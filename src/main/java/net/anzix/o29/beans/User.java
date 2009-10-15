@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name="o29user")
 @XmlRootElement(name="user")
 public class User extends BaseBean {
+	@Column(name="openidurl",nullable=false, unique=true, updatable=false,length=128)
+	String openIdUrl;
 	@Column(name="displayname")
 	String displayName;
 	@Column(nullable=true, length=64)
@@ -22,7 +24,7 @@ public class User extends BaseBean {
 	@Embedded
 	Coordinate homeLoc;
 	@Column
-	short homeZoomLevel;
+	Short homeZoomLevel;
 	
 	public String getDisplayName() {
 		return displayName;
@@ -56,11 +58,20 @@ public class User extends BaseBean {
 		this.homeLoc = homeLoc;
 	}
 
-	public short getHomeZoomLevel() {
+	public Short getHomeZoomLevel() {
 		return homeZoomLevel;
 	}
 
-	public void setHomeZoomLevel(short homeZoomLevel) {
+	public void setHomeZoomLevel(Short homeZoomLevel) {
 		this.homeZoomLevel = homeZoomLevel;
 	}
+
+	public String getOpenIdUrl() {
+		return openIdUrl;
+	}
+
+	public void setOpenIdUrl(String openIdUrl) {
+		this.openIdUrl = openIdUrl;
+	}
+
 }
