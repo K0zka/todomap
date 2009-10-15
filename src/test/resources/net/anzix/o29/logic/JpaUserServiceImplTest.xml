@@ -2,5 +2,5 @@
 
 <dataset>
 	<base id="-1" created="2009-10-10"/>
-	<o29user id="-1" displayname="Bobek" email="bobek@example.com"/>
+	<o29user id="-1" displayname="Bobek" email="bobek@example.com" openidurl="http://bobek.example.com/"/>
 </dataset>
