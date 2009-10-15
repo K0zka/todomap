@@ -14,6 +14,10 @@ public interface UserService {
 	@Path("/user/{id}")
 	User getUserById(@PathParam("id") long id);
 	
+	@GET
+	@Path("userbyopenid/{url}")
+	User getUserByOpenIdUrl(@PathParam("url") String name);
+	
 	@PUT
 	@Path("/new")
 	void addUser(User user);
