@@ -36,4 +36,11 @@ public class JpaUserServiceImplTest extends UnitilsJUnit4 {
 		Assert.assertNotNull(user);
 		Assert.assertEquals("http://bobek.example.com/", user.getOpenIdUrl());
 	}
+
+	@Test
+	public void getUserByOpenId_notfound() {
+		User user = userService.getUserByOpenIdUrl("http://notexisting.example.com/");
+		Assert.assertNull(user);
+	}
+
 }

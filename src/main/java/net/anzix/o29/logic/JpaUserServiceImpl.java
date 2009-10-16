@@ -1,5 +1,7 @@
 package net.anzix.o29.logic;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 
@@ -26,7 +28,9 @@ public class JpaUserServiceImpl extends JpaDaoSupport implements UserService {
 			
 			@Override
 			public Object doInJpa(EntityManager em) throws PersistenceException {
-				return em.createQuery("select OBJECT(usr) from "+User.class.getName()+ " usr where openIdUrl = :url").setParameter("url", url).getSingleResult();
+				@SuppressWarnings("unchecked")
+				List<User> resultList = em.createQuery("select OBJECT(usr) from "+User.class.getName()+ " usr where openIdUrl = :url").setParameter("url", url).getResultList();
+				return resultList.size() == 0 ? null : resultList.get(0);
 			}
 		});
 	}
