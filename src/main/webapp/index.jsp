@@ -252,6 +252,15 @@ if(request.getParameter("lat") == null) {
 		map.setZoom(zoomL);
 	}
 
+	function logOut() {
+		$.ajax({
+				type	:	'GET',
+				url		: 'logout.jsp',
+				success : checkLoginStatus,
+				error	: checkLoginStatus
+			});
+	}
+	
 	function handleErrors(XMLHttpRequest) {
 		if(XMLHttpRequest.status == 401) {
 			$("#loginWindow").dialog('open');
@@ -301,11 +310,14 @@ if(request.getParameter("lat") == null) {
 			contentType : 'application/json',
 			dataType : 'json'
 		});
-		
-		setTimeout("checkLoginStatus()",20000);
 	}
 
-	checkLoginStatus();
+	function checkLoginStatus_periodically() {
+		checkLoginStatus();
+		setTimeout("checkLoginStatus_periodically()",20000);
+	}
+	
+	checkLoginStatus_periodically();
 	
 </script>
 
