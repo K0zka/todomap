@@ -7,7 +7,6 @@ import net.anzix.o29.beans.Coordinate;
 import net.anzix.o29.beans.Todo;
 
 import org.springframework.orm.jpa.support.JpaDaoSupport;
-import org.todomap.geocoder.Address;
 import org.todomap.geocoder.GeoCodeException;
 import org.todomap.geocoder.GeoCoder;
 import org.todomap.geocoder.LatLng;
