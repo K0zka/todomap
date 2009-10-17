@@ -7,8 +7,15 @@ import net.anzix.o29.beans.Coordinate;
 import net.anzix.o29.beans.Todo;
 
 import org.springframework.orm.jpa.support.JpaDaoSupport;
+import org.todomap.geocoder.Address;
+import org.todomap.geocoder.GeoCodeException;
+import org.todomap.geocoder.GeoCoder;
+import org.todomap.geocoder.LatLng;
 
 public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
+	
+	GeoCoder geoCoder;
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Todo> getAllTodos() {
@@ -32,6 +39,11 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 
 	@Override
 	public void addTodo(final Todo todo) {
+		try {
+			todo.setAddress(geoCoder.revert(new LatLng(todo.getLocation().getLatitude(), todo.getLocation().getLongitude())));
+		} catch (GeoCodeException e) {
+			logger.error("Could not reverse-geocode location");
+		}
 		getJpaTemplate().persist(todo);
 	}
 
@@ -58,6 +70,14 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 			ret.add(todoSummary);
 		}
 		return ret;
+	}
+
+	public GeoCoder getGeoCoder() {
+		return geoCoder;
+	}
+
+	public void setGeoCoder(GeoCoder geoCoder) {
+		this.geoCoder = geoCoder;
 	}
 
 }
