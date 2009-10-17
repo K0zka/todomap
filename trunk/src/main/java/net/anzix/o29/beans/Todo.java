@@ -8,6 +8,8 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.todomap.geocoder.Address;
+
 @Entity
 @Table(name="todo")
 @XmlRootElement(name="todo")
@@ -20,6 +22,9 @@ public class Todo extends BaseBean {
 	@Column(nullable=false, name="dsc")
 	@Lob
 	String description;
+	@Embedded
+	Address address;
+
 	public Coordinate getLocation() {
 		return location;
 	}
@@ -37,5 +42,11 @@ public class Todo extends BaseBean {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 }
