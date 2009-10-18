@@ -1,10 +1,26 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.anzix.o29</groupId>
 	<artifactId>o29</artifactId>
 	<packaging>war</packaging>
 	<version>0.3-SNAPSHOT</version>
 	<name>o29</name>
+	<repositories>
+		<repository>
+			<id>todomap.org</id>
+			<name>todomap.org maven repository</name>
+			<url>http://www.todomap.org/maven</url>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</releases>
+			<snapshots>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -176,6 +192,11 @@
 			<version>2.4.6</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.todomap</groupId>
+			<artifactId>geocoder</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<description>Todo map</description>
 	<url>http://code.google.com/p/todomap/</url>
@@ -219,4 +240,21 @@
 			</plugin>
 		</plugins>
 	</build>
+	<distributionManagement>
+		<repository>
+			<id>todomap.org</id>
+			<name>todomap.org maven repository - releases</name>
+			<url>scp://todomap.org:/var/www/mavenrepo/</url>
+		</repository>
+		<snapshotRepository>
+			<id>todomap.org</id>
+			<name>todomap.org maven repository - releases</name>
+			<url>scp://todomap.org:/var/www/mavenrepo/</url>
+		</snapshotRepository>
+		<site>
+			<id>todomap.org</id>
+			<name>todomap.org maven sites place</name>
+			<url>scp://todomap.org:/var/www/mavensites/geocoder/</url>
+		</site>
+	</distributionManagement>
 </project>
