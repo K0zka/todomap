@@ -71,7 +71,7 @@ public interface TodoService {
 	@Path("/new")
 	@Consumes("application/json")
 	@Produces("application/json")
-	void addTodo( Todo todo);
+	void addTodo(Todo todo);
 
 	@GET
 	@Path("/all")
@@ -81,5 +81,11 @@ public interface TodoService {
 	@GET
 	@Path("/byid/{id}")
 	Todo getById(@PathParam("id") long id);
+
+	@GET
+	@Path("/byloc/{countrycode}/{state}/{town}")
+	@XmlElementWrapper(name = "todos")
+	List<Todo> getByLocation(@PathParam("countrycode") String countryCode,
+			@PathParam("state") String state, @PathParam("town") String town);
 
 }

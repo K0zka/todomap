@@ -1,8 +1,11 @@
 package net.anzix.o29.logic;
 
+import java.util.List;
+
 import net.anzix.o29.beans.Coordinate;
 import net.anzix.o29.beans.Todo;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
@@ -28,6 +31,12 @@ public class JpaTodoServiceImplTest extends UnitilsJUnit4 {
 		todoService.getAllTodos();
 	}
 
+	@Test
+	public void testGetByLocation() {
+		List<Todo> todos = todoService.getByLocation("HU", "Budapest", "Budapest");
+		Assert.assertNotNull(todos);
+	}
+	
 	@Test
 	public void testAddTodo() {
 		new TransactionTemplate(transactionManager).execute(new TransactionCallback() {
