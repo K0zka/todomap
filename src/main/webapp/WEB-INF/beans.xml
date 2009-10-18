@@ -32,6 +32,7 @@
 
 	<bean id="todos" class="net.anzix.o29.logic.JpaTodoServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="geoCoder" ref="geoCoder"/>
 	</bean>
 
 	<bean id="users" class="net.anzix.o29.logic.JpaUserServiceImpl">
@@ -67,6 +68,10 @@
 	<bean id="dataSource"
 		class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="jdbc/o29ds"/>
+	</bean>
+
+	<bean id="geoCoder" class="org.todomap.geocoder.google.GoogleGeocoder">
+		<property name="apiKey" value="PLEASE GET A KEY"/>
 	</bean>
 
 	<bean class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
