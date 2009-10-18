@@ -11,6 +11,9 @@
 
 	<bean id="todos" class="net.anzix.o29.logic.JpaTodoServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="geoCoder">
+			<bean class="net.anzix.o29.logic.FakeGeoCoder"/>
+		</property>
 	</bean>
 
 	<bean id="entityManager"
