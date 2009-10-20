@@ -89,6 +89,7 @@
 			return new google.maps.LatLng(google.loader.ClientLocation['latitude'], google.loader.ClientLocation['longitude']);
 		} catch (fubar) {
 			debug(fubar);
+			$('#wheretogoWindow').dialog('open');
 			return new google.maps.LatLng(0, 0);
 		}
 	}
@@ -215,6 +216,11 @@ if(request.getParameter("lat") == null) {
         $("#linksWindow").dialog({
             autoOpen : false
             });
+        $('#wheretogoWindow').dialog({
+        	autoOpen : false,
+            width: 600,
+            height: 600
+            });
 
     });
 
@@ -318,6 +324,18 @@ if(request.getParameter("lat") == null) {
 	}
 	
 	checkLoginStatus_periodically();
+
+	function gotoLocation() {
+		geocoder = new google.maps.Geocoder();
+		geocoder.geocode( { 'address': $('#wheretogoLocation').val()}, function(results, status) {
+	        if (status == google.maps.GeocoderStatus.OK) {
+	          map.setCenter(results[0].geometry.location);
+	        } else {
+	        	$('#wheretogoErrors').val(status);
+	        }
+	      });
+			
+	}
 	
 </script>
 
@@ -445,6 +463,25 @@ if(request.getParameter("lat") == null) {
 		<input type="hidden" id="newTodoLng" name="newTodoLng"/>
 	</form>
 	<button id="submitNewTodoButton" onclick="submitNewTodo()"><img src="img/gear32.png"/></button>
+</div>
+
+<div id="wheretogoWindow" title="Where do you want to go?">
+	<div>
+		<!-- GeoIP is racism. -->
+		<h3>Choose your destination</h3>
+		<p>Unfortunately your location could not be determined from your IP address
+		so there was no other choice than showing a map probably totally irrelevant for you.
+		</p>
+		<p>
+		Please type the name of the location where you want to center your map!
+		</p>
+		<div style="width: 100%">
+		<label for="wheretogoLocation">Location:</label>
+		<input id="wheretogoLocation"/>
+		<button id="wheretogoButton" value="Go!" onclick="gotoLocation()"/>
+		<span id="wheretogoErrors"></span>
+		</div>
+	</div>
 </div>
 
 </body>
