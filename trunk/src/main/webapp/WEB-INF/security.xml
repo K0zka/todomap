@@ -15,10 +15,8 @@
 
 	<sec:authentication-manager alias="authenticationManager"/>
 
-	<sec:authentication-provider>
-		<sec:user-service>
-			<sec:user name="http://iwillworkforfood.blogspot.com/" authorities="ROLE_USER" password="tiger"/>
-		</sec:user-service>
-	</sec:authentication-provider>
+	<bean id="UserDetailService" class="net.anzix.o29.utils.security.UserDetailServiceImpl">
+		<property name="userService" ref="users"/>
+	</bean>
 
 </beans>
