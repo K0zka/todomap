@@ -43,3 +43,27 @@ div.versionInfo {
 	font-size: small;
 	font-family: monospace;
 }
+
+button {
+	-moz-border-radius-bottomleft:4px;
+	-moz-border-radius-bottomright:4px;
+	-moz-border-radius-topleft:4px;
+	-moz-border-radius-topright:4px;
+	font-family:inherit;
+	font-size:10px;
+	font-weight:  bold;
+	color : #EEEEEE;
+	padding:1px 1px;
+	text-decoration:none;
+	white-space:nowrap;
+	background:#0063DC;
+	border: none;
+	margin: 2px
+}
+
+button:hover {
+	background:#0054BD;
+	color:#FFFFFF;
+	cursor:pointer;
+}
+
