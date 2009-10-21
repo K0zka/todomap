@@ -478,7 +478,7 @@ if(request.getParameter("lat") == null) {
 		<div style="width: 100%">
 		<label for="wheretogoLocation">Location:</label>
 		<input id="wheretogoLocation"/>
-		<button id="wheretogoButton" value="Go!" onclick="gotoLocation()"/>
+		<button id="wheretogoButton" onclick="gotoLocation()">Go!</button>
 		<span id="wheretogoErrors"></span>
 		</div>
 	</div>
