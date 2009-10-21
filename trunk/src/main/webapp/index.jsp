@@ -479,6 +479,7 @@ if(request.getParameter("lat") == null) {
 		<label for="wheretogoLocation">Location:</label>
 		<input id="wheretogoLocation"/>
 		<button id="wheretogoButton" onclick="gotoLocation()">Go!</button>
+		<button id="nogoButton" onclick="$('#wheretogoWindow').dialog('close')">I like it here</button>
 		<span id="wheretogoErrors"></span>
 		</div>
 	</div>
