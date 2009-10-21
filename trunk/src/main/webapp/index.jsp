@@ -424,7 +424,7 @@ if(request.getParameter("lat") == null) {
 	<div style="width: 100%; height: 80%">
 	    <label for="j_username">Your <a href="https://openid.org/home">OpenID</a> Identity:</label> <input id="" type='text' name='j_username' value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>'/>
 	
-	    <button onclick="loginform.submit()">Log in</button>
+	    <button onclick="document.loginForm.submit()">Log in</button>
 	</div>
 	
 	</form>
