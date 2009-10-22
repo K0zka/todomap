@@ -65,7 +65,7 @@ public class SecurityFilter implements Filter {
 			if(userByOpenIdUrl == null) {
 				userByOpenIdUrl = new User();
 				userByOpenIdUrl.setOpenIdUrl(openIdUrl);
-				userService.addUser(userByOpenIdUrl);
+				userService.persist(userByOpenIdUrl);
 			}
 		}
 	}

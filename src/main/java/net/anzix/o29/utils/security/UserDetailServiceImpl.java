@@ -72,7 +72,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 			userByOpenIdUrl = new User();
 			userByOpenIdUrl.setCreated(new Date());
 			userByOpenIdUrl.setOpenIdUrl(username);
-			userService.addUser(userByOpenIdUrl);
+			userService.persist(userByOpenIdUrl);
 		}
 		return new UserDetailsAdapter(userByOpenIdUrl);
 	}
