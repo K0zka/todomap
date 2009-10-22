@@ -16,12 +16,12 @@ public class JpaUserServiceImplTest extends UnitilsJUnit4 {
 	UserService userService;
 	
 	@Test
-	public void testAddUser() {
+	public void testPersist() {
 		User user = new User();
 		user.setEmail(System.currentTimeMillis() + "@example.com");
 		user.setDisplayName("TEST");
 		user.setOpenIdUrl("http://"+System.currentTimeMillis()+".example.com/");
-		userService.addUser(user);
+		userService.persist(user);
 	}
 
 	@Test
