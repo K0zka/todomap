@@ -38,13 +38,14 @@
 	<bean id="users" class="net.anzix.o29.logic.JpaUserServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
 	</bean>
-	
+
 	<bean id="ratings" class="net.anzix.o29.logic.JpaRatingServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
 	</bean>
 	
 	<bean id="homes" class="net.anzix.o29.logic.JpaHomeServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="userService" ref="users"/>
 	</bean>
 
 	<bean id="entityManager"
