@@ -195,6 +195,7 @@ if(request.getParameter("lat") == null) {
     $(document).ready(function(){
         $("#toolsAccordion").accordion({
            });
+        $("#userDetailsAccordion").accordion({});
         $("#helpWindow").dialog({
             autoOpen : false
            });
@@ -325,8 +326,12 @@ if(request.getParameter("lat") == null) {
 	function saveUserDetails() {
 		var user = {'user':
 			{
-			'displayName':$('#userDetailsDisplayName').val(),
-			'email':$('#userDetailsEmail').val()
+			'displayName'	:$('#userDetailsDisplayName').val(),
+			'email'			:$('#userDetailsEmail').val(),
+			'homeLoc'		: {
+				'longitude' 	: $('#userDetailsHomeLocationLat').val(),
+				'latitude'		: $('#userDetailsHomeLocationLng').val()
+				}
 			}
 		};
 		$.ajax({
@@ -517,17 +522,37 @@ if(request.getParameter("lat") == null) {
 </div>
 
 <div id="userDetailsWindow" title="Your details">
-	<div>
+	<script type="text/javascript">
+	function updateLocation() {
+		$('#userDetailsHomeLocationLat').val(map.getCenter().lat());
+		$('#userDetailsHomeLocationLng').val(map.getCenter().lng());
+	}
+	</script>
+	<div id="userDetailsAccordion">
+		<h3><a href="#userDetails">Your data</a></h3>
 		<div>
-		<label for="userDetailsDisplayName">Display name</label>
-		<input id="userDetailsDisplayName"/>
+			<div>
+			<label for="userDetailsDisplayName">Display name</label>
+			<input id="userDetailsDisplayName"/>
+			</div>
+			<div>
+			<label for="userDetailsEmail">Email address (never displayed)</label>
+			<input id="userDetailsEmail"/>
+			</div>
 		</div>
+		<h3><a href="#userDetails">Your home location</a></h3>
 		<div>
-		<label for="userDetailsEmail">Email address (never displayed)</label>
-		<input id="userDetailsEmail"/>
+			<div>
+			<label for="userDetailsEmail">Home location</label>
+			<input id="userDetailsHomeLocationLat"/>,<input id="userDetailsHomeLocationLng"/>
+			<button id="userDetailsUseCurrentLocation" onclick="updateLocation()">Use current</button>
+			</div>
+			<div>
+				
+			</div>
 		</div>
-		<button id="saveUserDetailsButton" onclick="saveUserDetails()">Save</button>
 	</div>
+	<button id="saveUserDetailsButton" onclick="saveUserDetails()">Save</button>
 </div>
 
 </body>
