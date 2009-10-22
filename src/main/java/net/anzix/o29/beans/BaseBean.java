@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.Version;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -28,8 +30,10 @@ public abstract class BaseBean {
 	@SequenceGenerator(name="base_seq", allocationSize=1, initialValue=0, sequenceName="base_seq")
 	long id;
 	@OneToMany(fetch=FetchType.LAZY)
+	@XmlTransient
 	List<Comment> comments;
 	@OneToMany(fetch=FetchType.LAZY)
+	@XmlTransient
 	List<Rating> ratings;
 	
 	@Transient
@@ -37,6 +41,10 @@ public abstract class BaseBean {
 
 	@Column(updatable=false, nullable=false)
 	Date created = new Date();
+	
+	@Version
+	@Column(nullable=false)
+	int version = 0;
 	
 	@OneToMany(fetch=FetchType.LAZY)
 	List<Attachment> attachments;
@@ -76,4 +84,11 @@ public abstract class BaseBean {
 	public void setRatings(List<Rating> ratings) {
 		this.ratings = ratings;
 	}
+	public int getVersion() {
+		return version;
+	}
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
 }
