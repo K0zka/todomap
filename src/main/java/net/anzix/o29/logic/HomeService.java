@@ -6,6 +6,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import net.anzix.o29.beans.Coordinate;
+import net.anzix.o29.beans.User;
 
 @Path("/home/")
 @Produces("application/json")
@@ -39,5 +40,12 @@ public interface HomeService {
 	@Path("/set")
 	@PUT
 	void setHome(HomeLocation loc);
-	
+
+	@Path("/user/get")
+	@GET
+	User getUser();
+
+	@Path("/user/set")
+	@PUT
+	void setUserData(User user);
 }

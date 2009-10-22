@@ -13,7 +13,7 @@ import org.springframework.orm.jpa.support.JpaDaoSupport;
 public class JpaUserServiceImpl extends JpaDaoSupport implements UserService {
 
 	@Override
-	public void addUser(User user) {
+	public void persist(User user) {
 		getJpaTemplate().persist(user);
 	}
 
