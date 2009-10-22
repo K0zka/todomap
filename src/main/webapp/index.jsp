@@ -221,7 +221,11 @@ if(request.getParameter("lat") == null) {
             width: 600,
             height: 600
             });
-
+        $('#userDetailsWindow').dialog({
+        	autoOpen : false,
+            width: 400,
+            height: 400
+            });
     });
 
 	function submitNewTodo() {
@@ -318,6 +322,32 @@ if(request.getParameter("lat") == null) {
 		});
 	}
 
+	function saveUserDetails() {
+		var user = {'user':
+			{
+			'displayName':$('#userDetailsDisplayName').val(),
+			'email':$('#userDetailsEmail').val()
+			}
+		};
+		$.ajax({
+			url		: 'services/home/user/set',
+			type	: 'PUT',
+			data	: JSON.stringify(user),
+			success	:$('#userDetailsWindow').dialog('close'),
+			contentType : 'application/json',
+			dataType : 'json'
+		});
+	}
+
+	function getUserDetails() {
+		$.get("services/home/user/get", function(data) {
+			debug(data);
+			var userData = eval("("+data+")");
+			$('#userDetailsDisplayName').val(userData['user']['displayName']);
+			$('#userDetailsEmail').val(userData['user']['email']);
+		});
+	}
+
 	function checkLoginStatus_periodically() {
 		checkLoginStatus();
 		setTimeout("checkLoginStatus_periodically()",20000);
@@ -352,6 +382,7 @@ if(request.getParameter("lat") == null) {
 			<span class="authOnly">
 			<button id="homeButton"  onclick="goHome()"><img src="img/gohome32.png"/> Go Home </button>
 			<button id="logoutButton"  onclick="logOut()"><img src="img/lock32.png"/> Log out </button>
+			<button id="logoutButton"  onclick="$('#userDetailsWindow').dialog('open'); getUserDetails();"><img src="img/user32.png"/> Your details </button>
 			</span>
 			<span class="noAuthOnly">
 			<button id="loginButton" onclick="$(loginWindow).dialog('open')"><img src="img/keys32.png"/> Log in </button>
@@ -482,6 +513,20 @@ if(request.getParameter("lat") == null) {
 		<button id="nogoButton" onclick="$('#wheretogoWindow').dialog('close')">I like it here</button>
 		<span id="wheretogoErrors"></span>
 		</div>
+	</div>
+</div>
+
+<div id="userDetailsWindow" title="Your details">
+	<div>
+		<div>
+		<label for="userDetailsDisplayName">Display name</label>
+		<input id="userDetailsDisplayName"/>
+		</div>
+		<div>
+		<label for="userDetailsEmail">Email address (never displayed)</label>
+		<input id="userDetailsEmail"/>
+		</div>
+		<button id="saveUserDetailsButton" onclick="saveUserDetails()">Save</button>
 	</div>
 </div>
 
