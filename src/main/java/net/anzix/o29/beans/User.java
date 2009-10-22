@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name="o29user")
@@ -20,6 +21,7 @@ public class User extends BaseBean {
 	@Column(nullable=true, length=64)
 	String email;
 	@OneToMany()
+	@XmlTransient
 	List<BaseBean> bookmarks;
 	@Embedded
 	Coordinate homeLoc;
