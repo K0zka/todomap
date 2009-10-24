@@ -31,6 +31,10 @@
 <script type="text/javascript"
 	src="http://maps.google.com/maps/api/js?sensor=false">
 </script>
+
+<script type="text/javascript" src="scripts/o29.js">
+</script>
+
 <script type="text/javascript">
 
 	var pageLocation = '<%= request.getRequestURL() %>';
@@ -38,19 +42,6 @@
     var map;
     var myLatlng;
     var zoomL;
-
-	function isDefined(variable) {
-		return (typeof(window[variable]) != 'undefined');
-	}
-
-	function debug(message) {
-		try {
-			//the good old firebug console
-			console.log(message)
-		} catch (fubar) {
-			//do nothing. No console, no log.
-		}
-	}
 
     (function () {
     	google.maps.Marker.prototype.todoId = -1;
@@ -84,28 +75,6 @@
     	})();
 
 
-	function ipBasedLocation() {
-		try {
-			return new google.maps.LatLng(google.loader.ClientLocation['latitude'], google.loader.ClientLocation['longitude']);
-		} catch (fubar) {
-			debug(fubar);
-			$('#wheretogoWindow').dialog('open');
-			return new google.maps.LatLng(0, 0);
-		}
-	}
-
-	function zoomLevel() {
-		try {
-			if(isDefined(google.loader.ClientLocation)) {
-				return 4;
-			}
-		} catch (fubar) {
-			debug(fubar);
-		} 
-		return 8;
-
-	}
-    
     function initialize() {
 <%
 if(request.getParameter("lat") == null) {
@@ -263,15 +232,6 @@ if(request.getParameter("lat") == null) {
 		map.setZoom(zoomL);
 	}
 
-	function logOut() {
-		$.ajax({
-				type	:	'GET',
-				url		: 'logout.jsp',
-				success : checkLoginStatus,
-				error	: checkLoginStatus
-			});
-	}
-	
 	function handleErrors(XMLHttpRequest) {
 		if(XMLHttpRequest.status == 401) {
 			$("#loginWindow").dialog('open');
@@ -297,31 +257,6 @@ if(request.getParameter("lat") == null) {
 			});
 	}
 
-	function checkLoginStatus() {
-		debug('checkLoginStatus()');
-		$.ajax({
-			type	: 'GET',
-			url		: 'services/home/auth',
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
-				handleErrors(XMLHttpRequest);
-			},
-			success: function(msg){
-				debug('login status:'+msg);
-				var isLoggedIn = eval("("+msg+")");
-				if(isLoggedIn) {
-					$("#loginWindow").dialog('close');
-					$(".authOnly").show(1000);
-					$(".noAuthOnly").hide(1000);
-				} else {
-					$(".authOnly").hide(1000);
-					$(".noAuthOnly").show(1000);
-				}
-			},
-			processData : false,
-			contentType : 'application/json',
-			dataType : 'json'
-		});
-	}
 
 	function saveUserDetails() {
 		var user = {'user':
@@ -353,12 +288,6 @@ if(request.getParameter("lat") == null) {
 		});
 	}
 
-	function checkLoginStatus_periodically() {
-		checkLoginStatus();
-		setTimeout("checkLoginStatus_periodically()",20000);
-	}
-	
-	checkLoginStatus_periodically();
 
 	function gotoLocation() {
 		geocoder = new google.maps.Geocoder();
