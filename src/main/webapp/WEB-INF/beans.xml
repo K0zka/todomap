@@ -48,6 +48,14 @@
 		<property name="userService" ref="users"/>
 	</bean>
 
+	<bean id="attachments" class="net.anzix.o29.logic.JpaAttachmentService" init-method="init">
+		<property name="entityManagerFactory" ref="entityManager"/>
+	</bean>
+
+	<bean id="base" class="net.anzix.o29.logic.JpaBaseService">
+		<property name="entityManagerFactory" ref="entityManager" />
+	</bean>
+
 	<bean id="entityManager"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />

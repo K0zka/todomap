@@ -28,11 +28,14 @@
 			expression="execution(* net.anzix.o29.logic.RatingService.*(..))" />
 		<aop:pointcut id="homeServiceMethods"
 			expression="execution(* net.anzix.o29.logic.HomeService.*(..))" />
+		<aop:pointcut id="attachmentServiceMethods"
+			expression="execution(* net.anzix.o29.logic.AttachmentService.*(..))" />
 		
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="todoServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="userServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="ratingServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="homeServiceMethods" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="attachmentServiceMethods" />
 
 	</aop:config>
 
