@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -41,10 +42,13 @@ public abstract class BaseBean {
 
 	@Column(updatable=false, nullable=false)
 	Date created = new Date();
-	
+
 	@Version
 	@Column(nullable=false)
 	int version = 0;
+
+	@ManyToOne
+	User creator;
 	
 	@OneToMany(fetch=FetchType.LAZY)
 	List<Attachment> attachments;
@@ -89,6 +93,12 @@ public abstract class BaseBean {
 	}
 	public void setVersion(int version) {
 		this.version = version;
+	}
+	public User getCreator() {
+		return creator;
+	}
+	public void setCreator(User creator) {
+		this.creator = creator;
 	}
 
 }
