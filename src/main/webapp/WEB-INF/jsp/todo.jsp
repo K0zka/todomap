@@ -28,12 +28,16 @@ Todo todo = (Todo)request.getAttribute("todo");
 </script>
 <script type="text/javascript" src="scripts/jquery-ui-1.7.2.js">
 </script>
-
+<script type="text/javascript" src="scripts/o29.js">
+</script>
+<script type="text/javascript" src="scripts/ajaxupload.js">
+</script>
 
 <title><%= todo.getShortDescr() %></title>
 
 <script type="text/javascript">
 function initialize() {
+    checkLoginStatus();
 	var map;
 	var mapCenter = new google.maps.LatLng(<%= todo.getLocation().getLatitude() %>, <%= todo.getLocation().getLongitude() %>);
 	var mapOptions = {
@@ -51,9 +55,17 @@ function initialize() {
     $(document).ready(function(){
         $("#todoDetails").accordion({
            });
+
+        new AjaxUpload('uploadButton', 
+                {
+            	action: 'upload/<%= todo.getId() %>', 
+            	autoSubmit: true, 
+            	name: 'file'
+    			}
+        );
+        
     });
-	
-    
+
 }
 </script>
 
@@ -74,6 +86,13 @@ function initialize() {
 	</div>
 	<h3><a href="#">Attachments</a></h3>
 	<div>
+		<span class="authOnly">
+			<button id="uploadButton">upload</button>
+		</span>
+		<span class="noAuthOnly">
+			<h4>You are not authorized</h4>
+			<p>Please sign in to attach files</p>
+		</span>
 	</div>
 	<h3><a href="#">Comments</a></h3>
 	<div>
