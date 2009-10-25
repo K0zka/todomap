@@ -73,6 +73,16 @@
 		<servlet-class>net.anzix.o29.utils.RssServlet</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>upload</servlet-name>
+		<servlet-class>net.anzix.o29.utils.UploadServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>upload</servlet-name>
+		<url-pattern>/upload/*</url-pattern>
+	</servlet-mapping>
+
 	<servlet-mapping>
 		<servlet-name>rssServlet</servlet-name>
 		<url-pattern>rss.xml/*</url-pattern>
