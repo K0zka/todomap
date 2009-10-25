@@ -1,11 +1,12 @@
 package net.anzix.o29.beans;
 
-import javax.persistence.Basic;
+import java.io.InputStream;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 @DiscriminatorValue("todo")
@@ -17,9 +18,11 @@ public class Attachment extends BaseBean{
 	@Column
 	String mime;
 
-	@Lob
-	@Basic(fetch=FetchType.LAZY)
-	byte[] data;
+	@ManyToOne
+	BaseBean attachedTo;
+	
+	@Transient
+	InputStream data;
 
 	public String getFileName() {
 		return fileName;
@@ -37,11 +40,19 @@ public class Attachment extends BaseBean{
 		this.mime = mime;
 	}
 
-	public byte[] getData() {
+	public InputStream getData() {
 		return data;
 	}
 
-	public void setData(byte[] data) {
+	public void setData(final InputStream data) {
 		this.data = data;
+	}
+
+	public BaseBean getAttachedTo() {
+		return attachedTo;
+	}
+
+	public void setAttachedTo(BaseBean attachedTo) {
+		this.attachedTo = attachedTo;
 	}
 }
