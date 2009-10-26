@@ -22,6 +22,7 @@
 			<ref bean="users"/>
 			<ref bean="homes"/>
 			<ref bean="ratings"/>
+			<ref bean="attachments"/>
 		</jaxrs:serviceBeans>
 		<!-- 
 		<jaxrs:extensionMappings>
