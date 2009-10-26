@@ -8,7 +8,8 @@
 Todo todo = (Todo)request.getAttribute("todo");
 %>
 
-<html>
+
+<%@page import="net.anzix.o29.beans.Attachment"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link REL="SHORTCUT ICON" HREF="img/earth.ico"/>
@@ -45,6 +46,7 @@ function initialize() {
           center: mapCenter,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
+
     map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
     var marker = new google.maps.Marker({
         position: mapCenter, 
@@ -60,13 +62,33 @@ function initialize() {
                 {
             	action: 'upload/<%= todo.getId() %>', 
             	autoSubmit: true, 
-            	name: 'file'
+            	name: 'file',
+            	onComplete: updateAttachments
     			}
         );
         
     });
 
 }
+
+function handleErrors(XMLHttpRequest) {
+	
+}
+
+function updateAttachments(file, response) {
+	$.get('services/attachments/<%= todo.getId() %>/get.shrt', function(data) {
+			var attachments = eval('('+data+')');
+			var html = ''
+			$('#attachments').empty();
+			$.each(attachments['atchmnt'], function(i, val) {
+				html = html + '<div id="attachment-'+val['id']+'">'
+					+ '<img alt="'+ val['id'] +'" src="thumbnail/'+val['id']+'"/>'
+					+ '</div>'
+			});
+			$('#attachments').html(html);
+		});
+}
+
 </script>
 
 </head>
@@ -84,8 +106,19 @@ function initialize() {
 			<%= todo.getDescription() %>
 		</span>
 	</div>
-	<h3><a href="#">Attachments</a></h3>
+	<h3><a href="#">Attachments (<%= todo.getAttachments().size() %>)</a></h3>
 	<div>
+	
+		<span id="attachments">
+			<% for(Attachment attachment : todo.getAttachments()) { %>
+				<div id="attachment-<%= attachment.getId() %>">
+					<a href="#attchment-window">
+						<img alt="<%= attachment.getFileName() %>" src="thumbnail/<%=attachment.getId() %>"/>
+					</a>
+				</div>
+			<% } %>
+		</span>
+	
 		<span class="authOnly">
 			<button id="uploadButton">upload</button>
 		</span>
@@ -94,7 +127,7 @@ function initialize() {
 			<p>Please sign in to attach files</p>
 		</span>
 	</div>
-	<h3><a href="#">Comments</a></h3>
+	<h3><a href="#">Comments (<%= todo.getComments().size() %>)</a></h3>
 	<div>
 	</div>
 	<h3><a href="#">Ratings details</a></h3>
