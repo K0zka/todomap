@@ -48,9 +48,11 @@ public abstract class BaseBean {
 	int version = 0;
 
 	@ManyToOne
+	@XmlTransient
 	User creator;
 	
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="attachedTo")
+	@XmlTransient
 	List<Attachment> attachments;
 	public RatingSummary getRatingSummary() {
 		return ratingSummary;
