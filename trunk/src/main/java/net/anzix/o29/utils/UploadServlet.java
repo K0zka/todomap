@@ -47,7 +47,7 @@ public class UploadServlet extends SpringServlet {
 				if("file".equals(item.getFieldName())) {
 					final Attachment attachment = new Attachment();
 					attachment.setCreator(user);
-					attachment.setFileName(item.getFieldName());
+					attachment.setFileName(item.getName());
 					attachment.setMime(item.getContentType());
 					attachment.setData(item.getInputStream());
 					
