@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @XmlRootElement(name="attachment")
@@ -23,14 +24,18 @@ public class Attachment extends BaseBean{
 
 	@ManyToOne
 	@JoinColumn(name="attachedTo_id", nullable=false)
+	@XmlTransient
 	BaseBean attachedTo;
 
 	@Transient
+	@XmlTransient
 	InputStream data;
 
 	@Transient
+	@XmlTransient
 	InputStream thumbnail;
 
+	@XmlTransient
 	public InputStream getThumbnail() {
 		return thumbnail;
 	}
@@ -55,6 +60,7 @@ public class Attachment extends BaseBean{
 		this.mime = mime;
 	}
 
+	@XmlTransient
 	public InputStream getData() {
 		return data;
 	}
@@ -63,6 +69,7 @@ public class Attachment extends BaseBean{
 		this.data = data;
 	}
 
+	@XmlTransient
 	public BaseBean getAttachedTo() {
 		return attachedTo;
 	}

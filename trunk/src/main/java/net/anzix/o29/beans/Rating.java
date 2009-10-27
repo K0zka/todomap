@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name="rating", uniqueConstraints={@UniqueConstraint(columnNames={"user_id", "bean_id"})})
@@ -18,6 +19,7 @@ public class Rating {
 	
 	@ManyToOne
 	@JoinColumn(name="bean_id", nullable=false)
+	@XmlTransient
 	BaseBean bean;
 	@ManyToOne
 	@JoinColumn(name="user_id", nullable=false)
@@ -26,6 +28,7 @@ public class Rating {
 	short rate;
 	@Column
 	String comment;
+	@XmlTransient
 	public BaseBean getBean() {
 		return bean;
 	}
