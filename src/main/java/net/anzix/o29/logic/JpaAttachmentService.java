@@ -18,6 +18,8 @@ import net.anzix.o29.beans.Attachment;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
+import org.springframework.security.Authentication;
+import org.springframework.security.context.SecurityContextHolder;
 
 public class JpaAttachmentService extends JpaDaoSupport implements
 		AttachmentService {
@@ -28,8 +30,22 @@ public class JpaAttachmentService extends JpaDaoSupport implements
 	
 	String fileStorageDir = "attachments";
 
+	List<String> acceptedMime = new ArrayList<String>();
+	
+	public List<String> getAcceptedMime() {
+		return acceptedMime;
+	}
+
+	public void setAcceptedMime(List<String> acceptedMime) {
+		this.acceptedMime = acceptedMime;
+	}
+
 	@Override
 	public void addAttachment(Attachment attachment) throws IOException {
+		if(!acceptedMime.contains(attachment.getMime())){
+			logger.info("Attachment was ignored:"+attachment.getMime()+" "+attachment.getFileName());
+			return;
+		}
 		getJpaTemplate().persist(attachment);
 		attachment.getId();
 		final File dataFile = new File(
@@ -105,6 +121,17 @@ public class JpaAttachmentService extends JpaDaoSupport implements
 	@Override
 	public Attachment getAttachment(long id) {
 		return loadData(getJpaTemplate().find(Attachment.class, id));
+	}
+
+	@Override
+	public void deleteAttachment(long id) {
+		final Attachment attachment = getJpaTemplate().find(Attachment.class, id);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(attachment.getCreator().getOpenIdUrl().equals(authentication.getName())) {
+			//remove from db
+			getJpaTemplate().remove(attachment);
+			
+		}
 	}
 
 }

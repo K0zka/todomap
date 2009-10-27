@@ -3,6 +3,7 @@ package net.anzix.o29.logic;
 import java.io.IOException;
 import java.util.List;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -58,4 +59,8 @@ public interface AttachmentService {
 	@GET
 	@Path("/{id}")
 	Attachment getAttachment(@PathParam("id") long id);
+	
+	@DELETE
+	@Path("delete/{id}")
+	void deleteAttachment(@PathParam("id") long id);
 }
