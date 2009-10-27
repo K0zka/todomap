@@ -51,6 +51,27 @@
 
 	<bean id="attachments" class="net.anzix.o29.logic.JpaAttachmentService" init-method="init">
 		<property name="entityManagerFactory" ref="entityManager"/>
+		<property name="acceptedMime">
+			<list>
+				<value>audio/mpeg</value>
+				<value>audio/ogg</value>
+				<value>audio/vorbis</value>
+				<value>image/gif</value>
+				<value>image/jpeg</value>
+				<value>image/png</value>
+				<value>text/plain</value>
+				<value>video/mpeg</value>
+				<value>video/mp4</value>
+				<value>video/ogg</value>
+				<value>application/pdf</value>
+				<value>application/msword</value>
+				<value>application/vnd.ms-powerpoint</value>
+				<value>application/vnd.ms-excel</value>
+				<value>application/vnd.oasis.opendocument.presentation</value>
+				<value>application/vnd.oasis.opendocument.text</value>
+				<value>application/vnd.oasis.opendocument.spreadsheet</value>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="base" class="net.anzix.o29.logic.JpaBaseService">
