@@ -58,6 +58,12 @@ function initialize() {
         $("#todoDetails").accordion({
            });
 
+		$('#imageWindow').dialog({
+			autoOpen:false,
+			width : 400,
+			height: 360
+			});
+        
         new AjaxUpload('uploadButton', 
                 {
             	action: 'upload/<%= todo.getId() %>', 
@@ -66,13 +72,26 @@ function initialize() {
             	onComplete: updateAttachments
     			}
         );
-        
+
     });
 
 }
 
 function handleErrors(XMLHttpRequest) {
 	
+}
+
+function downloadAttachment(id) {
+	$.get('services/attachments/'+id, function(data) {
+			var attachment = eval('('+data+')');
+			var mimeType = attachment['attachment']['mime'];
+			if(mimeType.indexOf('image/') == 0) {
+				$('#imageWindow').dialog('open');
+				$('#bigPicture').attr('src','download/'+id);
+			} else {
+				//TODO
+			}
+		});
 }
 
 function updateAttachments(file, response) {
@@ -83,6 +102,7 @@ function updateAttachments(file, response) {
 			$.each(attachments['atchmnt'], function(i, val) {
 				html = html + '<div id="attachment-'+val['id']+'">'
 					+ '<img alt="'+ val['id'] +'" src="thumbnail/'+val['id']+'"/>'
+					+ '<span>'+val['filename']+'</span>'
 					+ '</div>'
 			});
 			$('#attachments').html(html);
@@ -111,9 +131,10 @@ function updateAttachments(file, response) {
 	
 		<span id="attachments">
 			<% for(Attachment attachment : todo.getAttachments()) { %>
-				<div id="attachment-<%= attachment.getId() %>">
-					<a href="#attchment-window">
+				<div id="attachment-<%= attachment.getId() %>" onclick="downloadAttachment(<%= attachment.getId() %>)">
+					<a href="#attchment-window-<%= attachment.getId() %>">
 						<img alt="<%= attachment.getFileName() %>" src="thumbnail/<%=attachment.getId() %>"/>
+						<span><%=attachment.getFileName() %></span>
 					</a>
 				</div>
 			<% } %>
@@ -133,6 +154,10 @@ function updateAttachments(file, response) {
 	<h3><a href="#">Ratings details</a></h3>
 	<div>
 	</div>
+
+<div id="imageWindow" title="Picture">
+	<img id="bigPicture" style="width: 100%; height: 100%" src=""/>
+</div>
 
 </div>
 
