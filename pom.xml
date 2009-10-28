@@ -21,6 +21,21 @@
 			</snapshots>
 		</repository>
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>todomap.org</id>
+			<name>todomap.org maven plugin repository</name>
+			<url>http://www.todomap.org/maven</url>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</releases>
+			<snapshots>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -242,6 +257,17 @@
 					<jettyEnvXml>${basedir}/env/jetty/jetty-config.dev.xml</jettyEnvXml>
 					<contextPath>/</contextPath>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.todomap.tools</groupId>
+				<artifactId>maven-jettygzip-plugin</artifactId>
+				<version>0.0.1</version>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals><goal>process</goal></goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
