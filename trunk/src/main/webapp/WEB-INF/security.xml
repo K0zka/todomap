@@ -15,7 +15,7 @@
 
 	<sec:authentication-manager alias="authenticationManager"/>
 
-	<bean id="UserDetailService" class="net.anzix.o29.utils.security.UserDetailServiceImpl">
+	<bean id="UserDetailService" class="org.todomap.o29.utils.security.UserDetailServiceImpl">
 		<property name="userService" ref="users"/>
 	</bean>
 

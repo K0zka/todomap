@@ -19,7 +19,7 @@
 
 	<filter>
 		<filter-name>enforceEncoding</filter-name>
-		<filter-class>net.anzix.o29.utils.EnforceEncodingFilter</filter-class>
+		<filter-class>org.todomap.o29.utils.EnforceEncodingFilter</filter-class>
 	</filter>
 
 	<filter>
@@ -36,7 +36,7 @@
 	</filter>
 	<filter>
 		<filter-name>jsonSecFilter</filter-name>
-		<filter-class>net.anzix.o29.utils.security.SecurityFilter</filter-class>
+		<filter-class>org.todomap.o29.utils.security.SecurityFilter</filter-class>
 	</filter>
 
 
@@ -74,28 +74,28 @@
 
 	<servlet>
 		<servlet-name>todoFullPageServlet</servlet-name>
-		<servlet-class>net.anzix.o29.utils.TodoFullPageServlet</servlet-class>
+		<servlet-class>org.todomap.o29.utils.TodoFullPageServlet</servlet-class>
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>rssServlet</servlet-name>
-		<servlet-class>net.anzix.o29.utils.RssServlet</servlet-class>
+		<servlet-class>org.todomap.o29.utils.RssServlet</servlet-class>
 	</servlet>
 
 	<servlet>
 		<servlet-name>regionRssServlet</servlet-name>
-		<servlet-class>net.anzix.o29.utils.RegionRssServlet</servlet-class>
+		<servlet-class>org.todomap.o29.utils.RegionRssServlet</servlet-class>
 	</servlet>
 
 	<servlet>
 		<servlet-name>upload</servlet-name>
-		<servlet-class>net.anzix.o29.utils.UploadServlet</servlet-class>
+		<servlet-class>org.todomap.o29.utils.UploadServlet</servlet-class>
 	</servlet>
 
 	<servlet>
 		<servlet-name>download</servlet-name>
-		<servlet-class>net.anzix.o29.utils.DownloadServlet</servlet-class>
+		<servlet-class>org.todomap.o29.utils.DownloadServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
