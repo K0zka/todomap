@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
 
-	<bean id="attachmentService" class="net.anzix.o29.logic.JpaAttachmentService">
+	<bean id="attachmentService" class="net.anzix.o29.logic.JpaAttachmentService" init-method="init">
 		<property name="entityManagerFactory" ref="entityManager"/>
 		<property name="acceptedMime">
 			<list>
