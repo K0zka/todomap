@@ -1,0 +1,38 @@
+package net.anzix.o29.logic;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
+
+import net.anzix.o29.beans.User;
+
+import org.springframework.orm.jpa.JpaCallback;
+import org.springframework.orm.jpa.support.JpaDaoSupport;
+
+public class JpaUserServiceImpl extends JpaDaoSupport implements UserService {
+
+	@Override
+	public void persist(User user) {
+		getJpaTemplate().persist(user);
+	}
+
+	@Override
+	public User getUserById(long id) {
+		return getJpaTemplate().find(User.class, id);
+	}
+
+	@Override
+	public User getUserByOpenIdUrl(final String url) {
+		return (User) getJpaTemplate().execute(new JpaCallback() {
+			
+			@Override
+			public Object doInJpa(EntityManager em) throws PersistenceException {
+				@SuppressWarnings("unchecked")
+				List<User> resultList = em.createQuery("select OBJECT(usr) from "+User.class.getName()+ " usr where openIdUrl = :url").setParameter("url", url).getResultList();
+				return resultList.size() == 0 ? null : resultList.get(0);
+			}
+		});
+	}
+
+}

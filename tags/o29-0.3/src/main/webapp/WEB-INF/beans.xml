@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+	http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+
+
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-jaxrs-binding.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+	<bean id="config" class="net.anzix.o29.logic.Configuration">
+	</bean>
+
+	<jaxrs:server name="o29" address="/">
+		<jaxrs:serviceBeans>
+			<ref bean="todos"/>
+			<ref bean="users"/>
+			<ref bean="homes"/>
+			<ref bean="ratings"/>
+			<ref bean="attachments"/>
+		</jaxrs:serviceBeans>
+		<!-- 
+		<jaxrs:extensionMappings>
+			<alias name="xml" alias="application/xml"/>
+		</jaxrs:extensionMappings>
+		 -->
+	</jaxrs:server>
+
+	<bean id="todos" class="net.anzix.o29.logic.JpaTodoServiceImpl">
+		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="geoCoder" ref="geoCoder"/>
+	</bean>
+
+	<bean id="users" class="net.anzix.o29.logic.JpaUserServiceImpl">
+		<property name="entityManagerFactory" ref="entityManager" />
+	</bean>
+
+	<bean id="ratings" class="net.anzix.o29.logic.JpaRatingServiceImpl">
+		<property name="entityManagerFactory" ref="entityManager" />
+	</bean>
+	
+	<bean id="homes" class="net.anzix.o29.logic.JpaHomeServiceImpl">
+		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="userService" ref="users"/>
+	</bean>
+
+	<bean id="attachments" class="net.anzix.o29.logic.JpaAttachmentService" init-method="init">
+		<property name="entityManagerFactory" ref="entityManager"/>
+		<property name="acceptedMime">
+			<list>
+				<value>audio/mpeg</value>
+				<value>audio/ogg</value>
+				<value>audio/vorbis</value>
+				<value>image/gif</value>
+				<value>image/jpeg</value>
+				<value>image/png</value>
+				<value>text/plain</value>
+				<value>video/mpeg</value>
+				<value>video/mp4</value>
+				<value>video/ogg</value>
+				<value>application/pdf</value>
+				<value>application/msword</value>
+				<value>application/vnd.ms-powerpoint</value>
+				<value>application/vnd.ms-excel</value>
+				<value>application/vnd.oasis.opendocument.presentation</value>
+				<value>application/vnd.oasis.opendocument.text</value>
+				<value>application/vnd.oasis.opendocument.spreadsheet</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="base" class="net.anzix.o29.logic.JpaBaseService">
+		<property name="entityManagerFactory" ref="entityManager" />
+	</bean>
+
+	<bean id="entityManager"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="persistenceUnitName" value="o29" />
+		<property name="persistenceProvider">
+			<bean class="org.hibernate.ejb.HibernatePersistence" />
+		</property>
+		<property name="jpaPropertyMap">
+			<map>
+
+				<entry key="hibernate.show_sql" value="false" />
+				<entry key="hibernate.format_sql" value="true" />
+				<entry key="hibernate.hbm2ddl.auto" value="update" />
+
+			</map>
+		</property>
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="jdbc/o29ds"/>
+	</bean>
+
+	<bean id="geoCoder" class="org.todomap.geocoder.google.GoogleGeocoder">
+		<property name="apiKey" value="PLEASE GET A KEY"/>
+	</bean>
+
+	<bean class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
+		<property name="ignoreResourceNotFound" value="true"/>
+		<property name="location" value="classpath:o29.properties"/>
+	</bean>
+
+</beans>
