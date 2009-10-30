@@ -18,6 +18,11 @@
 	</context-param>
 
 	<filter>
+		<filter-name>enforceEncoding</filter-name>
+		<filter-class>net.anzix.o29.utils.EnforceEncodingFilter</filter-class>
+	</filter>
+
+	<filter>
 		<filter-name>oemiv</filter-name>
 		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
 		<init-param>
@@ -34,6 +39,11 @@
 		<filter-class>net.anzix.o29.utils.security.SecurityFilter</filter-class>
 	</filter>
 
+
+	<filter-mapping>
+		<filter-name>enforceEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
