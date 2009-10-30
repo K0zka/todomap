@@ -25,16 +25,16 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Todo> getTodos(double nex, double ney, double swx, double swy) {
+	public List<Todo> getTodos(double northEastLng, double northEastLat, double southWestLng, double southWestLat) {
 		// TODO: Still not correct implementation, but works until I get a GIS
 		// up and running.
-		return getJpaTemplate()
-				.find(
-						"select a from "
-								+ Todo.class.getName()
-								+ " a "
-								+ "where a.location.longitude between ? and ? and a.location.latitude between ? and ?",
-								(double) ney, (double) swy, (double) nex, (double) swx);
+		return getJpaTemplate().find(
+				"select a from " + Todo.class.getName() + " a "
+						+ "where a.location.longitude between ? and ? "
+						+ "and a.location.latitude between ? and ?",
+				(double) min(southWestLng, northEastLng), (double) max(southWestLng, northEastLng),
+				(double) min(southWestLat, northEastLat), (double) max(southWestLat, northEastLat)
+				);
 	}
 
 	@Override
@@ -92,9 +92,17 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 		return getJpaTemplate().findByNamedParams(
 				"select todo from " + Todo.class.getName()
 						+ " todo where todo.address.country = :country "
-						+ "and todo.address.town = :town " 
+						+ "and todo.address.town = :town "
 						+ "and todo.address.state = :state "
 						+ "order by todo.created desc ", params);
+	}
+
+	static double min(final double a, final double b) {
+		return a < b ? a : b;
+	}
+
+	static double max(final double a, final double b) {
+		return a > b ? a : b;
 	}
 
 }
