@@ -2,14 +2,14 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<%@page import="net.anzix.o29.beans.Todo"%>
+<%@page import="org.todomap.o29.beans.Todo"%>
 
 <%
 Todo todo = (Todo)request.getAttribute("todo");
 %>
 
 
-<%@page import="net.anzix.o29.beans.Attachment"%><html>
+<%@page import="org.todomap.o29.beans.Attachment"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link REL="SHORTCUT ICON" HREF="img/earth.ico"/>

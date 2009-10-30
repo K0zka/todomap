@@ -21,15 +21,15 @@
 	<aop:config>
 	
 		<aop:pointcut id="todoServiceMethods"
-			expression="execution(* net.anzix.o29.logic.TodoService.*(..))" />
+			expression="execution(* org.todomap.o29.logic.TodoService.*(..))" />
 		<aop:pointcut id="userServiceMethods"
-			expression="execution(* net.anzix.o29.logic.UserService.*(..))" />
+			expression="execution(* org.todomap.o29.logic.UserService.*(..))" />
 		<aop:pointcut id="ratingServiceMethods"
-			expression="execution(* net.anzix.o29.logic.RatingService.*(..))" />
+			expression="execution(* org.todomap.o29.logic.RatingService.*(..))" />
 		<aop:pointcut id="homeServiceMethods"
-			expression="execution(* net.anzix.o29.logic.HomeService.*(..))" />
+			expression="execution(* org.todomap.o29.logic.HomeService.*(..))" />
 		<aop:pointcut id="attachmentServiceMethods"
-			expression="execution(* net.anzix.o29.logic.AttachmentService.*(..))" />
+			expression="execution(* org.todomap.o29.logic.AttachmentService.*(..))" />
 		
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="todoServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="userServiceMethods" />

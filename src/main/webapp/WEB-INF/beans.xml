@@ -13,7 +13,7 @@
 	<import resource="classpath:META-INF/cxf/cxf-extension-jaxrs-binding.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	<bean id="config" class="net.anzix.o29.logic.Configuration">
+	<bean id="config" class="org.todomap.o29.logic.Configuration">
 	</bean>
 
 	<jaxrs:server name="o29" address="/">
@@ -31,25 +31,25 @@
 		 -->
 	</jaxrs:server>
 
-	<bean id="todos" class="net.anzix.o29.logic.JpaTodoServiceImpl">
+	<bean id="todos" class="org.todomap.o29.logic.JpaTodoServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
 		<property name="geoCoder" ref="geoCoder"/>
 	</bean>
 
-	<bean id="users" class="net.anzix.o29.logic.JpaUserServiceImpl">
+	<bean id="users" class="org.todomap.o29.logic.JpaUserServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
 	</bean>
 
-	<bean id="ratings" class="net.anzix.o29.logic.JpaRatingServiceImpl">
+	<bean id="ratings" class="org.todomap.o29.logic.JpaRatingServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
 	</bean>
 	
-	<bean id="homes" class="net.anzix.o29.logic.JpaHomeServiceImpl">
+	<bean id="homes" class="org.todomap.o29.logic.JpaHomeServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
 		<property name="userService" ref="users"/>
 	</bean>
 
-	<bean id="attachments" class="net.anzix.o29.logic.JpaAttachmentService" init-method="init">
+	<bean id="attachments" class="org.todomap.o29.logic.JpaAttachmentService" init-method="init">
 		<property name="entityManagerFactory" ref="entityManager"/>
 		<property name="acceptedMime">
 			<list>
@@ -74,7 +74,7 @@
 		</property>
 	</bean>
 
-	<bean id="base" class="net.anzix.o29.logic.JpaBaseService">
+	<bean id="base" class="org.todomap.o29.logic.JpaBaseService">
 		<property name="entityManagerFactory" ref="entityManager" />
 	</bean>
 

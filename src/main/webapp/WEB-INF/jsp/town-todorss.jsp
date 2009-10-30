@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 
 <%@page import="java.util.List"%>
-<%@page import="net.anzix.o29.beans.Todo"%>
-<%@page import="net.anzix.o29.utils.VersionUtil"%>
+<%@page import="org.todomap.o29.beans.Todo"%>
+<%@page import="org.todomap.o29.utils.VersionUtil"%>
 <%
 SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss ZZZ");
 final List<Todo> todos = (List<Todo>)request.getAttribute("todos");
