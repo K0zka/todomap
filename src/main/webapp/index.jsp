@@ -12,7 +12,7 @@
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <link REL="SHORTCUT ICON" HREF="img/earth.ico"/>
-<title>O29</title>
+<title>todomap</title>
 
 <link rel="stylesheet" type="text/css"
 	href="style/jquery-ui-1.7.2.custom.css" media="all" />
