@@ -110,4 +110,9 @@
 		<property name="location" value="classpath:o29.properties"/>
 	</bean>
 
+	<bean class="org.todomap.minigeoip.impl.jpa.JpaGeoipResolver">
+		<property name="entityManagerFactory" ref="entityManager"/>
+		<property name="txManager" ref="transactionManager"/>
+	</bean>
+
 </beans>
