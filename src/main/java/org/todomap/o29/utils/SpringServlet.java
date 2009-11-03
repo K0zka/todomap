@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.todomap.minigeoip.GeoipResolver;
 import org.todomap.o29.logic.AttachmentService;
 import org.todomap.o29.logic.BaseService;
 import org.todomap.o29.logic.TodoService;
@@ -18,10 +19,11 @@ class SpringServlet extends HttpServlet{
 	 * 
 	 */
 	private static final long serialVersionUID = -722510994881678145L;
-	TodoService todoService = null;
-	BaseService baseService = null;
-	UserService userService = null;
-	AttachmentService attachmentService = null;
+	TodoService todoService;
+	BaseService baseService;
+	UserService userService;
+	AttachmentService attachmentService;
+	GeoipResolver geoipResolver;
 
 	@Override
 	final public void init(ServletConfig config) throws ServletException {
@@ -32,6 +34,7 @@ class SpringServlet extends HttpServlet{
 		userService = (UserService) webApplicationContext.getBean("users");
 		baseService = (BaseService) webApplicationContext.getBean("base");
 		attachmentService = (AttachmentService) webApplicationContext.getBean("attachments");
+		geoipResolver = (GeoipResolver) webApplicationContext.getBean("geoipResolver");
 	}
 
 

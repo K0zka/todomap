@@ -98,6 +98,16 @@
 		<servlet-class>org.todomap.o29.utils.DownloadServlet</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>geoip</servlet-name>
+		<servlet-class>org.todomap.o29.utils.GeoipServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>geoip</servlet-name>
+		<url-pattern>/geoip</url-pattern>
+	</servlet-mapping>
+
 	<servlet-mapping>
 		<servlet-name>download</servlet-name>
 		<url-pattern>/download/*</url-pattern>

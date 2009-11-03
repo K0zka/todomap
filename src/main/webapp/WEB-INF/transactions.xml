@@ -20,6 +20,8 @@
 
 	<aop:config>
 	
+		<aop:pointcut id="geoipMethods"
+			expression="execution(* org.todomap.minigeoip.GeoipResolver.*(..))" />
 		<aop:pointcut id="todoServiceMethods"
 			expression="execution(* org.todomap.o29.logic.TodoService.*(..))" />
 		<aop:pointcut id="userServiceMethods"
@@ -31,6 +33,7 @@
 		<aop:pointcut id="attachmentServiceMethods"
 			expression="execution(* org.todomap.o29.logic.AttachmentService.*(..))" />
 		
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="geoipMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="todoServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="userServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="ratingServiceMethods" />
