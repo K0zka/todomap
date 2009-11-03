@@ -216,6 +216,11 @@
 			<artifactId>commons-io</artifactId>
 			<version>1.4</version>
 		</dependency>
+		<dependency>
+			<groupId>org.todomap</groupId>
+			<artifactId>minigeoip</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<description>Todo map</description>
 	<url>http://code.google.com/p/todomap/</url>
