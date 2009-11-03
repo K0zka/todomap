@@ -14,6 +14,8 @@
 		</Array>
 	</Set>
 
+	<Set name="extraClasspath">env/dev</Set>
+
 
 	<New id="o29ds" class="org.mortbay.jetty.plus.naming.Resource">
 		<Arg>jdbc/o29ds</Arg>
