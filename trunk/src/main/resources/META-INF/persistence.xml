@@ -10,5 +10,6 @@
 		<class>org.todomap.o29.beans.Rating</class>
 		<class>org.todomap.o29.beans.Todo</class>
 		<class>org.todomap.o29.beans.User</class>
+		<class>org.todomap.minigeoip.impl.jpa.IpDomain</class>
 	</persistence-unit>
 </persistence>
