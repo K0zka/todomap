@@ -33,7 +33,20 @@ function ipBasedLocation() {
 		return new google.maps.LatLng(google.loader.ClientLocation['latitude'],
 				google.loader.ClientLocation['longitude']);
 	} catch (fubar) {
-		debug(fubar);
+		
+		//try to resolve country with internal geoip
+		
+		$.get('/geoip', function(data) {
+			if(data != 'unknown') {
+				geocoder = new google.maps.Geocoder();
+				geocoder.geocode( { 'address': data }, function(results, status) {
+			        if (status == google.maps.GeocoderStatus.OK) {
+			          map.setCenter(results[0].geometry.location);
+			        }
+			      });
+			}
+		});
+		
 		$('#wheretogoWindow').dialog('open');
 		return new google.maps.LatLng(0, 0);
 	}
