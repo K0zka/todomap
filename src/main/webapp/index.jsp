@@ -11,6 +11,9 @@
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<meta name="description" content="Keeping track of issues on the map. A direct-democracy tool for town and country-size communities." lang="english"/>
+
 <link REL="SHORTCUT ICON" HREF="img/earth.ico"/>
 <title>todomap</title>
 
@@ -141,8 +144,9 @@ if(request.getParameter("lat") == null) {
 						    google.maps.event.addListener(marker, 'click', function() {
 							    $.get("services/todos/byid/"+val['id'], function(data){
 								    var todo = eval("("+data+")");
+								    var shortDescr = todo['todo']['shortDescr'];
 							    	var infowindow = new google.maps.InfoWindow({
-							            content: '<h2>'+todo['todo']['shortDescr'] + '</h2><div>' + todo['todo']['description'] + '</div>'
+							            content: '<h2>'+ shortDescr + '</h2><div>' + todo['todo']['description'] + '</div>'
 							            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',1)"/>'
 							            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',2)"/>'
 							            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',3)"/>'
