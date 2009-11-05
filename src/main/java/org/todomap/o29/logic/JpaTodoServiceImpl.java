@@ -40,7 +40,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 	@Override
 	public void addTodo(final Todo todo) {
 		try {
-			todo.setAddress(geoCoder.revert(new LatLng(todo.getLocation()
+			todo.setAddr(geoCoder.revert(new LatLng(todo.getLocation()
 					.getLatitude(), todo.getLocation().getLongitude())));
 		} catch (GeoCodeException e) {
 			logger.error("Could not reverse-geocode location");

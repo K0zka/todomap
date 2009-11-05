@@ -23,7 +23,8 @@ public class Todo extends BaseBean {
 	@Lob
 	String description;
 	@Embedded
-	Address address;
+	@Column(name="address")
+	Address addr;
 
 	public Coordinate getLocation() {
 		return location;
@@ -43,10 +44,10 @@ public class Todo extends BaseBean {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Address getAddress() {
-		return address;
+	public Address getAddr() {
+		return addr;
 	}
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setAddr(Address addr) {
+		this.addr = addr;
 	}
 }
