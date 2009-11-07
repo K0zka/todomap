@@ -12,7 +12,8 @@ Todo todo = (Todo)request.getAttribute("todo");
 <%@page import="org.todomap.o29.beans.Attachment"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link REL="SHORTCUT ICON" HREF="img/earth.ico"/>
+
+<jsp:include page="includes/sitemeta.jsp"/>
 
 <script type="text/javascript"
 	src="http://maps.google.com/maps/api/js?sensor=false">

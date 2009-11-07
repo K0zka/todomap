@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
 Disallow: /services/
-Sitemap: sitemap_todos.xml
