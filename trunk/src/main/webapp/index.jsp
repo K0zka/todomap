@@ -12,9 +12,8 @@
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
-<meta name="description" content="Keeping track of issues on the map. A direct-democracy tool for town and country-size communities." lang="english"/>
+<jsp:include page="WEB-INF/jsp/includes/sitemeta.jsp"/>
 
-<link REL="SHORTCUT ICON" HREF="img/earth.ico"/>
 <title>todomap</title>
 
 <link rel="stylesheet" type="text/css"
