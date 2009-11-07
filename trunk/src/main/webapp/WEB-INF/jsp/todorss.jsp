@@ -4,6 +4,7 @@
 <%@page import="java.util.List"%>
 <%@page import="org.todomap.o29.beans.Todo"%>
 <%@page import="org.todomap.o29.utils.VersionUtil"%>
+<%@page import="org.todomap.o29.utils.URLUtil"%>
 <%
 SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss ZZZ");
 final List<Todo> todos = (List<Todo>)request.getAttribute("todos");
@@ -18,10 +19,10 @@ final List<Todo> todos = (List<Todo>)request.getAttribute("todos");
 	<% for(Todo todo : todos)  {%>
     <item>
       <title><%= todo.getShortDescr() %></title>
-      <link><%= "../"+todo.getId() + "-" + todo.getShortDescr() + ".html" %></link>
+      <link><%= URLUtil.getUrl(request, todo)%></link>
       <description> <%= todo.getDescription() %> </description>
       <pubDate><%= sdf.format(todo.getCreated()) %></pubDate>
-      <guid><%= todo.getId() + "-" + todo.getShortDescr() + ".html" %></guid>
+      <guid><%= URLUtil.getUrl(request, todo)%></guid>
     </item>
 	<% } %>
   </channel>

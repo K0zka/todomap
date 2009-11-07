@@ -13,7 +13,8 @@ final String countryCode = (String)request.getAttribute("countryCode");
 %>
 
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%><rss version="2.0">
+<%@page import="java.util.Date"%>
+<%@page import="org.todomap.o29.utils.URLUtil"%><rss version="2.0">
   <channel>
     <title>Todomap RSS feed for <%= town %> </title>
     <description><%= town %> </description>
@@ -21,10 +22,10 @@ final String countryCode = (String)request.getAttribute("countryCode");
 	<% for(Todo todo : todos)  {%>
     <item>
       <title><%= todo.getShortDescr() %></title>
-      <link><%= "../"+todo.getId() + "-" + todo.getShortDescr() + ".html" %></link>
+      <link><%= URLUtil.getUrl(request, todo) %></link>
       <description> <%= todo.getDescription() %> </description>
       <pubDate><%= sdf.format(todo.getCreated()) %></pubDate>
-      <guid><%= todo.getId() + "-" + todo.getShortDescr() + ".html" %></guid>
+      <guid><%= URLUtil.getUrl(request, todo) %></guid>
     </item>
 	<% } %>
   </channel>
