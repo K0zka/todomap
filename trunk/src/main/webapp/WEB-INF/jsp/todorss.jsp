@@ -6,8 +6,9 @@
 <%@page import="org.todomap.o29.utils.VersionUtil"%>
 <%@page import="org.todomap.o29.utils.URLUtil"%>
 <%
-SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss ZZZ");
+final SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss ZZZ");
 final List<Todo> todos = (List<Todo>)request.getAttribute("todos");
+final String chanelLink = (String)request.getAttribute("chanelLink");
 %>
 
 <%@page import="java.text.SimpleDateFormat"%>
@@ -16,6 +17,8 @@ final List<Todo> todos = (List<Todo>)request.getAttribute("todos");
     <title>Todomap RSS feed for area</title>
     <description>Todomap RSS feed for area</description>
     <lastBuildDate><%= sdf.format(new Date())%></lastBuildDate>
+    <generator>Todomap <%= VersionUtil.getVersionNumber() %></generator>
+    <link><%= chanelLink %></link>
 	<% for(Todo todo : todos)  {%>
     <item>
       <title><%= todo.getShortDescr() %></title>

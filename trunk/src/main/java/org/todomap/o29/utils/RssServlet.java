@@ -29,6 +29,7 @@ public class RssServlet extends SpringServlet {
 		final double nex = Double.parseDouble(params[2]);
 		final double ney = Double.parseDouble(params[3]);
 		final List<Todo> todos = todoService.getTodos(ney, nex, swy, swx);
+		req.setAttribute("chanelLink", req.getRequestURL().toString());
 		req.setAttribute("todos", todos);
 		req.getRequestDispatcher("/WEB-INF/jsp/todorss.jsp").forward(req, resp);
 	}

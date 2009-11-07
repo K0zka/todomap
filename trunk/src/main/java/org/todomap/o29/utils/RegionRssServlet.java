@@ -23,6 +23,7 @@ public class RegionRssServlet extends SpringServlet {
 		final String town = getParam(split, 0);
 		final List<Todo> todos = todoService.getByLocation(countryCode, state,
 				town);
+		req.setAttribute("chanelLink", req.getRequestURL().toString());
 		req.setAttribute("todos", todos);
 		req.setAttribute("countryCode", countryCode);
 		req.setAttribute("state", state);
