@@ -91,9 +91,9 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 		params.put("town", state);
 		return getJpaTemplate().findByNamedParams(
 				"select todo from " + Todo.class.getName()
-						+ " todo where todo.address.country = :country "
-						+ "and todo.address.town = :town "
-						+ "and todo.address.state = :state "
+						+ " todo where todo.addr.country = :country "
+						+ "and todo.addr.town = :town "
+						+ "and todo.addr.state = :state "
 						+ "order by todo.created desc ", params);
 	}
 
