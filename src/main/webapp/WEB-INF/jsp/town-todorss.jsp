@@ -10,6 +10,7 @@ final List<Todo> todos = (List<Todo>)request.getAttribute("todos");
 final String town = (String)request.getAttribute("town");
 final String state = (String)request.getAttribute("state");
 final String countryCode = (String)request.getAttribute("countryCode");
+final String chanelLink = (String)request.getAttribute("chanelLink");
 %>
 
 <%@page import="java.text.SimpleDateFormat"%>
@@ -19,6 +20,8 @@ final String countryCode = (String)request.getAttribute("countryCode");
     <title>Todomap RSS feed for <%= town %> </title>
     <description><%= town %> </description>
     <lastBuildDate><%=sdf.format(new Date())%></lastBuildDate>
+    <generator>Todomap <%= VersionUtil.getVersionNumber() %></generator>
+    <link><%= chanelLink %></link>
 	<% for(Todo todo : todos)  {%>
     <item>
       <title><%= todo.getShortDescr() %></title>
