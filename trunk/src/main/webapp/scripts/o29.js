@@ -69,7 +69,6 @@ function zoomLevel() {
  * @return nothing
  */
 function checkLoginStatus() {
-	debug('checkLoginStatus()');
 	$.ajax( {
 		type : 'GET',
 		url : 'services/home/auth',
@@ -77,7 +76,6 @@ function checkLoginStatus() {
 			handleErrors(XMLHttpRequest);
 		},
 		success : function(msg) {
-			debug('login status:' + msg);
 			var isLoggedIn = eval("(" + msg + ")");
 			if (isLoggedIn) {
 				$("#loginWindow").dialog('close');
