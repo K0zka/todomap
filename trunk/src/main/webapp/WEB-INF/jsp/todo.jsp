@@ -1,15 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 <%@page import="org.todomap.o29.beans.Todo"%>
-
+<%@page import="org.todomap.o29.beans.Attachment"%>
 <%
 Todo todo = (Todo)request.getAttribute("todo");
+
 %>
-
-
-<%@page import="org.todomap.o29.beans.Attachment"%><html>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -23,6 +21,7 @@ Todo todo = (Todo)request.getAttribute("todo");
 	href="style/jquery-ui-1.7.2.custom.css" media="all" />
 <link rel="stylesheet" type="text/css"
 	href="style/default.css" media="all" />
+<link type="text/css" rel="stylesheet" href="style/jquery.rte.css" />
 
 <script type="text/javascript" src="scripts/json.js">
 </script>
@@ -34,13 +33,23 @@ Todo todo = (Todo)request.getAttribute("todo");
 </script>
 <script type="text/javascript" src="scripts/ajaxupload.js">
 </script>
+<script type="text/javascript" src="scripts/jquery.rte.js">
+</script>
+<script type="text/javascript" src="scripts/jquery.rte.tb.js">
+</script>
+
 
 <title><%= todo.getShortDescr() %></title>
 
 <script type="text/javascript">
+
+var version = <%= todo.getVersion() %>;
+var id = <%= todo.getId() %>;
+var marker;
+var map;
+
 function initialize() {
     checkLoginStatus();
-	var map;
 	var mapCenter = new google.maps.LatLng(<%= todo.getLocation().getLatitude() %>, <%= todo.getLocation().getLongitude() %>);
 	var mapOptions = {
           zoom: 15,
@@ -49,14 +58,16 @@ function initialize() {
         };
 
     map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-    var marker = new google.maps.Marker({
+    marker = new google.maps.Marker({
         position: mapCenter, 
         map: map,
         title:'-'
     });
 
     $(document).ready(function(){
+    	$('#descriptionEdit').hide();
         $("#todoDetails").accordion({
+        	navigation: true
            });
 
 		$('#imageWindow').dialog({
@@ -73,13 +84,12 @@ function initialize() {
             	onComplete: updateAttachments
     			}
         );
-
     });
 
 }
 
 function handleErrors(XMLHttpRequest) {
-	
+	debug('problem...');
 }
 
 function downloadAttachment(id) {
@@ -110,21 +120,70 @@ function updateAttachments(file, response) {
 		});
 }
 
+var editors;
+
+function editDescription() {
+	editors = $('#todoDescriptionEditor').rte({
+		css: ['style/default.css'],
+		controls_rte: rte_toolbar,
+		controls_html: html_toolbar,
+		frame_class: 'frameBody'
+	});
+	$('#todoDescriptionShow').hide();
+	$('#descriptionEdit').show();
+	debug($('#todoDescriptionShow').html());
+	editors['todoDescriptionEditor'].set_content($('#todoDescriptionShow').html());
+}
+
+function saveData() {
+	var todo = {"todo":
+		{
+		"id":id,
+		"version":version,
+		"location" : {
+			"latitude": 0,
+			"longitude":0
+			},
+		"description": editors['todoDescriptionEditor'].get_content()
+		}
+	};
+	var strData = JSON.stringify(todo);
+	$.ajax({
+		type : 'PUT',
+		url : 'services/todos/update',
+		data: strData,
+		success: function(msg){
+			$("#newTodo").dialog('close');
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			handleErrors(XMLHttpRequest);
+		},
+		processData : false,
+		contentType : 'application/json',
+		dataType : 'json'
+		});
+}
+
 </script>
 
 </head>
 <body onload="initialize()">
 
+<div style="width: 100%; height: 800px;">
 <div id="todoDetails">
 
+	<h3><a href="#">Location</a></h3>
+	<div style="height: 600px">
+		<div id="map_canvas" style="width: 100%; height: 100%"></div>
+	</div>
 	<h3><a href="#">Details</a></h3>
 	<div>
-		<h1><%= todo.getShortDescr() %></h1>
-		
-		<div id="map_canvas" style="width: 300px; height: 300px"></div>
-		
-		<span class="todoDescription">
-			<%= todo.getDescription() %>
+		<span id="descriptionNoEdit">
+			<span id="todoDescriptionShow" ondblclick="editDescription()" style="cursor: text; width: 100%; height: 100%"><%= todo.getDescription() %></span>
+		</span>
+		<span id="descriptionEdit">
+			<textarea id="todoDescriptionEditor" class="todoDescription"></textarea>
+			<button onclick="saveData()">save</button>
 		</span>
 	</div>
 	<h3><a href="#">Attachments (<%= todo.getAttachments().size() %>)</a></h3>
@@ -160,6 +219,7 @@ function updateAttachments(file, response) {
 	<img id="bigPicture" style="width: 100%; height: 100%" src=""/>
 </div>
 
+</div>
 </div>
 
 </body>
