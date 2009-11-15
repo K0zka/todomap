@@ -311,35 +311,31 @@ if(request.getParameter("lat") == null) {
 <body onload="initialize()" style="margin: 0px; padding: 0px;">
 
 <div style="width: 100%; height: 100%;">
-	<span style="width: 20%; height: 100%; position: absolute; left: 0px;">
+	<span id="sidebar" style="width: 20%; height: 100%; position: absolute; left: 0px;">
 		<div id="toolsAccordion">
 			<h3><a href="#">Tools</a></h3>
-			<div>
-			<p>
-			<span class="authOnly">
-			<button id="homeButton"  onclick="goHome()"><img src="img/gohome32.png"/> Go Home </button>
-			<button id="logoutButton"  onclick="logOut()"><img src="img/lock32.png"/> Log out </button>
-			<button id="logoutButton"  onclick="$('#userDetailsWindow').dialog('open'); getUserDetails();"><img src="img/user32.png"/> Your details </button>
-			</span>
-			<span class="noAuthOnly">
-			<button id="loginButton" onclick="$(loginWindow).dialog('open')"><img src="img/keys32.png"/> Log in </button>
-			</span>
-			<button id="embedButton" onclick="$(linksWindow).dialog('open')"><img src="img/external-link.png"/> Link to this map </button>
-			</p>
+			<div class="sidebarControls">
+				<span class="authOnly">
+				<button id="homeButton"  onclick="goHome()"><img src="img/gohome32.png"/> Go Home </button>
+				<button id="logoutButton"  onclick="logOut()"><img src="img/lock32.png"/> Log out </button>
+				<button id="logoutButton"  onclick="$('#userDetailsWindow').dialog('open'); getUserDetails();"><img src="img/user32.png"/> Your details </button>
+				</span>
+				<span class="noAuthOnly">
+				<button id="loginButton" onclick="$(loginWindow).dialog('open')"><img src="img/keys32.png"/> Log in </button>
+				</span>
+				<button id="embedButton" onclick="$(linksWindow).dialog('open')"><img src="img/external-link.png"/> Link to this map </button>
 			</div>
 			<h3><a href="#">Info</a></h3>
-			<div>
-			<p>
-			<button id="infoButton" onclick="$(productInfoWindow).dialog('open')"><img src="img/info32.png"/> About todomap </button>
-			<button id="statisticsButton"><img src="img/math32.png"/> Statistics </button>
-			<button id="helpButton" onclick="$(helpWindow).dialog('open')"><img src="img/help32.png"/> Help </button>
-			</p>
+			<div class="sidebarControls">
+				<button id="infoButton" onclick="$(productInfoWindow).dialog('open')"><img src="img/info32.png"/> About todomap </button>
+				<button id="statisticsButton"><img src="img/math32.png"/> Statistics </button>
+				<button id="helpButton" onclick="$(helpWindow).dialog('open')"><img src="img/help32.png"/> Help </button>
 			</div>
 			<h3><a href="#">Search</a></h3>
-			<div>
+			<div class="sidebarControls">
 			</div>
 			<h3><a href="#">Bookmarks</a></h3>
-			<div>
+			<div class="sidebarControls">
 			</div>
 		</div>
 		<div class="versionInfo">
