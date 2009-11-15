@@ -70,7 +70,7 @@ var rte_toolbar = {
 	},
 	block : {
 		command : "formatblock",
-		select : '<select>	<option value="">- format -</option>	<option value="<p>">Paragraph</option>	<option value="<h1>">Header 1</option>	<option value="<h2>">Header 2</options>	<option value="<h3>">Header 3</option>	<option value="<h4>">Header 4</options>	<option value="<h5>">Header 5</option>	<option value="<h6>">Header 6</options></select>	',
+		select : '<select>	<option value="<p>" selected="true">Paragraph</option>	<option value="<h1>">Header 1</option>	<option value="<h2>">Header 2</options>	<option value="<h3>">Header 3</option>	<option value="<h4>">Header 4</options>	<option value="<h5>">Header 5</option>	<option value="<h6>">Header 6</options></select>	',
 		tag_cmp : lwrte_block_compare,
 		tags : [ "p", "h1", "h2", "h3", "h4", "h5", "h6" ]
 	},
