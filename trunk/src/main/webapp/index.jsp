@@ -21,6 +21,7 @@
 
 <link rel="stylesheet" type="text/css"
 	href="style/default.css" media="all" />
+<link type="text/css" rel="stylesheet" href="style/jquery.tooltip.css" />
 
 <script type="text/javascript" src="http://www.google.com/jsapi">
 </script>
@@ -29,6 +30,10 @@
 <script type="text/javascript" src="scripts/jquery-1.3.2.js">
 </script>
 <script type="text/javascript" src="scripts/jquery-ui-1.7.2.js">
+</script>
+<script type="text/javascript" src="scripts/jquery.dimensions.min.js">
+</script>
+<script type="text/javascript" src="scripts/jquery.tooltip.min.js">
 </script>
 <script type="text/javascript"
 	src="http://maps.google.com/maps/api/js?sensor=false">
@@ -199,6 +204,17 @@ if(request.getParameter("lat") == null) {
             width: 400,
             height: 400
             });
+
+        /*
+        Button tooltips
+        */
+        $('button').tooltip({
+            delay : 1000,
+            bodyHandler: function() {
+            	return $('#'+this.id+"-tooltip").html();
+        	}
+        });
+        
     });
 
 	function submitNewTodo() {
@@ -316,20 +332,20 @@ if(request.getParameter("lat") == null) {
 			<h3><a href="#">Tools</a></h3>
 			<div class="sidebarControls">
 				<span class="authOnly">
-				<button id="homeButton"  onclick="goHome()"><img src="img/gohome32.png"/> Go Home </button>
-				<button id="logoutButton"  onclick="logOut()"><img src="img/lock32.png"/> Log out </button>
-				<button id="logoutButton"  onclick="$('#userDetailsWindow').dialog('open'); getUserDetails();"><img src="img/user32.png"/> Your details </button>
+				<button id="homeButton"  onclick="goHome()"> Go Home </button>
+				<button id="logoutButton"  onclick="logOut()"> Log out </button>
+				<button id="yourDetailsButton"  onclick="$('#userDetailsWindow').dialog('open'); getUserDetails();"> Your details </button>
 				</span>
 				<span class="noAuthOnly">
-				<button id="loginButton" onclick="$(loginWindow).dialog('open')"><img src="img/keys32.png"/> Log in </button>
+				<button id="loginButton" onclick="$(loginWindow).dialog('open')"> Log in </button>
 				</span>
-				<button id="embedButton" onclick="$(linksWindow).dialog('open')"><img src="img/external-link.png"/> Link to this map </button>
+				<button id="embedButton" onclick="$(linksWindow).dialog('open')"> Link to this map </button>
 			</div>
 			<h3><a href="#">Info</a></h3>
 			<div class="sidebarControls">
-				<button id="infoButton" onclick="$(productInfoWindow).dialog('open')"><img src="img/info32.png"/> About todomap </button>
-				<button id="statisticsButton"><img src="img/math32.png"/> Statistics </button>
-				<button id="helpButton" onclick="$(helpWindow).dialog('open')"><img src="img/help32.png"/> Help </button>
+				<button id="infoButton" onclick="$(productInfoWindow).dialog('open')"> About todomap </button>
+				<button id="statisticsButton"> Statistics </button>
+				<button id="helpButton" onclick="$(helpWindow).dialog('open')"> Help </button>
 			</div>
 			<h3><a href="#">Search</a></h3>
 			<div class="sidebarControls">
@@ -481,6 +497,28 @@ if(request.getParameter("lat") == null) {
 		</div>
 	</div>
 	<button id="saveUserDetailsButton" onclick="saveUserDetails()">Save</button>
+</div>
+
+<!-- tooltips here -->
+<div id="tooltips" style="visibility: hidden">
+	<div id="homeButton-tooltip">
+		<p><img src="img/gohome.png"/>Position the map to your home location</p>
+	</div>
+	<div id="loginButton-tooltip">
+		<p><img src="img/keys.png"/>Log in with your OpenID account</p>
+	</div>
+	<div id="logoutButton-tooltip">
+		<p><img src="img/keys.png"/>Close your session to protect your data.</p>
+	</div>
+	<div id="yourDetailsButton-tooltip">
+		<p><img src="img/user.png"/>Edit your personal data, like home location, email address, etc</p>
+	</div>
+	<div id="embedButton-tooltip">
+		<p> <img src="img/feed.png"> Link and RSS feed URL to this map. </p>
+	</div>
+	<div id="infoButton-tooltip">
+		<p> <img src="img/info.png"/> </p>
+	</div>
 </div>
 
 </body>
