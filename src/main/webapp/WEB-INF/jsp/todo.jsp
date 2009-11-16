@@ -22,10 +22,17 @@ Todo todo = (Todo)request.getAttribute("todo");
 <link rel="stylesheet" type="text/css"
 	href="style/default.css" media="all" />
 <link type="text/css" rel="stylesheet" href="style/jquery.rte.css" />
+<link type="text/css" rel="stylesheet" href="style/jquery.tooltip.css" />
 
 <script type="text/javascript" src="scripts/json.js">
 </script>
 <script type="text/javascript" src="scripts/jquery-1.3.2.js">
+</script>
+<script type="text/javascript" src="scripts/jquery-ui-1.7.2.js">
+</script>
+<script type="text/javascript" src="scripts/jquery.dimensions.min.js">
+</script>
+<script type="text/javascript" src="scripts/jquery.tooltip.min.js">
 </script>
 <script type="text/javascript" src="scripts/jquery-ui-1.7.2.js">
 </script>
@@ -66,7 +73,19 @@ function initialize() {
 
     $(document).ready(function(){
     	$('#descriptionEdit').hide();
-        $("#todoDetails").accordion({
+    	$('#todoDescriptionShow').tooltip({
+    		bodyHandler : function() {
+    			return $('#'+this.id+"-tooltip").html();
+    		},
+			delay : 1000
+        	});
+    	$('button').tooltip({
+    		bodyHandler : function() {
+    			return $('#'+this.id+"-tooltip").html();
+    		},
+			delay : 1000
+        	});
+    	$("#todoDetails").accordion({
         	navigation: true
            });
 
@@ -183,7 +202,7 @@ function saveData() {
 		</span>
 		<span id="descriptionEdit">
 			<textarea id="todoDescriptionEditor" class="todoDescription"></textarea>
-			<button onclick="saveData()">save</button>
+			<button id="saveButton" onclick="saveData()">save</button>
 		</span>
 	</div>
 	<h3><a href="#">Attachments (<%= todo.getAttachments().size() %>)</a></h3>
@@ -221,6 +240,15 @@ function saveData() {
 
 </div>
 </div>
+
+<span style="visibility: hidden">
+	<div id="todoDescriptionShow-tooltip">
+		<p><img src="img/edit.png"/>Double click the text to start editing.</p>
+	</div>
+	<div id="saveButton-tooltip">
+		<p><img src="img/floppy.png"/> Click save to submit your modifications. </p>
+	</div>
+</span>
 
 </body>
 </html>
