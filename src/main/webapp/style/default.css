@@ -59,6 +59,7 @@ button {
 	border: none;
 	margin: 2px;
 	cursor:pointer !important;
+	overflow: auto;
 }
 
 button:hover {
@@ -67,3 +68,5 @@ button:hover {
 	cursor:pointer !important;
 }
 
+.sidebarControls {
+}
