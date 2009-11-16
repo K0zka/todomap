@@ -218,6 +218,16 @@
 			<artifactId>minigeoip</artifactId>
 			<version>0.0.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.todomap</groupId>
+			<artifactId>late-trans</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.htmlcleaner</groupId>
+			<artifactId>htmlcleaner</artifactId>
+			<version>2.1</version>
+		</dependency>
 	</dependencies>
 	<description>Todo map</description>
 	<url>http://code.google.com/p/todomap/</url>
