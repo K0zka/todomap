@@ -508,7 +508,7 @@ if(request.getParameter("lat") == null) {
 		<p><img src="img/keys.png"/>Log in with your OpenID account</p>
 	</div>
 	<div id="logoutButton-tooltip">
-		<p><img src="img/keys.png"/>Close your session to protect your data.</p>
+		<p><img src="img/lock.png"/>Close your session to protect your data.</p>
 	</div>
 	<div id="yourDetailsButton-tooltip">
 		<p><img src="img/user.png"/>Edit your personal data, like home location, email address, etc</p>
