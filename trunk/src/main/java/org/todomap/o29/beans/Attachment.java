@@ -14,10 +14,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @XmlRootElement(name="attachment")
 @DiscriminatorValue("attachment")
-public class Attachment extends BaseBean{
+public class Attachment extends BaseBean {
 	
 	@Column
 	String fileName;
+
+	@Column
+	String description;
 	
 	@Column
 	String mime;
@@ -76,5 +79,13 @@ public class Attachment extends BaseBean{
 
 	public void setAttachedTo(BaseBean attachedTo) {
 		this.attachedTo = attachedTo;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }
