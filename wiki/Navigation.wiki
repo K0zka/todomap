@@ -3,4 +3,4 @@ User resources
 
 Developer resources:
  * [JettyGzipPlugin]
- * [ReleaseSchedule]
+ * [ReleaseSchedule Release Schedule]
