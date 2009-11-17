@@ -517,7 +517,13 @@ if(request.getParameter("lat") == null) {
 		<p> <img src="img/feed.png"> Link and RSS feed URL to this map. </p>
 	</div>
 	<div id="infoButton-tooltip">
-		<p> <img src="img/info.png"/> </p>
+		<p> <img src="img/info.png"/> Information about the software and todomap.org </p>
+	</div>
+	<div id="statisticsButton-tooltip">
+		<p> <img src="img/math.png"> Service statistics </p>
+	</div>
+	<div id="helpButton-tooltip">
+		<p> <img src="img/help.png"> Todomap help </p>
 	</div>
 </div>
 
