@@ -2,4 +2,4 @@ User resources
  * [Start]
 
 Developer resources:
- * [JettyGzipPLugin]
+ * [JettyGzipPlugin]
