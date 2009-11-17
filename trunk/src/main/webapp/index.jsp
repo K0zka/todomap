@@ -144,6 +144,7 @@ if(request.getParameter("lat") == null) {
 						        title:val['descr']
 						    });
 						    marker.setTodoId(val['id']);
+						    marker.setIcon('img/flag.png');
 						    map.addMarker(marker);
 						    google.maps.event.addListener(marker, 'click', function() {
 							    $.get("services/todos/byid/"+val['id'], function(data){
