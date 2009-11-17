@@ -50,6 +50,9 @@ public abstract class BaseBean {
 	@ManyToOne
 	@XmlTransient
 	User creator;
+
+	@Column
+	String language;
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="attachedTo")
 	@XmlTransient
@@ -104,5 +107,11 @@ public abstract class BaseBean {
 	}
 	public void setCreator(User creator) {
 		this.creator = creator;
+	}
+	public String getLanguage() {
+		return language;
+	}
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 }
