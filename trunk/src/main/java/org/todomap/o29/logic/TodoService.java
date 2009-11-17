@@ -74,6 +74,12 @@ public interface TodoService {
 	@Produces("application/json")
 	void addTodo(Todo todo);
 
+	@PUT
+	@Path("/update")
+	@Consumes("application/json")
+	@Produces("application/json")
+	void saveTodo(Todo todo);
+	
 	@GET
 	@Path("/all")
 	@XmlElementWrapper(name = "todos")
