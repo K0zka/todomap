@@ -17,4 +17,4 @@ The main focus of release 0.6 is external systems integration.
 
 = Version 0.7 =
 
-...
+Release 0.7 will target self-organization, event planing and support requests to the interested parties.
