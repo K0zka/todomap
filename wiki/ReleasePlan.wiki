@@ -6,11 +6,15 @@ The main focus of release 0.4 is comments and todo editing.
 
 = Version 0.5 =
 
-The main focus of release 0.5 is rating, grouping todos on the map and search functionality.
+The main focus of release 0.5 is rating, grouping todos on the map and search functionality, bookmarks.
 
 = Version 0.6 =
 
 The main focus of release 0.6 is external systems integration.
- * bookmarks like digg
+ * external bookmarks like digg
  * email and IM notifications
  * Wave?
+
+= Version 0.7 =
+
+...
