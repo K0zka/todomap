@@ -34,6 +34,7 @@
 	<bean id="todos" class="org.todomap.o29.logic.JpaTodoServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
 		<property name="geoCoder" ref="geoCoder"/>
+		<property name="translatorService" ref="translatorService"/>
 	</bean>
 
 	<bean id="users" class="org.todomap.o29.logic.JpaUserServiceImpl">
@@ -117,6 +118,13 @@
 
 	<bean id="geoipLogic" class="org.todomap.o29.logic.GeoIpLogic" init-method="init">
 		<property name="resolver" ref="geoipResolver"/>
+	</bean>
+
+	<bean id="translatorService" class="org.todomap.o29.logic.TranslatorServiceImpl">
+		<constructor-arg ref="translator"/>
+	</bean>
+
+	<bean id="translator" class="org.todomap.latetrans.GoogleTranslator">
 	</bean>
 
 </beans>

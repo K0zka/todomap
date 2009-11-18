@@ -16,6 +16,16 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 
 	GeoCoder geoCoder;
 
+	TranslatorService translatorService;
+	
+	public TranslatorService getTranslatorService() {
+		return translatorService;
+	}
+
+	public void setTranslatorService(TranslatorService translatorService) {
+		this.translatorService = translatorService;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Todo> getAllTodos() {
@@ -45,6 +55,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 		} catch (GeoCodeException e) {
 			logger.error("Could not reverse-geocode location");
 		}
+		translatorService.updateLanguage(todo);
 		getJpaTemplate().persist(todo);
 	}
 
@@ -117,6 +128,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 				logger.warn(e.getMessage(), e);
 			}
 		}
+		translatorService.updateLanguage(byId);
 		getJpaTemplate().persist(byId);
 	}
 
