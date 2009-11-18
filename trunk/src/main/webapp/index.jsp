@@ -501,7 +501,7 @@ if(request.getParameter("lat") == null) {
 </div>
 
 <!-- tooltips here -->
-<div id="tooltips" style="visibility: hidden">
+<div id="tooltips" style="visibility: hidden; overflow: hidden; display: none;">
 	<div id="homeButton-tooltip">
 		<p><img src="img/gohome.png"/>Position the map to your home location</p>
 	</div>
