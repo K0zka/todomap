@@ -13,6 +13,14 @@ public class GoogleTranslator implements Translator {
 
 	private String key = "notsupplied";
 	
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
 	public String getLanguage(final String text) {
 		final HttpClient client = new HttpClient();
 		final GetMethod method = new GetMethod("http://www.google.com/uds/GlangDetect");
