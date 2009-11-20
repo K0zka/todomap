@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @XmlRootElement(name="attachment")
 @DiscriminatorValue("attachment")
-public class Attachment extends BaseBean {
+public class Attachment extends BaseBean implements Translatable {
 	
 	@Column
 	String fileName;
@@ -87,5 +87,10 @@ public class Attachment extends BaseBean {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Override
+	public String getText() {
+		return getDescription();
 	}
 }

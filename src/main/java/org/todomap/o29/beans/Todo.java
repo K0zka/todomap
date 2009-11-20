@@ -14,7 +14,7 @@ import org.todomap.geocoder.Address;
 @Table(name="todo")
 @XmlRootElement(name="todo")
 @DiscriminatorValue("todo")
-public class Todo extends BaseBean {
+public class Todo extends BaseBean implements Translatable{
 	@Embedded
 	Coordinate location;
 	@Column(nullable=false, name="shdsc")
@@ -49,5 +49,12 @@ public class Todo extends BaseBean {
 	}
 	public void setAddr(Address addr) {
 		this.addr = addr;
+	}
+	@Override
+	public String getText() {
+		return getDescription();
+	}
+	public void setLanguage(String language) {
+		super.setLanguage(language);
 	}
 }
