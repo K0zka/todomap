@@ -27,7 +27,7 @@
 </script>
 <script type="text/javascript" src="scripts/json.js">
 </script>
-<script type="text/javascript" src="scripts/jquery-1.3.2.js">
+<script type="text/javascript" src="scripts/jquery-1.3.2.min.js">
 </script>
 <script type="text/javascript" src="scripts/jquery-ui-1.7.2.js">
 </script>
