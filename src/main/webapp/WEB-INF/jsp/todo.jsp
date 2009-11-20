@@ -26,7 +26,7 @@ Todo todo = (Todo)request.getAttribute("todo");
 
 <script type="text/javascript" src="scripts/json.js">
 </script>
-<script type="text/javascript" src="scripts/jquery-1.3.2.js">
+<script type="text/javascript" src="scripts/jquery-1.3.2.min.js">
 </script>
 <script type="text/javascript" src="scripts/jquery-ui-1.7.2.js">
 </script>
@@ -223,12 +223,19 @@ function saveData() {
 			<button id="uploadButton">upload</button>
 		</span>
 		<span class="noAuthOnly">
-			<h4>You are not authorized</h4>
+			<h4>You are not signed in</h4>
 			<p>Please sign in to attach files</p>
 		</span>
 	</div>
 	<h3><a href="#">Comments (<%= todo.getComments().size() %>)</a></h3>
 	<div>
+		<span class="authOnly">
+			<button id="uploadButton">add</button>
+		</span>
+		<span class="noAuthOnly">
+			<h4>You are not signed in</h4>
+			<p>Please sign in to comment</p>
+		</span>
 	</div>
 	<h3><a href="#">Ratings details</a></h3>
 	<div>
