@@ -32,6 +32,8 @@
 			expression="execution(* org.todomap.o29.logic.HomeService.*(..))" />
 		<aop:pointcut id="attachmentServiceMethods"
 			expression="execution(* org.todomap.o29.logic.AttachmentService.*(..))" />
+		<aop:pointcut id="commentServiceMethods"
+			expression="execution(* org.todomap.o29.logic.CommentService.*(..))" />
 		
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="geoipMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="todoServiceMethods" />
@@ -39,6 +41,7 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="ratingServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="homeServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="attachmentServiceMethods" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="commentServiceMethods" />
 
 	</aop:config>
 

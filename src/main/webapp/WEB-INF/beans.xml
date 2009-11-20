@@ -23,6 +23,7 @@
 			<ref bean="homes"/>
 			<ref bean="ratings"/>
 			<ref bean="attachments"/>
+			<ref bean="comments"/>
 		</jaxrs:serviceBeans>
 		<!-- 
 		<jaxrs:extensionMappings>
@@ -39,6 +40,11 @@
 
 	<bean id="users" class="org.todomap.o29.logic.JpaUserServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
+	</bean>
+
+	<bean id="comments" class="org.todomap.o29.logic.JpaCommentServiceImpl">
+		<property name="entityManagerFactory" ref="entityManager"/>
+		<property name="translatorService" ref="translatorService"/>
 	</bean>
 
 	<bean id="ratings" class="org.todomap.o29.logic.JpaRatingServiceImpl">
