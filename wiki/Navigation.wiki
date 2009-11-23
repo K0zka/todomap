@@ -4,5 +4,5 @@ User resources
 Developer resources:
  * [JettyGzipPlugin]
  * Releases
-   * [ReleasePlan Release Plan]
-   * [PastReleases Past releases]
+    * [ReleasePlan Release Plan]
+    * [PastReleases Past releases]
