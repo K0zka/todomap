@@ -7,7 +7,8 @@
 Todo todo = (Todo)request.getAttribute("todo");
 
 %>
-<html>
+
+<%@page import="org.todomap.o29.beans.Comment"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -94,7 +95,22 @@ function initialize() {
 			width : 400,
 			height: 360
 			});
-        
+
+		$('#newComment').hide(0);
+
+		$('#todoDescriptionEditor').rte({
+			css: ['style/default.css'],
+			controls_rte: rte_toolbar,
+			controls_html: html_toolbar,
+			frame_class: 'frameBody'
+		});
+		editors = $('#commentEditor').rte({
+			css: ['style/default.css'],
+			controls_rte: rte_toolbar,
+			controls_html: html_toolbar,
+			frame_class: 'frameBody'
+		});
+
         new AjaxUpload('uploadButton', 
                 {
             	action: 'upload/<%= todo.getId() %>', 
@@ -107,8 +123,8 @@ function initialize() {
 
 }
 
-function handleErrors(XMLHttpRequest) {
-	debug('problem...');
+function handleErrors(request) {
+	debug('problem:'+request);
 }
 
 function downloadAttachment(id) {
@@ -142,16 +158,39 @@ function updateAttachments(file, response) {
 var editors;
 
 function editDescription() {
-	editors = $('#todoDescriptionEditor').rte({
-		css: ['style/default.css'],
-		controls_rte: rte_toolbar,
-		controls_html: html_toolbar,
-		frame_class: 'frameBody'
-	});
 	$('#todoDescriptionShow').hide();
 	$('#descriptionEdit').show();
 	debug($('#todoDescriptionShow').html());
 	editors['todoDescriptionEditor'].set_content($('#todoDescriptionShow').html());
+}
+
+function submitComment() {
+	$.ajax({
+		type : 'POST',
+		url : 'services/comments/add/<%=todo.getId()%>',
+		data: editors['commentEditor'].get_content(),
+		success: function(msg){alert('ok');},
+		processData : false,
+		contentType : 'application/json',
+		dataType : 'json'
+	});
+
+	//refresh comments
+	$.get('services/comments/get/<%= todo.getId() %>','', function(data, status) {
+			$('#comments').empty();
+			editors['commentEditor'].set_content('');
+			$('#newComment').hide(1000);
+			$('#addCommentButton').show(1000);
+			var comments = eval('('+data+')');
+			$.each(comments['comment'], function(i, val) {
+					$('#comments').append('<span class="comment" id="'+val['id']+'">'+val['text']+'</span>');
+				});
+		});
+}
+
+function addComment() {
+	$('#newComment').show(1000);
+	$('#addCommentButton').hide(1000);
 }
 
 function saveData() {
@@ -172,7 +211,9 @@ function saveData() {
 		url : 'services/todos/update',
 		data: strData,
 		success: function(msg){
-			$("#newTodo").dialog('close');
+			$('#todoDescriptionShow').html(editors['todoDescriptionEditor'].get_content());
+			$('#todoDescriptionShow').show(1000);
+			$('#descriptionEdit').hide(1000);
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			handleErrors(XMLHttpRequest);
@@ -229,13 +270,22 @@ function saveData() {
 	</div>
 	<h3><a href="#">Comments (<%= todo.getComments().size() %>)</a></h3>
 	<div>
+		<div id="newComment" style="">
+			<textarea id="commentEditor" class="todoDescription"></textarea> <br/>
+			<button id="uploadButton" onclick="submitComment();">submit</button>
+		</div>
 		<span class="authOnly">
-			<button id="uploadButton">add</button>
+			<button id="addCommentButton" onclick="addComment()">add</button>
 		</span>
 		<span class="noAuthOnly">
 			<h4>You are not signed in</h4>
 			<p>Please sign in to comment</p>
 		</span>
+		<div id="comments" class="comments">
+			<% for(Comment comment : todo.getComments()) { %>
+				<span id="comment-<%= comment.getId() %>" class="comment"><%= comment.getText() %></span>
+			<% } %>
+		</div>
 	</div>
 	<h3><a href="#">Ratings details</a></h3>
 	<div>

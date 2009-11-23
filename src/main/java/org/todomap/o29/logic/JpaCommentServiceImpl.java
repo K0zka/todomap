@@ -15,7 +15,7 @@ public class JpaCommentServiceImpl extends JpaDaoSupport implements CommentServi
 	@Override
 	public void addComment(long id, String text) {
 		final BaseBean bean = getJpaTemplate().find(BaseBean.class, id);
-		Comment comment = new Comment();
+		final Comment comment = new Comment();
 		comment.setText(text);
 		comment.setCreated(new Date());
 		translatorService.updateLanguage(comment);
