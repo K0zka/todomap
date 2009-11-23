@@ -70,3 +70,21 @@ button:hover {
 
 .sidebarControls {
 }
+
+#authOnly {
+	display: none;
+}
+
+#noAuthOnly {
+	display: none;
+}
+
+.comments {
+	width: 100%;
+	height: 80%;
+}
+
+.comment {
+	width: 100%;
+	border-bottom:1px solid #BBBBBB;
+}
