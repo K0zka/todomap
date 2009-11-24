@@ -190,7 +190,10 @@ if(request.getParameter("lat") == null) {
            });
         $("#loginWindow").dialog({
         	modal: true,
-            autoOpen : false
+            autoOpen : false,
+            show: 'slide',
+            width: 600,
+            height: 600
             });
         $("#linksWindow").dialog({
             autoOpen : false
@@ -205,6 +208,7 @@ if(request.getParameter("lat") == null) {
             width: 400,
             height: 400
             });
+        $('#loginTabs').tabs();
 
         /*
         Button tooltips
@@ -398,13 +402,41 @@ if(request.getParameter("lat") == null) {
 	
 	<form name="loginForm" action="<c:url value='j_spring_openid_security_check'/>" method="POST">
 	
-	<div style="width: 100%; height: 20%">
-		<img src="img/logo_openid.png"/>
-	</div>
-	
-	<div style="width: 100%; height: 80%">
-	    <label for="j_username">Your <a href="https://openid.org/home">OpenID</a> Identity:</label> <input id="" type='text' name='j_username' value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>'/>
-	
+	<div id="loginTabs">
+		<ul>
+			<li><a href="#logintab-openid">OpenId</a></li>
+			<li><a href="#logintab-yahooid">Yahoo! ID</a></li>
+			<li><a href="#logintab-bloggercom">Blogger.com</a></li>
+		</ul>
+		<div id="logintab-openid">
+			<div>
+				<img src="img/logo_openid.png"/>
+			</div>
+			<div>
+			    <label for="j_username">Your <a href="https://openid.org/home">OpenID</a> Identity:</label> 
+			    <input id="openidUrl" type='text' name='j_username' value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>'/>
+			</div>
+		</div>
+		<div id="logintab-yahooid">
+			<div>
+				Enter your Yahoo! ID
+			</div>
+			<div>
+				<input 
+					id="yahooIdInput" 
+					onkeyup="$('#openidUrl').val('https://me.yahoo.com/'+$('#yahooIdInput').val())"/>
+			</div>
+		</div>
+		<div id="logintab-bloggercom">
+			<div>
+				Enter your Blogger blog URL
+			</div>
+			<div >
+				<input 
+					id="bloggerInput" 
+					onkeyup="$('#openidUrl').val($('#bloggerInput').val())"/>
+			</div>
+		</div>
 	    <button onclick="document.loginForm.submit()">Log in</button>
 	</div>
 	
