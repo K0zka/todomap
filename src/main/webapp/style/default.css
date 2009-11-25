@@ -88,3 +88,7 @@ button:hover {
 	width: 100%;
 	border-bottom:1px solid #BBBBBB;
 }
+
+.sidebarControls button {
+	width: 80%
+}

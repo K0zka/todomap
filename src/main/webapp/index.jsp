@@ -193,7 +193,8 @@ if(request.getParameter("lat") == null) {
             autoOpen : false,
             show: 'slide',
             width: 600,
-            height: 600
+            height: 600,
+            position: 'top'
             });
         $("#linksWindow").dialog({
             autoOpen : false
