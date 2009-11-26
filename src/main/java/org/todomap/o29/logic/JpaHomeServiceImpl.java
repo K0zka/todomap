@@ -32,9 +32,7 @@ public class JpaHomeServiceImpl extends JpaDaoSupport implements HomeService {
 
 	@Override
 	public User getUser() {
-		final Authentication authentication = getAuthentication();
-		return authentication == null ? null : userService
-				.getUserByOpenIdUrl(authentication.getName());
+		return userService.getCurrentUser();
 	}
 	
 	public UserService getUserService() {

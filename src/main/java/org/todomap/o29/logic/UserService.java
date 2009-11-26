@@ -11,6 +11,9 @@ import org.todomap.o29.beans.User;
 public interface UserService {
 	
 	@GET
+	User getCurrentUser();
+	
+	@GET
 	@Path("/user/{id}")
 	User getUserById(@PathParam("id") long id);
 	

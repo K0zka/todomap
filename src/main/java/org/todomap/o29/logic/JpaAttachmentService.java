@@ -32,6 +32,16 @@ public class JpaAttachmentService extends JpaDaoSupport implements
 
 	List<String> acceptedMime = new ArrayList<String>();
 	
+	UserService userService;
+	
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
 	public List<String> getAcceptedMime() {
 		return acceptedMime;
 	}
@@ -46,6 +56,7 @@ public class JpaAttachmentService extends JpaDaoSupport implements
 			logger.info("Attachment was ignored:"+attachment.getMime()+" "+attachment.getFileName());
 			return;
 		}
+		attachment.setCreator(userService.getCurrentUser());
 		getJpaTemplate().persist(attachment);
 		attachment.getId();
 		final File dataFile = new File(

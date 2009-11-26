@@ -36,6 +36,7 @@
 		<property name="entityManagerFactory" ref="entityManager" />
 		<property name="geoCoder" ref="geoCoder"/>
 		<property name="translatorService" ref="translatorService"/>
+		<property name="userService" ref="users"/>
 	</bean>
 
 	<bean id="users" class="org.todomap.o29.logic.JpaUserServiceImpl">
@@ -45,10 +46,12 @@
 	<bean id="comments" class="org.todomap.o29.logic.JpaCommentServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager"/>
 		<property name="translatorService" ref="translatorService"/>
+		<property name="userService" ref="users"/>
 	</bean>
 
 	<bean id="ratings" class="org.todomap.o29.logic.JpaRatingServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="userService" ref="users"/>
 	</bean>
 	
 	<bean id="homes" class="org.todomap.o29.logic.JpaHomeServiceImpl">
