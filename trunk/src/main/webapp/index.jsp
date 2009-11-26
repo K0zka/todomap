@@ -184,7 +184,7 @@ if(request.getParameter("lat") == null) {
         $("#productInfoWindow").dialog({
             modal: true,
             width: 600,
-            height: 600,
+            height: 400,
             show: 'slide',
             autoOpen : false
            });
@@ -465,7 +465,7 @@ if(request.getParameter("lat") == null) {
 	</p>
 	<p>
 	To find out more about the software, please visit the project page at 
-	<a target="new" href="http://code.google.com/p/todomap/">google code</a>! Your contribution 
+	<a id="googleCodeLink" target="new" href="http://code.google.com/p/todomap/">google code</a>! Your contribution 
 	to todomap's success is highly appreciated!
 	</p>
 	<p>
@@ -563,6 +563,15 @@ if(request.getParameter("lat") == null) {
 	</div>
 	<div id="openIdLink-tooltip">
 		<p> Find your OpenID provider at openid.org! </p>
+	</div>
+	<div id="googleCodeLink-tooltip">
+		<p> <img src="img/gear.png"/> This link will take you to the developer site where you can find the
+		<ul>
+			<li>bugtracker</li>
+			<li>wiki</li>
+			<li>and all the source code</li>
+		</ul>
+		</p>
 	</div>
 </div>
 
