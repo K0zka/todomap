@@ -200,9 +200,7 @@ if(request.getParameter("lat") == null) {
             autoOpen : false
             });
         $('#wheretogoWindow').dialog({
-        	autoOpen : false,
-            width: 600,
-            height: 600
+        	autoOpen : false
             });
         $('#userDetailsWindow').dialog({
         	autoOpen : false,
@@ -215,6 +213,16 @@ if(request.getParameter("lat") == null) {
         Button tooltips
         */
         $('button').tooltip({
+            delay : 1000,
+            bodyHandler: function() {
+            	return $('#'+this.id+"-tooltip").html();
+        	}
+        });
+
+        /*
+        Link tooltips
+        */
+        $('a').tooltip({
             delay : 1000,
             bodyHandler: function() {
             	return $('#'+this.id+"-tooltip").html();
@@ -346,6 +354,7 @@ if(request.getParameter("lat") == null) {
 				<button id="loginButton" onclick="$(loginWindow).dialog('open')"> Log in </button>
 				</span>
 				<button id="embedButton" onclick="$(linksWindow).dialog('open')"> Link to this map </button>
+				<button id="gotoButton" onclick="$('#wheretogoWindow').dialog('open')">Enter address</button>
 			</div>
 			<h3><a href="#">Info</a></h3>
 			<div class="sidebarControls">
@@ -414,7 +423,7 @@ if(request.getParameter("lat") == null) {
 				<img src="img/logo_openid.png"/>
 			</div>
 			<div>
-			    <label for="j_username">Your <a href="https://openid.org/home">OpenID</a> Identity:</label> 
+			    <label for="j_username">Your <a id="openIdLink" href="https://openid.org/home">OpenID</a> Identity:</label> 
 			    <input id="openidUrl" type='text' name='j_username' value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>'/>
 			</div>
 		</div>
@@ -482,13 +491,6 @@ if(request.getParameter("lat") == null) {
 <div id="wheretogoWindow" title="Where do you want to go?">
 	<div>
 		<!-- GeoIP is racism. -->
-		<h3>Choose your destination</h3>
-		<p>Unfortunately your location could not be determined from your IP address
-		so there was no other choice than showing a map probably totally irrelevant for you.
-		</p>
-		<p>
-		Please type the name of the location where you want to center your map!
-		</p>
 		<div style="width: 100%">
 		<label for="wheretogoLocation">Location:</label>
 		<input id="wheretogoLocation"/>
@@ -539,7 +541,7 @@ if(request.getParameter("lat") == null) {
 		<p><img src="img/gohome.png"/>Position the map to your home location</p>
 	</div>
 	<div id="loginButton-tooltip">
-		<p><img src="img/keys.png"/>Log in with your OpenID account</p>
+		<p><img src="img/keys.png"/>Log in with your OpenID account.<br/>You can use your <strong>Yahoo! ID</strong>, your <strong>google/blogger</strong> account, or <strong>any OpenID provider</strong>.</p>
 	</div>
 	<div id="logoutButton-tooltip">
 		<p><img src="img/lock.png"/>Close your session to protect your data.</p>
@@ -558,6 +560,9 @@ if(request.getParameter("lat") == null) {
 	</div>
 	<div id="helpButton-tooltip">
 		<p> <img src="img/help.png"> Todomap help </p>
+	</div>
+	<div id="openIdLink-tooltip">
+		<p> Find your OpenID provider at openid.org! </p>
 	</div>
 </div>
 
