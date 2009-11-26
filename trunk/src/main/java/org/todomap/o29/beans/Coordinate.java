@@ -10,7 +10,7 @@ public class Coordinate {
 	public Coordinate() {
 		super();
 	}
-	public Coordinate(long longitude, long latitude) {
+	public Coordinate(final double longitude, final double latitude) {
 		super();
 		this.longitude = longitude;
 		this.latitude = latitude;
