@@ -493,7 +493,7 @@ if(request.getParameter("lat") == null) {
 		<!-- GeoIP is racism. -->
 		<div style="width: 100%">
 		<label for="wheretogoLocation">Location:</label>
-		<input id="wheretogoLocation"/>
+		<input id="wheretogoLocation" onchange="gotoLocation()"/>
 		<button id="wheretogoButton" onclick="gotoLocation()">Go!</button>
 		<button id="nogoButton" onclick="$('#wheretogoWindow').dialog('close')">I like it here</button>
 		<span id="wheretogoErrors"></span>
