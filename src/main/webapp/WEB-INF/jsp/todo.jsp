@@ -169,13 +169,17 @@ function submitComment() {
 		type : 'POST',
 		url : 'services/comments/add/<%=todo.getId()%>',
 		data: editors['commentEditor'].get_content(),
-		success: function(msg){alert('ok');},
+		success: function(msg){
+			refreshComments();
+			},
 		processData : false,
 		contentType : 'application/json',
 		dataType : 'json'
 	});
 
-	//refresh comments
+}
+
+function refreshComments() {
 	$.get('services/comments/get/<%= todo.getId() %>','', function(data, status) {
 			$('#comments').empty();
 			editors['commentEditor'].set_content('');
