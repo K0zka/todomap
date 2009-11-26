@@ -351,7 +351,7 @@ if(request.getParameter("lat") == null) {
 				<button id="yourDetailsButton"  onclick="$('#userDetailsWindow').dialog('open'); getUserDetails();"> Your details </button>
 				</span>
 				<span class="noAuthOnly">
-				<button id="loginButton" onclick="$(loginWindow).dialog('open')"> Log in </button>
+				<button id="loginButton" onclick="$(loginWindow).dialog('open')"> Log in / Register </button>
 				</span>
 				<button id="embedButton" onclick="$(linksWindow).dialog('open')"> Link to this map </button>
 				<button id="gotoButton" onclick="$('#wheretogoWindow').dialog('open')">Enter address</button>
