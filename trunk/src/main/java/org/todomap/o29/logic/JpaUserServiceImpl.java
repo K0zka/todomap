@@ -8,6 +8,8 @@ import javax.persistence.PersistenceException;
 
 import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
+import org.springframework.security.Authentication;
+import org.springframework.security.context.SecurityContextHolder;
 import org.todomap.o29.beans.User;
 
 public class JpaUserServiceImpl extends JpaDaoSupport implements UserService {
@@ -33,6 +35,12 @@ public class JpaUserServiceImpl extends JpaDaoSupport implements UserService {
 				return resultList.size() == 0 ? null : resultList.get(0);
 			}
 		});
+	}
+
+	@Override
+	public User getCurrentUser() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		return authentication == null ? null : getUserByOpenIdUrl(authentication.getName());
 	}
 
 }

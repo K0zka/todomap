@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
 import org.springframework.orm.jpa.support.JpaDaoSupport;
 import org.todomap.geocoder.GeoCodeException;
 import org.todomap.geocoder.GeoCoder;
@@ -17,7 +16,17 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 	GeoCoder geoCoder;
 
 	TranslatorService translatorService;
-	
+
+	UserService userService;
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
 	public TranslatorService getTranslatorService() {
 		return translatorService;
 	}
@@ -35,16 +44,18 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Todo> getTodos(double northEastLng, double northEastLat, double southWestLng, double southWestLat) {
+	public List<Todo> getTodos(double northEastLng, double northEastLat,
+			double southWestLng, double southWestLat) {
 		// TODO: Still not correct implementation, but works until I get a GIS
 		// up and running.
 		return getJpaTemplate().find(
 				"select a from " + Todo.class.getName() + " a "
 						+ "where a.location.longitude between ? and ? "
 						+ "and a.location.latitude between ? and ?",
-				(double) min(southWestLng, northEastLng), (double) max(southWestLng, northEastLng),
-				(double) min(southWestLat, northEastLat), (double) max(southWestLat, northEastLat)
-				);
+				(double) min(southWestLng, northEastLng),
+				(double) max(southWestLng, northEastLng),
+				(double) min(southWestLat, northEastLat),
+				(double) max(southWestLat, northEastLat));
 	}
 
 	@Override
@@ -55,7 +66,9 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 		} catch (GeoCodeException e) {
 			logger.error("Could not reverse-geocode location");
 		}
+		todo.setCreator(userService.getCurrentUser());
 		translatorService.updateLanguage(todo);
+		todo.setCreator(userService.getCurrentUser());
 		getJpaTemplate().persist(todo);
 	}
 
@@ -120,10 +133,11 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 	public void saveTodo(final Todo todo) {
 		Todo byId = getById(todo.getId());
 		byId.setDescription(todo.getDescription());
-		if(todo.getLocation() != null) {
+		if (todo.getLocation() != null) {
 			byId.setLocation(todo.getLocation());
 			try {
-				todo.setAddr(geoCoder.revert(new LatLng(todo.getLocation().getLatitude(), todo.getLocation().getLongitude())));
+				todo.setAddr(geoCoder.revert(new LatLng(todo.getLocation()
+						.getLatitude(), todo.getLocation().getLongitude())));
 			} catch (GeoCodeException e) {
 				logger.warn(e.getMessage(), e);
 			}

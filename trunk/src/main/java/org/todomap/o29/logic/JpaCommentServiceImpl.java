@@ -11,7 +11,16 @@ import org.todomap.o29.beans.Comment;
 public class JpaCommentServiceImpl extends JpaDaoSupport implements CommentService {
 
 	TranslatorService translatorService;
+	UserService userService;
 	
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
 	@Override
 	public void addComment(long id, String text) {
 		final BaseBean bean = getJpaTemplate().find(BaseBean.class, id);
@@ -20,6 +29,7 @@ public class JpaCommentServiceImpl extends JpaDaoSupport implements CommentServi
 		comment.setCreated(new Date());
 		translatorService.updateLanguage(comment);
 		comment.setBean(bean);
+		comment.setCreator(userService.getCurrentUser());
 
 		getJpaTemplate().persist(comment);
 	}

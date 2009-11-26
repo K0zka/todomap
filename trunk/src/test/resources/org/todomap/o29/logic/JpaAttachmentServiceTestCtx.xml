@@ -27,6 +27,9 @@
 				<value>application/vnd.oasis.opendocument.spreadsheet</value>
 			</list>
 		</property>
+		<property name="userService">
+			<bean class="org.todomap.o29.logic.FakeUserService"/>
+		</property>
 	</bean>
 
 	<bean id="entityManager"
