@@ -45,18 +45,32 @@ public class HtmlUtil {
 			final TagNode node = cleaner.clean(html);
 			final TagNode body = node.findElementByName("body", true);
 			final ArrayList<BaseToken> nodes = new ArrayList<BaseToken>();
-			for(final BaseToken child : ((List<BaseToken>)body.getChildren())) {
-				if(child instanceof TagToken && "br".equals(((TagToken)child).getName()) ) {
-					break;
-				} else if(child instanceof TagToken && "p".equals(((TagToken)child).getName())) {
-					return serializeTokens(cleanerProperties, ((TagNode)child).getChildren());
-				} else {
-					nodes.add(child);
-				}
-			}
-			return serializeTokens(cleanerProperties, nodes);
+			final List<BaseToken> children = (List<BaseToken>)body.getChildren();
+			return extract(cleanerProperties, nodes, children);
 		} catch (IOException e) {
 			return "";
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private static String extract(final CleanerProperties cleanerProperties,
+			final ArrayList<BaseToken> nodes, final List<BaseToken> children)
+			throws IOException {
+		for(final BaseToken child : children) {
+			if(child instanceof TagToken) {
+				if("span".equals(((TagToken)child).getName()) ) {
+					return extract(cleanerProperties, nodes, ((TagNode)child).getChildren());
+				} else if("div".equals(((TagToken)child).getName()) ) {
+					return extract(cleanerProperties, nodes, ((TagNode)child).getChildren());
+				} else if("br".equals(((TagToken)child).getName()) ) {
+					break;
+				} else if("p".equals(((TagToken)child).getName())) {
+					return serializeTokens(cleanerProperties, ((TagNode)child).getChildren());
+				}
+			} else {
+				nodes.add(child);
+			}
+		}
+		return serializeTokens(cleanerProperties, nodes);
 	}
 }
