@@ -38,11 +38,11 @@ public class HtmlUtil {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static String getFirstParagraph(String html) {
+	public static String getFirstParagraph(final String html) {
 		final CleanerProperties cleanerProperties = mkCleanerProperties();
 		HtmlCleaner cleaner = new HtmlCleaner(cleanerProperties);
 		try {
-			final TagNode node = cleaner.clean(html);
+			final TagNode node = cleaner.clean(html.replaceAll("&nbsp;", "<br/>"));
 			final TagNode body = node.findElementByName("body", true);
 			final ArrayList<BaseToken> nodes = new ArrayList<BaseToken>();
 			final List<BaseToken> children = (List<BaseToken>)body.getChildren();
