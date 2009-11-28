@@ -5,11 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.orm.jpa.support.JpaDaoSupport;
+import org.todomap.geocoder.Address;
 import org.todomap.geocoder.GeoCodeException;
 import org.todomap.geocoder.GeoCoder;
 import org.todomap.geocoder.LatLng;
 import org.todomap.o29.beans.Coordinate;
 import org.todomap.o29.beans.Todo;
+import org.todomap.o29.utils.HtmlUtil;
 
 public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 
@@ -78,8 +80,8 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 	}
 
 	@Override
-	public List<TodoSummary> getTodoSums(double nex, double ney, double swx,
-			double swy) {
+	public List<TodoSummary> getTodoSums(final double nex, final double ney, final double swx,
+			final double swy) {
 		final ArrayList<TodoSummary> ret = new ArrayList<TodoSummary>();
 		for (final Object row : getJpaTemplate()
 				.find(
@@ -107,8 +109,8 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Todo> getByLocation(String countryCode, String state,
-			String town) {
+	public List<Todo> getByLocation(final String countryCode, final String state,
+			final String town) {
 		final HashMap<String, String> params = new HashMap<String, String>();
 		params.put("state", state);
 		params.put("country", countryCode);
@@ -131,7 +133,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 
 	@Override
 	public void saveTodo(final Todo todo) {
-		Todo byId = getById(todo.getId());
+		final Todo byId = getById(todo.getId());
 		byId.setDescription(todo.getDescription());
 		if (todo.getLocation() != null) {
 			byId.setLocation(todo.getLocation());
@@ -144,6 +146,32 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 		}
 		translatorService.updateLanguage(byId);
 		getJpaTemplate().persist(byId);
+	}
+
+	@Override
+	public Todo getShortTodoById(final long id) {
+		final Todo todo = getById(id);
+		/*
+		 * This long boilerplate code is actually cloning the Todo. It is no good here.
+		 * TODO: addr?
+		 */
+		final Todo ret = new Todo();
+		ret.setDescription(HtmlUtil.getFirstParagraph(todo.getText()));
+		if(todo.getAddr() != null) {
+			final Address addr = new Address();
+			addr.setAddress(todo.getAddr().getAddress());
+			addr.setCountry(todo.getAddr().getCountry());
+			addr.setState(todo.getAddr().getState());
+			addr.setTown(todo.getAddr().getTown());
+			ret.setAddr(addr);
+		}
+		ret.setId(todo.getId());
+		ret.setLanguage(todo.getLanguage());
+		final Coordinate location = todo.getLocation();
+		ret.setLocation(new Coordinate(location.getLatitude(), location.getLongitude()));
+		ret.setVersion(todo.getVersion());
+		ret.setShortDescr(todo.getShortDescr());
+		return ret;
 	}
 
 }

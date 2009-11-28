@@ -90,6 +90,10 @@ public interface TodoService {
 	Todo getById(@PathParam("id") long id);
 
 	@GET
+	@Path("/shortbyid/{id}")
+	Todo getShortTodoById(@PathParam("id") long id);
+	
+	@GET
 	@Path("/byloc/{countrycode}/{state}/{town}")
 	@XmlElementWrapper(name = "todos")
 	List<Todo> getByLocation(@PathParam("countrycode") String countryCode,
