@@ -12,5 +12,6 @@ public class HtmlUtilTest {
 		Assert.assertEquals("lorem",  HtmlUtil.getFirstParagraph("lorem<br>ipsum"));
 		Assert.assertEquals("lorem",  HtmlUtil.getFirstParagraph("<div>lorem<br>ipsum</div>"));
 		Assert.assertEquals("lorem",  HtmlUtil.getFirstParagraph("<span>lorem<br>ipsum</span>"));
+		Assert.assertEquals("lorem",  HtmlUtil.getFirstParagraph("<span>lorem&nbsp;ipsum</span>"));
 	}
 }
