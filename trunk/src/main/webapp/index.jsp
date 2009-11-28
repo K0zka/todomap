@@ -147,7 +147,7 @@ if(request.getParameter("lat") == null) {
 						    marker.setIcon('img/flag.png');
 						    map.addMarker(marker);
 						    google.maps.event.addListener(marker, 'click', function() {
-							    $.get("services/todos/byid/"+val['id'], function(data){
+							    $.get("services/todos/shortbyid/"+val['id'], function(data){
 								    var todo = eval("("+data+")");
 								    var shortDescr = todo['todo']['shortDescr'];
 							    	var infowindow = new google.maps.InfoWindow({
@@ -374,6 +374,10 @@ if(request.getParameter("lat") == null) {
 			<img alt="logo" src="img/todomap-logo.jpg" width="80%"><br/>
 			Version: <%= VersionUtil.getVersionNumber() %></span>
 		</div>
+		<div class="licenseInfo">
+			<img alt="creative commons logo" src="img/cc88x31.png"/><br/>
+			The content of the site is published under creative commons license.
+		</div>
 	</span>
 	<span style="width: 80%; height: 100%; position: absolute; right: 0px;">
 		<div id="map_canvas" style="width: 100%; height: 100%"></div>
@@ -560,6 +564,9 @@ if(request.getParameter("lat") == null) {
 	</div>
 	<div id="helpButton-tooltip">
 		<p> <img src="img/help.png"> Todomap help </p>
+	</div>
+	<div id="gotoButton-tooltip">
+		<p> <img src="img/earth.png"> Enter an address to jump to. </p>
 	</div>
 	<div id="openIdLink-tooltip">
 		<p> Find your OpenID provider at openid.org! </p>
