@@ -14,9 +14,47 @@ import org.htmlcleaner.TagToken;
 
 public class HtmlUtil {
 
+	private final static String[] acceptedTags = {"div","span","b","i","strong","a", "img", "br"};
+	
+	static boolean isAcceptedTag(final String name) {
+		for(final String acceptedTag : acceptedTags) {
+			if(acceptedTag.equalsIgnoreCase(name)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static String cleanup(final String html) {
+		final CleanerProperties cleanerProperties = mkCleanerProperties();
+		final HtmlCleaner cleaner = new HtmlCleaner(cleanerProperties);
+		try {
+			final TagNode node = cleaner.clean(html);
+			final TagNode body = node.findElementByName("body", true);
+			cleanup(body);
+			return serializeTokens(cleanerProperties, body.getChildren());
+		} catch (IOException e) {
+		}
+		return "";
+	}
+	
+	@SuppressWarnings("unchecked")
+	private static void cleanup(TagNode body) {
+		for(final BaseToken token : (List<BaseToken>)body.getChildren()) {
+			if(token instanceof TagToken) {
+				if(isAcceptedTag(((TagNode)token).getName())) {
+					cleanup((TagNode)token);
+				} else {
+					body.removeChild(token);
+				}
+			}
+		}
+	}
+
 	private static String serializeTokens(
 			final CleanerProperties cleanerProperties,
-			List<BaseToken> children) throws IOException {
+			final List<BaseToken> children) throws IOException {
 		final StringWriter writer = new StringWriter();
 		for (final Object child : children) {
 			if (child instanceof TagNode) {
@@ -40,13 +78,11 @@ public class HtmlUtil {
 	@SuppressWarnings("unchecked")
 	public static String getFirstParagraph(final String html) {
 		final CleanerProperties cleanerProperties = mkCleanerProperties();
-		HtmlCleaner cleaner = new HtmlCleaner(cleanerProperties);
+		final HtmlCleaner cleaner = new HtmlCleaner(cleanerProperties);
 		try {
 			final TagNode node = cleaner.clean(html.replaceAll("&nbsp;", "<br/>"));
 			final TagNode body = node.findElementByName("body", true);
-			final ArrayList<BaseToken> nodes = new ArrayList<BaseToken>();
-			final List<BaseToken> children = (List<BaseToken>)body.getChildren();
-			return extract(cleanerProperties, nodes, children);
+			return extract(cleanerProperties, new ArrayList<BaseToken>(), (List<BaseToken>)body.getChildren());
 		} catch (IOException e) {
 			return "";
 		}
