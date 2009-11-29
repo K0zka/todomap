@@ -209,25 +209,25 @@ if(request.getParameter("lat") == null) {
             });
         $('#loginTabs').tabs();
 
-        /*
-        Button tooltips
-        */
-        $('button').tooltip({
-            delay : 1000,
+		var tooltipOptions = {
+	            delay : 1000,
+	            bodyHandler: function() {
+	            	return $('#'+this.id+"-tooltip").html();
+	        	}
+	    };
+        
+        //Button tooltips
+        $('button').tooltip(tooltipOptions);
+        //Link tooltips
+        $('a').tooltip(tooltipOptions);
+        //div tooltips
+		$('div').tooltip({
+            delay : 2000,
             bodyHandler: function() {
-            	return $('#'+this.id+"-tooltip").html();
+            	//TODO: return different tooltip for authenticated users and anons.
+           		return $('#'+this.id+"-tooltip").html();
         	}
-        });
-
-        /*
-        Link tooltips
-        */
-        $('a').tooltip({
-            delay : 1000,
-            bodyHandler: function() {
-            	return $('#'+this.id+"-tooltip").html();
-        	}
-        });
+		});
         
     });
 
@@ -571,7 +571,10 @@ if(request.getParameter("lat") == null) {
 	<div id="openIdLink-tooltip">
 		<p> Find your OpenID provider at openid.org! </p>
 	</div>
-	<div id="googleCodeLink-tooltip">
+	<div id="map_canvas-tooltip">
+		<p> <img src="img/earth.png"/> Right click to add a new TODO! </p>
+	</div>
+	<div id="googleCodeLink-tooltip" class="tooltipable">
 		<p> <img src="img/gear.png"/> This link will take you to the developer site where you can find the
 		<ul>
 			<li>bugtracker</li>
