@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+	<persistence-unit name="o29">
+		<class>org.todomap.o29.beans.BaseBean</class>
+		<class>org.todomap.o29.beans.Comment</class>
+		<class>org.todomap.o29.beans.Attachment</class>
+		<class>org.todomap.o29.beans.Rating</class>
+		<class>org.todomap.o29.beans.Todo</class>
+		<class>org.todomap.o29.beans.User</class>
+		<class>org.todomap.minigeoip.impl.jpa.IpDomain</class>
+	</persistence-unit>
+</persistence>
