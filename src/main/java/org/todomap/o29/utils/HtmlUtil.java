@@ -35,8 +35,8 @@ public class HtmlUtil {
 			cleanup(body);
 			return serializeTokens(cleanerProperties, body.getChildren());
 		} catch (IOException e) {
+			return "";
 		}
-		return "";
 	}
 	
 	@SuppressWarnings("unchecked")
