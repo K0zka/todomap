@@ -68,6 +68,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 		} catch (GeoCodeException e) {
 			logger.error("Could not reverse-geocode location");
 		}
+		todo.setDescription(HtmlUtil.cleanup(todo.getDescription()));
 		todo.setCreator(userService.getCurrentUser());
 		translatorService.updateLanguage(todo);
 		todo.setCreator(userService.getCurrentUser());
