@@ -13,7 +13,7 @@ public class GeoipServlet extends SpringServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		final String countryCode = geoipResolver.getCountryCode(req.getRemoteAddr());
+		final String countryCode = geoipResolver.getCountryName(req.getRemoteAddr());
 		resp.getWriter().write(countryCode == null ? "unknown" : countryCode);
 	}
 
