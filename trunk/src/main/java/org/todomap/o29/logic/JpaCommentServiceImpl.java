@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
 import org.todomap.o29.beans.BaseBean;
 import org.todomap.o29.beans.Comment;
+import org.todomap.o29.utils.HtmlUtil;
 
 public class JpaCommentServiceImpl extends JpaDaoSupport implements CommentService {
 
@@ -25,7 +26,7 @@ public class JpaCommentServiceImpl extends JpaDaoSupport implements CommentServi
 	public Comment addComment(long id, String text) {
 		final BaseBean bean = getJpaTemplate().find(BaseBean.class, id);
 		final Comment comment = new Comment();
-		comment.setText(text);
+		comment.setText(HtmlUtil.cleanup(text));
 		comment.setCreated(new Date());
 		translatorService.updateLanguage(comment);
 		comment.setBean(bean);
