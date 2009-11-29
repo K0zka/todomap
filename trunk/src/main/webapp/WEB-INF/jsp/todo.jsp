@@ -98,7 +98,7 @@ function initialize() {
 
 		$('#newComment').hide(0);
 
-		$('#todoDescriptionEditor').rte({
+		var editor = $('#todoDescriptionEditor').rte({
 			css: ['style/default.css'],
 			controls_rte: rte_toolbar,
 			controls_html: html_toolbar,
@@ -110,6 +110,7 @@ function initialize() {
 			controls_html: html_toolbar,
 			frame_class: 'frameBody'
 		});
+		editors['todoDescriptionEditor'] = editor['todoDescriptionEditor'];
 
         new AjaxUpload('uploadButton', 
                 {
@@ -169,7 +170,7 @@ function submitComment() {
 		type : 'POST',
 		url : 'services/comments/add/<%=todo.getId()%>',
 		data: editors['commentEditor'].get_content(),
-		success: function(msg){
+		success: function(data, textStatus){
 			refreshComments();
 			},
 		processData : false,
@@ -203,21 +204,21 @@ function saveData() {
 		"id":id,
 		"version":version,
 		"location" : {
-			"latitude": 0,
-			"longitude":0
+			"latitude": <%= todo.getLocation().getLatitude() %>,
+			"longitude":<%= todo.getLocation().getLongitude() %>
 			},
 		"description": editors['todoDescriptionEditor'].get_content()
 		}
 	};
 	var strData = JSON.stringify(todo);
 	$.ajax({
-		type : 'PUT',
+		type : 'POST',
 		url : 'services/todos/update',
 		data: strData,
-		success: function(msg){
+		success: function (data, textStatus){
 			$('#todoDescriptionShow').html(editors['todoDescriptionEditor'].get_content());
-			$('#todoDescriptionShow').show(1000);
 			$('#descriptionEdit').hide(1000);
+			$('#todoDescriptionShow').show(1000);
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			handleErrors(XMLHttpRequest);
@@ -245,7 +246,7 @@ function saveData() {
 		<span id="descriptionNoEdit">
 			<span id="todoDescriptionShow" ondblclick="editDescription()" style="cursor: text; width: 100%; height: 100%"><%= todo.getDescription() %></span>
 		</span>
-		<span id="descriptionEdit">
+		<span id="descriptionEdit" style="display: none">
 			<textarea id="todoDescriptionEditor" class="todoDescription"></textarea>
 			<button id="saveButton" onclick="saveData()">save</button>
 		</span>
