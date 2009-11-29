@@ -12,7 +12,8 @@ final String chanelLink = (String)request.getAttribute("chanelLink");
 %>
 
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%><rss version="2.0">
+<%@page import="java.util.Date"%>
+<%@page import="org.todomap.o29.utils.HtmlUtil"%><rss version="2.0">
   <channel>
     <title>Todomap RSS feed for area</title>
     <description>Todomap RSS feed for area</description>
@@ -23,7 +24,7 @@ final String chanelLink = (String)request.getAttribute("chanelLink");
     <item>
       <title><%= todo.getShortDescr() %></title>
       <link><%= URLUtil.getUrl(request, todo)%></link>
-      <description> <%= todo.getDescription() %> </description>
+      <description> <%= HtmlUtil.getFirstParagraph(todo.getDescription()) %> </description>
       <pubDate><%= sdf.format(todo.getCreated()) %></pubDate>
       <guid><%= URLUtil.getUrl(request, todo)%></guid>
     </item>
