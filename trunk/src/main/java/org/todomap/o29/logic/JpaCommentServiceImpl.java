@@ -22,7 +22,7 @@ public class JpaCommentServiceImpl extends JpaDaoSupport implements CommentServi
 	}
 
 	@Override
-	public void addComment(long id, String text) {
+	public Comment addComment(long id, String text) {
 		final BaseBean bean = getJpaTemplate().find(BaseBean.class, id);
 		final Comment comment = new Comment();
 		comment.setText(text);
@@ -32,6 +32,7 @@ public class JpaCommentServiceImpl extends JpaDaoSupport implements CommentServi
 		comment.setCreator(userService.getCurrentUser());
 
 		getJpaTemplate().persist(comment);
+		return comment;
 	}
 
 	@Override

@@ -17,7 +17,7 @@ import org.todomap.o29.beans.Comment;
 public interface CommentService {
 	@Path("/add/{id}")
 	@POST
-	void addComment( @PathParam("id") long id, String comment);
+	Comment addComment( @PathParam("id") long id, String comment);
 
 	@GET
 	@Path("/get/{id}")

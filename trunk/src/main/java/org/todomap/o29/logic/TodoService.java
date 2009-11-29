@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -68,17 +68,17 @@ public interface TodoService {
 			@PathParam("ney") double ney, @PathParam("swx") double swx,
 			@PathParam("swy") double swy);
 
-	@PUT
+	@POST
 	@Path("/new")
 	@Consumes("application/json")
 	@Produces("application/json")
-	void addTodo(Todo todo);
+	Todo addTodo(Todo todo);
 
-	@PUT
+	@POST
 	@Path("/update")
 	@Consumes("application/json")
 	@Produces("application/json")
-	void saveTodo(Todo todo);
+	Todo saveTodo(Todo todo);
 	
 	@GET
 	@Path("/all")

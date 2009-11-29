@@ -245,7 +245,7 @@ if(request.getParameter("lat") == null) {
 			}};
 		var strData = JSON.stringify(submitData);
 		$.ajax({
-			type : 'PUT',
+			type : 'POST',
 			url : 'services/todos/new',
 			data: strData,
 			success: function(msg){
@@ -278,7 +278,7 @@ if(request.getParameter("lat") == null) {
 			}};
 		var strData = JSON.stringify(data);
 		$.ajax({
-			type	: 'PUT',
+			type	: 'POST',
 			url		: 'services/rating/add/' + todoId,
 			data	: strData,
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -304,7 +304,7 @@ if(request.getParameter("lat") == null) {
 		};
 		$.ajax({
 			url		: 'services/home/user/set',
-			type	: 'PUT',
+			type	: 'POST',
 			data	: JSON.stringify(user),
 			success	:$('#userDetailsWindow').dialog('close'),
 			contentType : 'application/json',
