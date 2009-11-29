@@ -41,14 +41,18 @@ public class HtmlUtil {
 	
 	@SuppressWarnings("unchecked")
 	private static void cleanup(TagNode body) {
+		final ArrayList<Object> eviltags = new ArrayList<Object>();
 		for(final BaseToken token : (List<BaseToken>)body.getChildren()) {
 			if(token instanceof TagToken) {
 				if(isAcceptedTag(((TagNode)token).getName())) {
 					cleanup((TagNode)token);
 				} else {
-					body.removeChild(token);
+					eviltags.add(token);
 				}
 			}
+		}
+		for(final Object tag : eviltags) {
+			body.removeChild(tag);
 		}
 	}
 
