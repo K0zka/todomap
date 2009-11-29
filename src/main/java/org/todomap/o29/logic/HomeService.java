@@ -1,7 +1,7 @@
 package org.todomap.o29.logic;
 
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
@@ -39,7 +39,7 @@ public interface HomeService {
 	HomeLocation getHome();
 
 	@Path("/set")
-	@PUT
+	@POST
 	void setHome(HomeLocation loc);
 
 	@Path("/user/get")
@@ -47,6 +47,6 @@ public interface HomeService {
 	User getUser();
 
 	@Path("/user/set")
-	@PUT
+	@POST
 	void setUserData(User user);
 }

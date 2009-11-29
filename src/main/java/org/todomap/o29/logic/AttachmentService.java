@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -43,7 +43,7 @@ public interface AttachmentService {
 		}
 	}
 
-	@PUT
+	@POST
 	@Path("/add")
 	void addAttachment(Attachment attachment) throws IOException;
 

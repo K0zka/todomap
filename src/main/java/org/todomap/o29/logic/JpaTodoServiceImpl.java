@@ -61,7 +61,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 	}
 
 	@Override
-	public void addTodo(final Todo todo) {
+	public Todo addTodo(final Todo todo) {
 		try {
 			todo.setAddr(geoCoder.revert(new LatLng(todo.getLocation()
 					.getLatitude(), todo.getLocation().getLongitude())));
@@ -72,6 +72,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 		translatorService.updateLanguage(todo);
 		todo.setCreator(userService.getCurrentUser());
 		getJpaTemplate().persist(todo);
+		return todo;
 	}
 
 	@Override
@@ -131,8 +132,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 		return a > b ? a : b;
 	}
 
-	@Override
-	public void saveTodo(final Todo todo) {
+	public Todo saveTodo(final Todo todo) {
 		final Todo byId = getById(todo.getId());
 		byId.setDescription(todo.getDescription());
 		if (todo.getLocation() != null) {
@@ -146,6 +146,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 		}
 		translatorService.updateLanguage(byId);
 		getJpaTemplate().persist(byId);
+		return byId;
 	}
 
 	@Override
