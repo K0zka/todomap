@@ -9,7 +9,7 @@ public class HtmlUtilTest {
 	@Test
 	public void testCleanup() {
 		Assert.assertEquals("hello  world!", HtmlUtil.cleanup("hello <script language='javascript'>\nalert('wrong!')</script> world!"));
-		Assert.assertEquals("hello  world!", HtmlUtil.cleanup("hello <embed>somethng</embed> world!"));
+		Assert.assertEquals("hello  world!", HtmlUtil.cleanup("hello <embed/> world!"));
 	}
 	
 	@Test
