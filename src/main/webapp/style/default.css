@@ -37,13 +37,6 @@ td {
 	background: transparent; color: orange;
 }
 
-div.versionInfo {
-	text-align: center;
-	color: gray;
-	font-size: small;
-	font-family: monospace;
-}
-
 button {
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
@@ -86,9 +79,36 @@ button:hover {
 
 .comment {
 	width: 100%;
-	border-bottom:1px solid #BBBBBB;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	font-family:inherit;
+	font-size:10px;
+	color : #EEEEEE;
+	padding:1px 1px;
+	text-decoration:none;
+	white-space:nowrap;
+	background:#0063DC;
+	border: none;
+	margin: 2px;
+	cursor:pointer !important;
+	overflow: auto;
 }
 
 .sidebarControls button {
 	width: 80%
+}
+
+.versionInfo {
+	text-align: center;
+	color: gray;
+	font-size: small;
+	font-family: monospace;
+}
+
+.licenseInfo {
+	text-align: center;
+	color: gray;
+	font-size: small;
+	font-family: monospace;
 }
