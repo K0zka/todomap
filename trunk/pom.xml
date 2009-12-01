@@ -233,6 +233,11 @@
 			<version>8.3-603.jdbc4</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.openid4java</groupId>
+			<artifactId>openid4java</artifactId>
+			<version>0.9.5</version>
+		</dependency>
 	</dependencies>
 	<description>Todo map</description>
 	<url>http://code.google.com/p/todomap/</url>
