@@ -16,13 +16,14 @@ final String chanelLink = (String)request.getAttribute("chanelLink");
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="org.todomap.o29.utils.URLUtil"%>
-<%@page import="org.todomap.o29.utils.HtmlUtil"%><rss version="2.0">
+<%@page import="org.todomap.o29.utils.HtmlUtil"%><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Todomap RSS feed for <%= town %> </title>
     <description><%= town %> </description>
     <lastBuildDate><%=sdf.format(new Date())%></lastBuildDate>
     <generator>Todomap <%= VersionUtil.getVersionNumber() %></generator>
     <link><%= chanelLink %></link>
+    <atom:link href="<%= chanelLink %>" rel="self" type="application/rss+xml" />
 	<% for(Todo todo : todos)  {%>
     <item>
       <title><%= todo.getShortDescr() %></title>
