@@ -419,6 +419,7 @@ if(request.getParameter("lat") == null) {
 	<div id="loginTabs">
 		<ul>
 			<li><a href="#logintab-openid">OpenId</a></li>
+			<li><a href="#logintab-google">Google</a></li>
 			<li><a href="#logintab-yahooid">Yahoo! ID</a></li>
 			<li><a href="#logintab-bloggercom">Blogger.com</a></li>
 		</ul>
@@ -430,6 +431,18 @@ if(request.getParameter("lat") == null) {
 			    <label for="j_username">Your <a id="openIdLink" href="https://openid.org/home">OpenID</a> Identity:</label> 
 			    <input id="openidUrl" type='text' name='j_username' value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>'/>
 			</div>
+			<div>
+			    <button onclick="document.loginForm.submit()">Log in</button>
+		    </div>
+		</div>
+		<div id="logintab-google">
+			<div>
+				<p><img src="img/google-logo.png" style="float: right;"/> Please click on the button below to log in with your google account!
+				</p>
+			</div>
+			<div>
+				<button id="googleLoginButton" onclick="$('#openidUrl').val('https://www.google.com/accounts/o8/id'); document.loginForm.submit()">Log in</button>
+			</div>
 		</div>
 		<div id="logintab-yahooid">
 			<div>
@@ -440,6 +453,9 @@ if(request.getParameter("lat") == null) {
 					id="yahooIdInput" 
 					onkeyup="$('#openidUrl').val('https://me.yahoo.com/'+$('#yahooIdInput').val())"/>
 			</div>
+			<div>
+			    <button onclick="document.loginForm.submit()">Log in</button>
+		    </div>
 		</div>
 		<div id="logintab-bloggercom">
 			<div>
@@ -450,8 +466,10 @@ if(request.getParameter("lat") == null) {
 					id="bloggerInput" 
 					onkeyup="$('#openidUrl').val($('#bloggerInput').val())"/>
 			</div>
+			<div>
+			    <button onclick="document.loginForm.submit()">Log in</button>
+		    </div>
 		</div>
-	    <button onclick="document.loginForm.submit()">Log in</button>
 	</div>
 	
 	</form>
