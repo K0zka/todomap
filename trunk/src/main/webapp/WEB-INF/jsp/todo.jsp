@@ -240,6 +240,13 @@ function saveData() {
 	<h3><a href="#">Location</a></h3>
 	<div style="height: 600px">
 		<div id="map_canvas" style="width: 100%; height: 100%"></div>
+		<div style="color: grey; font-size: 0.8em;">
+			<% if(todo.getAddr() != null) { %>
+			<%= todo.getAddr().getCountry() == null ? "-" : todo.getAddr().getCountry() %>
+			&gt; <%= todo.getAddr().getTown() == null ? "-" : todo.getAddr().getTown() %>
+			&gt; <%= todo.getAddr().getAddress() == null ? "-" : todo.getAddr().getAddress() %>
+			<% } %>
+		</div>
 	</div>
 	<h3><a href="#">Details</a></h3>
 	<div>
