@@ -7,7 +7,7 @@ The jetty gzip plugin is a maven plugin, that runs over your webapp at build tim
 = Details =
 
 Usage:
-
+{{{
 	<build>
 		<plugins>
 			<plugin>
@@ -23,3 +23,4 @@ Usage:
 			</plugin>
 		</plugins>
 	</build>
+}}}
