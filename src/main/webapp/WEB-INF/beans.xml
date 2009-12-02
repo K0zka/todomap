@@ -61,6 +61,7 @@
 
 	<bean id="attachments" class="org.todomap.o29.logic.JpaAttachmentService" init-method="init">
 		<property name="entityManagerFactory" ref="entityManager"/>
+		<property name="userService" ref="users"/>
 		<property name="acceptedMime">
 			<list>
 				<value>audio/mpeg</value>
