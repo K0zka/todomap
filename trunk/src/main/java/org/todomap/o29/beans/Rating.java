@@ -2,9 +2,12 @@ package org.todomap.o29.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -15,6 +18,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement(name="rating")
 public class Rating {
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="rating_seq")
+	@SequenceGenerator(name="rating_seq", allocationSize=1, initialValue=0, sequenceName="base_seq")
 	long id;
 	
 	@ManyToOne
