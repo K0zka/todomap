@@ -166,10 +166,15 @@ function editDescription() {
 }
 
 function submitComment() {
+	comment = {
+			comment: {
+				text: editors['commentEditor'].get_content()
+			}
+	};
 	$.ajax({
 		type : 'POST',
 		url : 'services/comments/add/<%=todo.getId()%>',
-		data: editors['commentEditor'].get_content(),
+		data: JSON.stringify(comment),
 		success: function(data, textStatus){
 			refreshComments();
 			},

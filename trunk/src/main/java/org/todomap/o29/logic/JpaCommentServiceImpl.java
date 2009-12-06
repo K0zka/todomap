@@ -23,21 +23,20 @@ public class JpaCommentServiceImpl extends JpaDaoSupport implements CommentServi
 	}
 
 	@Override
-	public Comment addComment(long id, String text) {
+	public Comment addComment(long id, final Comment comment) {
 		final BaseBean bean = getJpaTemplate().find(BaseBean.class, id);
-		final Comment comment = new Comment();
-		comment.setText(HtmlUtil.cleanup(text));
+		comment.setText(HtmlUtil.cleanup(comment.getText()));
 		comment.setCreated(new Date());
 		translatorService.updateLanguage(comment);
-		comment.setBean(bean);
 		comment.setCreator(userService.getCurrentUser());
+		comment.setBean(bean);
 
 		getJpaTemplate().persist(comment);
 		return comment;
 	}
 
 	@Override
-	public List<Comment> getComments(long id) {
+	public List<Comment> getComments(final long id) {
 		final BaseBean bean = getJpaTemplate().find(BaseBean.class, id);
 		if(bean == null) {
 			return new ArrayList<Comment>();
