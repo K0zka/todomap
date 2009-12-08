@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+
+<web-app>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			WEB-INF/controllers.xml
+			WEB-INF/beans.xml
+			WEB-INF/transactions.xml
+			WEB-INF/security.xml
+		</param-value>
+	</context-param>
+
+	<filter>
+		<filter-name>enforceEncoding</filter-name>
+		<filter-class>org.todomap.o29.utils.EnforceEncodingFilter</filter-class>
+	</filter>
+
+	<filter>
+		<filter-name>oemiv</filter-name>
+		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+		<init-param>
+			<param-name>entityManagerFactoryBeanName</param-name>
+			<param-value>entityManager</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter>
+		<filter-name>jsonSecFilter</filter-name>
+		<filter-class>org.todomap.o29.utils.security.SecurityFilter</filter-class>
+	</filter>
+
+
+	<filter-mapping>
+		<filter-name>enforceEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>oemiv</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>jsonSecFilter</filter-name>
+		<url-pattern>/services/*</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>CXFServlet</servlet-name>
+		<display-name>CXF Servlet</display-name>
+		<servlet-class>
+			org.apache.cxf.transport.servlet.CXFServlet
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>todoFullPageServlet</servlet-name>
+		<servlet-class>org.todomap.o29.utils.TodoFullPageServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>rssServlet</servlet-name>
+		<servlet-class>org.todomap.o29.utils.RssServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>regionRssServlet</servlet-name>
+		<servlet-class>org.todomap.o29.utils.RegionRssServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>upload</servlet-name>
+		<servlet-class>org.todomap.o29.utils.UploadServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>download</servlet-name>
+		<servlet-class>org.todomap.o29.utils.DownloadServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>geoip</servlet-name>
+		<servlet-class>org.todomap.o29.utils.GeoipServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>geoip</servlet-name>
+		<url-pattern>/geoip</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>download</servlet-name>
+		<url-pattern>/download/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>download</servlet-name>
+		<url-pattern>/thumbnail/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>upload</servlet-name>
+		<url-pattern>/upload/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>rssServlet</servlet-name>
+		<url-pattern>rss.xml/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>regionRssServlet</servlet-name>
+		<url-pattern>rss.xml/region/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>todoFullPageServlet</servlet-name>
+		<url-pattern>*.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>CXFServlet</servlet-name>
+		<url-pattern>/services/*</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<resource-ref>
+		<res-ref-name>jdbc/o29ds</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>CONTAINER</res-auth>
+	</resource-ref>
+	
+</web-app>
