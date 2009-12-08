@@ -248,6 +248,7 @@ function saveData() {
 		<div style="color: grey; font-size: 0.8em;">
 			<% if(todo.getAddr() != null) { %>
 			<%= todo.getAddr().getCountry() == null ? "-" : todo.getAddr().getCountry() %>
+			&gt; <%= todo.getAddr().getState() == null ? "-" : todo.getAddr().getState() %>
 			&gt; <%= todo.getAddr().getTown() == null ? "-" : todo.getAddr().getTown() %>
 			&gt; <%= todo.getAddr().getAddress() == null ? "-" : todo.getAddr().getAddress() %>
 			<% } %>
