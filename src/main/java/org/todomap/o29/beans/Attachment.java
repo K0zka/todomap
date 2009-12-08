@@ -1,13 +1,10 @@
 package org.todomap.o29.beans;
 
-import java.io.InputStream;
-
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -30,23 +27,6 @@ public class Attachment extends BaseBean implements Translatable {
 	@XmlTransient
 	BaseBean attachedTo;
 
-	@Transient
-	@XmlTransient
-	InputStream data;
-
-	@Transient
-	@XmlTransient
-	InputStream thumbnail;
-
-	@XmlTransient
-	public InputStream getThumbnail() {
-		return thumbnail;
-	}
-
-	public void setThumbnail(InputStream thumbnail) {
-		this.thumbnail = thumbnail;
-	}
-
 	public String getFileName() {
 		return fileName;
 	}
@@ -61,15 +41,6 @@ public class Attachment extends BaseBean implements Translatable {
 
 	public void setMime(String mime) {
 		this.mime = mime;
-	}
-
-	@XmlTransient
-	public InputStream getData() {
-		return data;
-	}
-
-	public void setData(final InputStream data) {
-		this.data = data;
 	}
 
 	@XmlTransient
