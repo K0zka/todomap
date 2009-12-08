@@ -157,7 +157,7 @@ if(request.getParameter("lat") == null) {
 							            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',3)"/>'
 							            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',4)"/>'
 							            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',5)"/> <br/>'
-							            	+ '<a target="new" href="' + todo['todo']['id'] + '-' + todo['todo']['shortDescr'] + '.html">'
+							            	+ '<a target="new" href="' + encodeURI(todo['todo']['id'] + '-' + todo['todo']['shortDescr']) + '.html">'
 					            			+ 'more...</a>'
 							        });
 							        infowindow.open(map,marker);
