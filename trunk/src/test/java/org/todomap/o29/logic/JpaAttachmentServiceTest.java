@@ -2,10 +2,8 @@ package org.todomap.o29.logic;
 
 import java.io.IOException;
 
-
 import org.junit.Test;
 import org.todomap.o29.beans.Attachment;
-import org.todomap.o29.logic.AttachmentService;
 import org.unitils.UnitilsJUnit4;
 import org.unitils.spring.annotation.SpringApplicationContext;
 import org.unitils.spring.annotation.SpringBean;
@@ -23,10 +21,9 @@ public class JpaAttachmentServiceTest extends UnitilsJUnit4 {
 	@Test
 	public void testAddAttachment() throws IOException {
 		final Attachment attachment = new Attachment();
-		attachment.setData(Thread.currentThread().getContextClassLoader().getResourceAsStream("duke.gif"));
 		attachment.setMime("image/gif");
 		attachment.setFileName("duke.gif");
 		attachment.setAttachedTo(attachment);
-		attachmentService.addAttachment(attachment);
+		attachmentService.addAttachment(attachment, Thread.currentThread().getContextClassLoader().getResourceAsStream("duke.gif"));
 	}
 }

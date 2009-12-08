@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.todomap.o29.beans.Attachment;
+import org.todomap.o29.beans.BaseBean;
 
 
 public class DownloadServlet extends SpringServlet {
@@ -20,29 +21,44 @@ public class DownloadServlet extends SpringServlet {
 			final HttpServletResponse resp) throws ServletException,
 			IOException {
 		final long id = getId(req);
-		final Attachment attachment = attachmentService.getAttachment(id);
-		if(req.getRequestURI().indexOf("thumbnail") != -1) {
-			findThumbnail(resp, attachment);
+		final BaseBean bean = baseService.getById(id);
+		if(bean instanceof Attachment) {
+			final Attachment attachment = (Attachment)bean;
+			if(req.getRequestURI().indexOf("thumbnail") != -1) {
+				findThumbnail(resp, attachment);
+			} else {
+				findData(resp, attachment);
+			}
 		} else {
-			findData(resp, attachment);
+			
 		}
 	}
 
 	void findData(final HttpServletResponse resp,
 			final Attachment attachment) throws IOException {
-		if (attachment == null || attachment.getData() == null) {
-			resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-		} else {
-			sendData(resp, attachment.getMime(), attachment.getData());
+		final InputStream data = attachmentService.getData(attachment);
+		try {
+			if (attachment == null || data == null) {
+				resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			} else {
+				sendData(resp, attachment.getMime(), data);
+			}
+		} finally {
+			IOUtils.closeQuietly(data);
 		}
 	}
 
 	void findThumbnail(final HttpServletResponse resp,
 			final Attachment attachment) throws IOException {
-		if (attachment == null || attachment.getThumbnail() == null) {
-			resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-		} else {
-			sendData(resp, attachment.getMime(), attachment.getThumbnail());
+		final InputStream thumbnail = attachmentService.getThumbnail(attachment);
+		try {
+			if (attachment == null || thumbnail == null) {
+				resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			} else {
+				sendData(resp, attachment.getMime(), thumbnail);
+			}
+		} finally {
+			IOUtils.closeQuietly(thumbnail);
 		}
 	}
 
