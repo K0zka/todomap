@@ -7,10 +7,20 @@
 <%@ page import="org.springframework.security.ui.webapp.AuthenticationProcessingFilter" %>
 <%@ page import="org.springframework.security.AuthenticationException" %>
 
-<%@page import="org.todomap.o29.utils.VersionUtil"%><html>
+<%@page import="org.todomap.o29.logic.Configuration"%>
+<%@page import="org.todomap.o29.utils.VersionUtil"%>
+<%
+final Configuration configuration = (Configuration)WebApplicationContextUtils
+	.getRequiredWebApplicationContext(config.getServletContext()).getBean("config");
+
+%>
+
+<%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%><html>
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="google-site-verification" content="<%= configuration.getGoogleWebmastersVerification() %>" />
+<meta name="y_key" content="<%= configuration.getYahooSiteExplorerVerification() %>">
 
 <jsp:include page="WEB-INF/jsp/includes/sitemeta.jsp"/>
 
