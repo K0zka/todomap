@@ -18,25 +18,24 @@
 
 	<jaxrs:server name="o29" address="/">
 		<jaxrs:serviceBeans>
-			<ref bean="todos"/>
-			<ref bean="users"/>
-			<ref bean="homes"/>
-			<ref bean="ratings"/>
-			<ref bean="attachments"/>
-			<ref bean="comments"/>
+			<ref bean="todos" />
+			<ref bean="users" />
+			<ref bean="homes" />
+			<ref bean="ratings" />
+			<ref bean="attachments" />
+			<ref bean="comments" />
 		</jaxrs:serviceBeans>
-		<!-- 
-		<jaxrs:extensionMappings>
-			<alias name="xml" alias="application/xml"/>
-		</jaxrs:extensionMappings>
-		 -->
+		<!--
+			<jaxrs:extensionMappings> <alias name="xml" alias="application/xml"/>
+			</jaxrs:extensionMappings>
+		-->
 	</jaxrs:server>
 
 	<bean id="todos" class="org.todomap.o29.logic.JpaTodoServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
-		<property name="geoCoder" ref="geoCoder"/>
-		<property name="translatorService" ref="translatorService"/>
-		<property name="userService" ref="users"/>
+		<property name="geoCoder" ref="geoCoder" />
+		<property name="translatorService" ref="translatorService" />
+		<property name="userService" ref="users" />
 	</bean>
 
 	<bean id="users" class="org.todomap.o29.logic.JpaUserServiceImpl">
@@ -44,24 +43,25 @@
 	</bean>
 
 	<bean id="comments" class="org.todomap.o29.logic.JpaCommentServiceImpl">
-		<property name="entityManagerFactory" ref="entityManager"/>
-		<property name="translatorService" ref="translatorService"/>
-		<property name="userService" ref="users"/>
+		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="translatorService" ref="translatorService" />
+		<property name="userService" ref="users" />
 	</bean>
 
 	<bean id="ratings" class="org.todomap.o29.logic.JpaRatingServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
-		<property name="userService" ref="users"/>
-	</bean>
-	
-	<bean id="homes" class="org.todomap.o29.logic.JpaHomeServiceImpl">
-		<property name="entityManagerFactory" ref="entityManager" />
-		<property name="userService" ref="users"/>
+		<property name="userService" ref="users" />
 	</bean>
 
-	<bean id="attachments" class="org.todomap.o29.logic.JpaAttachmentService" init-method="init">
-		<property name="entityManagerFactory" ref="entityManager"/>
-		<property name="userService" ref="users"/>
+	<bean id="homes" class="org.todomap.o29.logic.JpaHomeServiceImpl">
+		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="userService" ref="users" />
+	</bean>
+
+	<bean id="attachments" class="org.todomap.o29.logic.JpaAttachmentService"
+		init-method="init">
+		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="userService" ref="users" />
 		<property name="acceptedMime">
 			<list>
 				<value>audio/mpeg</value>
@@ -107,34 +107,57 @@
 		</property>
 	</bean>
 
-	<bean id="dataSource"
-		class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="jdbc/o29ds"/>
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="jdbc/o29ds" />
 	</bean>
 
 	<bean id="geoCoder" class="org.todomap.geocoder.google.GoogleGeocoder">
-		<property name="apiKey" value="PLEASE GET A KEY"/>
+		<property name="apiKey" value="PLEASE GET A KEY" />
 	</bean>
 
-	<bean class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
-		<property name="ignoreResourceNotFound" value="true"/>
-		<property name="location" value="classpath:o29.properties"/>
+	<bean
+		class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="location" value="classpath:o29.properties" />
 	</bean>
 
 	<bean id="geoipResolver" class="org.todomap.minigeoip.impl.jpa.JpaGeoipResolver">
-		<property name="entityManagerFactory" ref="entityManager"/>
-		<property name="txManager" ref="transactionManager"/>
+		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="txManager" ref="transactionManager" />
 	</bean>
 
-	<bean id="geoipLogic" class="org.todomap.o29.logic.GeoIpLogic" init-method="init">
-		<property name="resolver" ref="geoipResolver"/>
+	<bean id="geoipLogic" class="org.todomap.o29.logic.GeoIpLogic"
+		init-method="init">
+		<property name="resolver" ref="geoipResolver" />
 	</bean>
 
 	<bean id="translatorService" class="org.todomap.o29.logic.TranslatorServiceImpl">
-		<constructor-arg ref="translator"/>
+		<constructor-arg ref="translator" />
 	</bean>
 
 	<bean id="translator" class="org.todomap.latetrans.GoogleTranslator">
+	</bean>
+
+	<bean id="timerFactory" class="org.springframework.scheduling.timer.TimerFactoryBean">
+		<property name="scheduledTimerTasks">
+			<list>
+				<bean class="org.springframework.scheduling.timer.ScheduledTimerTask">
+					<property name="delay" value="10000" />
+					<property name="period" value="1000" />
+					<property name="timerTask">
+						<bean class="org.todomap.o29.utils.jobs.ReverseGeocodeTask">
+							<property name="geoCoder" ref="geoCoder"/>
+							<property name="jpaTemplate">
+								<bean class="org.springframework.orm.jpa.JpaTemplate">
+									<property name="entityManagerFactory" ref="entityManager"/>
+								</bean>
+							</property>
+							<property name="manager" ref="transactionManager"/>
+						</bean>
+					</property>
+				</bean>
+			</list>
+		</property>
 	</bean>
 
 </beans>
