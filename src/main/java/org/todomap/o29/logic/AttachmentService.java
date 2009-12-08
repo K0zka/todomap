@@ -1,6 +1,8 @@
 package org.todomap.o29.logic;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 import javax.ws.rs.DELETE;
@@ -45,7 +47,7 @@ public interface AttachmentService {
 
 	@POST
 	@Path("/add")
-	void addAttachment(Attachment attachment) throws IOException;
+	void addAttachment(Attachment attachment, InputStream data) throws IOException;
 
 	@GET
 	@Path("/{id}/get")
@@ -64,4 +66,8 @@ public interface AttachmentService {
 	@DELETE
 	@Path("delete/{id}")
 	void deleteAttachment(@PathParam("id") long id);
+	
+	public InputStream getData(final Attachment attachment) throws IOException;
+	public InputStream getThumbnail(final Attachment attachment) throws IOException;
+	public OutputStream writeData(final Attachment attachment) throws IOException;
 }

@@ -4,15 +4,15 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
@@ -27,7 +27,7 @@ public class JpaAttachmentService extends JpaDaoSupport implements
 	private static final String ThumbnailPrefix = "thmb-";
 
 	private final static Logger logger = Logger.getLogger(JpaAttachmentService.class);
-	
+
 	String fileStorageDir = "attachments";
 
 	List<String> acceptedMime = new ArrayList<String>();
@@ -51,7 +51,7 @@ public class JpaAttachmentService extends JpaDaoSupport implements
 	}
 
 	@Override
-	public void addAttachment(Attachment attachment) throws IOException {
+	public void addAttachment(Attachment attachment, InputStream data) throws IOException {
 		if(!acceptedMime.contains(attachment.getMime())){
 			logger.info("Attachment was ignored:"+attachment.getMime()+" "+attachment.getFileName());
 			return;
@@ -59,40 +59,24 @@ public class JpaAttachmentService extends JpaDaoSupport implements
 		attachment.setCreator(userService.getCurrentUser());
 		getJpaTemplate().persist(attachment);
 		attachment.getId();
-		final File dataFile = new File(
-				fileStorageDir, String.valueOf(attachment.getId()));
+		final File dataFile = getFile(attachment);
 		final FileOutputStream fileOutputStream = new FileOutputStream(dataFile);
 		File thumbnailFile = new File(
 				fileStorageDir, ThumbnailPrefix.concat(String.valueOf(attachment.getId())));
 		try {
-			IOUtils.copy(attachment.getData(), fileOutputStream);
+			fileOutputStream.flush();
+			IOUtils.copy(data, fileOutputStream);
 		} finally {
 			IOUtils.closeQuietly(fileOutputStream);
 		}
 		//generate thumbnail
-		final BufferedImage image = ImageIO.read(dataFile);
+		final BufferedImage image = ImageIO.read(getFile(attachment));
 		final Image scaledInstance = image.getScaledInstance(100, 80, Image.SCALE_FAST);
 		BufferedImage newImage = new BufferedImage(100, 80, BufferedImage.TYPE_INT_RGB);
 		newImage.getGraphics().drawImage(scaledInstance, 0, 0, null);
 		ImageIO.write(newImage, "jpg", thumbnailFile);
 	}
 
-	Attachment loadData(final Attachment attachment) {
-		if(attachment != null) {
-			try {
-				attachment.setData(new FileInputStream(new File(fileStorageDir, String.valueOf(attachment.getId()))));
-			} catch (FileNotFoundException e) {
-				logger.error("Attachment not found in file store ", e);
-			}
-			try {
-				attachment.setThumbnail(new FileInputStream(new File(fileStorageDir, ThumbnailPrefix.concat(String.valueOf(attachment.getId())))));
-			} catch (FileNotFoundException e) {
-				logger.error("Attachment thumbnail not found in file store ", e);
-			}
-		}
-		return attachment;
-	}
-	
 	public void init() {
 		final File storageDir = new File(fileStorageDir);
 		if(!storageDir.exists()) {
@@ -114,9 +98,6 @@ public class JpaAttachmentService extends JpaDaoSupport implements
 		params.put("id", id);
 		@SuppressWarnings("unchecked")
 		final List<Attachment> attachments = getJpaTemplate().findByNamedParams("select OBJECT(attachment) from "+Attachment.class.getName() + " attachment where attachedTo.id = :id", params);
-		for(final Attachment attachment : attachments) {
-			loadData(attachment);
-		}
 		return attachments;
 	}
 
@@ -131,7 +112,7 @@ public class JpaAttachmentService extends JpaDaoSupport implements
 
 	@Override
 	public Attachment getAttachment(long id) {
-		return loadData(getJpaTemplate().find(Attachment.class, id));
+		return getJpaTemplate().find(Attachment.class, id);
 	}
 
 	@Override
@@ -143,6 +124,25 @@ public class JpaAttachmentService extends JpaDaoSupport implements
 			getJpaTemplate().remove(attachment);
 			
 		}
+	}
+
+	@Override
+	public InputStream getData(final Attachment attachment) throws IOException {
+		return new FileInputStream(getFile(attachment));
+	}
+
+	File getFile(final Attachment attachment) {
+		return new File(fileStorageDir, String.valueOf(attachment.getId()));
+	}
+
+	@Override
+	public InputStream getThumbnail(final Attachment attachment) throws IOException {
+		return new FileInputStream(new File(fileStorageDir, ThumbnailPrefix.concat(String.valueOf(attachment.getId()))));
+	}
+
+	@Override
+	public OutputStream writeData(final Attachment attachment) throws IOException {
+		return new FileOutputStream(getFile(attachment));
 	}
 
 }

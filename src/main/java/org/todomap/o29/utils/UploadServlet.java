@@ -1,6 +1,7 @@
 package org.todomap.o29.utils;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.security.Authentication;
 import org.springframework.security.context.SecurityContextHolder;
@@ -49,12 +51,17 @@ public class UploadServlet extends SpringServlet {
 					attachment.setCreator(user);
 					attachment.setFileName(item.getName());
 					attachment.setMime(item.getContentType());
-					attachment.setData(item.getInputStream());
+					final OutputStream dataStream = attachmentService.writeData(attachment);
+					try {
+						IOUtils.copy(item.getInputStream(), dataStream);
+					} finally {
+						IOUtils.closeQuietly(dataStream);
+					}
 					
 					final BaseBean attachedTo = baseService.getById(id);
 					
 					attachment.setAttachedTo(attachedTo);
-					attachmentService.addAttachment(attachment);
+					attachmentService.addAttachment(attachment, item.getInputStream());
 				}
 			}
 			resp.getWriter().println("ok");
