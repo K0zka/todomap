@@ -21,6 +21,7 @@ final Configuration configuration = (Configuration)WebApplicationContextUtils
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="google-site-verification" content="<%= configuration.getGoogleWebmastersVerification() %>" />
 <meta name="y_key" content="<%= configuration.getYahooSiteExplorerVerification() %>">
+<meta name="description" content="Keeping track of issues on the map. A direct-democracy tool for town and country-size communities." lang="english"/>
 
 <jsp:include page="WEB-INF/jsp/includes/sitemeta.jsp"/>
 
@@ -121,63 +122,7 @@ if(request.getParameter("lat") == null) {
 			$("#newTodo").dialog('open');
         });
 	    
-		google.maps.event.addListener(map, "bounds_changed", function() {
-
-			var center = map.getCenter();
-			var bounds = map.get_bounds();
-			var sw = bounds.getSouthWest();
-			var ne = bounds.getNorthEast();
-
-			//update the link content
-			$('#linkToThisMap').val(pageLocation+'?lat='+center.lat()+'&lng='+center.lng()+"&zoom="+map.getZoom());
-			$('#rssLinkToThisMap').val(pageLocation.replace(/index.jsp/,'')+'rss.xml/' + ne.lat() + ',' + ne.lng() + ',' + sw.lat() + ',' + sw.lng() );
-
-			//update the todos on the map
-			$.get("services/todos/area.sht/"+sw.lat() + "," + sw.lng() + "," + ne.lat() + "," + ne.lng(), function(data){
-					var response = eval("("+data+")");
-					$.each(response['todo-sum'], function(i, val) {
-
-						markers = map.getMarkers();
-						found = false;
-						for(i = 0; i < markers.length; i++) {
-							if(markers[i].getTodoId() == val['id']) {
-								found = true;
-								break;
-							}
-						}
-						
-						if(!found) {
-							var mLatlng = new google.maps.LatLng(val['location']['latitude'], val['location']['longitude']);
-						    var marker = new google.maps.Marker({
-						        position: mLatlng, 
-						        map: map,
-						        title:val['descr']
-						    });
-						    marker.setTodoId(val['id']);
-						    marker.setIcon('img/flag.png');
-						    map.addMarker(marker);
-						    google.maps.event.addListener(marker, 'click', function() {
-							    $.get("services/todos/shortbyid/"+val['id'], function(data){
-								    var todo = eval("("+data+")");
-								    var shortDescr = todo['todo']['shortDescr'];
-							    	var infowindow = new google.maps.InfoWindow({
-							            content: '<h2>'+ shortDescr + '</h2><div>' + todo['todo']['description'] + '</div>'
-							            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',1)"/>'
-							            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',2)"/>'
-							            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',3)"/>'
-							            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',4)"/>'
-							            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',5)"/> <br/>'
-							            	+ '<a target="new" href="' + encodeURI(todo['todo']['id'] + '-' + todo['todo']['shortDescr']) + '.html">'
-					            			+ 'more...</a>'
-							        });
-							        infowindow.open(map,marker);
-								})
-					        });
-
-						}
-					});
-				});
-        });
+		google.maps.event.addListener(map, "bounds_changed", refreshMarkers);
         
     }
     $(document).ready(function(){
@@ -241,9 +186,72 @@ if(request.getParameter("lat") == null) {
         
     });
 
+	function refreshMarkers() {
+		
+		var center = map.getCenter();
+		var bounds = map.getBounds();
+		debug('map:'+map);
+		debug('bounds:'+bounds);
+		var sw = bounds.getSouthWest();
+		var ne = bounds.getNorthEast();
+
+		//update the link content
+		$('#linkToThisMap').val(pageLocation+'?lat='+center.lat()+'&lng='+center.lng()+"&zoom="+map.getZoom());
+		$('#rssLinkToThisMap').val(pageLocation.replace(/index.jsp/,'')+'rss.xml/' + ne.lat() + ',' + ne.lng() + ',' + sw.lat() + ',' + sw.lng() );
+
+		//update the todos on the map
+		$.get("services/todos/area.sht/"+sw.lat() + "," + sw.lng() + "," + ne.lat() + "," + ne.lng(), function(data){
+				var response = eval("("+data+")");
+				$.each(response['todo-sum'], function(i, val) {
+
+					markers = map.getMarkers();
+					found = false;
+					for(i = 0; i < markers.length; i++) {
+						if(markers[i].getTodoId() == val['id']) {
+							found = true;
+							break;
+						}
+					}
+					
+					if(!found) {
+						var mLatlng = new google.maps.LatLng(val['location']['latitude'], val['location']['longitude']);
+					    var marker = new google.maps.Marker({
+					        position: mLatlng, 
+					        map: map,
+					        title:val['descr']
+					    });
+					    marker.setTodoId(val['id']);
+					    marker.setIcon('img/flag.png');
+					    map.addMarker(marker);
+					    google.maps.event.addListener(marker, 'click', function() {
+						    $.get("services/todos/shortbyid/"+val['id'], function(data){
+							    var todo = eval("("+data+")");
+							    var shortDescr = todo['todo']['shortDescr'];
+						    	var infowindow = new google.maps.InfoWindow({
+						            content: '<h2>'+ shortDescr + '</h2><div>' + todo['todo']['description'] + '</div>'
+						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',1)"/>'
+						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',2)"/>'
+						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',3)"/>'
+						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',4)"/>'
+						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',5)"/> <br/>'
+						            	+ '<a target="new" href="' + encodeURI(todo['todo']['id'] + '-' + todo['todo']['shortDescr']) + '.html">'
+				            			+ 'more...</a>'
+						        });
+						        infowindow.open(map,marker);
+							})
+				        });
+
+					}
+				});
+			});
+	
+	}
+    
 	function submitNewTodo() {
 
 		debug('submit new todo');
+
+		$('#submitNewTodoButton').attr('disabled','disabled');
 		
 		var submitData = {todo:{
 			shortDescr: $('#newTodoShortDescr').val(),
@@ -259,7 +267,9 @@ if(request.getParameter("lat") == null) {
 			url : 'services/todos/new',
 			data: strData,
 			success: function(msg){
+				refreshMarkers();
 				$("#newTodo").dialog('close');
+				$('#submitNewTodoButton').removeAttr('disabled');
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 				handleErrors(XMLHttpRequest);
