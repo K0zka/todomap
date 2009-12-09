@@ -143,7 +143,8 @@
 			<list>
 				<bean class="org.springframework.scheduling.timer.ScheduledTimerTask">
 					<property name="delay" value="10000" />
-					<property name="period" value="1000" />
+					<!-- every day -->
+					<property name="period" value="86400000" />
 					<property name="timerTask">
 						<bean class="org.todomap.o29.utils.jobs.ReverseGeocodeTask">
 							<property name="geoCoder" ref="geoCoder"/>
