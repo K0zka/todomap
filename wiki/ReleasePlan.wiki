@@ -1,5 +1,10 @@
 #summary Upcoming releases
 
+The from version 0.5.x, the version string is composed of three number. 
+ # The first number is 0 :)
+ # The second number is the long iteration. Long iterations are about a month long and address a specific functionality.
+ # The third number is the short iteration. Short iterations add small functionalities and fixes.
+
 = Version 0.4 =
 
 The main focus of release 0.4 is comments and todo editing.
