@@ -1,0 +1,11 @@
+#summary Grouping flags in the map
+#labels Phase-Requirements
+
+= Introduction =
+
+This document describes ideas for grouping flags on the map
+
+= Basic requirements =
+
+ * There should not be 'too many' too close to each other
+ * The same level of grouping consistently for all the map
