@@ -335,6 +335,9 @@ function saveData() {
 	<div id="saveButton-tooltip">
 		<p><img src="img/floppy.png"/> Click save to submit your modifications. </p>
 	</div>
+	<div id="authorId-tooltip">
+		<p><img src="img/user.png"/> This is the unique ID of the user. Names are not neccesarily unique.</p>
+	</div>
 </span>
 
 </body>
