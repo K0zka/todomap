@@ -112,3 +112,8 @@ button:hover {
 .licenseInfo img {
 	float: left;
 }
+
+.authorId {
+	font-weight: bolder;
+	background-color: #eeeeee;
+}
