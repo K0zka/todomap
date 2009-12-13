@@ -398,8 +398,11 @@ if(request.getParameter("lat") == null) {
 			Version: <%= VersionUtil.getVersionNumber() %></span>
 		</div>
 		<div class="licenseInfo">
-			<img alt="creative commons logo" src="img/cc88x31.png"/><br/>
-			The content of the site is published under creative commons license.
+			<a href="http://creativecommons.org/licenses/by/3.0/">
+				<img alt="creative commons logo" src="img/cc88x31.png"/>
+			</a>
+			The content of the site is published under creative commons license.<br/>
+			The map is copyrighted by <a href="http://www.google.com/">google<a/>.
 		</div>
 	</span>
 	<span style="width: 80%; height: 100%; position: absolute; right: 0px;">
