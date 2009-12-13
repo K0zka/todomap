@@ -105,4 +105,10 @@ button:hover {
 	color: gray;
 	font-size: small;
 	font-family: monospace;
+	text-align: justify;
+	margin: 10px;
+}
+
+.licenseInfo img {
+	float: left;
 }
