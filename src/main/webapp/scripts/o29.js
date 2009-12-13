@@ -111,3 +111,24 @@ function checkLoginStatus_periodically() {
 }
 
 checkLoginStatus_periodically();
+
+function bookmarkItem(itemId) {
+	debug('Bookmarking '+itemId);
+	$.ajax({
+		type:	'POST',
+		url:	'services/bookmarks/bookmark/'+itemId,
+		data:	itemId
+	});
+}
+
+function isBookmarked(itemId) {
+	//TODO
+	return false;
+}
+
+function unBookmarkItem(itemId) {
+	$.ajax({
+		type:	'DELETE',
+		url:	'services/bookmarks/'+itemId
+	});
+}
