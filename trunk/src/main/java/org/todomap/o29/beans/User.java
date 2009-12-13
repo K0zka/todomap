@@ -44,6 +44,7 @@ public class User extends BaseBean {
 		this.email = email;
 	}
 
+	@XmlTransient
 	public List<BaseBean> getBookmarks() {
 		return bookmarks;
 	}
