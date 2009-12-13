@@ -8,7 +8,8 @@ Todo todo = (Todo)request.getAttribute("todo");
 
 %>
 
-<%@page import="org.todomap.o29.beans.Comment"%><html>
+<%@page import="org.todomap.o29.beans.Comment"%>
+<%@page import="org.apache.commons.lang.StringUtils"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -81,6 +82,12 @@ function initialize() {
 			delay : 1000
         	});
     	$('button').tooltip({
+    		bodyHandler : function() {
+    			return $('#'+this.id+"-tooltip").html();
+    		},
+			delay : 1000
+        	});
+    	$('span').tooltip({
     		bodyHandler : function() {
     			return $('#'+this.id+"-tooltip").html();
     		},
@@ -253,6 +260,11 @@ function saveData() {
 			&gt; <%= todo.getAddr().getAddress() == null ? "-" : todo.getAddr().getAddress() %>
 			<% } %>
 		</div>
+		<% if(todo.getCreator() != null && !StringUtils.isEmpty(todo.getCreator().getDisplayName())) { %>
+		<div style="position: absolute; bottom: 0px; right: 0px; color: grey; font-size: 0.8em;">
+			Submitted by <%= todo.getCreator().getDisplayName() %> <span id="authorId" class="authorId">[<%= todo.getCreator().getId() %>]</span>
+		</div>
+		<% } %>
 	</div>
 	<h3><a href="#">Details</a></h3>
 	<div>
