@@ -86,9 +86,28 @@ final Configuration configuration = (Configuration)WebApplicationContextUtils
     	    
     	  google.maps.Map.prototype.clearMarkers = function() {
     	    for(var i=0; i<this.markers.length; i++){
-    	      this.markers[i].set_map(null);
+    	      this.markers[i].setMap(null);
     	    }
     	    this.markers = new Array();
+    	  };
+
+    	  google.maps.Map.prototype.removeMarker = function(marker) {
+          //remove from the map
+	    	marker.setMap(null);
+      	  //clear from the markers array
+      	  var pos = 0;
+      	  var found = false;
+      	  while(!found && pos < this.markers.length) {
+			if(this.markers[pos] == marker) {
+				found = true;
+				break;
+			}
+			pos++;
+          }
+          for(var i = pos; i < this.markers.length - 1; i++) {
+        	  this.markers[i] = this.markers[i+1];
+          }
+          this.markers.pop();
     	  };
     	})();
 
@@ -356,6 +375,20 @@ if(request.getParameter("lat") == null) {
 	      });
 			
 	}
+
+	function cleanupMarkers() {
+		markers = map.getMarkers();
+		bounds = map.getBounds();
+		for(i = 0; i < markers.length; i++) {
+			if(!bounds.contains(markers[i].getPosition())) {
+				map.removeMarker(markers[i]);
+			}
+		}
+
+		setTimeout("cleanupMarkers()", 20000);
+	}
+
+	setTimeout("cleanupMarkers()", 20000);
 	
 </script>
 
