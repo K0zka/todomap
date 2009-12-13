@@ -64,4 +64,9 @@ public class Attachment extends BaseBean implements Translatable {
 	public String getText() {
 		return getDescription();
 	}
+
+	@Override
+	public String getName() {
+		return getFileName();
+	}
 }

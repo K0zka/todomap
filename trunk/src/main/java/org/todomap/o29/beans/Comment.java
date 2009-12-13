@@ -38,4 +38,9 @@ public class Comment extends BaseBean implements Translatable {
 	public void setText(String text) {
 		this.text = text;
 	}
+
+	@Override
+	public String getName() {
+		return String.valueOf(getId());
+	}
 }

@@ -57,4 +57,8 @@ public class Todo extends BaseBean implements Translatable{
 	public void setLanguage(String language) {
 		super.setLanguage(language);
 	}
+	@Override
+	public String getName() {
+		return getShortDescr();
+	}
 }

@@ -19,13 +19,15 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING, name="type", length=8)
 @Table(name="base")
-public abstract class BaseBean {
+@XmlRootElement(name="base")
+public abstract class BaseBean implements Nameable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="base_seq")
 	@SequenceGenerator(name="base_seq", allocationSize=1, initialValue=0, sequenceName="base_seq")
@@ -81,14 +83,12 @@ public abstract class BaseBean {
 	public void setId(long id) {
 		this.id = id;
 	}
-	@XmlTransient
 	public List<Comment> getComments() {
 		return comments;
 	}
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
-	@XmlTransient
 	public List<Rating> getRatings() {
 		return ratings;
 	}
@@ -101,7 +101,6 @@ public abstract class BaseBean {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-	@XmlTransient
 	public User getCreator() {
 		return creator;
 	}

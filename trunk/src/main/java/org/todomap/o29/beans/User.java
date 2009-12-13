@@ -76,4 +76,9 @@ public class User extends BaseBean {
 		this.openIdUrl = openIdUrl;
 	}
 
+	@Override
+	public String getName() {
+		return getName() == null ? String.valueOf(getId()) : getName();
+	}
+
 }
