@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.htmlcleaner.BaseToken;
 import org.htmlcleaner.CleanerProperties;
+import org.htmlcleaner.CommentToken;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.SimpleXmlSerializer;
 import org.htmlcleaner.TagNode;
@@ -49,6 +50,8 @@ public class HtmlUtil {
 				} else {
 					eviltags.add(token);
 				}
+			} else if(token instanceof CommentToken) {
+				eviltags.add(token);
 			}
 		}
 		for(final Object tag : eviltags) {
