@@ -227,15 +227,18 @@ if(request.getParameter("lat") == null) {
 						    $.get("services/todos/shortbyid/"+val['id'], function(data){
 							    var todo = eval("("+data+")");
 							    var shortDescr = todo['todo']['shortDescr'];
+							    var itemId = todo['todo']['id'];
 						    	var infowindow = new google.maps.InfoWindow({
-						            content: '<h2>'+ shortDescr + '</h2><div>' + todo['todo']['description'] + '</div>'
-						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',1)"/>'
-						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',2)"/>'
-						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',3)"/>'
-						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',4)"/>'
-						            	+ '<img src="img/bookmark32.png" onclick="javascript:postRating('+val['id']+',5)"/> <br/>'
-						            	+ '<a target="new" href="' + encodeURI(todo['todo']['id'] + '-' + todo['todo']['shortDescr']) + '.html">'
-				            			+ 'more...</a>'
+						    		content: '<div style="width: 200px; height: 200px;">'
+						    			+ '<h3 style="margin: 5px; font-size: 15px; width: 160px;">'+shortDescr+'</h3>'
+						    			+ '<div style="overflow: hidden; margin: 10px; text-align: justify; font-size: 12px; width: 160px; height: 100px;">'
+						    			+ todo['todo']['description']
+							    		+ '</div>'
+						    		    + '<a href="'+ encodeURI(itemId + '-' + todo['todo']['shortDescr']) + '.html" style="position: absolute; bottom: 10px; font-style: italic; font-size: 10px;">more...</a>'
+						    		    + '<img src="img/bookmark32.png" style="position: absolute; top: 0px; right: 0px; cursor: pointer;" onclick="bookmarkItem('+itemId+')"/>'
+						    			+ '<img src="img/up32.png" style="position: absolute; top: 32px; right: 0px; cursor: pointer;"/>'
+						    			+ '<img src="img/down32.png" style="position: absolute; bottom: 10px; right: 0px; cursor: pointer;"/>'
+						    			+ '</div>'
 						        });
 						        infowindow.open(map,marker);
 							})
