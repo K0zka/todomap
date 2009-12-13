@@ -3,7 +3,7 @@
 	<groupId>org.todomap</groupId>
 	<artifactId>o29</artifactId>
 	<packaging>war</packaging>
-	<version>0.5.1</version>
+	<version>0.5.2-SNAPSHOT</version>
 	<name>o29</name>
 	<repositories>
 		<repository>
@@ -256,9 +256,9 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:svn:http://todomap.googlecode.com/svn/tags/o29-0.5.1</connection>
-		<developerConnection>scm:svn:https://todomap.googlecode.com/svn/tags/o29-0.5.1</developerConnection>
-		<url>http://code.google.com/p/todomap/source/browse/tags/o29-0.5.1</url>
+		<connection>scm:svn:http://todomap.googlecode.com/svn/trunk/</connection>
+		<developerConnection>scm:svn:https://todomap.googlecode.com/svn/trunk/</developerConnection>
+		<url>http://code.google.com/p/todomap/source/browse/</url>
 	</scm>
 	<build>
 		<plugins>
