@@ -22,6 +22,8 @@ Todo todo = (Todo)request.getAttribute("todo");
 <link rel="stylesheet" type="text/css"
 	href="style/jquery-ui-1.7.2.custom.css" media="all" />
 <link rel="stylesheet" type="text/css"
+	href="style/jquery.rating.css" media="all" />
+<link rel="stylesheet" type="text/css"
 	href="style/default.css" media="all" />
 <link type="text/css" rel="stylesheet" href="style/jquery.rte.css" />
 <link type="text/css" rel="stylesheet" href="style/jquery.tooltip.css" />
@@ -41,6 +43,8 @@ Todo todo = (Todo)request.getAttribute("todo");
 <script type="text/javascript" src="scripts/o29.js">
 </script>
 <script type="text/javascript" src="scripts/ajaxupload.js">
+</script>
+<script type="text/javascript" src="scripts/jquery.rating.js">
 </script>
 <script type="text/javascript" src="scripts/jquery.rte.js">
 </script>
@@ -319,6 +323,13 @@ function saveData() {
 	</div>
 	<h3><a href="#">Ratings details</a></h3>
 	<div>
+		<div id="ratingDetails">
+			<input name="simpleRating" type="radio" class="star"/> 
+			<input name="simpleRating" type="radio" class="star"/> 
+			<input name="simpleRating" type="radio" class="star"/> 
+			<input name="simpleRating" type="radio" class="star"/> 
+			<input name="simpleRating" type="radio" class="star"/>
+		</div>
 	</div>
 
 <div id="imageWindow" title="Picture">
