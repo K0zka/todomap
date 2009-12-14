@@ -13,7 +13,7 @@ final String chanelLink = (String)request.getAttribute("chanelLink");
 
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
-<%@page import="org.todomap.o29.utils.HtmlUtil"%><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<%@page import="org.todomap.o29.utils.HtmlUtil"%><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:georss="http://www.georss.org/georss">
   <channel>
     <title>Todomap RSS feed for area</title>
     <description>Todomap RSS feed for area</description>
@@ -28,6 +28,7 @@ final String chanelLink = (String)request.getAttribute("chanelLink");
       <description> <%= HtmlUtil.getFirstParagraph(todo.getDescription()) %> </description>
       <pubDate><%= sdf.format(todo.getCreated()) %></pubDate>
       <guid><%= URLUtil.getUrl(request, todo)%></guid>
+      <georss:point><%= todo.getLocation().getLatitude() %> <%= todo.getLocation().getLongitude() %></georss:point>
     </item>
 	<% } %>
   </channel>
