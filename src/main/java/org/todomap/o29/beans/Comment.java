@@ -19,6 +19,8 @@ public class Comment extends BaseBean implements Translatable {
 	@JoinColumn(name="bean_id")
 	@XmlTransient
 	BaseBean bean;
+
+	@XmlTransient
 	public BaseBean getBean() {
 		return bean;
 	}
