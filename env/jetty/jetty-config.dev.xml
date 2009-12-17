@@ -2,22 +2,12 @@
 <!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
 
 
-<Configure class="org.mortbay.jetty.webapp.WebAppContext">
-
-	<Set name="configurationClasses">
-		<Array id="plusConfig" type="java.lang.String">
-			<Item>org.mortbay.jetty.webapp.WebInfConfiguration</Item>
-			<Item>org.mortbay.jetty.plus.webapp.EnvConfiguration</Item>
-			<Item>org.mortbay.jetty.plus.webapp.Configuration</Item>
-			<Item>org.mortbay.jetty.webapp.JettyWebXmlConfiguration</Item>
-			<Item>org.mortbay.jetty.webapp.TagLibConfiguration</Item>
-		</Array>
-	</Set>
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
 
 	<Set name="extraClasspath">env/dev</Set>
 
 
-	<New id="o29ds" class="org.mortbay.jetty.plus.naming.Resource">
+	<New id="o29ds" class="org.eclipse.jetty.plus.jndi.Resource">
 		<Arg>jdbc/o29ds</Arg>
 		<Arg>
 			<New class="org.apache.commons.dbcp.BasicDataSource">
@@ -29,10 +19,10 @@
 		</Arg>
 	</New>
 
-	<New id="mail" class="org.mortbay.jetty.plus.naming.Resource">
+	<New id="mail" class="org.eclipse.jetty.plus.jndi.Resource">
 		<Arg>mail/Session</Arg>
 		<Arg>
-			<New class="org.mortbay.naming.factories.MailSessionReference">
+			<New class="org.eclipse.jetty.jndi.factories.MailSessionReference">
 				<Set name="properties">
 					<New class="java.util.Properties">
 						<Put name="mail.smtp.host">localhost</Put>
