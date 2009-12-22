@@ -14,12 +14,17 @@ public class URLUtil {
 	private final static Logger logger = Logger.getLogger(URLUtil.class);
 
 	public static String getApplicationRoot(final HttpServletRequest request) {
+		return getApplicationRoot(request, "WEB-INF");
+	}
+
+	public static String getApplicationRoot(final HttpServletRequest request, String file) {
 		final StringBuffer requestURL = request.getRequestURL();
-		final int contextLoc = requestURL.indexOf("WEB-INF");
+		final int contextLoc = requestURL.indexOf(file);
 		requestURL.replace(contextLoc, requestURL.length(), "");
 		return requestURL.toString();
 	}
 
+	
 	public static String getUrl(final HttpServletRequest request,
 			final BaseBean bean) {
 		return getApplicationRoot(request) + bean.getId() + "-"

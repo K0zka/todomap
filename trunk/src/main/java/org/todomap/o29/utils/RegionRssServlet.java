@@ -18,9 +18,9 @@ public class RegionRssServlet extends SpringServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		final String[] split = req.getRequestURI().replace("/rss.xml/region/", "").split("/");
-		final String countryCode = getParam(split, 2);
+		final String countryCode = getParam(split, 0);
 		final String state = getParam(split, 1);
-		final String town = getParam(split, 0);
+		final String town = getParam(split, 2);
 		final List<Todo> todos = todoService.getByLocation(countryCode, state,
 				town);
 		req.setAttribute("chanelLink", req.getRequestURL().toString());
@@ -34,7 +34,7 @@ public class RegionRssServlet extends SpringServlet {
 
 	static String getParam(String[] split, int index) {
 		if (split.length > index) {
-			return split[split.length - 1 - index];
+			return split[index];
 		} else {
 			return null;
 		}
