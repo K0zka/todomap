@@ -15,7 +15,8 @@ final Configuration configuration = (Configuration)WebApplicationContextUtils
 
 %>
 
-<%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%><html>
+<%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
+<%@page import="org.todomap.o29.utils.URLUtil"%><html>
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -205,28 +206,84 @@ if(request.getParameter("lat") == null) {
         
     });
 
+	var flagmode = 'none';
+    
 	function refreshMarkers() {
 		
 		var center = map.getCenter();
 		var bounds = map.getBounds();
-		debug('map:'+map);
-		debug('bounds:'+bounds);
+		var zoomLevel = map.getZoom();
+		debug('map level:'+zoomLevel);
 		var sw = bounds.getSouthWest();
 		var ne = bounds.getNorthEast();
-
 		//update the link content
 		$('#linkToThisMap').val(pageLocation+'?lat='+center.lat()+'&lng='+center.lng()+"&zoom="+map.getZoom());
 		$('#rssLinkToThisMap').val(pageLocation.replace(/index.jsp/,'')+'rss.xml/' + ne.lat() + ',' + ne.lng() + ',' + sw.lat() + ',' + sw.lng() );
 
-		//update the todos on the map
-		$.get("services/todos/area.sht/"+sw.lat() + "," + sw.lng() + "," + ne.lat() + "," + ne.lng(), function(data){
+
+		if( zoomLevel > 12) {
+
+			prepareForLevel('all');
+
+			//update the todos on the map
+			$.get("services/todos/area.sht/"+sw.lat() + "," + sw.lng() + "," + ne.lat() + "," + ne.lng(), function(data){
+					var response = eval("("+data+")");
+					$.each(response['todo-sum'], function(i, val) {
+
+						markers = map.getMarkers();
+						found = false;
+						for(i = 0; i < markers.length; i++) {
+							if(markers[i].getTodoId() == val['id']) {
+								found = true;
+								break;
+							}
+						}
+						
+						if(!found) {
+							var mLatlng = new google.maps.LatLng(val['location']['latitude'], val['location']['longitude']);
+						    var marker = new google.maps.Marker({
+						        position: mLatlng, 
+						        map: map,
+						        title:val['descr']
+						    });
+						    marker.setTodoId(val['id']);
+						    marker.setIcon('img/flag.png');
+						    map.addMarker(marker);
+						    google.maps.event.addListener(marker, 'click', function() {
+							    $.get("services/todos/shortbyid/"+val['id'], function(data){
+								    var todo = eval("("+data+")");
+								    var shortDescr = todo['todo']['shortDescr'];
+								    var itemId = todo['todo']['id'];
+							    	var infowindow = new google.maps.InfoWindow({
+							    		content: '<div style="width: 200px; height: 200px;">'
+							    			+ '<h3 style="margin: 5px; font-size: 15px; width: 160px;">'+shortDescr+'</h3>'
+							    			+ '<div style="overflow: hidden; margin: 10px; text-align: justify; font-size: 12px; width: 160px; height: 100px;">'
+							    			+ todo['todo']['description']
+								    		+ '</div>'
+							    		    + '<a href="'+ encodeURI(itemId + '-' + todo['todo']['shortDescr']) + '.html" style="position: absolute; bottom: 10px; font-style: italic; font-size: 10px;" target="new">more...</a>'
+							    		    + '<img src="img/bookmark32.png" style="position: absolute; top: 0px; right: 0px; cursor: pointer;" onclick="bookmarkItem('+itemId+')"/>'
+							    			+ '<img src="img/up32.png" style="position: absolute; top: 32px; right: 0px; cursor: pointer;"/>'
+							    			+ '<img src="img/down32.png" style="position: absolute; bottom: 10px; right: 0px; cursor: pointer;"/>'
+							    			+ '</div>'
+							        });
+							        infowindow.open(map,marker);
+								})
+					        });
+
+						}
+					});
+				});
+				
+			
+		} else {
+			var fn = function(data){
 				var response = eval("("+data+")");
-				$.each(response['todo-sum'], function(i, val) {
+				$.each(response['group-sum'], function(i, val) {
 
 					markers = map.getMarkers();
 					found = false;
 					for(i = 0; i < markers.length; i++) {
-						if(markers[i].getTodoId() == val['id']) {
+						if(markers[i].getTodoId() == val['address']) {
 							found = true;
 							break;
 						}
@@ -239,36 +296,90 @@ if(request.getParameter("lat") == null) {
 					        map: map,
 					        title:val['descr']
 					    });
-					    marker.setTodoId(val['id']);
-					    marker.setIcon('img/flag.png');
+					    marker.setTodoId(val['address']);
+					    marker.setIcon('img/flags.png');
 					    map.addMarker(marker);
 					    google.maps.event.addListener(marker, 'click', function() {
-						    $.get("services/todos/shortbyid/"+val['id'], function(data){
-							    var todo = eval("("+data+")");
-							    var shortDescr = todo['todo']['shortDescr'];
-							    var itemId = todo['todo']['id'];
-						    	var infowindow = new google.maps.InfoWindow({
-						    		content: '<div style="width: 200px; height: 200px;">'
-						    			+ '<h3 style="margin: 5px; font-size: 15px; width: 160px;">'+shortDescr+'</h3>'
-						    			+ '<div style="overflow: hidden; margin: 10px; text-align: justify; font-size: 12px; width: 160px; height: 100px;">'
-						    			+ todo['todo']['description']
-							    		+ '</div>'
-						    		    + '<a href="'+ encodeURI(itemId + '-' + todo['todo']['shortDescr']) + '.html" style="position: absolute; bottom: 10px; font-style: italic; font-size: 10px;" target="new">more...</a>'
-						    		    + '<img src="img/bookmark32.png" style="position: absolute; top: 0px; right: 0px; cursor: pointer;" onclick="bookmarkItem('+itemId+')"/>'
-						    			+ '<img src="img/up32.png" style="position: absolute; top: 32px; right: 0px; cursor: pointer;"/>'
-						    			+ '<img src="img/down32.png" style="position: absolute; bottom: 10px; right: 0px; cursor: pointer;"/>'
-						    			+ '</div>'
-						        });
-						        infowindow.open(map,marker);
-							})
+					    	var infowindow = new google.maps.InfoWindow({
+					    		content: '<div style="width: 200px; height: 100px;">'
+					    			+ '<h3 style="margin: 5px; font-size: 15px; width: 160px;">'+getAddress(val['address'])+'</h3>'
+					    			+ '<div style="overflow: hidden; margin: 10px; text-align: justify; font-size: 12px; width: 160px; height: 50px;">'
+					    			+ 'Open issues: '+  val['nrOfIssues']
+						    		+ '</div>'
+					    		    + '<img src="img/feed32.png" style="position: absolute; top: 0px; right: 0px; cursor: pointer;" onclick="window.open(\''+getRssUrlForAddr(val['address'])+'\', \'new\')"/>'
+//					    		    + '<img src="img/search32.png" style="position: absolute; top: 32px; right: 0px; cursor: pointer; onclick="map.panTo(new google.maps.LatLng('+1+','+1+'))"/>'
+					    			+ '</div>'
+					        });
+					        infowindow.open(map,marker);
 				        });
 
 					}
 				});
-			});
+			};
+		
+			if (zoomLevel >= 10) {
+				prepareForLevel('town');
+				$.get("services/todos/area/town/"+sw.lat() + "," + sw.lng() + "," + ne.lat() + "," + ne.lng(), fn);
+			} else if (zoomLevel > 5) {
+				prepareForLevel('state');
+				$.get("services/todos/area/state/"+sw.lat() + "," + sw.lng() + "," + ne.lat() + "," + ne.lng(), fn);
+			} else {
+				prepareForLevel('country');
+				$.get("services/todos/area/country/"+sw.lat() + "," + sw.lng() + "," + ne.lat() + "," + ne.lng(), fn);
+			}
+		}
+
 	
 	}
-    
+
+	function prepareForLevel(level) {
+		if(flagmode != level) {
+			map.clearMarkers();
+		}
+		flagmode = level;
+	}
+	
+	function getAddress(addr) {
+		ret = '';
+		try {
+			if(''+addr['country'] != 'undefined') {
+				ret = ret + addr['country'];
+			}
+		} finally {};
+		try {
+			if(''+addr['state'] != 'undefined') {
+				ret = ret + " > " + addr['state'];
+			}
+		} finally {};
+		try {
+			if(''+addr['town'] != 'undefined') {
+				ret = ret + " > " + addr['town'];
+			}
+		} finally {};
+		return ret;
+	}
+
+	function getRssUrlForAddr(addr) {
+		ret = '<%= URLUtil.getApplicationRoot(request,"index.jsp") + "rss.xml/region/" %>';
+		try {
+			if(''+addr['country'] != 'undefined') {
+				ret = ret + addr['country'];
+			}
+		} finally {};
+		try {
+			if(''+addr['state'] != 'undefined') {
+				ret = ret + "/" + addr['state'];
+			}
+		} finally {};
+		try {
+			if(''+addr['town'] != 'undefined') {
+				ret = ret + "/" + addr['town'];
+			}
+		} finally {};
+		return ret;
+
+	}
+	
 	function submitNewTodo() {
 
 		debug('submit new todo');
