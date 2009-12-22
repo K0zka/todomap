@@ -566,7 +566,8 @@ if(request.getParameter("lat") == null) {
 		<input type="hidden" id="newTodoLat" name="newTodoLat"/>
 		<input type="hidden" id="newTodoLng" name="newTodoLng"/>
 	</form>
-	<button id="submitNewTodoButton" onclick="submitNewTodo()"><img src="img/gear32.png"/></button>
+	<button id="submitNewTodoButton" onclick="submitNewTodo()">save</button>
+	<button id="cancelNewTodoButton" onclick="$('#newTodo').dialog('close')">close</button>
 </div>
 
 <div id="wheretogoWindow" title="Where do you want to go?">
