@@ -113,42 +113,41 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 	TodoGroup getGroupByAddress(final Address address) {
 		final TodoGroup group = new TodoGroup();
 
-		getJpaTemplate().execute(
-				new JpaCallback() {
+		getJpaTemplate().execute(new JpaCallback() {
 
-					@Override
-					public Object doInJpa(final EntityManager em)
-							throws PersistenceException {
-						final String country = address.getCountry();
-						final String state = address.getState();
-						final String town = address.getTown();
-						// TODO: average is not a perfect method. We could just
-						// use google GEO.
-						final Query query = em
-								.createQuery("select avg(t.location.longitude), avg(t.location.latitude), count(t) from "
-										+ Todo.class.getName()
-										+ " t "
-										+ " where t.addr.country = :country "
-										+ (state == null ? ""
-												: " and t.addr.state = :state")
-										+ (town == null ? ""
-												: " and t.addr.town = :town "));
-						query.setParameter("country", country);
-						if (state != null) {
-							query.setParameter("state", state);
-						}
-						if (town != null) {
-							query.setParameter("town", town);
-						}
+			@Override
+			public Object doInJpa(final EntityManager em)
+					throws PersistenceException {
+				final String country = address.getCountry();
+				final String state = address.getState();
+				final String town = address.getTown();
+				// TODO: average is not a perfect method. We could just
+				// use google GEO.
+				final Query query = em
+						.createQuery("select avg(t.location.longitude), avg(t.location.latitude), count(t) from "
+								+ Todo.class.getName()
+								+ " t "
+								+ " where t.addr.country = :country "
+								+ (state == null ? ""
+										: " and t.addr.state = :state")
+								+ (town == null ? ""
+										: " and t.addr.town = :town "));
+				query.setParameter("country", country);
+				if (state != null) {
+					query.setParameter("state", state);
+				}
+				if (town != null) {
+					query.setParameter("town", town);
+				}
 
-						final Object[] result = (Object[]) query.getSingleResult();
-						group.setLocation(new Coordinate((Double) result[0],
-								(Double) result[1]));
-						group.setNrOfIssues(((Long)result[2]).intValue());
+				final Object[] result = (Object[]) query.getSingleResult();
+				group.setLocation(new Coordinate((Double) result[0],
+						(Double) result[1]));
+				group.setNrOfIssues(((Long) result[2]).intValue());
 
-						return null;
-					}
-				});
+				return null;
+			}
+		});
 		group.setAddress(address);
 		return group;
 	}
@@ -217,15 +216,23 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 	public List<Todo> getByLocation(final String countryCode,
 			final String state, final String town) {
 		final HashMap<String, String> params = new HashMap<String, String>();
-		params.put("state", state);
+		if (state != null) {
+			params.put("state", state);
+		}
 		params.put("country", countryCode);
-		params.put("town", state);
-		return getJpaTemplate().findByNamedParams(
-				"select todo from " + Todo.class.getName()
-						+ " todo where todo.addr.country = :country "
-						+ "and todo.addr.town = :town "
-						+ "and todo.addr.state = :state "
-						+ "order by todo.created desc ", params);
+		if (town != null) {
+			params.put("town", state);
+		}
+		return getJpaTemplate()
+				.findByNamedParams(
+						"select todo from "
+								+ Todo.class.getName()
+								+ " todo where todo.addr.country = :country "
+								+ (town == null ? ""
+										: "and todo.addr.town = :town ")
+								+ (state == null ? ""
+										: "and todo.addr.state = :state ")
+								+ "order by todo.created desc ", params);
 	}
 
 	static double min(final double a, final double b) {
