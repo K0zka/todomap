@@ -12,19 +12,70 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.todomap.geocoder.Address;
 import org.todomap.o29.beans.Coordinate;
 import org.todomap.o29.beans.Todo;
-
 
 @Path("/todos/")
 @Produces("application/json")
 public interface TodoService {
 
+	@XmlRootElement
+	public abstract class Flag {
+
+		Coordinate location;
+
+		@XmlElement(name = "location")
+		public Coordinate getLocation() {
+			return location;
+		}
+
+		public void setLocation(Coordinate location) {
+			this.location = location;
+		}
+
+	}
+
+	@XmlRootElement(name = "group-sum")
+	public class TodoGroup extends Flag {
+		String name;
+
+		int nrOfIssues;
+
+		Address address;
+
+		@XmlElement(name = "name")
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		@XmlElement(name = "nrOfIssues")
+		public int getNrOfIssues() {
+			return nrOfIssues;
+		}
+
+		public void setNrOfIssues(int nrOfIssues) {
+			this.nrOfIssues = nrOfIssues;
+		}
+
+		@XmlElement(name = "address")
+		public Address getAddress() {
+			return address;
+		}
+
+		public void setAddress(Address address) {
+			this.address = address;
+		}
+	}
+
 	@XmlRootElement(name = "todo-sum")
-	public class TodoSummary {
+	public class TodoSummary extends Flag {
 		long id;
 		String shortDescr;
-		Coordinate location;
 
 		@XmlElement(name = "id")
 		public long getId() {
@@ -43,15 +94,6 @@ public interface TodoService {
 		public void setShortDescr(String shortDescr) {
 			this.shortDescr = shortDescr;
 		}
-
-		@XmlElement(name = "location")
-		public Coordinate getLocation() {
-			return location;
-		}
-
-		public void setLocation(Coordinate location) {
-			this.location = location;
-		}
 	}
 
 	@GET
@@ -68,6 +110,14 @@ public interface TodoService {
 			@PathParam("ney") double ney, @PathParam("swx") double swx,
 			@PathParam("swy") double swy);
 
+	@GET
+	@Path("/area/{level}/{nex},{ney},{swx},{swy}")
+	@XmlElementWrapper(name = "groups")
+	List<TodoGroup> getTodoGroupsFromArea(
+			@PathParam("level") final String level,
+			@PathParam("nex") double nex, @PathParam("ney") double ney,
+			@PathParam("swx") double swx, @PathParam("swy") double swy);
+
 	@POST
 	@Path("/new")
 	@Consumes("application/json")
@@ -79,7 +129,7 @@ public interface TodoService {
 	@Consumes("application/json")
 	@Produces("application/json")
 	Todo saveTodo(Todo todo);
-	
+
 	@GET
 	@Path("/all")
 	@XmlElementWrapper(name = "todos")
@@ -92,7 +142,7 @@ public interface TodoService {
 	@GET
 	@Path("/shortbyid/{id}")
 	Todo getShortTodoById(@PathParam("id") long id);
-	
+
 	@GET
 	@Path("/byloc/{countrycode}/{state}/{town}")
 	@XmlElementWrapper(name = "todos")

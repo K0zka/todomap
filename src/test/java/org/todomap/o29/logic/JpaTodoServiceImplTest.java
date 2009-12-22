@@ -9,9 +9,11 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
+import org.todomap.geocoder.Address;
 import org.todomap.o29.beans.Coordinate;
 import org.todomap.o29.beans.Todo;
 import org.todomap.o29.logic.JpaTodoServiceImpl;
+import org.todomap.o29.logic.TodoService.TodoGroup;
 import org.unitils.UnitilsJUnit4;
 import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.spring.annotation.SpringApplicationContext;
@@ -68,4 +70,48 @@ public class JpaTodoServiceImplTest extends UnitilsJUnit4 {
 		});
 	}
 	
+	@Test
+	public void testGetTodoGroupsFromArea() {
+		new TransactionTemplate(transactionManager).execute(new TransactionCallback() {
+			
+			@Override
+			public Object doInTransaction(TransactionStatus status) {
+				check(todoService.getTodoGroupsFromArea("country",0, 0, 100, 100));
+				check(todoService.getTodoGroupsFromArea("state",0, 0, 100, 100));
+				return null;
+			}
+			
+			public void check(List<TodoGroup> groups) {
+				Assert.assertNotNull(groups);
+				for(TodoGroup group : groups) {
+					Assert.assertNotNull(group.getAddress());
+					Assert.assertTrue(group.getNrOfIssues() > 0);
+				}
+			}
+			
+		});
+		
+	}
+
+	@Test
+	public void testGetTodoGroup() {
+		new TransactionTemplate(transactionManager).execute(new TransactionCallback() {
+			
+			@Override
+			public Object doInTransaction(TransactionStatus status) {
+				final Address address = new Address();
+				address.setCountry("HU");
+				address.setState("Budapest");
+				address.setTown("Budapest");
+				((JpaTodoServiceImpl)todoService).getGroupByAddress(address);
+				address.setTown(null);
+				((JpaTodoServiceImpl)todoService).getGroupByAddress(address);
+				address.setState(null);
+				((JpaTodoServiceImpl)todoService).getGroupByAddress(address);
+				return null;
+			}
+		});
+		
+	}
+
 }
