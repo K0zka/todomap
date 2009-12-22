@@ -306,7 +306,7 @@ if(request.getParameter("lat") == null) {
 					    			+ '<div style="overflow: hidden; margin: 10px; text-align: justify; font-size: 12px; width: 160px; height: 50px;">'
 					    			+ 'Open issues: '+  val['nrOfIssues']
 						    		+ '</div>'
-					    		    + '<img src="img/feed32.png" style="position: absolute; top: 0px; right: 0px; cursor: pointer;" onclick="window.open(\''+getRssUrlForAddr(val['address'])+'\', \'new\')"/>'
+					    		    + '<a style="color: #FFFFFF;" href="'+getRssUrlForAddr(val['address'])+'" target="_new"><img src="img/feed32.png" style="position: absolute; top: 0px; right: 0px; cursor: pointer;"/>'
 //					    		    + '<img src="img/search32.png" style="position: absolute; top: 32px; right: 0px; cursor: pointer; onclick="map.panTo(new google.maps.LatLng('+1+','+1+'))"/>'
 					    			+ '</div>'
 					        });
