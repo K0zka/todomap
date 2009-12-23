@@ -317,7 +317,11 @@ function saveData() {
 		</span>
 		<div id="comments" class="comments">
 			<% for(Comment comment : todo.getComments()) { %>
-				<span id="comment-<%= comment.getId() %>" class="comment"><%= comment.getText() %></span>
+				<span id="comment-<%= comment.getId() %>" class="comment"><%= comment.getText() %>
+				<div style="color: grey; font-size: 0.8em; text-align: right; font-family: monospace;">
+					<%= comment.getCreator().getDisplayName() %> <span id="authorId" class="authorId">[<%= comment.getCreator().getId() %>]</span>
+				</div>
+				</span>
 			<% } %>
 		</div>
 	</div>
