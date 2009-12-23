@@ -158,7 +158,7 @@ function updateAttachments(file, response) {
 			var html = ''
 			$('#attachments').empty();
 			$.each(attachments['atchmnt'], function(i, val) {
-				html = html + '<div id="attachment-'+val['id']+'" class="attachment">'
+				html = html + '<div id="attachment-'+val['id']+'" class="attachment" onclick="downloadAttachment('+val['id']+')">'
 					+ '<img alt="'+ val['id'] +'" src="thumbnail/'+val['id']+'"/>'
 					+ '<span>'+val['filename']+'</span>'
 					+ '</div>'
@@ -294,10 +294,8 @@ function saveData() {
 		<span id="attachments" class="attachments">
 			<% for(Attachment attachment : todo.getAttachments()) { %>
 				<div id="attachment-<%= attachment.getId() %>" class="attachment" onclick="downloadAttachment(<%= attachment.getId() %>)">
-					<a href="#attchment-window-<%= attachment.getId() %>">
-						<img alt="<%= attachment.getFileName() %>" src="thumbnail/<%=attachment.getId() %>"/>
-						<span><%=attachment.getFileName() %></span>
-					</a>
+					<img alt="<%= attachment.getFileName() %>" src="thumbnail/<%=attachment.getId() %>"/>
+					<span><%=attachment.getFileName() %></span>
 				</div>
 			<% } %>
 		</span>
