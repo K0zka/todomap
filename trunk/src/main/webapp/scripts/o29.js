@@ -132,3 +132,11 @@ function unBookmarkItem(itemId) {
 		url:	'services/bookmarks/'+itemId
 	});
 }
+
+function increaseCounter(name) {
+	$('#'+name).text(eval($('#'+name).text()+ '+ 1'));
+}
+
+function setCounter(name, value) {
+	$('#'+name).text(value);
+}

@@ -164,6 +164,7 @@ function updateAttachments(file, response) {
 					+ '</div>'
 			});
 			$('#attachments').html(html);
+			increaseCounter('nrOfAttachments');
 		});
 }
 
@@ -193,7 +194,7 @@ function submitComment() {
 		contentType : 'application/json',
 		dataType : 'json'
 	});
-
+	increaseCounter('nrOfComments');
 }
 
 function refreshComments() {
@@ -280,7 +281,7 @@ function saveData() {
 			<button id="saveButton" onclick="saveData()">save</button>
 		</span>
 	</div>
-	<h3><a href="#">Attachments (<%= todo.getAttachments().size() %>)</a></h3>
+	<h3><a href="#">Attachments <span id="nrOfAttachments" class="counter"><%= todo.getAttachments().size() %></span></a></h3>
 	<div>
 	
 		<span class="authOnly">
@@ -300,7 +301,7 @@ function saveData() {
 			<% } %>
 		</span>
 	</div>
-	<h3><a href="#">Comments (<%= todo.getComments().size() %>)</a></h3>
+	<h3><a href="#">Comments <span id="nrOfComments" class="counter"><%= todo.getComments().size() %></span></a></h3>
 	<div>
 		<div id="newComment" style="">
 			<textarea id="commentEditor" class="todoDescription"></textarea> <br/>
