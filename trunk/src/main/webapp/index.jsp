@@ -167,20 +167,21 @@ if(request.getParameter("lat") == null) {
         	modal: true,
             autoOpen : false,
             show: 'slide',
-            width: 600,
-            height: 600,
+            width: 650,
+            height: 400,
             position: 'top'
             });
         $("#linksWindow").dialog({
             autoOpen : false
             });
         $('#wheretogoWindow').dialog({
-        	autoOpen : false
+        	autoOpen : false,
+        	width: 400,
             });
         $('#userDetailsWindow').dialog({
         	autoOpen : false,
-            width: 400,
-            height: 400
+            width: 500,
+            height: 450
             });
         $('#loginTabs').tabs();
 
@@ -599,46 +600,36 @@ if(request.getParameter("lat") == null) {
 			</div>
 			<div>
 			    <label for="j_username">Your <a id="openIdLink" href="https://openid.org/home">OpenID</a> Identity:</label> 
-			    <input id="openidUrl" type='text' name='j_username' value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>'/>
+			    <input id="openidUrl" type='text' name='j_username' value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>'/><br/>
 			</div>
 			<div>
 			    <button onclick="document.loginForm.submit()">Log in</button>
 		    </div>
 		</div>
 		<div id="logintab-google">
-			<div>
-				<p><img src="img/google-logo.png" style="float: right;"/> Please click on the button below to log in with your google account!
-				</p>
-			</div>
-			<div>
-				<button id="googleLoginButton" onclick="$('#openidUrl').val('https://www.google.com/accounts/o8/id'); document.loginForm.submit()">Log in</button>
-			</div>
+			<p>
+				<img src="img/google-logo.png" style="float: right;"/> 
+				<span>Please click on the button below to log in with your google account!</span>
+			</p>
+			<button id="googleLoginButton" onclick="$('#openidUrl').val('https://www.google.com/accounts/o8/id'); document.loginForm.submit()">Log in</button>
 		</div>
 		<div id="logintab-yahooid">
-			<div>
+			<label for="yahooIdInput">
 				Enter your Yahoo! ID
-			</div>
-			<div>
-				<input 
-					id="yahooIdInput" 
-					onkeyup="$('#openidUrl').val('https://me.yahoo.com/'+$('#yahooIdInput').val())"/>
-			</div>
-			<div>
-			    <button onclick="document.loginForm.submit()">Log in</button>
-		    </div>
+			</label>
+			<input 
+				id="yahooIdInput" 
+				onkeyup="$('#openidUrl').val('https://me.yahoo.com/'+$('#yahooIdInput').val())"/><br/>
+		    <button onclick="document.loginForm.submit()">Log in</button>
 		</div>
 		<div id="logintab-bloggercom">
-			<div>
+			<label for="bloggerInput">
 				Enter your Blogger blog URL
-			</div>
-			<div >
-				<input 
-					id="bloggerInput" 
-					onkeyup="$('#openidUrl').val($('#bloggerInput').val())"/>
-			</div>
-			<div>
-			    <button onclick="document.loginForm.submit()">Log in</button>
-		    </div>
+			</label>
+			<input 
+				id="bloggerInput" 
+				onkeyup="$('#openidUrl').val($('#bloggerInput').val())"/><br/>
+		    <button onclick="document.loginForm.submit()">Log in</button>
 		</div>
 	</div>
 	
@@ -684,13 +675,11 @@ if(request.getParameter("lat") == null) {
 <div id="wheretogoWindow" title="Where do you want to go?">
 	<div>
 		<!-- GeoIP is racism. -->
-		<div style="width: 100%">
 		<label for="wheretogoLocation">Location:</label>
-		<input id="wheretogoLocation" onchange="gotoLocation()"/>
+		<input id="wheretogoLocation" onchange="gotoLocation()"/><br/>
 		<button id="wheretogoButton" onclick="gotoLocation()">Go!</button>
 		<button id="nogoButton" onclick="$('#wheretogoWindow').dialog('close')">I like it here</button>
 		<span id="wheretogoErrors"></span>
-		</div>
 	</div>
 </div>
 
@@ -703,27 +692,20 @@ if(request.getParameter("lat") == null) {
 	</script>
 	<div id="userDetailsAccordion">
 		<h3><a href="#userDetails">Your data</a></h3>
-		<div>
-			<div>
+		<span>
 			<label for="userDetailsDisplayName">Display name</label>
-			<input id="userDetailsDisplayName"/>
-			</div>
-			<div>
+			<input id="userDetailsDisplayName"/><br/>
 			<label for="userDetailsEmail">Email address (never displayed)</label>
-			<input id="userDetailsEmail"/>
-			</div>
-		</div>
+			<input id="userDetailsEmail"/><br/>
+		</span>
 		<h3><a href="#userDetails">Your home location</a></h3>
-		<div>
-			<div>
-			<label for="userDetailsEmail">Home location</label>
-			<input id="userDetailsHomeLocationLat"/>,<input id="userDetailsHomeLocationLng"/>
+		<span>
+			<label for="userDetailsHomeLocationLat">Latitude</label>
+			<input id="userDetailsHomeLocationLat"/><br>
+			<label for="userDetailsHomeLocationLng">Longitude</label>
+			<input id="userDetailsHomeLocationLng"/><br/>
 			<button id="userDetailsUseCurrentLocation" onclick="updateLocation()">Use current</button>
-			</div>
-			<div>
-				
-			</div>
-		</div>
+		</span>
 	</div>
 	<button id="saveUserDetailsButton" onclick="saveUserDetails()">Save</button>
 </div>
