@@ -158,7 +158,7 @@ function updateAttachments(file, response) {
 			var html = ''
 			$('#attachments').empty();
 			$.each(attachments['atchmnt'], function(i, val) {
-				html = html + '<div id="attachment-'+val['id']+'">'
+				html = html + '<div id="attachment-'+val['id']+'" class="attachment">'
 					+ '<img alt="'+ val['id'] +'" src="thumbnail/'+val['id']+'"/>'
 					+ '<span>'+val['filename']+'</span>'
 					+ '</div>'
@@ -283,23 +283,23 @@ function saveData() {
 	<h3><a href="#">Attachments (<%= todo.getAttachments().size() %>)</a></h3>
 	<div>
 	
-		<span id="attachments">
-			<% for(Attachment attachment : todo.getAttachments()) { %>
-				<div id="attachment-<%= attachment.getId() %>" onclick="downloadAttachment(<%= attachment.getId() %>)">
-					<a href="#attchment-window-<%= attachment.getId() %>">
-						<img alt="<%= attachment.getFileName() %>" src="thumbnail/<%=attachment.getId() %>"/>
-						<span><%=attachment.getFileName() %></span>
-					</a>
-				</div>
-			<% } %>
-		</span>
-	
 		<span class="authOnly">
 			<button id="uploadButton">upload</button>
 		</span>
 		<span class="noAuthOnly">
 			<h4>You are not signed in</h4>
 			<p>Please sign in to attach files</p>
+		</span>
+	
+		<span id="attachments" class="attachments">
+			<% for(Attachment attachment : todo.getAttachments()) { %>
+				<div id="attachment-<%= attachment.getId() %>" class="attachment" onclick="downloadAttachment(<%= attachment.getId() %>)">
+					<a href="#attchment-window-<%= attachment.getId() %>">
+						<img alt="<%= attachment.getFileName() %>" src="thumbnail/<%=attachment.getId() %>"/>
+						<span><%=attachment.getFileName() %></span>
+					</a>
+				</div>
+			<% } %>
 		</span>
 	</div>
 	<h3><a href="#">Comments (<%= todo.getComments().size() %>)</a></h3>
