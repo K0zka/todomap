@@ -112,6 +112,37 @@ button:hover {
 	font-style: normal;
 }
 
+.attachments {
+	width: 100%;
+	float: left;
+}
+
+.attachment {
+	width: 100px !important;
+	height: 100px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	padding:1px 1px;
+	text-decoration:none;
+	border: solid 2px #0063DC;
+	margin: 2px;
+	float: left;
+	font-family: sans-serif;
+	font-variant: normal;
+	font-style: normal;
+	font-size: 0.5em;
+	overflow: hidden;
+}
+
+.attachment img {
+	width: 100%;
+}
+
+.attachment a {
+	text-decoration: none;
+}
+
 .sidebarControls button {
 	width: 100%;
 	overflow: hidden;
