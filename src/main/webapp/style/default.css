@@ -27,6 +27,26 @@ th {
 	
 }
 
+input {
+	display: block;
+	width: 200px;
+	float: left;
+	margin-bottom: 10px;
+}
+
+label {
+	display: block;
+	text-align: right;
+	float: left;
+	width: 150px;
+	padding-right: 10px;
+	font-size: 0.8em;
+}
+
+br {
+	clear: left;
+}
+
 td {
 	background-image: url("../img/camera.png");
 	background-position: left;
