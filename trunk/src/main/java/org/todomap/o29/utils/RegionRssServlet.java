@@ -7,6 +7,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.httpclient.URIException;
+import org.apache.commons.httpclient.util.URIUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.todomap.o29.beans.Todo;
 
 
@@ -14,6 +18,8 @@ public class RegionRssServlet extends SpringServlet {
 
 	private static final long serialVersionUID = 212173477860116511L;
 
+	private final static Logger logger = LoggerFactory.getLogger(RegionRssServlet.class);
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -32,9 +38,14 @@ public class RegionRssServlet extends SpringServlet {
 				resp);
 	}
 
-	static String getParam(String[] split, int index) {
+	static String getParam(final String[] split, final int index) {
 		if (split.length > index) {
-			return split[index];
+			try {
+				return URIUtil.decode(split[index]);
+			} catch (final URIException e) {
+				logger.error("Could not decode:"+split[index], e);
+				return null;
+			}
 		} else {
 			return null;
 		}
