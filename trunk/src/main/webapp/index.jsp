@@ -658,15 +658,11 @@ if(request.getParameter("lat") == null) {
 
 <div id="newTodo" title="New Todo">
 	<form>
-		<div>
-			<label for="newTodoShortDescr">Short description</label> <input type="text" name="newTodoShortDescr" id="newTodoShortDescr"/>
-			</div>
-		<div>
+			<label for="newTodoShortDescr">Short description</label> <input type="text" name="newTodoShortDescr" id="newTodoShortDescr"/><br/>
 			<label for="newTodoDescription">Details</label>
-			<textarea id="newTodoDescription" name="newTodoDesription" style="width: 100%; height: 50%"></textarea>
-		</div>
-		<input type="hidden" id="newTodoLat" name="newTodoLat"/>
-		<input type="hidden" id="newTodoLng" name="newTodoLng"/>
+			<textarea id="newTodoDescription" name="newTodoDesription" style="width: 100%; height: 50%"></textarea><br/>
+			<label for="newTodoLat">Latitude</label><input id="newTodoLat" name="newTodoLat"/><br/>
+			<label for="newTodoLng">Longitude</label><input id="newTodoLng" name="newTodoLng"/><br/>
 	</form>
 	<button id="submitNewTodoButton" onclick="submitNewTodo()">save</button>
 	<button id="cancelNewTodoButton" onclick="$('#newTodo').dialog('close')">close</button>
