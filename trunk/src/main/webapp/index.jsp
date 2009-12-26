@@ -154,7 +154,9 @@ if(request.getParameter("lat") == null) {
            });
         $("#newTodo").dialog({
             modal: true,
-            autoOpen : false
+            autoOpen : false,
+            width: 600,
+            height: 400
            });
         $("#productInfoWindow").dialog({
             modal: true,
