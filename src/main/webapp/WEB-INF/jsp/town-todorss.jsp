@@ -18,7 +18,7 @@ final String chanelLink = (String)request.getAttribute("chanelLink");
 <%@page import="org.todomap.o29.utils.URLUtil"%>
 <%@page import="org.todomap.o29.utils.HtmlUtil"%><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:georss="http://www.georss.org/georss">
   <channel>
-    <title>Todomap RSS feed for <%= town %> </title>
+    <title>Todomap RSS feed for <%= town == null ? (state == null ? countryCode: state) : town  %> </title>
     <description><%= town %> </description>
     <lastBuildDate><%=sdf.format(new Date())%></lastBuildDate>
     <generator>Todomap <%= VersionUtil.getVersionNumber() %></generator>
