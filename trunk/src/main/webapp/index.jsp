@@ -45,7 +45,7 @@ final Configuration configuration = (Configuration)WebApplicationContextUtils
 </script>
 <script type="text/javascript" src="scripts/jquery.dimensions.min.js">
 </script>
-<script type="text/javascript" src="scripts/jquery.tooltip.min.js">
+<script type="text/javascript" src="scripts/jquery.tooltip.js">
 </script>
 <script type="text/javascript"
 	src="http://maps.google.com/maps/api/js?sensor=false">
@@ -178,7 +178,7 @@ if(request.getParameter("lat") == null) {
             });
         $('#wheretogoWindow').dialog({
         	autoOpen : false,
-        	width: 400,
+        	width: 400
             });
         $('#userDetailsWindow').dialog({
         	autoOpen : false,
@@ -516,21 +516,21 @@ if(request.getParameter("lat") == null) {
 			<h3><a href="#">Tools</a></h3>
 			<div class="sidebarControls">
 				<span class="authOnly">
-				<button id="homeButton"  onclick="goHome()"> Go Home </button>
-				<button id="logoutButton"  onclick="logOut()"> Log out </button>
-				<button id="yourDetailsButton"  onclick="$('#userDetailsWindow').dialog('open'); getUserDetails();"> Your details </button>
+				<button id="homeButton"  onclick="goHome()"> Go Home </button><br/>
+				<button id="logoutButton"  onclick="logOut()"> Log out </button><br/>
+				<button id="yourDetailsButton"  onclick="$('#userDetailsWindow').dialog('open'); getUserDetails();"> Your details </button><br/>
 				</span>
 				<span class="noAuthOnly">
-				<button id="loginButton" onclick="$(loginWindow).dialog('open')"> Log in / Register </button>
+				<button id="loginButton" onclick="$(loginWindow).dialog('open')"> Log in / Register </button><br/>
 				</span>
-				<button id="embedButton" onclick="$(linksWindow).dialog('open')"> Link to this map </button>
-				<button id="gotoButton" onclick="$('#wheretogoWindow').dialog('open')">Enter address</button>
+				<button id="embedButton" onclick="$(linksWindow).dialog('open')"> Link to this map </button><br/>
+				<button id="gotoButton" onclick="$('#wheretogoWindow').dialog('open')">Enter address</button><br/>
 			</div>
 			<h3><a href="#">Info</a></h3>
 			<div class="sidebarControls">
-				<button id="infoButton" onclick="$(productInfoWindow).dialog('open')"> About todomap </button>
-				<button id="statisticsButton"> Statistics </button>
-				<button id="helpButton" onclick="$(helpWindow).dialog('open')"> Help </button>
+				<button id="infoButton" onclick="$(productInfoWindow).dialog('open')"> About todomap </button><br/>
+				<button id="statisticsButton"> Statistics </button><br/>
+				<button id="helpButton" onclick="$(helpWindow).dialog('open')"> Help </button><br/>
 			</div>
 			<h3><a href="#">Search</a></h3>
 			<div class="sidebarControls">
