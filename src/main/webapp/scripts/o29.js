@@ -140,3 +140,11 @@ function increaseCounter(name) {
 function setCounter(name, value) {
 	$('#'+name).text(value);
 }
+
+function deleteResource(id, callback) {
+	$.ajax({
+		type: 	'POST',
+		url: 	'services/base/remove/'+id,
+		success:callback
+	});
+}
