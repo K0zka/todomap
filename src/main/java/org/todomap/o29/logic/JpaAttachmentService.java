@@ -17,23 +17,23 @@ import javax.imageio.ImageIO;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
-import org.springframework.security.Authentication;
-import org.springframework.security.context.SecurityContextHolder;
 import org.todomap.o29.beans.Attachment;
+import org.todomap.o29.beans.User;
 
 public class JpaAttachmentService extends JpaDaoSupport implements
 		AttachmentService {
 
 	private static final String ThumbnailPrefix = "thmb-";
 
-	private final static Logger logger = Logger.getLogger(JpaAttachmentService.class);
+	private final static Logger logger = Logger
+			.getLogger(JpaAttachmentService.class);
 
 	String fileStorageDir = "attachments";
 
 	List<String> acceptedMime = new ArrayList<String>();
-	
+
 	UserService userService;
-	
+
 	public UserService getUserService() {
 		return userService;
 	}
@@ -51,9 +51,11 @@ public class JpaAttachmentService extends JpaDaoSupport implements
 	}
 
 	@Override
-	public void addAttachment(Attachment attachment, InputStream data) throws IOException {
-		if(!acceptedMime.contains(attachment.getMime())){
-			logger.info("Attachment was ignored:"+attachment.getMime()+" "+attachment.getFileName());
+	public void addAttachment(Attachment attachment, InputStream data)
+			throws IOException {
+		if (!acceptedMime.contains(attachment.getMime())) {
+			logger.info("Attachment was ignored:" + attachment.getMime() + " "
+					+ attachment.getFileName());
 			return;
 		}
 		attachment.setCreator(userService.getCurrentUser());
@@ -61,25 +63,26 @@ public class JpaAttachmentService extends JpaDaoSupport implements
 		attachment.getId();
 		final File dataFile = getFile(attachment);
 		final FileOutputStream fileOutputStream = new FileOutputStream(dataFile);
-		File thumbnailFile = new File(
-				fileStorageDir, ThumbnailPrefix.concat(String.valueOf(attachment.getId())));
+		File thumbnailFile = getThumbnailFile(attachment);
 		try {
 			fileOutputStream.flush();
 			IOUtils.copy(data, fileOutputStream);
 		} finally {
 			IOUtils.closeQuietly(fileOutputStream);
 		}
-		//generate thumbnail
+		// generate thumbnail
 		final BufferedImage image = ImageIO.read(getFile(attachment));
-		final Image scaledInstance = image.getScaledInstance(100, 80, Image.SCALE_FAST);
-		BufferedImage newImage = new BufferedImage(100, 80, BufferedImage.TYPE_INT_RGB);
+		final Image scaledInstance = image.getScaledInstance(100, 80,
+				Image.SCALE_FAST);
+		BufferedImage newImage = new BufferedImage(100, 80,
+				BufferedImage.TYPE_INT_RGB);
 		newImage.getGraphics().drawImage(scaledInstance, 0, 0, null);
 		ImageIO.write(newImage, "jpg", thumbnailFile);
 	}
 
 	public void init() {
 		final File storageDir = new File(fileStorageDir);
-		if(!storageDir.exists()) {
+		if (!storageDir.exists()) {
 			storageDir.mkdirs();
 		}
 	}
@@ -97,14 +100,19 @@ public class JpaAttachmentService extends JpaDaoSupport implements
 		final HashMap<String, Long> params = new HashMap<String, Long>();
 		params.put("id", id);
 		@SuppressWarnings("unchecked")
-		final List<Attachment> attachments = getJpaTemplate().findByNamedParams("select OBJECT(attachment) from "+Attachment.class.getName() + " attachment where attachedTo.id = :id", params);
+		final List<Attachment> attachments = getJpaTemplate()
+				.findByNamedParams(
+						"select OBJECT(attachment) from "
+								+ Attachment.class.getName()
+								+ " attachment where attachedTo.id = :id",
+						params);
 		return attachments;
 	}
 
 	@Override
 	public List<ShortAttachment> getShortAttachments(final long id) {
 		ArrayList<ShortAttachment> ret = new ArrayList<ShortAttachment>();
-		for(Attachment attachment : getAttachments(id)) {
+		for (Attachment attachment : getAttachments(id)) {
 			ret.add(new ShortAttachment(attachment));
 		}
 		return ret;
@@ -116,14 +124,21 @@ public class JpaAttachmentService extends JpaDaoSupport implements
 	}
 
 	@Override
-	public void deleteAttachment(long id) {
-		final Attachment attachment = getJpaTemplate().find(Attachment.class, id);
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if(attachment.getCreator().getOpenIdUrl().equals(authentication.getName())) {
-			//remove from db
+	public Attachment deleteAttachment(long id) {
+		final User currentUser = userService.getCurrentUser();
+		final Attachment attachment = getJpaTemplate().find(Attachment.class,
+				id);
+		if (currentUser != null
+				&& attachment != null
+				&& currentUser.getOpenIdUrl().equals(
+						attachment.getCreator().getOpenIdUrl())) {
+			final File data = getFile(attachment);
+			final File thumbnailData = getThumbnailFile(attachment);
 			getJpaTemplate().remove(attachment);
-			
+			data.delete();
+			thumbnailData.delete();
 		}
+		return null;
 	}
 
 	@Override
@@ -136,12 +151,19 @@ public class JpaAttachmentService extends JpaDaoSupport implements
 	}
 
 	@Override
-	public InputStream getThumbnail(final Attachment attachment) throws IOException {
-		return new FileInputStream(new File(fileStorageDir, ThumbnailPrefix.concat(String.valueOf(attachment.getId()))));
+	public InputStream getThumbnail(final Attachment attachment)
+			throws IOException {
+		return new FileInputStream(getThumbnailFile(attachment));
+	}
+
+	private File getThumbnailFile(final Attachment attachment) {
+		return new File(fileStorageDir, ThumbnailPrefix
+				.concat(String.valueOf(attachment.getId())));
 	}
 
 	@Override
-	public OutputStream writeData(final Attachment attachment) throws IOException {
+	public OutputStream writeData(final Attachment attachment)
+			throws IOException {
 		return new FileOutputStream(getFile(attachment));
 	}
 
