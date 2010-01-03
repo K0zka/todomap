@@ -50,7 +50,7 @@ final Locale locale = (Locale)request.getAttribute("locale");
 </script>
 <script type="text/javascript" src="scripts/jquery.dimensions.min.js">
 </script>
-<script type="text/javascript" src="scripts/jquery.tooltip.js">
+<script type="text/javascript" src="scripts/jquery.tooltip.min.js">
 </script>
 <script type="text/javascript"
 	src="http://maps.google.com/maps/api/js?sensor=false">
