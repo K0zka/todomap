@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -62,10 +61,10 @@ public interface AttachmentService {
 	@GET
 	@Path("/{id}")
 	Attachment getAttachment(@PathParam("id") long id);
-	
-	@DELETE
-	@Path("delete/{id}")
-	void deleteAttachment(@PathParam("id") long id);
+
+	@POST
+	@Path("/delete/{id}")
+	Attachment deleteAttachment(@PathParam("id") long id);
 	
 	public InputStream getData(final Attachment attachment) throws IOException;
 	public InputStream getThumbnail(final Attachment attachment) throws IOException;
