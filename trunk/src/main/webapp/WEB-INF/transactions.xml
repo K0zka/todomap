@@ -22,6 +22,8 @@
 	
 		<aop:pointcut id="geoipMethods"
 			expression="execution(* org.todomap.minigeoip.GeoipResolver.*(..))" />
+		<aop:pointcut id="baseMethods"
+			expression="execution(* org.todomap.o29.logic.BaseService.*(..))" />
 		<aop:pointcut id="todoServiceMethods"
 			expression="execution(* org.todomap.o29.logic.TodoService.*(..))" />
 		<aop:pointcut id="userServiceMethods"
