@@ -1,22 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="i18n" %>
 
-<%@ page import="org.springframework.security.ui.AbstractProcessingFilter" %>
-<%@ page import="org.springframework.security.ui.webapp.AuthenticationProcessingFilter" %>
-<%@ page import="org.springframework.security.AuthenticationException" %>
+<%@page import="java.util.Locale"%><html>
+
+<%@page import="org.springframework.security.ui.AbstractProcessingFilter" %>
+<%@page import="org.springframework.security.ui.webapp.AuthenticationProcessingFilter" %>
+<%@page import="org.springframework.security.AuthenticationException" %>
+<%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 
 <%@page import="org.todomap.o29.logic.Configuration"%>
 <%@page import="org.todomap.o29.utils.VersionUtil"%>
+<%@page import="org.todomap.o29.utils.URLUtil"%>
 <%
 final Configuration configuration = (Configuration)WebApplicationContextUtils
 	.getRequiredWebApplicationContext(config.getServletContext()).getBean("config");
-
+final Locale locale = (Locale)request.getAttribute("locale");
 %>
 
-<%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
-<%@page import="org.todomap.o29.utils.URLUtil"%><html>
+<i18n:setLocale value="<%= locale %>"/>
+<i18n:setBundle basename="Messages"/>
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -150,20 +155,23 @@ if(request.getParameter("lat") == null) {
            });
         $("#userDetailsAccordion").accordion({});
         $("#helpWindow").dialog({
-            autoOpen : false
+            autoOpen : false,
+            title	:	'<i18n:message key="window.help"/>'
            });
         $("#newTodo").dialog({
             modal: true,
             autoOpen : false,
             width: 600,
-            height: 400
+            height: 400,
+            title: '<i18n:message key="window.newTodo.title"/>'
            });
         $("#productInfoWindow").dialog({
             modal: true,
             width: 600,
             height: 400,
             show: 'slide',
-            autoOpen : false
+            autoOpen : false,
+            title: '<i18n:message key="window.productInfoWindow.title">About todomap</i18n:message>'
            });
         $("#loginWindow").dialog({
         	modal: true,
@@ -171,19 +179,23 @@ if(request.getParameter("lat") == null) {
             show: 'slide',
             width: 650,
             height: 400,
-            position: 'top'
+            position: 'top',
+            title: '<i18n:message key="window.login.title"/>'               
             });
         $("#linksWindow").dialog({
-            autoOpen : false
+            autoOpen : false,
+            title	: '<i18n:message key="window.links.title"/>'
             });
         $('#wheretogoWindow').dialog({
         	autoOpen : false,
-        	width: 400
+        	width: 400,
+        	title	: '<i18n:message key="window.wheretogoWindow.title"/>'
             });
         $('#userDetailsWindow').dialog({
         	autoOpen : false,
             width: 500,
-            height: 450
+            height: 450,
+            title:	'<i18n:message key="window.userDetailsWindow.title"/>'
             });
         $('#loginTabs').tabs();
 
@@ -513,43 +525,45 @@ if(request.getParameter("lat") == null) {
 <div style="width: 100%; height: 100%;">
 	<span id="sidebar" style="width: 20%; height: 100%; position: absolute; left: 0px;">
 		<div id="toolsAccordion">
-			<h3><a href="#">Tools</a></h3>
+			<h3><a href="#"> <i18n:message key="sidebar.accordion.tools"> Tools </i18n:message></a></h3>
 			<div class="sidebarControls">
 				<span class="authOnly">
-				<button id="homeButton"  onclick="goHome()"> Go Home </button><br/>
-				<button id="logoutButton"  onclick="logOut()"> Log out </button><br/>
-				<button id="yourDetailsButton"  onclick="$('#userDetailsWindow').dialog('open'); getUserDetails();"> Your details </button><br/>
+				<button id="homeButton"  onclick="goHome()"> <i18n:message key="sidebar.button.gohome"> Go Home </i18n:message> </button><br/>
+				<button id="logoutButton"  onclick="logOut()"> <i18n:message key="sidebar.button.logout"> Log out </i18n:message> </button><br/>
+				<button id="yourDetailsButton"  onclick="$('#userDetailsWindow').dialog('open'); getUserDetails();"> <i18n:message key="sidebar.button.yourdetails"> Your details </i18n:message> </button><br/>
 				</span>
 				<span class="noAuthOnly">
-				<button id="loginButton" onclick="$(loginWindow).dialog('open')"> Log in / Register </button><br/>
+				<button id="loginButton" onclick="$(loginWindow).dialog('open')"> <i18n:message key="sidebar.button.login"> Log in / Register </i18n:message> </button><br/>
 				</span>
-				<button id="embedButton" onclick="$(linksWindow).dialog('open')"> Link to this map </button><br/>
-				<button id="gotoButton" onclick="$('#wheretogoWindow').dialog('open')">Enter address</button><br/>
+				<button id="embedButton" onclick="$(linksWindow).dialog('open')"> <i18n:message key="sidebar.button.links"> Link to this map </i18n:message> </button><br/>
+				<button id="gotoButton" onclick="$('#wheretogoWindow').dialog('open')"> <i18n:message key="sidebar.button.goto"> Enter address </i18n:message> </button><br/>
 			</div>
-			<h3><a href="#">Info</a></h3>
+			<h3><a href="#"><i18n:message key="sidebar.accordion.info">Info</i18n:message></a></h3>
 			<div class="sidebarControls">
-				<button id="infoButton" onclick="$(productInfoWindow).dialog('open')"> About todomap </button><br/>
-				<button id="statisticsButton"> Statistics </button><br/>
-				<button id="helpButton" onclick="$(helpWindow).dialog('open')"> Help </button><br/>
+				<button id="infoButton" onclick="$(productInfoWindow).dialog('open')"> <i18n:message key="sidebar.button.about">About todomap </i18n:message></button><br/>
+				<button id="statisticsButton"> <i18n:message key="sidebar.button.statistics">Statistics</i18n:message> </button><br/>
+				<button id="helpButton" onclick="$(helpWindow).dialog('open')"> <i18n:message key="sidebar.button.help">Help</i18n:message> </button><br/>
 			</div>
-			<h3><a href="#">Search</a></h3>
+			<h3><a href="#"><i18n:message key="sidebar.accordion.search">Search</i18n:message></a></h3>
 			<div class="sidebarControls">
 			</div>
-			<h3><a href="#">Bookmarks</a></h3>
+			<h3><a href="#"><i18n:message key="sidebar.accordion.bookmarks">Bookmarks</i18n:message></a></h3>
 			<div class="sidebarControls">
 			</div>
 		</div>
 		<div class="versionInfo">
 			<span>
 			<img alt="logo" src="img/todomap-logo.jpg" width="80%"><br/>
-			Version: <%= VersionUtil.getVersionNumber() %></span>
+			<i18n:message key="etc.version">Version</i18n:message>: <%= VersionUtil.getVersionNumber() %></span>
 		</div>
 		<div class="licenseInfo">
 			<a href="http://creativecommons.org/licenses/by/3.0/">
 				<img alt="creative commons logo" src="img/cc88x31.png"/>
 			</a>
+			<i18n:message key="etc.license">
 			The content of the site is published under creative commons license.<br/>
 			The map is copyrighted by <a href="http://www.google.com/">google<a/>.
+			</i18n:message>
 		</div>
 	</span>
 	<span style="width: 80%; height: 100%; position: absolute; right: 0px;">
@@ -558,20 +572,17 @@ if(request.getParameter("lat") == null) {
 </div>
 
 
-<div id="helpWindow" title="Help">
-	TODO.
-<!-- 
-	<iframe src="help.html" style="width: 100%; height: 100%"></iframe>
-	 -->
+<div id="helpWindow">
+	<i18n:message key="etc.underconstruction">TODO.</i18n:message>
 </div>
 
 <div id="linksWindow" title="Links to this map">
 	<div style="width: 100%" onclick="javascript:linkToThisMap.select()">
-		<label for="linkToThisPage" style="width: 40%">Link to this map</label>
+		<label for="linkToThisPage" style="width: 40%"><i18n:message key="window.links.link">Link to this map</i18n:message></label>
 		<input type="text" id="linkToThisMap" value="" style="width: 40%" />
 	</div>
 	<div style="width: 100%" onclick="javascript:rssLinkToThisMap.select()">
-		<label for="rssLinkToThisMap" style="width:40%" >RSS to this map</label>
+		<label for="rssLinkToThisMap" style="width:40%" ><i18n:message key="window.links.rss">RSS to this map</i18n:message></label>
 		<input type="text" id="rssLinkToThisMap" value="" style="width: 40%"/>
 	</div>
 </div>
@@ -601,87 +612,89 @@ if(request.getParameter("lat") == null) {
 				<img src="img/logo_openid.png"/>
 			</div>
 			<div>
-			    <label for="j_username">Your <a id="openIdLink" href="https://openid.org/home">OpenID</a> Identity:</label> 
+			    <label for="j_username"><i18n:message key="window.login.username"> Your <a id="openIdLink" href="https://openid.org/home">OpenID</a> Identity:</i18n:message></label> 
 			    <input id="openidUrl" type='text' name='j_username' value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>'/><br/>
 			</div>
 			<div>
-			    <button onclick="document.loginForm.submit()">Log in</button>
+			    <button onclick="document.loginForm.submit()"><i18n:message key="window.login.login">Log in</i18n:message></button>
 		    </div>
 		</div>
 		<div id="logintab-google">
 			<p>
 				<img src="img/google-logo.png" style="float: right;"/> 
-				<span>Please click on the button below to log in with your google account!</span>
+				<span><i18n:message key="window.login.googletext">Please click on the button below to log in with your google account!</i18n:message></span>
 			</p>
 			<button id="googleLoginButton" onclick="$('#openidUrl').val('https://www.google.com/accounts/o8/id'); document.loginForm.submit()">Log in</button>
 		</div>
 		<div id="logintab-yahooid">
 			<label for="yahooIdInput">
-				Enter your Yahoo! ID
+				<i18n:message key="window.login.yahooIdInput">Enter your Yahoo! ID</i18n:message>
 			</label>
 			<input 
 				id="yahooIdInput" 
 				onkeyup="$('#openidUrl').val('https://me.yahoo.com/'+$('#yahooIdInput').val())"/><br/>
-		    <button onclick="document.loginForm.submit()">Log in</button>
+		    <button onclick="document.loginForm.submit()"><i18n:message key="window.login.login">Log in</i18n:message></button>
 		</div>
 		<div id="logintab-bloggercom">
 			<label for="bloggerInput">
-				Enter your Blogger blog URL
+				<i18n:message key="window.login.bloggerInput">Enter your Blogger blog URL</i18n:message>
 			</label>
 			<input 
 				id="bloggerInput" 
 				onkeyup="$('#openidUrl').val($('#bloggerInput').val())"/><br/>
-		    <button onclick="document.loginForm.submit()">Log in</button>
+		    <button onclick="document.loginForm.submit()"><i18n:message key="window.login.login">Log in</i18n:message></button>
 		</div>
 	</div>
 	
 	</form>
 </div>
 
-<div id="productInfoWindow" title="About todomap">
+<div id="productInfoWindow">
 	<h2>
-	Todomap - development version
+	<i18n:message key="window.productInfoWindow.head">Todomap - development version</i18n:message>
 	</h2>
 	<p>
-	This site is running todomap version <%= VersionUtil.getVersionNumber() %>.
+	<i18n:message key="window.productInfoWindow.version">This site is running todomap version</i18n:message> <%= VersionUtil.getVersionNumber() %>
 	</p>
 	<p>
-	Please note that this is an <strong>early beta</strong> version of the application under active development since Q3 2009.
+	<i18n:message key="window.productInfoWindow.betanote"> Please note that this is an <strong>early beta</strong> version of the application under active development since Q3 2009.</i18n:message>
 	</p>
 	<p>
+	<i18n:message key="window.productInfoWindow.more">
 	To find out more about the software, please visit the project page at 
 	<a id="googleCodeLink" target="new" href="http://code.google.com/p/todomap/">google code</a>! Your contribution 
 	to todomap's success is highly appreciated!
+	</i18n:message>
 	</p>
 	<p>
 		<img alt="todomap logo" src="img/todomap-logo.jpg">
 	</p>
 </div>
 
-<div id="newTodo" title="New Todo">
+<div id="newTodo">
 	<form>
-			<label for="newTodoShortDescr">Short description</label> <input type="text" name="newTodoShortDescr" id="newTodoShortDescr"/><br/>
-			<label for="newTodoDescription">Details</label>
+			<label for="newTodoShortDescr"><i18n:message key="window.newTodo.newTodoShortDescr">Short description</i18n:message></label> <input type="text" name="newTodoShortDescr" id="newTodoShortDescr"/><br/>
+			<label for="newTodoDescription"><i18n:message key="window.newTodo.newTodoDescription">Details</i18n:message></label>
 			<textarea id="newTodoDescription" name="newTodoDesription" style="width: 100%; height: 50%"></textarea><br/>
-			<label for="newTodoLat">Latitude</label><input id="newTodoLat" name="newTodoLat"/><br/>
-			<label for="newTodoLng">Longitude</label><input id="newTodoLng" name="newTodoLng"/><br/>
+			<label for="newTodoLat"><i18n:message key="etc.latitude">Latitude</i18n:message></label><input id="newTodoLat" name="newTodoLat"/><br/>
+			<label for="newTodoLng"><i18n:message key="etc.longitude">Longitude</i18n:message></label><input id="newTodoLng" name="newTodoLng"/><br/>
 	</form>
-	<button id="submitNewTodoButton" onclick="submitNewTodo()">save</button>
-	<button id="cancelNewTodoButton" onclick="$('#newTodo').dialog('close')">close</button>
+	<button id="submitNewTodoButton" onclick="submitNewTodo()"> <i18n:message key="etc.save">save</i18n:message></button>
+	<button id="cancelNewTodoButton" onclick="$('#newTodo').dialog('close')"><i18n:message key="etc.close">close</i18n:message></button>
 </div>
 
-<div id="wheretogoWindow" title="Where do you want to go?">
+<div id="wheretogoWindow">
 	<div>
 		<!-- GeoIP is racism. -->
-		<label for="wheretogoLocation">Location:</label>
+		<label for="wheretogoLocation"><i18n:message key="etc.location">Location</i18n:message></label>
 		<input id="wheretogoLocation" onchange="gotoLocation()"/><br/>
-		<button id="wheretogoButton" onclick="gotoLocation()">Go!</button>
-		<button id="nogoButton" onclick="$('#wheretogoWindow').dialog('close')">I like it here</button>
+		<button id="wheretogoButton" onclick="gotoLocation()"><i18n:message key="etc.go">Go!</i18n:message></button>
+		<button id="nogoButton" onclick="$('#wheretogoWindow').dialog('close')"><i18n:message key="etc.nogo">I like it here</i18n:message></button>
 		<span id="wheretogoErrors"></span>
 	</div>
 </div>
 
-<div id="userDetailsWindow" title="Your details">
+<div id="userDetailsWindow">
 	<script type="text/javascript">
 	function updateLocation() {
 		$('#userDetailsHomeLocationLat').val(map.getCenter().lat());
@@ -689,67 +702,70 @@ if(request.getParameter("lat") == null) {
 	}
 	</script>
 	<div id="userDetailsAccordion">
-		<h3><a href="#userDetails">Your data</a></h3>
+		<h3><a href="#userDetails"> <i18n:message key="window.userDetailsWindow.userDetails"> Your data </i18n:message> </a></h3>
 		<span>
-			<label for="userDetailsDisplayName">Display name</label>
+			<label for="userDetailsDisplayName"><i18n:message key="window.userDetailsWindow.userDetailsDisplayName">Display name</i18n:message></label>
 			<input id="userDetailsDisplayName"/><br/>
-			<label for="userDetailsEmail">Email address (never displayed)</label>
+			<label for="userDetailsEmail"><i18n:message key="window.userDetailsWindow.userDetailsEmail">Email address (never displayed)</i18n:message></label>
 			<input id="userDetailsEmail"/><br/>
 		</span>
-		<h3><a href="#userDetails">Your home location</a></h3>
+		<h3><a href="#homeLocation"> <i18n:message key="window.userDetailsWindow.homeLocation"> Your home location </i18n:message></a></h3>
 		<span>
-			<label for="userDetailsHomeLocationLat">Latitude</label>
+			<label for="userDetailsHomeLocationLat"><i18n:message key="etc.latitude">Latitude</i18n:message></label>
 			<input id="userDetailsHomeLocationLat"/><br>
-			<label for="userDetailsHomeLocationLng">Longitude</label>
+			<label for="userDetailsHomeLocationLng"><i18n:message key="etc.longitude">Longitude</i18n:message></label>
 			<input id="userDetailsHomeLocationLng"/><br/>
-			<button id="userDetailsUseCurrentLocation" onclick="updateLocation()">Use current</button>
+			<button id="userDetailsUseCurrentLocation" onclick="updateLocation()">
+				<i18n:message key="window.userDetailsWindow.useCurrent">Use current</i18n:message>
+			</button>
 		</span>
 	</div>
-	<button id="saveUserDetailsButton" onclick="saveUserDetails()">Save</button>
+	<button id="saveUserDetailsButton" onclick="saveUserDetails()"><i18n:message key="etc.save">Save</i18n:message></button>
 </div>
 
 <!-- tooltips here -->
 <div id="tooltips" style="visibility: hidden; overflow: hidden; display: none;">
 	<div id="homeButton-tooltip">
-		<p><img src="img/gohome.png"/>Position the map to your home location</p>
+		<p><img src="img/gohome.png"/> <i18n:message key="tooltip.homeButton"> Position the map to your home location </i18n:message> </p>
 	</div>
 	<div id="loginButton-tooltip">
-		<p><img src="img/keys.png"/>Log in with your OpenID account.<br/>You can use your <strong>Yahoo! ID</strong>, your <strong>google/blogger</strong> account, or <strong>any OpenID provider</strong>.</p>
+		<p><img src="img/keys.png"/> <i18n:message key="tooltip.loginButton"> Log in with your OpenID account.<br/>You can use your <strong>Yahoo! ID</strong>, your <strong>google/blogger</strong> account, or <strong>any OpenID provider</strong>. </i18n:message></p>
 	</div>
 	<div id="logoutButton-tooltip">
-		<p><img src="img/lock.png"/>Close your session to protect your data.</p>
+		<p><img src="img/lock.png"/> <i18n:message key="tooltip.logoutButton"> Close your session to protect your data. </i18n:message></p>
 	</div>
 	<div id="yourDetailsButton-tooltip">
-		<p><img src="img/user.png"/>Edit your personal data, like home location, email address, etc</p>
+		<p><img src="img/user.png"/> <i18n:message key="tooltip.yourDetailsButton"> Edit your personal data, like home location, email address, etc </i18n:message></p>
 	</div>
 	<div id="embedButton-tooltip">
-		<p> <img src="img/feed.png"> Link and RSS feed URL to this map. </p>
+		<p> <img src="img/feed.png"> <i18n:message key="tooltip.embedButton"> Link and RSS feed URL to this map. </i18n:message> </p>
 	</div>
 	<div id="infoButton-tooltip">
-		<p> <img src="img/info.png"/> Information about the software and todomap.org </p>
+		<p> <img src="img/info.png"/> <i18n:message key="tooltip.infoButton"> Information about the software and todomap.org </i18n:message> </p>
 	</div>
 	<div id="statisticsButton-tooltip">
-		<p> <img src="img/math.png"> Service statistics </p>
+		<p> <img src="img/math.png"> <i18n:message key="tooltip.statisticsButton"> Service statistics </i18n:message></p>
 	</div>
 	<div id="helpButton-tooltip">
-		<p> <img src="img/help.png"> Todomap help </p>
+		<p> <img src="img/help.png"> <i18n:message key="tooltip.helpButton"> Todomap help </i18n:message></p>
 	</div>
 	<div id="gotoButton-tooltip">
-		<p> <img src="img/earth.png"> Enter an address to jump to. </p>
+		<p> <img src="img/earth.png"> <i18n:message key="tooltip.gotoButton">Enter an address to jump to.</i18n:message> </p>
 	</div>
 	<div id="openIdLink-tooltip">
-		<p> Find your OpenID provider at openid.org! </p>
+		<p> <i18n:message key="tooltip.openIdLink"> Find your OpenID provider at openid.org! </i18n:message> </p>
 	</div>
 	<div id="map_canvas-tooltip">
-		<p> <img src="img/earth.png"/> Right click to add a new TODO! </p>
+		<p> <img src="img/earth.png"/> <i18n:message key="tooltip.map_canvas"> Right click to add a new TODO! </i18n:message> </p>
 	</div>
 	<div id="googleCodeLink-tooltip" class="tooltipable">
-		<p> <img src="img/gear.png"/> This link will take you to the developer site where you can find the
+		<p> <img src="img/gear.png"/> <i18n:message key="tooltip.googleCodeLink"> This link will take you to the developer site where you can find the
 		<ul>
 			<li>bugtracker</li>
 			<li>wiki</li>
 			<li>and all the source code</li>
 		</ul>
+		</i18n:message>
 		</p>
 	</div>
 </div>
