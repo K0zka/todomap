@@ -148,3 +148,11 @@ function deleteResource(id, callback) {
 		success:callback
 	});
 }
+
+function deleteAttachment(id, callback) {
+	$.ajax({
+		type: 	'POST',
+		url: 	'services/attachments/delete/'+id,
+		success:callback
+	});
+}
