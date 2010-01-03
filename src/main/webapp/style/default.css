@@ -124,7 +124,7 @@ button:hover {
 
 .attachment {
 	width: 100px !important;
-	height: 100px;
+	height: 116px;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
 	border-radius:4px;
@@ -177,4 +177,23 @@ button:hover {
 .authorId {
 	font-weight: bolder;
 	background-color: #eeeeee;
+}
+
+.datacontrols {
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	padding:1px 1px;
+	text-decoration:none;
+	border: solid 2px #0063DC;
+	position: static;
+	bottom: 0px;
+	width: 94px;
+	height: 18px;
+}
+
+.datacontrols img {
+	float: left;
+	width: 16px;
+	height: 16px;
 }
