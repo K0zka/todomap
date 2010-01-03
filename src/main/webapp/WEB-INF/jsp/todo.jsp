@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="i18n" %>
+<%@page import="org.apache.commons.lang.StringUtils"%>
+<%@page import="java.util.Locale"%><html>
 <%@page import="org.todomap.o29.beans.Todo"%>
 <%@page import="org.todomap.o29.beans.Attachment"%>
-<%
-Todo todo = (Todo)request.getAttribute("todo");
-
-%>
-
 <%@page import="org.todomap.o29.beans.Comment"%>
-<%@page import="org.apache.commons.lang.StringUtils"%><html>
+<%
+final Todo todo = (Todo)request.getAttribute("todo");
+%>
+<i18n:setLocale value="<%= (Locale)request.getAttribute("locale") %>"/>
+<i18n:setBundle basename="Messages"/>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -104,7 +107,8 @@ function initialize() {
 		$('#imageWindow').dialog({
 			autoOpen:false,
 			width : 400,
-			height: 360
+			height: 360,
+			title: '<i18n:message key="todo.window.imageWindow"/>'
 			});
 
 		$('#newComment').hide(0);
@@ -254,7 +258,7 @@ function saveData() {
 <div style="width: 100%; height: 800px;">
 <div id="todoDetails">
 
-	<h3><a href="#">Location</a></h3>
+	<h3><a href="#"> <i18n:message key="todo.location">Location</i18n:message></a></h3>
 	<div style="height: 600px">
 		<div id="map_canvas" style="width: 100%; height: 100%"></div>
 		<div style="color: grey; font-size: 0.8em;">
@@ -267,41 +271,50 @@ function saveData() {
 		</div>
 		<% if(todo.getCreator() != null && !StringUtils.isEmpty(todo.getCreator().getDisplayName())) { %>
 		<div style="position: absolute; bottom: 0px; right: 0px; color: grey; font-size: 0.8em;">
-			Submitted by <%= todo.getCreator().getDisplayName() %> <span id="authorId" class="authorId">[<%= todo.getCreator().getId() %>]</span>
+			<i18n:message key="todo.submittedby">Submitted by</i18n:message> <%= todo.getCreator().getDisplayName() %> <span id="authorId" class="authorId">[<%= todo.getCreator().getId() %>]</span>
 		</div>
 		<% } %>
 	</div>
-	<h3><a href="#">Details</a></h3>
+	<h3><a href="#"><i18n:message key="todo.details">Details</i18n:message></a></h3>
 	<div>
 		<span id="descriptionNoEdit">
 			<span id="todoDescriptionShow" ondblclick="editDescription()" style="cursor: text; width: 100%; height: 100%"><%= todo.getDescription() %></span>
 		</span>
 		<span id="descriptionEdit" style="display: none">
 			<textarea id="todoDescriptionEditor" class="todoDescription"></textarea>
-			<button id="saveButton" onclick="saveData()">save</button>
+			<button id="saveButton" onclick="saveData()"><i18n:message key="etc.save">save</i18n:message></button>
 		</span>
 	</div>
-	<h3><a href="#">Attachments <span id="nrOfAttachments" class="counter"><%= todo.getAttachments().size() %></span></a></h3>
+	<h3><a href="#"> <i18n:message key="todo.attachments"> Attachments </i18n:message> <span id="nrOfAttachments" class="counter"><%= todo.getAttachments().size() %></span></a></h3>
 	<div>
 	
 		<span class="authOnly">
-			<button id="uploadButton">upload</button>
+			<button id="uploadButton"><i18n:message key="todo.uploadButton">upload</i18n:message></button>
 		</span>
 		<span class="noAuthOnly">
+			<i18n:message key="todo.uploadNoAuth">
 			<h4>You are not signed in</h4>
 			<p>Please sign in to attach files</p>
+			</i18n:message>
 		</span>
 	
 		<span id="attachments" class="attachments">
 			<% for(Attachment attachment : todo.getAttachments()) { %>
-				<div id="attachment-<%= attachment.getId() %>" class="attachment" onclick="downloadAttachment(<%= attachment.getId() %>)">
-					<img alt="<%= attachment.getFileName() %>" src="thumbnail/<%=attachment.getId() %>"/>
+				<span id="attachment-<%= attachment.getId() %>" class="attachment">
+					<img alt="<%= attachment.getFileName() %>" src="thumbnail/<%=attachment.getId() %>"  onclick="downloadAttachment(<%= attachment.getId() %>)"/>
 					<span><%=attachment.getFileName() %></span>
-				</div>
+					<!-- 
+					<span class="authOnly">
+						<span class="datacontrols">
+							<img src="img/delete32.png" alt="remove" onclick="deleteAttachment(<%= attachment.getId() %>, function() {alert('ok');})"/>
+						</span>
+					</span>
+					 -->
+				</span>
 			<% } %>
 		</span>
 	</div>
-	<h3><a href="#">Comments <span id="nrOfComments" class="counter"><%= todo.getComments().size() %></span></a></h3>
+	<h3><a href="#"><i18n:message key="todo.comments">Comments</i18n:message> <span id="nrOfComments" class="counter"><%= todo.getComments().size() %></span></a></h3>
 	<div>
 		<div id="newComment" style="">
 			<textarea id="commentEditor" class="todoDescription"></textarea> <br/>
@@ -311,8 +324,10 @@ function saveData() {
 			<button id="addCommentButton" onclick="addComment()">add</button>
 		</span>
 		<span class="noAuthOnly">
+			<i18n:message key="todo.commentNoAuth">
 			<h4>You are not signed in</h4>
 			<p>Please sign in to comment</p>
+			</i18n:message>
 		</span>
 		<div id="comments" class="comments">
 			<% for(Comment comment : todo.getComments()) { %>
@@ -324,7 +339,7 @@ function saveData() {
 			<% } %>
 		</div>
 	</div>
-	<h3><a href="#">Ratings details</a></h3>
+	<h3><a href="#"><i18n:message key="todo.ratingdetails">Ratings details</i18n:message></a></h3>
 	<div>
 		<div id="ratingDetails">
 			<input name="simpleRating" type="radio" class="star"/> 
@@ -335,7 +350,7 @@ function saveData() {
 		</div>
 	</div>
 
-<div id="imageWindow" title="Picture">
+<div id="imageWindow">
 	<img id="bigPicture" style="width: 100%; height: 100%" src=""/>
 </div>
 
@@ -344,13 +359,13 @@ function saveData() {
 
 <span style="visibility: hidden">
 	<div id="todoDescriptionShow-tooltip">
-		<p><img src="img/edit.png"/>Double click the text to start editing.</p>
+		<p><img src="img/edit.png"/> <i18n:message key="tooltip.todoDescriptionShow">Double click the text to start editing.</i18n:message></p>
 	</div>
 	<div id="saveButton-tooltip">
-		<p><img src="img/floppy.png"/> Click save to submit your modifications. </p>
+		<p><img src="img/floppy.png"/> <i18n:message key="tooltip.saveButton"> Click save to submit your modifications. </i18n:message></p>
 	</div>
 	<div id="authorId-tooltip">
-		<p><img src="img/user.png"/> This is the unique ID of the user. Names are not neccesarily unique.</p>
+		<p><img src="img/user.png"/> <i18n:message key="tooltip.authorId">This is the unique ID of the user. Names are not neccesarily unique.</i18n:message></p>
 	</div>
 </span>
 
