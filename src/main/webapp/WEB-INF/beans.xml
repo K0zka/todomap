@@ -25,6 +25,7 @@
 			<ref bean="attachments" />
 			<ref bean="comments" />
 			<ref bean="bookmarks"/>
+			<ref bean="base"/>
 		</jaxrs:serviceBeans>
 		<!--
 			<jaxrs:extensionMappings> <alias name="xml" alias="application/xml"/>
@@ -88,6 +89,7 @@
 
 	<bean id="base" class="org.todomap.o29.logic.JpaBaseService">
 		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="userService" ref="users"/>
 	</bean>
 
 	<bean id="bookmarks" class="org.todomap.o29.logic.JpaBookmarkService">
