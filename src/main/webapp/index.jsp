@@ -624,7 +624,7 @@ if(request.getParameter("lat") == null) {
 				<img src="img/google-logo.png" style="float: right;"/> 
 				<span><i18n:message key="window.login.googletext">Please click on the button below to log in with your google account!</i18n:message></span>
 			</p>
-			<button id="googleLoginButton" onclick="$('#openidUrl').val('https://www.google.com/accounts/o8/id'); document.loginForm.submit()">Log in</button>
+			<button id="googleLoginButton" onclick="$('#openidUrl').val('https://www.google.com/accounts/o8/id'); document.loginForm.submit()"><i18n:message key="window.login.login">Log in</i18n:message></button>
 		</div>
 		<div id="logintab-yahooid">
 			<label for="yahooIdInput">
