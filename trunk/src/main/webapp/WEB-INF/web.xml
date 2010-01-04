@@ -154,6 +154,16 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/jsp/errors/error.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/jsp/errors/404.jsp</location>
+	</error-page>
+
 	<taglib>
 		<taglib-uri>http://java.sun.com/jsp/jstl/fmt</taglib-uri>
 		<taglib-location>/WEB-INF/fmt.tld</taglib-location>
