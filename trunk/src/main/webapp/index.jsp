@@ -307,7 +307,9 @@ if(request.getParameter("lat") == null) {
 					}
 					
 					if(!found) {
-						var mLatlng = new google.maps.LatLng(val['location']['latitude'], val['location']['longitude']);
+						var latitude = val['location']['latitude'];
+						var longitude = val['location']['longitude'];
+						var mLatlng = new google.maps.LatLng(latitude, longitude);
 					    var marker = new google.maps.Marker({
 					        position: mLatlng, 
 					        map: map,
@@ -323,8 +325,8 @@ if(request.getParameter("lat") == null) {
 					    			+ '<div style="overflow: hidden; margin: 10px; text-align: justify; font-size: 12px; width: 160px; height: 50px;">'
 					    			+ 'Open issues: '+  val['nrOfIssues']
 						    		+ '</div>'
-					    		    + '<a style="color: #FFFFFF;" href="'+getRssUrlForAddr(val['address'])+'" target="_new"><img src="img/feed32.png" style="position: absolute; top: 0px; right: 0px; cursor: pointer;"/>'
-//					    		    + '<img src="img/search32.png" style="position: absolute; top: 32px; right: 0px; cursor: pointer; onclick="map.panTo(new google.maps.LatLng('+1+','+1+'))"/>'
+					    		    + '<a style="color: #FFFFFF;" href="'+getRssUrlForAddr(val['address'])+'" target="_new"><img src="img/feed32.png" style="position: absolute; top: 32px; right: 0px; cursor: pointer;"/></a>'
+					    		    + '<img src="img/search32.png" style="position: absolute; top: 0px; right: 0px; cursor: pointer;" onclick="map.panTo(new google.maps.LatLng('+latitude+','+longitude+'))"/>'
 					    			+ '</div>'
 					        });
 					        infowindow.open(map,marker);
