@@ -23,6 +23,16 @@
 	</filter>
 
 	<filter>
+		<filter-name>cacheExpireFilter</filter-name>
+		<filter-class>org.todomap.o29.utils.CacheExpireFilter</filter-class>
+		<init-param>
+			<param-name>secondsToExpire</param-name>
+			<!-- 48 hours -->
+			<param-value>172800</param-value>
+		</init-param>
+	</filter>
+
+	<filter>
 		<filter-name>oemiv</filter-name>
 		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
 		<init-param>
@@ -62,6 +72,18 @@
 	<filter-mapping>
 		<filter-name>jsonSecFilter</filter-name>
 		<url-pattern>/services/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>cacheExpireFilter</filter-name>
+		<url-pattern>/img/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>cacheExpireFilter</filter-name>
+		<url-pattern>/style/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>cacheExpireFilter</filter-name>
+		<url-pattern>/scripts/*</url-pattern>
 	</filter-mapping>
 
 	<listener>
