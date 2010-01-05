@@ -68,6 +68,7 @@ final Locale locale = (Locale)request.getAttribute("locale");
     var map;
     var myLatlng;
     var zoomL;
+	var infoWindows = new Array();
     
     (function () {
     	google.maps.Marker.prototype.todoId = -1;
@@ -79,6 +80,20 @@ final Locale locale = (Locale)request.getAttribute("locale");
         	this.todoId = todoId;
         }
     })();
+
+	(function() {
+		google.maps.InfoWindow.prototype._open = function (map,marker) {
+			this.open(map, marker);
+			infoWindows[infoWindows.length] = this;
+		}
+	})();
+
+	function closeAllInfoWindow() {
+		for(var i=0; i<infoWindows.length; i++){
+			infoWindows[i].close();
+		}
+		infoWindows = new Array();
+	}
 
     (function () {
 
@@ -283,7 +298,7 @@ if(request.getParameter("lat") == null) {
 							    			+ '<img src="img/down32.png" style="position: absolute; bottom: 10px; right: 0px; cursor: pointer;"/>'
 							    			+ '</div>'
 							        });
-							        infowindow.open(map,marker);
+							        infowindow._open(map,marker);
 								})
 					        });
 
@@ -332,11 +347,11 @@ if(request.getParameter("lat") == null) {
 					    			+ '<div style="overflow: hidden; margin: 10px; text-align: justify; font-size: 12px; width: 160px; height: 50px;">'
 					    			+ 'Open issues: '+  val['nrOfIssues']
 						    		+ '</div>'
-					    		    + '<img src="img/search32.png" style="position: absolute; top: 0px; right: 0px; cursor: pointer;" onclick="map.panTo(new google.maps.LatLng('+latitude+','+longitude+')); map.setZoom('+zoom+');"/>'
+					    		    + '<img src="img/search32.png" style="position: absolute; top: 0px; right: 0px; cursor: pointer;" onclick="map.panTo(new google.maps.LatLng('+latitude+','+longitude+')); closeAllInfoWindow(); map.setZoom('+zoom+');"/>'
 					    		    + '<a style="color: #FFFFFF;" href="'+getRssUrlForAddr(val['address'])+'" target="_new"><img src="img/feed32.png" style="position: absolute; top: 32px; right: 0px; cursor: pointer;"/></a>'
 					    			+ '</div>'
 					        });
-					        infowindow.open(map,marker);
+					        infowindow._open(map,marker);
 				        });
 
 					}
