@@ -171,6 +171,7 @@ if(request.getParameter("lat") == null) {
         $("#toolsAccordion").accordion({
            });
         $("#userDetailsAccordion").accordion({});
+        $('#newTodoAccordion').accordion({});
         $("#helpWindow").dialog({
             autoOpen : false,
             title	:	'<i18n:message key="window.help"/>'
@@ -715,11 +716,20 @@ if(request.getParameter("lat") == null) {
 
 <div id="newTodo">
 	<form>
-			<label for="newTodoShortDescr"><i18n:message key="window.newTodo.newTodoShortDescr">Short description</i18n:message></label> <input type="text" name="newTodoShortDescr" id="newTodoShortDescr"/><br/>
-			<label for="newTodoDescription"><i18n:message key="window.newTodo.newTodoDescription">Details</i18n:message></label>
-			<textarea id="newTodoDescription" name="newTodoDesription" style="width: 100%; height: 50%"></textarea><br/>
-			<label for="newTodoLat"><i18n:message key="etc.latitude">Latitude</i18n:message></label><input id="newTodoLat" name="newTodoLat"/><br/>
-			<label for="newTodoLng"><i18n:message key="etc.longitude">Longitude</i18n:message></label><input id="newTodoLng" name="newTodoLng"/><br/>
+		<div id="newTodoAccordion">
+			<h3><a href="newTodoDescription"> <i18n:message key="todo.details"> Details </i18n:message> </a></h3>
+			<div>
+				<label for="newTodoShortDescr"><i18n:message key="window.newTodo.newTodoShortDescr">Short description</i18n:message></label> <input type="text" name="newTodoShortDescr" id="newTodoShortDescr"/><br/>
+				<label for="newTodoDescription"><i18n:message key="window.newTodo.newTodoDescription">Details</i18n:message></label>
+				<textarea id="newTodoDescription" name="newTodoDesription"></textarea><br/>
+			</div>
+			<h3><a href="#newTodoLocation"> <i18n:message key="todo.location"> Location </i18n:message> </a></h3>
+			<div>
+				<label for="newTodoLat"><i18n:message key="etc.latitude">Latitude</i18n:message></label><input id="newTodoLat" name="newTodoLat"/><br/>
+				<label for="newTodoLng"><i18n:message key="etc.longitude">Longitude</i18n:message></label><input id="newTodoLng" name="newTodoLng"/><br/>
+				<label for="todoReverseGeo"><i18n:message key="window.newTodo.reversegeo">Address</i18n:message></label><input id="todoReverseGeo" name="newTodoLng" onkeyup="updateLatLong('todoReverseGeo','newTodoLat','newTodoLng')"/><br/>
+			</div>
+		</div>
 	</form>
 	<button id="submitNewTodoButton" onclick="submitNewTodo()"> <i18n:message key="etc.save">save</i18n:message></button>
 	<button id="cancelNewTodoButton" onclick="$('#newTodo').dialog('close')"><i18n:message key="etc.close">close</i18n:message></button>
