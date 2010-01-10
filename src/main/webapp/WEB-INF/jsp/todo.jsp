@@ -103,6 +103,7 @@ function initialize() {
     	$("#todoDetails").accordion({
         	navigation: true
            });
+    	$("#todoDetails").accordion('activate', 1);
 
 		$('#imageWindow').dialog({
 			autoOpen:false,
