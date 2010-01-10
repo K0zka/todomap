@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+
+
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+
+	<Set name="extraClasspath">env/dev</Set>
+
+
+	<New id="o29ds" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg>jdbc/o29ds</Arg>
+		<Arg>
+			<New class="org.apache.commons.dbcp.BasicDataSource">
+				<Set name="driverClassName">org.postgresql.Driver</Set>
+				<Set name="url">jdbc:postgresql://localhost/test</Set>
+				<Set name="username">o29_dev</Set>
+				<Set name="password">aprocskakapalocska</Set>
+			</New>
+		</Arg>
+	</New>
+
+	<New id="mail" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg>mail/Session</Arg>
+		<Arg>
+			<New class="org.eclipse.jetty.jndi.factories.MailSessionReference">
+				<Set name="properties">
+					<New class="java.util.Properties">
+						<Put name="mail.smtp.host">localhost</Put>
+						<Put name="mail.from">noreplyp@todomap.org</Put>
+						<Put name="mail.debug">false</Put>
+					</New>
+				</Set>
+			</New>
+		</Arg>
+	</New>
+ 
+</Configure>
+
