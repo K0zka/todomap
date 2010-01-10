@@ -292,7 +292,7 @@ if(request.getParameter("lat") == null) {
 							    			+ '<div style="overflow: hidden; margin: 10px; text-align: justify; font-size: 12px; width: 160px; height: 100px;">'
 							    			+ todo['todo']['description']
 								    		+ '</div>'
-							    		    + '<a href="'+ encodeURI(itemId + '-' + todo['todo']['shortDescr']) + '.html" style="position: absolute; bottom: 10px; font-style: italic; font-size: 10px;" target="new"><i18n:message key="etc.more"/></a>'
+							    		    + '<a href="'+ encodeURI(itemId + '-' + todo['todo']['shortDescr']) + '.html" style="position: absolute; bottom: 10px; font-style: italic; font-size: 10px;" target="_blank"><i18n:message key="etc.more"/></a>'
 							    		    + '<img src="img/bookmark32.png" style="position: absolute; top: 0px; right: 0px; cursor: pointer;" onclick="bookmarkItem('+itemId+')"/>'
 							    			+ '<img src="img/up32.png" style="position: absolute; top: 32px; right: 0px; cursor: pointer;"/>'
 							    			+ '<img src="img/down32.png" style="position: absolute; bottom: 10px; right: 0px; cursor: pointer;"/>'
@@ -348,7 +348,7 @@ if(request.getParameter("lat") == null) {
 					    			+ 'Open issues: '+  val['nrOfIssues']
 						    		+ '</div>'
 					    		    + '<img src="img/search32.png" style="position: absolute; top: 0px; right: 0px; cursor: pointer;" onclick="map.panTo(new google.maps.LatLng('+latitude+','+longitude+')); closeAllInfoWindow(); map.setZoom('+zoom+');"/>'
-					    		    + '<a style="color: #FFFFFF;" href="'+getRssUrlForAddr(val['address'])+'" target="_new"><img src="img/feed32.png" style="position: absolute; top: 32px; right: 0px; cursor: pointer;"/></a>'
+					    		    + '<a style="color: #FFFFFF;" href="'+getRssUrlForAddr(val['address'])+'" target="_blank"><img src="img/feed32.png" style="position: absolute; top: 32px; right: 0px; cursor: pointer;"/></a>'
 					    			+ '</div>'
 					        });
 					        infowindow._open(map,marker);
@@ -525,9 +525,25 @@ if(request.getParameter("lat") == null) {
 	        	$('#wheretogoErrors').val(status);
 	        }
 	      });
-			
+	
 	}
 
+	function updateLatLong(value, latResult, lngResult) {
+		var addr = $('#'+value).val();
+		debug(addr);
+		geocoder = new google.maps.Geocoder();
+		geocoder.geocode( { 'address': addr}, function(results, status) {
+			debug('status:' + status);
+			try {
+				debug(results[0]);
+				$('#'+latResult).val(results[0]['geometry']['location'].lat());
+				$('#'+lngResult).val(results[0]['geometry']['location'].lng());
+			} catch (err) {
+				debug('Error: '+err);
+			}
+	      });
+	}
+	
 	function cleanupMarkers() {
 		markers = map.getMarkers();
 		bounds = map.getBounds();
@@ -688,7 +704,7 @@ if(request.getParameter("lat") == null) {
 	<p>
 	<i18n:message key="window.productInfoWindow.more">
 	To find out more about the software, please visit the project page at 
-	<a id="googleCodeLink" target="new" href="http://code.google.com/p/todomap/">google code</a>! Your contribution 
+	<a id="googleCodeLink" target="_blank" href="http://code.google.com/p/todomap/">google code</a>! Your contribution 
 	to todomap's success is highly appreciated!
 	</i18n:message>
 	</p>
@@ -736,15 +752,17 @@ if(request.getParameter("lat") == null) {
 			<input id="userDetailsEmail"/><br/>
 		</span>
 		<h3><a href="#homeLocation"> <i18n:message key="window.userDetailsWindow.homeLocation"> Your home location </i18n:message></a></h3>
-		<span>
+		<div>
 			<label for="userDetailsHomeLocationLat"><i18n:message key="etc.latitude">Latitude</i18n:message></label>
 			<input id="userDetailsHomeLocationLat"/><br>
 			<label for="userDetailsHomeLocationLng"><i18n:message key="etc.longitude">Longitude</i18n:message></label>
 			<input id="userDetailsHomeLocationLng"/><br/>
+			<label for="userDetailsHomeLocationReverseGeo"><i18n:message key="window.userDetailsWindow.reversegeo"></i18n:message></label>
+			<input id="userDetailsHomeLocationReverseGeo" onkeyup="updateLatLong('userDetailsHomeLocationReverseGeo','userDetailsHomeLocationLat','userDetailsHomeLocationLng')"/><br/>
 			<button id="userDetailsUseCurrentLocation" onclick="updateLocation()">
-				<i18n:message key="window.userDetailsWindow.useCurrent">Use current</i18n:message>
+				<i18n:message key="window.userDetailsWindow.useCurrent">use map center</i18n:message>
 			</button>
-		</span>
+		</div>
 	</div>
 	<button id="saveUserDetailsButton" onclick="saveUserDetails()"><i18n:message key="etc.save">Save</i18n:message></button>
 </div>
