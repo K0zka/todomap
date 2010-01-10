@@ -236,6 +236,8 @@ if(request.getParameter("lat") == null) {
            		return $('#'+this.id+"-tooltip").html();
         	}
 		});
+		//form labels
+        $('label').tooltip(tooltipOptions);
         
     });
 
@@ -571,7 +573,6 @@ if(request.getParameter("lat") == null) {
 			<h3><a href="#"> <i18n:message key="sidebar.accordion.tools"> Tools </i18n:message></a></h3>
 			<div class="sidebarControls">
 				<span class="authOnly">
-				<button id="homeButton"  onclick="goHome()"> <i18n:message key="sidebar.button.gohome"> Go Home </i18n:message> </button><br/>
 				<button id="logoutButton"  onclick="logOut()"> <i18n:message key="sidebar.button.logout"> Log out </i18n:message> </button><br/>
 				<button id="yourDetailsButton"  onclick="$('#userDetailsWindow').dialog('open'); getUserDetails();"> <i18n:message key="sidebar.button.yourdetails"> Your details </i18n:message> </button><br/>
 				</span>
@@ -580,6 +581,9 @@ if(request.getParameter("lat") == null) {
 				</span>
 				<button id="embedButton" onclick="$(linksWindow).dialog('open')"> <i18n:message key="sidebar.button.links"> Link to this map </i18n:message> </button><br/>
 				<button id="gotoButton" onclick="$('#wheretogoWindow').dialog('open')"> <i18n:message key="sidebar.button.goto"> Enter address </i18n:message> </button><br/>
+				<span class="authOnly">
+				<button id="homeButton"  onclick="goHome()"> <i18n:message key="sidebar.button.gohome"> Go Home </i18n:message> </button><br/>
+				</span>
 			</div>
 			<h3><a href="#"><i18n:message key="sidebar.accordion.info">Info</i18n:message></a></h3>
 			<div class="sidebarControls">
@@ -727,7 +731,7 @@ if(request.getParameter("lat") == null) {
 			<div>
 				<label for="newTodoLat"><i18n:message key="etc.latitude">Latitude</i18n:message></label><input id="newTodoLat" name="newTodoLat"/><br/>
 				<label for="newTodoLng"><i18n:message key="etc.longitude">Longitude</i18n:message></label><input id="newTodoLng" name="newTodoLng"/><br/>
-				<label for="todoReverseGeo"><i18n:message key="window.newTodo.reversegeo">Address</i18n:message></label><input id="todoReverseGeo" name="newTodoLng" onkeyup="updateLatLong('todoReverseGeo','newTodoLat','newTodoLng')"/><br/>
+				<label id="todoReverseGeo-label" for="todoReverseGeo"><i18n:message key="window.newTodo.reversegeo">Address</i18n:message></label><input id="todoReverseGeo" name="newTodoLng" onkeyup="updateLatLong('todoReverseGeo','newTodoLat','newTodoLng')"/><br/>
 			</div>
 		</div>
 	</form>
@@ -767,7 +771,7 @@ if(request.getParameter("lat") == null) {
 			<input id="userDetailsHomeLocationLat"/><br>
 			<label for="userDetailsHomeLocationLng"><i18n:message key="etc.longitude">Longitude</i18n:message></label>
 			<input id="userDetailsHomeLocationLng"/><br/>
-			<label for="userDetailsHomeLocationReverseGeo"><i18n:message key="window.userDetailsWindow.reversegeo"></i18n:message></label>
+			<label id="userDetailsHomeLocationReverseGeo-label" for="userDetailsHomeLocationReverseGeo"><i18n:message key="window.userDetailsWindow.reversegeo"></i18n:message></label>
 			<input id="userDetailsHomeLocationReverseGeo" onkeyup="updateLatLong('userDetailsHomeLocationReverseGeo','userDetailsHomeLocationLat','userDetailsHomeLocationLng')"/><br/>
 			<button id="userDetailsUseCurrentLocation" onclick="updateLocation()">
 				<i18n:message key="window.userDetailsWindow.useCurrent">use map center</i18n:message>
@@ -812,7 +816,7 @@ if(request.getParameter("lat") == null) {
 	<div id="map_canvas-tooltip">
 		<p> <img src="img/earth.png"/> <i18n:message key="tooltip.map_canvas"> Right click to add a new TODO! </i18n:message> </p>
 	</div>
-	<div id="googleCodeLink-tooltip" class="tooltipable">
+	<div id="googleCodeLink-tooltip">
 		<p> <img src="img/gear.png"/> <i18n:message key="tooltip.googleCodeLink"> This link will take you to the developer site where you can find the
 		<ul>
 			<li>bugtracker</li>
@@ -820,6 +824,16 @@ if(request.getParameter("lat") == null) {
 			<li>and all the source code</li>
 		</ul>
 		</i18n:message>
+		</p>
+	</div>
+	<div id="todoReverseGeo-label-tooltip">
+		<p>
+			<img src="img/mail.png"> <i18n:message key="tooltip.reverseGeo"/>
+		</p>
+	</div>
+	<div id="userDetailsHomeLocationReverseGeo-label-tooltip">
+		<p>
+			<img src="img/mail.png"> <i18n:message key="tooltip.reverseGeo"/>
 		</p>
 	</div>
 </div>
