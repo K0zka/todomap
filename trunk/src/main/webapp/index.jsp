@@ -64,7 +64,7 @@ final Locale locale = (Locale)request.getAttribute("locale");
 
 	var pageLocation = '<%= request.getRequestURL() %>';
 
-	var isAuthenticated = <%= SecurityContextHolder.getContext().getAuthentication() != null %>;
+	var isAuthenticated = null;
     var map;
     var myLatlng;
     var zoomL;
@@ -561,6 +561,13 @@ if(request.getParameter("lat") == null) {
 
 	setTimeout("cleanupMarkers()", 20000);
 	
+	if(isAuthenticated) {
+		$(".authOnly").show(1000);
+		$(".noAuthOnly").hide(1000);
+	} else {
+		$(".authOnly").hide(1000);
+		$(".noAuthOnly").show(1000);
+	}
 </script>
 
 
