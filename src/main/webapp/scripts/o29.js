@@ -77,13 +77,21 @@ function checkLoginStatus() {
 		},
 		success : function(msg) {
 			var isLoggedIn = eval("(" + msg + ")");
-			if (isLoggedIn) {
-				$("#loginWindow").dialog('close');
-				$(".authOnly").show(1000);
-				$(".noAuthOnly").hide(1000);
-			} else {
-				$(".authOnly").hide(1000);
-				$(".noAuthOnly").show(1000);
+			try {
+				if(isLoggedIn != isAuthenticated) {
+					if (isLoggedIn) {
+						$("#loginWindow").dialog('close');
+						$(".authOnly").show(1000);
+						$(".noAuthOnly").hide(1000);
+						isAuthenticated = true;
+					} else {
+						$(".authOnly").hide(1000);
+						$(".noAuthOnly").show(1000);
+						isAuthenticated = false;
+					}
+				}
+			} catch (errror) {
+				debug(error);
 			}
 		},
 		processData : false,
