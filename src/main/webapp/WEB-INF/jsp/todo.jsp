@@ -101,9 +101,13 @@ function initialize() {
 			delay : 1000
         	});
     	$("#todoDetails").accordion({
-        	navigation: true
+        	navigation: true,
+        	collapsible : true
            });
-    	$("#todoDetails").accordion('activate', 1);
+
+		//TODO: this is a half-ass solution to make google map work even if it is not
+		//on the active accordion. 
+        setTimeout('$("#todoDetails").accordion("activate", 1)',1000);
 
 		$('#imageWindow').dialog({
 			autoOpen:false,
