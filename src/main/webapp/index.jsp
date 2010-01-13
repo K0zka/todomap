@@ -346,10 +346,10 @@ if(request.getParameter("lat") == null) {
 					    map.addMarker(marker);
 					    google.maps.event.addListener(marker, 'click', function() {
 					    	var infowindow = new google.maps.InfoWindow({
-					    		content: '<div style="width: 200px; height: 100px;">'
+					    		content: '<div style="width: 200px; height: 100px; overflow: hidden;">'
 					    			+ '<h3 style="margin: 5px; font-size: 15px; width: 160px;">'+getAddress(val['address'])+'</h3>'
 					    			+ '<div style="overflow: hidden; margin: 10px; text-align: justify; font-size: 12px; width: 160px; height: 50px;">'
-					    			+ 'Open issues: '+  val['nrOfIssues']
+					    			+ '<i18n:message key="etc.openIssues"/> : '+  val['nrOfIssues']
 						    		+ '</div>'
 					    		    + '<img src="img/search32.png" style="position: absolute; top: 0px; right: 0px; cursor: pointer;" onclick="map.panTo(new google.maps.LatLng('+latitude+','+longitude+')); closeAllInfoWindow(); map.setZoom('+zoom+');"/>'
 					    		    + '<a style="color: #FFFFFF;" href="'+getRssUrlForAddr(val['address'])+'" target="_blank"><img src="img/feed32.png" style="position: absolute; top: 32px; right: 0px; cursor: pointer;"/></a>'
