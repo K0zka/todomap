@@ -54,7 +54,7 @@ final Locale locale = (Locale)request.getAttribute("locale");
 <script type="text/javascript" src="scripts/jquery.tooltip.min.js">
 </script>
 <script type="text/javascript"
-	src="http://maps.google.com/maps/api/js?sensor=false">
+	src="http://maps.google.com/maps/api/js?sensor=false&language=<%= locale.getLanguage() %>">
 </script>
 
 <script type="text/javascript" src="scripts/o29.js">

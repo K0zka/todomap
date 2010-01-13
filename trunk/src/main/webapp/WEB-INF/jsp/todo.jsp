@@ -9,8 +9,9 @@
 <%@page import="org.todomap.o29.beans.Comment"%>
 <%
 final Todo todo = (Todo)request.getAttribute("todo");
+final Locale locale = (Locale)request.getAttribute("locale");
 %>
-<i18n:setLocale value="<%= (Locale)request.getAttribute("locale") %>"/>
+<i18n:setLocale value="<%= locale %>"/>
 <i18n:setBundle basename="Messages"/>
 
 <head>
@@ -19,7 +20,7 @@ final Todo todo = (Todo)request.getAttribute("todo");
 <jsp:include page="includes/sitemeta.jsp"/>
 
 <script type="text/javascript"
-	src="http://maps.google.com/maps/api/js?sensor=false">
+	src="http://maps.google.com/maps/api/js?sensor=false&language=<%= locale.getLanguage() %>">
 </script>
 
 <link rel="stylesheet" type="text/css"
