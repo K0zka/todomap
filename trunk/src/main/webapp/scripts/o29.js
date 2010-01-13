@@ -164,3 +164,35 @@ function deleteAttachment(id, callback) {
 		success:callback
 	});
 }
+
+function updateLatLong(value, latResult, lngResult) {
+	var addr = $('#'+value).val();
+	debug(addr);
+	geocoder = new google.maps.Geocoder();
+	geocoder.geocode( { 'address': addr}, function(results, status) {
+		debug('status:' + status);
+		try {
+			$('#'+latResult).val(results[0]['geometry']['location'].lat());
+			$('#'+lngResult).val(results[0]['geometry']['location'].lng());
+		} catch (err) {
+			debug('Error: '+err);
+		}
+      });
+}
+
+function updateAddr(addr, latInput, lngInput) {
+	geocoder = new google.maps.Geocoder();
+	var lat = $('#'+latInput).val();
+	var lng = $('#'+lngInput).val();
+	geocoder.geocode( {'latLng' : new google.maps.LatLng(lat, lng)}, function(results, status) {
+		debug('status: ' + status);
+		debug(results);
+		try {
+			if(results[0]) {
+					$('#'+addr).val(results[0].formatted_address);
+			}
+		} catch (err) {
+			debug('Error: '+err);
+		}
+      });
+}
