@@ -161,6 +161,7 @@ if(request.getParameter("lat") == null) {
 		google.maps.event.addListener(map, "rightclick", function(event) {
 			document.getElementById("newTodoLat").value = event.latLng.lat();
 			document.getElementById("newTodoLng").value = event.latLng.lng();
+			updateAddr('todoReverseGeo','newTodoLat','newTodoLng');
 			$("#newTodo").dialog('open');
         });
 	    
@@ -531,21 +532,6 @@ if(request.getParameter("lat") == null) {
 	
 	}
 
-	function updateLatLong(value, latResult, lngResult) {
-		var addr = $('#'+value).val();
-		debug(addr);
-		geocoder = new google.maps.Geocoder();
-		geocoder.geocode( { 'address': addr}, function(results, status) {
-			debug('status:' + status);
-			try {
-				debug(results[0]);
-				$('#'+latResult).val(results[0]['geometry']['location'].lat());
-				$('#'+lngResult).val(results[0]['geometry']['location'].lng());
-			} catch (err) {
-				debug('Error: '+err);
-			}
-	      });
-	}
 	
 	function cleanupMarkers() {
 		markers = map.getMarkers();
@@ -736,8 +722,8 @@ if(request.getParameter("lat") == null) {
 			</div>
 			<h3><a href="#newTodoLocation"> <i18n:message key="todo.location"> Location </i18n:message> </a></h3>
 			<div>
-				<label for="newTodoLat"><i18n:message key="etc.latitude">Latitude</i18n:message></label><input id="newTodoLat" name="newTodoLat"/><br/>
-				<label for="newTodoLng"><i18n:message key="etc.longitude">Longitude</i18n:message></label><input id="newTodoLng" name="newTodoLng"/><br/>
+				<label for="newTodoLat"><i18n:message key="etc.latitude">Latitude</i18n:message></label><input id="newTodoLat" name="newTodoLat" onkeyup="updateAddr('todoReverseGeo','newTodoLat','newTodoLng')"/><br/>
+				<label for="newTodoLng"><i18n:message key="etc.longitude">Longitude</i18n:message></label><input id="newTodoLng" name="newTodoLng" onkeyup="updateAddr('todoReverseGeo','newTodoLat','newTodoLng')"/><br/>
 				<label id="todoReverseGeo-label" for="todoReverseGeo"><i18n:message key="window.newTodo.reversegeo">Address</i18n:message></label><input id="todoReverseGeo" name="newTodoLng" onkeyup="updateLatLong('todoReverseGeo','newTodoLat','newTodoLng')"/><br/>
 			</div>
 		</div>
@@ -775,9 +761,9 @@ if(request.getParameter("lat") == null) {
 		<h3><a href="#homeLocation"> <i18n:message key="window.userDetailsWindow.homeLocation"> Your home location </i18n:message></a></h3>
 		<div>
 			<label for="userDetailsHomeLocationLat"><i18n:message key="etc.latitude">Latitude</i18n:message></label>
-			<input id="userDetailsHomeLocationLat"/><br>
+			<input id="userDetailsHomeLocationLat" onkeyup="updateAddr('userDetailsHomeLocationReverseGeo','userDetailsHomeLocationLat','userDetailsHomeLocationLng')"/><br>
 			<label for="userDetailsHomeLocationLng"><i18n:message key="etc.longitude">Longitude</i18n:message></label>
-			<input id="userDetailsHomeLocationLng"/><br/>
+			<input id="userDetailsHomeLocationLng" onkeyup="updateAddr('userDetailsHomeLocationReverseGeo','userDetailsHomeLocationLat','userDetailsHomeLocationLng')"/><br/>
 			<label id="userDetailsHomeLocationReverseGeo-label" for="userDetailsHomeLocationReverseGeo"><i18n:message key="window.userDetailsWindow.reversegeo"></i18n:message></label>
 			<input id="userDetailsHomeLocationReverseGeo" onkeyup="updateLatLong('userDetailsHomeLocationReverseGeo','userDetailsHomeLocationLat','userDetailsHomeLocationLng')"/><br/>
 			<button id="userDetailsUseCurrentLocation" onclick="updateLocation()">
