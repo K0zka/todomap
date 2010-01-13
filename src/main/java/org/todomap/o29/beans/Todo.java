@@ -1,10 +1,13 @@
 package org.todomap.o29.beans;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -26,6 +29,16 @@ public class Todo extends BaseBean implements Translatable{
 	@Column(name="address")
 	Address addr;
 
+	public List<Project> getProjects() {
+		return projects;
+	}
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+	
+	@ManyToMany(mappedBy="todos")
+	List<Project> projects;
+	
 	public Coordinate getLocation() {
 		return location;
 	}

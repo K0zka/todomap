@@ -33,10 +33,8 @@ public abstract class BaseBean implements Nameable {
 	@SequenceGenerator(name="base_seq", allocationSize=1, initialValue=0, sequenceName="base_seq")
 	long id;
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="bean")
-	@XmlTransient
 	List<Comment> comments;
 	@OneToMany(fetch=FetchType.LAZY)
-	@XmlTransient
 	List<Rating> ratings;
 	
 	@Transient
@@ -50,14 +48,12 @@ public abstract class BaseBean implements Nameable {
 	int version = 0;
 
 	@ManyToOne
-	@XmlTransient
 	User creator;
 
 	@Column
 	String language;
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="attachedTo")
-	@XmlTransient
 	List<Attachment> attachments;
 	public RatingSummary getRatingSummary() {
 		return ratingSummary;
@@ -65,6 +61,7 @@ public abstract class BaseBean implements Nameable {
 	public void setRatingSummary(RatingSummary ratingSummary) {
 		this.ratingSummary = ratingSummary;
 	}
+	@XmlTransient
 	public List<Attachment> getAttachments() {
 		return attachments;
 	}
@@ -83,12 +80,14 @@ public abstract class BaseBean implements Nameable {
 	public void setId(long id) {
 		this.id = id;
 	}
+	@XmlTransient
 	public List<Comment> getComments() {
 		return comments;
 	}
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
+	@XmlTransient
 	public List<Rating> getRatings() {
 		return ratings;
 	}
@@ -101,6 +100,7 @@ public abstract class BaseBean implements Nameable {
 	public void setVersion(int version) {
 		this.version = version;
 	}
+	@XmlTransient
 	public User getCreator() {
 		return creator;
 	}
