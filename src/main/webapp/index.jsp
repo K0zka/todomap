@@ -162,7 +162,11 @@ if(request.getParameter("lat") == null) {
 			document.getElementById("newTodoLat").value = event.latLng.lat();
 			document.getElementById("newTodoLng").value = event.latLng.lng();
 			updateAddr('todoReverseGeo','newTodoLat','newTodoLng');
-			$("#newTodo").dialog('open');
+			if(isAuthenticated) {
+				$("#newTodo").dialog('open');
+			} else {
+				$("#loginWindow").dialog('open');
+			}
         });
 	    
 		google.maps.event.addListener(map, "bounds_changed", refreshMarkers);
