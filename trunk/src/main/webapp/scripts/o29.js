@@ -48,7 +48,7 @@ function ipBasedLocation() {
 		});
 		
 		$('#wheretogoWindow').dialog('open');
-		return new google.maps.LatLng(0, 0);
+		return null;
 	}
 }
 
