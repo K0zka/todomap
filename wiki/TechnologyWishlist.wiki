@@ -1,7 +1,5 @@
 #summary Technologies that would be nice to have an integration to
 
-= Introduction =
-
 = OpenSocial =
 
 Users could highlight TODO's registered in todomap on the opensocial enabled websites, they could comment on it, watch it, etc...
@@ -11,3 +9,7 @@ Users could highlight TODO's registered in todomap on the opensocial enabled web
 It would be great to have at least one kind of mobile application.
  * Register issues
  * Check issues around the current location
+
+= google maps integration =
+
+Todomap maplet for maps.google.com
