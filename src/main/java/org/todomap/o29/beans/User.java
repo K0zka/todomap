@@ -79,7 +79,7 @@ public class User extends BaseBean {
 
 	@Override
 	public String getName() {
-		return getName() == null ? String.valueOf(getId()) : getName();
+		return getDisplayName() == null ? String.valueOf(getId()) : getDisplayName();
 	}
 
 }
