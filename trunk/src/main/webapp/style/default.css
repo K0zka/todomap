@@ -197,3 +197,80 @@ button:hover {
 	width: 16px;
 	height: 16px;
 }
+
+div.starTogle_active {
+	width: 32px !important;
+	height: 32px !important;
+	background-image: url("../img/bookmark32.png");
+	background-repeat: no-repeat;
+	border: none;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	cursor: pointer;
+}
+div.starTogle_active:hover{
+	background-color: #d7d7d7;
+}
+div.starTogle_inactive {
+	width: 32px !important;
+	height: 32px !important;
+	background-image: url("../img/bookmark32.gr.png");
+	background-repeat: no-repeat;
+	border: none;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	cursor: pointer;
+}
+div.starTogle_inactive:hover{
+	background-color: #ece13d;
+}
+
+div.voteUp_unselected {
+	width: 32px !important;
+	height: 32px !important;
+	background-image: url("../img/up32.gr.png");
+	background-repeat: no-repeat;
+	border: none;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	cursor: pointer;
+}
+
+div.voteUp_selected {
+	width: 32px !important;
+	height: 32px !important;
+	background-image: url("../img/up32.png");
+	background-repeat: no-repeat;
+	border: none;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	cursor: pointer;
+}
+div.voteUp_unselected:hover {
+	background-color: #b6f366;
+}
+
+div.voteDown_unselected {
+	width: 32px !important;
+	height: 32px !important;
+	background-image: url("../img/down32.gr.png");
+	background-repeat: no-repeat;
+	border: none;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	cursor: pointer;
+}
+
+div.voteDown_selected {
+	width: 32px !important;
+	height: 32px !important;
+	background-image: url("../img/down32.png");
+	background-repeat: no-repeat;
+	border: none;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	cursor: pointer;
+}
+div.voteDown_unselected:hover {
+	background-color: #b6f366;
+}
