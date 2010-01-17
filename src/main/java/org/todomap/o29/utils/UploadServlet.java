@@ -8,15 +8,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
-import org.springframework.security.Authentication;
-import org.springframework.security.context.SecurityContextHolder;
 import org.todomap.o29.beans.Attachment;
 import org.todomap.o29.beans.BaseBean;
 import org.todomap.o29.beans.User;
@@ -32,12 +29,11 @@ public class UploadServlet extends SpringServlet {
 			throws ServletException, IOException {
 		logger.info("uploading...");
 		
-		final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if(authentication == null) {
+		final User user = userService.getCurrentUser();
+		if(user == null) {
 			resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
 			return;
 		}
-		final User user = userService.getUserByOpenIdUrl(authentication.getName());
 		
 		final long id = getId(req);
 		
