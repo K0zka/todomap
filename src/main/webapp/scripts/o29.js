@@ -129,6 +129,14 @@ function bookmarkItem(itemId) {
 	});
 }
 
+function unbookmarkItem(itemId) {
+	$.ajax({
+		type:	'POST',
+		url:	'services/bookmarks/unbookmark/'+itemId,
+		data:	itemId
+	});
+}
+
 function isBookmarked(itemId) {
 	//TODO
 	return false;
@@ -195,4 +203,17 @@ function updateAddr(addr, latInput, lngInput) {
 			debug('Error: '+err);
 		}
       });
+}
+
+function togle(who, callback) {
+	var tog = $('#'+who).attr('class');
+	var newVal = tog.indexOf('inactive') == -1;
+	if(newVal) {
+		$('#'+who).attr('class','starTogle_inactive');
+	} else {
+		$('#'+who).attr('class','starTogle_active');
+	}
+	if(callback) {
+		callback(who, newVal);
+	}
 }
