@@ -5,11 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="i18n" %>
 
 <%@page import="java.util.Locale"%>
-<%@page import="org.springframework.security.context.SecurityContextHolder"%><html>
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%><html>
 
-<%@page import="org.springframework.security.ui.AbstractProcessingFilter" %>
-<%@page import="org.springframework.security.ui.webapp.AuthenticationProcessingFilter" %>
-<%@page import="org.springframework.security.AuthenticationException" %>
+<%@page import="org.springframework.security.core.AuthenticationException" %>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 
 <%@page import="org.todomap.o29.logic.Configuration"%>
@@ -305,9 +303,9 @@ if(request.getParameter("lat") == null) {
 							    			+ todo['todo']['description']
 								    		+ '</div>'
 							    		    + '<a href="'+ encodeURI(itemId + '-' + todo['todo']['shortDescr']) + '.html" style="position: absolute; bottom: 10px; font-style: italic; font-size: 10px;" target="_blank"><i18n:message key="etc.more"/></a>'
-							    		    + '<img src="img/bookmark32.png" style="position: absolute; top: 0px; right: 0px; cursor: pointer;" onclick="bookmarkItem('+itemId+')"/>'
-							    			+ '<img src="img/up32.png" style="position: absolute; top: 32px; right: 0px; cursor: pointer;"/>'
-							    			+ '<img src="img/down32.png" style="position: absolute; bottom: 10px; right: 0px; cursor: pointer;"/>'
+							    		    + '<div id="bookmark_togle_'+itemId+'" class="starTogle_inactive" style="position: absolute; top: 0px; right: 0px;" onclick="togle(\'bookmark_togle_'+itemId+'\',function(add){if(add) {bookmarkItem('+itemId+');} else {unbookmarkItem('+itemId+');}})"></div>'
+							    			+ '<div id="voteup_'+itemId+'" class="voteUp_unselected" style="position: absolute; top: 32px; right: 0px;" onclick="voteUp('+itemId+')"></div>'
+							    			+ '<div id="votedown_'+itemId+'" class="voteDown_unselected" style="position: absolute; bottom: 10px; right: 0px;" onclick="voteDown('+itemId+')"></div>'
 							    			+ '</div>'
 							        });
 							        infowindow._open(map,marker);
@@ -661,7 +659,7 @@ if(request.getParameter("lat") == null) {
 			</div>
 			<div>
 			    <label for="j_username"><i18n:message key="window.login.username"> Your <a id="openIdLink" href="https://openid.org/home">OpenID</a> Identity:</i18n:message></label> 
-			    <input id="openidUrl" type='text' name='j_username' value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>'/><br/>
+			    <input id="openidUrl" type='text' name='openid_identifier' value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>'/><br/>
 			</div>
 			<div>
 			    <button onclick="document.loginForm.submit()"><i18n:message key="window.login.login">Log in</i18n:message></button>
