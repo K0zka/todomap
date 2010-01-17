@@ -40,6 +40,7 @@ public class Rating {
 	public void setBean(BaseBean bean) {
 		this.bean = bean;
 	}
+	@XmlTransient
 	public User getUser() {
 		return user;
 	}
