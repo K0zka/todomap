@@ -110,6 +110,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 		return ret;
 	}
 
+	@SuppressWarnings("unchecked")
 	TodoGroup getGroupByAddress(final Address address) {
 		final TodoGroup group = new TodoGroup();
 

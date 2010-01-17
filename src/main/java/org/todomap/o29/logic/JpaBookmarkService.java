@@ -3,11 +3,12 @@ package org.todomap.o29.logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.orm.jpa.support.JpaDaoSupport;
 import org.todomap.o29.beans.BaseBean;
 import org.todomap.o29.beans.Locatable;
 import org.todomap.o29.beans.User;
 
-public class JpaBookmarkService implements BookmarkService {
+public class JpaBookmarkService extends JpaDaoSupport implements BookmarkService {
 
 	UserService userService;
 	BaseService baseService;
@@ -24,7 +25,7 @@ public class JpaBookmarkService implements BookmarkService {
 	public void bookmark(final long itemId) {
 		final User currentUser = userService.getCurrentUser();
 		currentUser.getBookmarks().add(baseService.getById(itemId));
-		userService.persist(currentUser);
+		getJpaTemplate().persist(currentUser);
 	}
 
 	@Override
