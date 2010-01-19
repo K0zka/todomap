@@ -299,7 +299,7 @@ if(request.getParameter("lat") == null) {
 							    	var infowindow = new google.maps.InfoWindow({
 							    		content: '<div style="width: 200px; height: 200px;">'
 							    			+ '<h3 style="margin: 5px; font-size: 15px; width: 160px;">'+shortDescr+'</h3>'
-							    			+ '<div style="overflow: hidden; margin: 10px; text-align: justify; font-size: 12px; width: 160px; height: 100px;">'
+							    			+ '<div style="overflow: hidden; margin: 10px; text-align: justify; font-size: 12px; width: 160px; height: 150px;">'
 							    			+ todo['todo']['description']
 								    		+ '</div>'
 							    		    + '<a href="'+ encodeURI(itemId + '-' + todo['todo']['shortDescr']) + '.html" style="position: absolute; bottom: 10px; font-style: italic; font-size: 10px;" target="_blank"><i18n:message key="etc.more"/></a>'
