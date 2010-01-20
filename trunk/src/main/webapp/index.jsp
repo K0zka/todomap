@@ -141,7 +141,7 @@ if(request.getParameter("lat") == null) {
         myLatlng = ipBasedLocation();
         //locale-based location
         if(myLatlng == null) {
-        	myLatlng = new new google.maps.LatLng(<i18n:message key="etc.initloc.lat"/>,<i18n:message key="etc.initloc.lng"/>);
+        	myLatlng = new google.maps.LatLng(<i18n:message key="etc.initloc.lat"/>,<i18n:message key="etc.initloc.lng"/>);
         }
         zoomL = zoomLevel();
 <%
