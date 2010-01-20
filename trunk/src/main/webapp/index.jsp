@@ -3,6 +3,7 @@
 
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="i18n" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%@page import="java.util.Locale"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%><html>
@@ -200,7 +201,7 @@ if(request.getParameter("lat") == null) {
            });
         $("#loginWindow").dialog({
         	modal: true,
-            autoOpen : false,
+            autoOpen : <%= request.getParameter("error") != null %>,
             show: 'slide',
             width: 650,
             height: 400,
@@ -635,13 +636,7 @@ if(request.getParameter("lat") == null) {
 
 
 <div id="loginWindow" title="Log in">
-	<c:if test="${not empty param.login_error}">
-	  <font color="red">
-	
-	    Your login attempt was not successful, try again.<br/><br/>
-	    Reason: <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>.
-	  </font>
-	</c:if>
+
 	
 	
 	<form name="loginForm" action="<c:url value='j_spring_openid_security_check'/>" method="POST">
@@ -691,6 +686,15 @@ if(request.getParameter("lat") == null) {
 		    <button onclick="document.loginForm.submit()"><i18n:message key="window.login.login">Log in</i18n:message></button>
 		</div>
 	</div>
+	<% 
+	if(request.getParameter("error") != null 
+			&& session != null 
+			&& session.getAttribute("SPRING_SECURITY_LAST_EXCEPTION") != null) { %>
+	  <font color="red">
+	    <i18n:message key="">Login error</i18n:message><br/>
+	    <%= ((Exception)request.getSession(false).getAttribute("SPRING_SECURITY_LAST_EXCEPTION")).getMessage() %>
+	  </font>
+	<% } %>
 	
 	</form>
 </div>
