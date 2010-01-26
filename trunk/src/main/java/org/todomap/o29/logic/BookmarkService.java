@@ -72,4 +72,8 @@ public interface BookmarkService {
 	@Path("/")
 	@XmlElementWrapper(name="bookmarks")
 	List<Bookmark> bookmarks();
+
+	@GET
+	@Path("/isbookmarked/")
+	public boolean isBookmarked(long todoId);
 }
