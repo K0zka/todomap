@@ -60,5 +60,21 @@ public class JpaBookmarkService extends JpaDaoSupport implements BookmarkService
 	public void setBaseService(BaseService baseService) {
 		this.baseService = baseService;
 	}
+
+	@Override
+	public boolean isBookmarked(long todoId) {
+		final User currentUser = userService.getCurrentUser();
+		//FIXME: this is suboptimal on big number of bookmarks. jpa query would be nice
+		if(currentUser == null) {
+			return false;
+		} else {
+			for(final BaseBean bean : currentUser.getBookmarks()) {
+				if(bean.getId() == todoId) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}
 	
 }
