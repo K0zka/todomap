@@ -26,6 +26,7 @@
 			<ref bean="comments" />
 			<ref bean="bookmarks"/>
 			<ref bean="base"/>
+			<ref bean="todofacade"/>
 		</jaxrs:serviceBeans>
 		<!--
 			<jaxrs:extensionMappings> <alias name="xml" alias="application/xml"/>
@@ -122,6 +123,12 @@
 
 	<bean id="geoCoder" class="org.todomap.geocoder.google.GoogleGeocoder">
 		<property name="apiKey" value="PLEASE GET A KEY" />
+	</bean>
+
+	<bean id="todofacade" class="org.todomap.o29.logic.facade.TodoFacade">
+		<property name="todoService" ref="todos"/>
+		<property name="ratingService" ref="ratings"/>
+		<property name="bookmarkService" ref="bookmarks"/>
 	</bean>
 
 	<bean
