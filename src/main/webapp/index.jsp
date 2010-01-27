@@ -307,7 +307,7 @@ if(request.getParameter("lat") == null) {
 							    			+ todo['todo']['description']
 								    		+ '</div>'
 							    		    + '<a href="'+ encodeURI(itemId + '-' + todo['todo']['shortDescr']) + '.html" style="position: absolute; bottom: 10px; font-style: italic; font-size: 10px;" target="_blank"><i18n:message key="etc.more"/></a>'
-							    		    + '<div id="bookmark_togle_'+itemId+'" class="starTogle_'+(todo['bookmarked'] ? '' : 'in')+'active" style="position: absolute; top: 0px; right: 0px;" onclick="togle(\'bookmark_togle_'+itemId+'\',function(t,isAdd){ alert(isAdd); if(isAdd) {bookmarkItem('+itemId+');} else {unbookmarkItem('+itemId+');}})"></div>'
+							    		    + '<div id="bookmark_togle_'+itemId+'" class="starTogle_'+(todo['bookmarked'] ? '' : 'in')+'active" style="position: absolute; top: 0px; right: 0px;" onclick="togle(\'bookmark_togle_'+itemId+'\',function(t,isAdd){ if(isAdd) {bookmarkItem('+itemId+');} else {unbookmarkItem('+itemId+');}})"></div>'
 							    			+ '<div id="voteup_'+itemId+'" class="voteUp_unselected" style="position: absolute; top: 32px; right: 0px;" onclick="voteUp('+itemId+')"></div>'
 							    			+ '<div id="votedown_'+itemId+'" class="voteDown_unselected" style="position: absolute; bottom: 10px; right: 0px;" onclick="voteDown('+itemId+')"></div>'
 							    			+ '</div>'
