@@ -4,7 +4,7 @@ public class User {
 	private String email;
 	private String ipAddress;
 	private String name;
-	private String URL;
+	private String url;
 	private String userAgent;
 
 	public User() {
@@ -12,12 +12,12 @@ public class User {
 	}
 
 	public User(final String name, final String ipAddress, final String email,
-			final String URL, final String userAgent) {
+			final String url, final String userAgent) {
 		super();
 		this.name = name;
 		this.ipAddress = ipAddress;
 		this.email = email;
-		this.URL = URL;
+		this.url = url;
 		this.userAgent = userAgent;
 	}
 
@@ -34,7 +34,7 @@ public class User {
 	}
 
 	public String getURL() {
-		return URL;
+		return url;
 	}
 
 	public String getUserAgent() {
@@ -54,7 +54,7 @@ public class User {
 	}
 
 	public void setURL(final String uRL) {
-		URL = uRL;
+		url = uRL;
 	}
 
 	public void setUserAgent(final String userAgent) {
