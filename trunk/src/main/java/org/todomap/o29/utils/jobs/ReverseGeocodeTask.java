@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.orm.jpa.JpaTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.todomap.geocoder.GeoCodeException;
 import org.todomap.geocoder.GeoCoder;
@@ -17,34 +17,42 @@ import org.todomap.o29.beans.Todo;
 
 public class ReverseGeocodeTask extends TimerTask {
 
-	private final class ReverseGeocodeTransaction implements
-			TransactionCallback {
+	private final class ReverseGeocodeTransaction extends
+			TransactionCallbackWithoutResult {
+
 		@SuppressWarnings("unchecked")
 		@Override
-		public Object doInTransaction(TransactionStatus status) {
-			final List<Todo> unlocatedTodos = jpaTemplate.find("select OBJECT(todo) from "+Todo.class.getName()+ " todo where addr.country is null");
-			for(final Todo todo : unlocatedTodos) {
+		protected void doInTransactionWithoutResult(TransactionStatus status) {
+			final List<Todo> unlocatedTodos = jpaTemplate
+					.find("select OBJECT(todo) from " + Todo.class.getName()
+							+ " todo where addr.country is null");
+			for (final Todo todo : unlocatedTodos) {
 				try {
-					todo.setAddr(geoCoder.revert(new LatLng(todo.getLocation().getLatitude(), todo.getLocation().getLongitude())));
+					todo
+							.setAddr(geoCoder.revert(new LatLng(todo
+									.getLocation().getLatitude(), todo
+									.getLocation().getLongitude())));
 					jpaTemplate.persist(todo);
 				} catch (GeoCodeException e) {
-					logger.error("Could not reverse geocode todo: "+todo.getId());
+					logger.error("Could not reverse geocode todo: "
+							+ todo.getId());
 				}
 			}
-			return null;
 		}
 	}
 
-	private final static Logger logger = LoggerFactory.getLogger(ReverseGeocodeTask.class);
-	
+	private final static Logger logger = LoggerFactory
+			.getLogger(ReverseGeocodeTask.class);
+
 	GeoCoder geoCoder;
 	JpaTemplate jpaTemplate;
 	PlatformTransactionManager manager;
-	
+
 	@Override
 	public void run() {
 		logger.info("you can stop the tune but don't stop the beat");
-		new TransactionTemplate(manager).execute(new ReverseGeocodeTransaction());
+		new TransactionTemplate(manager)
+				.execute(new ReverseGeocodeTransaction());
 	}
 
 	public GeoCoder getGeoCoder() {
