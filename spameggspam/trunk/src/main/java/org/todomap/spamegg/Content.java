@@ -1,15 +1,11 @@
 package org.todomap.spamegg;
 
 public class Content {
-	private User author;
-	private String content;
-	private String permalink;
-	private String referrer;
-	private String type;
-
-	public Content() {
-		super();
-	}
+	private final User author;
+	private final String content;
+	private final String permalink;
+	private final String referrer;
+	private final String type;
 
 	public Content(final User author, final String referrer,
 			final String permalink, final String type, final String content) {
@@ -39,25 +35,5 @@ public class Content {
 
 	public String getType() {
 		return type;
-	}
-
-	public void setAuthor(final User author) {
-		this.author = author;
-	}
-
-	public void setContent(final String content) {
-		this.content = content;
-	}
-
-	public void setPermalink(final String permalink) {
-		this.permalink = permalink;
-	}
-
-	public void setReferrer(final String referrer) {
-		this.referrer = referrer;
-	}
-
-	public void setType(final String type) {
-		this.type = type;
 	}
 }
