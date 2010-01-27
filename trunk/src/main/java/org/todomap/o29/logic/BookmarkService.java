@@ -3,7 +3,6 @@ package org.todomap.o29.logic;
 import java.util.Date;
 import java.util.List;
 
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -64,8 +63,8 @@ public interface BookmarkService {
 	@POST
 	void bookmark(@PathParam("id") long itemId);
 	
-	@DELETE
-	@Path("/bookmark/{id}")
+	@POST
+	@Path("/unbookmark/{id}")
 	void unbookmark(@PathParam("id") long itemId);
 
 	@GET

@@ -42,6 +42,8 @@ final Locale locale = (Locale)request.getAttribute("locale");
 
 <script type="text/javascript" src="http://www.google.com/jsapi">
 </script>
+<script type="text/javascript" src="geoip.js">
+</script>
 <script type="text/javascript" src="scripts/json.js">
 </script>
 <script type="text/javascript" src="scripts/jquery-1.3.2.min.js">
@@ -293,8 +295,9 @@ if(request.getParameter("lat") == null) {
 						    marker.setIcon('img/flag.png');
 						    map.addMarker(marker);
 						    google.maps.event.addListener(marker, 'click', function() {
-							    $.get("services/todos/shortbyid/"+val['id'], function(data){
-								    var todo = eval("("+data+")");
+							    $.get("services/todofacade/get/"+val['id'], function(data){
+								    var todo_rel = eval("("+data+")");
+								    var todo = todo_rel['todo-rel'];
 								    var shortDescr = todo['todo']['shortDescr'];
 								    var itemId = todo['todo']['id'];
 							    	var infowindow = new google.maps.InfoWindow({
@@ -304,7 +307,7 @@ if(request.getParameter("lat") == null) {
 							    			+ todo['todo']['description']
 								    		+ '</div>'
 							    		    + '<a href="'+ encodeURI(itemId + '-' + todo['todo']['shortDescr']) + '.html" style="position: absolute; bottom: 10px; font-style: italic; font-size: 10px;" target="_blank"><i18n:message key="etc.more"/></a>'
-							    		    + '<div id="bookmark_togle_'+itemId+'" class="starTogle_inactive" style="position: absolute; top: 0px; right: 0px;" onclick="togle(\'bookmark_togle_'+itemId+'\',function(add){if(add) {bookmarkItem('+itemId+');} else {unbookmarkItem('+itemId+');}})"></div>'
+							    		    + '<div id="bookmark_togle_'+itemId+'" class="starTogle_'+(todo['bookmarked'] ? '' : 'in')+'active" style="position: absolute; top: 0px; right: 0px;" onclick="togle(\'bookmark_togle_'+itemId+'\',function(t,isAdd){ alert(isAdd); if(isAdd) {bookmarkItem('+itemId+');} else {unbookmarkItem('+itemId+');}})"></div>'
 							    			+ '<div id="voteup_'+itemId+'" class="voteUp_unselected" style="position: absolute; top: 32px; right: 0px;" onclick="voteUp('+itemId+')"></div>'
 							    			+ '<div id="votedown_'+itemId+'" class="voteDown_unselected" style="position: absolute; bottom: 10px; right: 0px;" onclick="voteDown('+itemId+')"></div>'
 							    			+ '</div>'
@@ -381,6 +384,7 @@ if(request.getParameter("lat") == null) {
 			}
 		}
 
+		setTimeout('refreshBookmarks()', 1000);
 	
 	}
 
@@ -596,6 +600,7 @@ if(request.getParameter("lat") == null) {
 			</div>
 			<h3><a href="#"><i18n:message key="sidebar.accordion.bookmarks">Bookmarks</i18n:message></a></h3>
 			<div class="sidebarControls">
+				<span id="bookmarks">bla bla</span>
 			</div>
 		</div>
 		<div class="versionInfo">

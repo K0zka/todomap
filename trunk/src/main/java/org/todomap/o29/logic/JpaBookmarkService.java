@@ -50,7 +50,9 @@ public class JpaBookmarkService extends JpaDaoSupport implements BookmarkService
 
 	@Override
 	public void unbookmark(long itemId) {
-		userService.getCurrentUser().getBookmarks().remove(baseService.getById(itemId));	
+		final User currentUser = userService.getCurrentUser();
+		currentUser.getBookmarks().remove(baseService.getById(itemId));
+		getJpaTemplate().persist(currentUser);
 	}
 
 	public BaseService getBaseService() {

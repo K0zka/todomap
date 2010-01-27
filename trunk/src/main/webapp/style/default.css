@@ -274,3 +274,20 @@ div.voteDown_selected {
 div.voteDown_unselected:hover {
 	background-color: #b6f366;
 }
+
+a.bookmark {
+	width: 90%;
+	font-family:inherit;
+	font-size:10px;
+	font-family: monospace;
+	margin: 5px;
+	line-height: 1em;
+}
+
+a.bookmark:hover {
+	width: 90%;
+	font-family:inherit;
+	font-size:10px;
+	background-color: gray;
+	font-family: monospace;
+}

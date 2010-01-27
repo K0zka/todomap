@@ -55,7 +55,7 @@ public class TodoFacade {
 	@Path("/get/{id}")
 	public TodoUserRelationship getTodo(@PathParam("id") long id) {
 		final TodoUserRelationship todoUserRel = new TodoUserRelationship();
-		final Todo todo = todoService.getById(id);
+		final Todo todo = todoService.getShortTodoById(id);
 		todoUserRel.setTodo(todo);
 		todoUserRel.setBookmarked(bookmarkService.isBookmarked(id));
 		todoUserRel.setRating(ratingService.getRating(id));

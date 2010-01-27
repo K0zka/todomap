@@ -4,6 +4,8 @@
  * Required libraries: jquery, jquery ui, json
  */
 
+var bookmarks = [];
+
 /**
  * Tries to find out if a variable is defined or not.
  * 
@@ -33,22 +35,12 @@ function ipBasedLocation() {
 		return new google.maps.LatLng(google.loader.ClientLocation['latitude'],
 				google.loader.ClientLocation['longitude']);
 	} catch (fubar) {
-		
 		//try to resolve country with internal geoip
-		
-		$.get('/geoip', function(data) {
-			if(data != 'unknown') {
-				geocoder = new google.maps.Geocoder();
-				geocoder.geocode( { 'address': data }, function(results, status) {
-			        if (status == google.maps.GeocoderStatus.OK) {
-			          map.setCenter(results[0].geometry.location);
-			        }
-			      });
-			}
-		});
-		
-		$('#wheretogoWindow').dialog('open');
-		return null;
+		if(todomap.geoip == 'unknown') {
+			return null;
+		} else {
+			return todomap.geoip;
+		}
 	}
 }
 
@@ -120,12 +112,25 @@ function checkLoginStatus_periodically() {
 
 checkLoginStatus_periodically();
 
+function refreshBookmarks() {
+	$.get('services/bookmarks', 
+		function(data) {
+			bookmarks = eval('('+data+')');
+			$('#bookmarks').empty();
+			$.each(bookmarks['bookmark'], function(i, val) {
+				$('#bookmarks').append("<a class='bookmark' href=\""+val['id']+'-'+val['text']+".html\" target=\"_blank\">"+val['text']+"</a> <img src='img/external-link.png' onclick='' style='cursor:pointer;'/> <br/>");
+			});
+		}
+	);
+}
+
 function bookmarkItem(itemId) {
 	debug('Bookmarking '+itemId);
 	$.ajax({
 		type:	'POST',
 		url:	'services/bookmarks/bookmark/'+itemId,
-		data:	itemId
+		data:	itemId,
+		success : refreshBookmarks
 	});
 }
 
@@ -133,8 +138,15 @@ function unbookmarkItem(itemId) {
 	$.ajax({
 		type:	'POST',
 		url:	'services/bookmarks/unbookmark/'+itemId,
-		data:	itemId
+		data:	itemId,
+		success : refreshBookmarks
 	});
+}
+
+function isBookmarked(itemId) {
+//	for(var i =0; i < bookmarks['bookmark'].) {
+//		
+//	}
 }
 
 function isBookmarked(itemId) {
@@ -207,13 +219,13 @@ function updateAddr(addr, latInput, lngInput) {
 
 function togle(who, callback) {
 	var tog = $('#'+who).attr('class');
-	var newVal = tog.indexOf('inactive') == -1;
-	if(newVal) {
+	var oldVal = tog.indexOf('inactive') == -1;
+	if(oldVal) {
 		$('#'+who).attr('class','starTogle_inactive');
 	} else {
 		$('#'+who).attr('class','starTogle_active');
 	}
 	if(callback) {
-		callback(who, newVal);
+		callback(who, !oldVal);
 	}
 }

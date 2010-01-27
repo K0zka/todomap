@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -20,7 +20,7 @@ public class User extends BaseBean {
 	String displayName;
 	@Column(nullable=true, length=64)
 	String email;
-	@OneToMany()
+	@ManyToMany
 	@XmlTransient
 	List<BaseBean> bookmarks;
 	@Embedded

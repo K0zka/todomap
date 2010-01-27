@@ -14,7 +14,7 @@ import org.todomap.o29.beans.User;
 public class JpaUserServiceImpl extends JpaDaoSupport implements UserService {
 
 	@Override
-	public void persist(User user) {
+	public void persist(final User user) {
 		getJpaTemplate().persist(user);
 	}
 
