@@ -18,9 +18,11 @@ public class GeoipServlet extends SpringServlet {
 		final PrintWriter writer = resp.getWriter();
 		resp.setHeader("Cache-control", "max-age=3600");
 		if(req.getRequestURI().endsWith(".js")) {
-			writer.write("org.todomap.geoip='");
+			writer.write("if(!window['todomap']) {\n");
+			writer.write("todomap = {};\n");
+			writer.write("todomap.geoip='");
 			writer.write(countryCode == null ? "unknown" : countryCode);
-			writer.write("';\n");
+			writer.write("';\n}\n");
 		} else {
 			writer.write(countryCode == null ? "unknown" : countryCode);
 		}

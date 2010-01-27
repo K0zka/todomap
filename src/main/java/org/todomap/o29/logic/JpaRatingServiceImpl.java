@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 
-import org.apache.abdera.model.Base;
 import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
 import org.todomap.o29.beans.BaseBean;
@@ -40,7 +39,7 @@ public class JpaRatingServiceImpl extends JpaDaoSupport implements
 			@Override
 			public Object doInJpa(final EntityManager em)
 					throws PersistenceException {
-				final Base data = getJpaTemplate().find(Base.class, id);
+				final BaseBean data = getJpaTemplate().find(BaseBean.class, id);
 				List<Rating> resultList = em
 						.createQuery(
 								"select OBJECT(rating) from "
