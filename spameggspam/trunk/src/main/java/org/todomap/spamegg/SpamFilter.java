@@ -13,8 +13,9 @@ public interface SpamFilter {
 	 * @param content
 	 *            the content submitted.
 	 * @return true or false based on implementation
+	 * @throws SpamFilterException if there is an error accessing the spam filter engine
 	 */
-	boolean isSpam(Content content);
+	boolean isSpam(Content content) throws SpamFilterException;
 
 	/**
 	 * Send a 'ham' (false positive) notification to the spam engine for a
@@ -22,8 +23,9 @@ public interface SpamFilter {
 	 * 
 	 * @param content
 	 *            the content
+	 * @throws SpamFilterException if there is an error accessing the spam filter engine
 	 */
-	void falsePositive(Content content);
+	void falsePositive(Content content) throws SpamFilterException;
 
 	/**
 	 * Send a 'spam' notification to the spam engine for a content that has been
@@ -31,6 +33,7 @@ public interface SpamFilter {
 	 * 
 	 * @param content
 	 *            the content
+	 * @throws SpamFilterException if there is an error accessing the spam filter engine
 	 */
-	void falseNegative(Content content);
+	void falseNegative(Content content) throws SpamFilterException;
 }

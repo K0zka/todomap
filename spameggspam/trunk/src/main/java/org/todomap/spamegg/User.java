@@ -4,11 +4,12 @@ public class User {
 	public User() {
 		super();
 	}
-	public User(String name, String ipAddress, String email, String uRL, String userAgent) {
+	public User(String name, String ipAddress, String email, String URL, String userAgent) {
 		super();
+		this.name = name;
 		this.ipAddress = ipAddress;
 		this.email = email;
-		URL = uRL;
+		this.URL = URL;
 		this.userAgent = userAgent;
 	}
 	public String getName() {

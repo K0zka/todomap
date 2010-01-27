@@ -18,7 +18,7 @@ public class AkismetSpamFilterTest {
 	}
 
 	@Test
-	public void testIsSpam() {
+	public void testIsSpam() throws SpamFilterException {
 		final Content spam = new Content(
 				new User("John Doe","127.0.0.1", "spamboy@hotmail.com",
 						"http://localhost/XXX", "Spambot 1.0"),

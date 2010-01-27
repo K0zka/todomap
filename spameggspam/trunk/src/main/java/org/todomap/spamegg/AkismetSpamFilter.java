@@ -1,12 +1,8 @@
 package org.todomap.spamegg;
 
-import java.io.IOException;
-
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
-import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.methods.PostMethod;
 
 public class AkismetSpamFilter implements SpamFilter {
@@ -23,7 +19,7 @@ public class AkismetSpamFilter implements SpamFilter {
 	String frontpage;
 	String appName;
 
-	public void falseNegative(Content content) {
+	public void falseNegative(Content content) throws SpamFilterException {
 		post("submit-spam", getRequest(content));
 	}
 
@@ -40,16 +36,16 @@ public class AkismetSpamFilter implements SpamFilter {
 				new NameValuePair()};
 	}
 
-	public void falsePositive(Content content) {
+	public void falsePositive(Content content) throws SpamFilterException {
 		post("submit-ham", getRequest(content));
 	}
 
-	public boolean isSpam(Content content) {
+	public boolean isSpam(Content content) throws SpamFilterException {
 		return Boolean.parseBoolean(post("comment-check", getRequest(content)));
 	}
 
 	private String post(final String operationName,
-			final NameValuePair[] request) {
+			final NameValuePair[] request) throws SpamFilterException {
 		final HttpClient client = new HttpClient();
 		final PostMethod post = new PostMethod();
 		try {
@@ -60,20 +56,9 @@ public class AkismetSpamFilter implements SpamFilter {
 			post.setRequestBody(request);
 			client.executeMethod(post);
 			return post.getResponseBodyAsString();
-		} catch (URIException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NullPointerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (HttpException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			throw new SpamFilterException(e);
 		}
-		return "";
 	}
 
 	public String getApikey() {
