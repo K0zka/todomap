@@ -5,9 +5,53 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.methods.PostMethod;
 
+/**
+ * Akismet spam api based on <a href="http://akismet.com/development/api/">aksimet api documentation</a>
+ * 
+ * @author kocka
+ */
 public class AkismetSpamFilter implements SpamFilter {
 
 	private static final String versionUrl = "$HeadURL: https://todomap.googlecode.com/svn/spameggspam/trunk/src/main $";
+
+	private String apikey;
+	private String appName;
+	private String frontpage;
+
+	public void falseNegative(final Content content) throws SpamFilterException {
+		post("submit-spam", getRequest(content));
+	}
+
+	public void falsePositive(final Content content) throws SpamFilterException {
+		post("submit-ham", getRequest(content));
+	}
+
+	public String getApikey() {
+		return apikey;
+	}
+
+	public String getAppName() {
+		return appName;
+	}
+
+	public String getFrontpage() {
+		return frontpage;
+	}
+
+	NameValuePair[] getRequest(final Content content) {
+		return new NameValuePair[] {
+				new NameValuePair("blog", frontpage),
+				new NameValuePair("user_ip", content.getAuthor().getIpAddress()),
+				new NameValuePair("user_agent", content.getAuthor()
+						.getUserAgent()),
+				new NameValuePair("comment_author_url", content.getAuthor()
+						.getURL()),
+				new NameValuePair("comment_author_email", content.getAuthor()
+						.getEmail()),
+				new NameValuePair("comment_author", content.getAuthor()
+						.getName()),
+				new NameValuePair("comment_content", content.getContent()) };
+	}
 
 	final String getVersion() {
 		final int srcRootPos = versionUrl.indexOf("/src/", 0);
@@ -15,32 +59,7 @@ public class AkismetSpamFilter implements SpamFilter {
 		return versionUrl.substring(lastSlash + 1, srcRootPos);
 	}
 
-	String apikey;
-	String frontpage;
-	String appName;
-
-	public void falseNegative(Content content) throws SpamFilterException {
-		post("submit-spam", getRequest(content));
-	}
-
-	NameValuePair[] getRequest(final Content content) {
-		return new NameValuePair[] {
-				new NameValuePair("blog", frontpage),
-				new NameValuePair("user_ip", content.getAuthor().ipAddress),
-				new NameValuePair("user_agent", content.getAuthor().userAgent),
-				new NameValuePair("comment_author_url", content.getAuthor()
-						.getURL()),
-				new NameValuePair("comment_author", content.getAuthor()
-								.getName()),
-				new NameValuePair("comment_content", content.getContent()),
-				new NameValuePair()};
-	}
-
-	public void falsePositive(Content content) throws SpamFilterException {
-		post("submit-ham", getRequest(content));
-	}
-
-	public boolean isSpam(Content content) throws SpamFilterException {
+	public boolean isSpam(final Content content) throws SpamFilterException {
 		return Boolean.parseBoolean(post("comment-check", getRequest(content)));
 	}
 
@@ -56,33 +75,21 @@ public class AkismetSpamFilter implements SpamFilter {
 			post.setRequestBody(request);
 			client.executeMethod(post);
 			return post.getResponseBodyAsString();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new SpamFilterException(e);
 		}
 	}
 
-	public String getApikey() {
-		return apikey;
-	}
-
-	public void setApikey(String apikey) {
+	public void setApikey(final String apikey) {
 		this.apikey = apikey;
 	}
 
-	public String getFrontpage() {
-		return frontpage;
-	}
-
-	public void setFrontpage(String frontpage) {
-		this.frontpage = frontpage;
-	}
-
-	public String getAppName() {
-		return appName;
-	}
-
-	public void setAppName(String appName) {
+	public void setAppName(final String appName) {
 		this.appName = appName;
+	}
+
+	public void setFrontpage(final String frontpage) {
+		this.frontpage = frontpage;
 	}
 
 }

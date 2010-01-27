@@ -1,11 +1,18 @@
 package org.todomap.spamegg;
 
 public class Content {
+	private User author;
+	private String content;
+	private String permalink;
+	private String referrer;
+	private String type;
+
 	public Content() {
 		super();
 	}
-	public Content(User author, String referrer, String permalink, String type,
-			String content) {
+
+	public Content(final User author, final String referrer,
+			final String permalink, final String type, final String content) {
 		super();
 		this.author = author;
 		this.referrer = referrer;
@@ -13,39 +20,44 @@ public class Content {
 		this.type = type;
 		this.content = content;
 	}
-	User author;
-	String referrer;
-	String permalink;
-	String type;
-	String content;
+
 	public User getAuthor() {
 		return author;
 	}
-	public void setAuthor(User author) {
-		this.author = author;
-	}
-	public String getReferrer() {
-		return referrer;
-	}
-	public void setReferrer(String referrer) {
-		this.referrer = referrer;
-	}
-	public String getPermalink() {
-		return permalink;
-	}
-	public void setPermalink(String permalink) {
-		this.permalink = permalink;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
+
 	public String getContent() {
 		return content;
 	}
-	public void setContent(String content) {
+
+	public String getPermalink() {
+		return permalink;
+	}
+
+	public String getReferrer() {
+		return referrer;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setAuthor(final User author) {
+		this.author = author;
+	}
+
+	public void setContent(final String content) {
 		this.content = content;
+	}
+
+	public void setPermalink(final String permalink) {
+		this.permalink = permalink;
+	}
+
+	public void setReferrer(final String referrer) {
+		this.referrer = referrer;
+	}
+
+	public void setType(final String type) {
+		this.type = type;
 	}
 }
