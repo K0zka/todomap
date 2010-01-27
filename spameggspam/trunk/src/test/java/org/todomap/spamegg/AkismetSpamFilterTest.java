@@ -30,4 +30,19 @@ public class AkismetSpamFilterTest {
 				.isSpam(spam);
 		spamFilter.falseNegative(spam);
 	}
+
+	@Test
+	public void testFalsePositive() throws SpamFilterException {
+		final Content notSpam = new Content(
+				new User("Dummy Warhead","127.0.0.1", "dummywarhead@hotmail.com",
+						"http://dummywarhead.openid.net/", "Firefox"),
+				"-",
+				"",
+				"comment",
+				"Hello! This is a test.");
+		spamFilter
+				.isSpam(notSpam);
+		spamFilter.falsePositive(notSpam);
+	}
+
 }
