@@ -130,7 +130,10 @@ function bookmarkItem(itemId) {
 		type:	'POST',
 		url:	'services/bookmarks/bookmark/'+itemId,
 		data:	itemId,
-		success : refreshBookmarks
+		success : refreshBookmarks,
+		error	: function(XMLHttpRequest, textStatus, errorThrown) {
+			handleErrors(XMLHttpRequest);
+		}
 	});
 }
 
@@ -139,7 +142,10 @@ function unbookmarkItem(itemId) {
 		type:	'POST',
 		url:	'services/bookmarks/unbookmark/'+itemId,
 		data:	itemId,
-		success : refreshBookmarks
+		success : refreshBookmarks,
+		error	: function(XMLHttpRequest, textStatus, errorThrown) {
+			handleErrors(XMLHttpRequest);
+		}
 	});
 }
 
