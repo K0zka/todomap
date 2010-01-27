@@ -21,8 +21,8 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:svn:http://todomap.googlecode.com/svn/trunk/</connection>
-		<developerConnection>scm:svn:https://todomap.googlecode.com/svn/trunk/</developerConnection>
+		<connection>scm:svn:http://todomap.googlecode.com/svn/spameggspam/trunk</connection>
+		<developerConnection>scm:svn:https://todomap.googlecode.com/svn//spameggspam/trunk</developerConnection>
 		<url>http://code.google.com/p/todomap/source/browse/</url>
 	</scm>
 	<dependencies>
