@@ -338,9 +338,12 @@ function saveData() {
 		<div id="comments" class="comments">
 			<% for(Comment comment : todo.getComments()) { %>
 				<span id="comment-<%= comment.getId() %>" class="comment"><%= comment.getText() %>
-				<div style="color: grey; font-size: 0.8em; text-align: right; font-family: monospace;">
-					<%= comment.getCreator().getDisplayName() %> <span id="authorId" class="authorId">[<%= comment.getCreator().getId() %>]</span>
-				</div>
+				<span style="color: grey; font-size: 0.8em; text-align: right; font-family: monospace;">
+					<%= StringUtils.isBlank(comment.getCreator().getDisplayName()) ? "..." : comment.getCreator().getDisplayName() %> <span id="authorId" class="authorId">[<%= comment.getCreator().getId() %>]</span>
+				</span>
+				<span style="color: grey; font-size: 0.8em; text-align: left; font-family: monospace;">
+					<i18n:formatDate value="<%= comment.getCreated() %>"/>
+				</span>
 				</span>
 			<% } %>
 		</div>
