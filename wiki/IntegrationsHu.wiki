@@ -1,0 +1,6 @@
+#summary Magyar integrációs pontok
+#labels Integrations,Draft
+
+= Célpontok =
+
+http://www.kozterulet-felugyelet.hu/web/cms/kozter-pub/ugyfelszolgalat.html - az első bekezdés máris nem túl biztató, de alul van egy email cím.
