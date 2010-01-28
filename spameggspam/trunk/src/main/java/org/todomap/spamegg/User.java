@@ -5,7 +5,7 @@ package org.todomap.spamegg;
  * 
  * @author kocka
  */
-public class User {
+public final class User {
 	private final String email;
 	private final String ipAddress;
 	private final String name;

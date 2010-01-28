@@ -5,7 +5,7 @@ package org.todomap.spamegg;
  * 
  * @author kocka
  */
-public class Content {
+public final class Content {
 	/** Author of the content */
 	private final User author;
 	/** The content */
