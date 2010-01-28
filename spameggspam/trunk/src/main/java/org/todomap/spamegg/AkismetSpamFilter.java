@@ -29,15 +29,15 @@ public class AkismetSpamFilter implements SpamFilter {
 		post("submit-ham", getRequest(content));
 	}
 
-	public String getApikey() {
+	public final String getApikey() {
 		return apikey;
 	}
 
-	public String getAppName() {
+	public final String getAppName() {
 		return appName;
 	}
 
-	public String getFrontpage() {
+	public final String getFrontpage() {
 		return frontpage;
 	}
 
@@ -85,15 +85,15 @@ public class AkismetSpamFilter implements SpamFilter {
 		}
 	}
 
-	public void setApikey(final String apikey) {
+	public final void setApikey(final String apikey) {
 		this.apikey = apikey;
 	}
 
-	public void setAppName(final String appName) {
+	public final void setAppName(final String appName) {
 		this.appName = appName;
 	}
 
-	public void setFrontpage(final String frontpage) {
+	public final void setFrontpage(final String frontpage) {
 		this.frontpage = frontpage;
 	}
 
