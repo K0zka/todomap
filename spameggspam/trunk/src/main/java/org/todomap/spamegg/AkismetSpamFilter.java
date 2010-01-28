@@ -1,12 +1,15 @@
 package org.todomap.spamegg;
 
+import java.io.IOException;
+
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.methods.PostMethod;
 
 /**
- * Akismet spam api based on <a href="http://akismet.com/development/api/">aksimet api documentation</a>
+ * Akismet spam api based on <a
+ * href="http://akismet.com/development/api/">aksimet api documentation</a>
  * 
  * @author kocka
  */
@@ -75,8 +78,10 @@ public class AkismetSpamFilter implements SpamFilter {
 			post.setRequestBody(request);
 			client.executeMethod(post);
 			return post.getResponseBodyAsString();
-		} catch (final Exception e) {
-			throw new SpamFilterException(e);
+		} catch (IllegalArgumentException e) {
+			throw new SpamFilterException(e.getMessage(), e);
+		} catch (IOException e) {
+			throw new SpamFilterException(e.getMessage(), e);
 		}
 	}
 
