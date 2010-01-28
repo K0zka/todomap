@@ -1,5 +1,10 @@
 package org.todomap.spamegg;
 
+/**
+ * Informations about the author of the content.
+ * 
+ * @author kocka
+ */
 public class User {
 	private final String email;
 	private final String ipAddress;

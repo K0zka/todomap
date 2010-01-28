@@ -1,7 +1,14 @@
 package org.todomap.spamegg;
 
+/**
+ * The content representation bean.
+ * 
+ * @author kocka
+ */
 public class Content {
+	/** Author of the content */
 	private final User author;
+	/** The content */
 	private final String content;
 	private final String permalink;
 	private final String referrer;
