@@ -7,6 +7,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<description>Well, there's spam egg sausage and spam, that's not got much spam in it.</description>
 	<inceptionYear>2010</inceptionYear>
+	<ciManagement>
+		<system>hudson</system>
+		<url>http://anzix.net/hudson/job/kocka.spameggspam/</url>
+	</ciManagement>
 	<licenses>
 		<license>
 			<name>Apache License 2.0</name>
