@@ -4,4 +4,4 @@
 = Célpontok =
 
  * http://www.kozterulet-felugyelet.hu/web/cms/kozter-pub/ugyfelszolgalat.html - az első bekezdés máris nem túl biztató, de alul van egy email cím.
- * http://police.hu/ - A rendőrségnek van valami kliens-oldali java cucca, amivel elméletileg bejelentések történhetnek. Reverse engineering után talén újrahasznosítható. A dolog érdekessége hogy területi bontás van.
+ * http://police.hu/ - A rendőrségnek van valami kliens-oldali java cucca, amivel elméletileg bejelentések történhetnek. Reverse engineering után talán újrahasznosítható. A dolog érdekessége hogy területi bontás van.
