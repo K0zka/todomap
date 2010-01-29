@@ -38,7 +38,7 @@ label {
 	display: block;
 	text-align: right;
 	float: left;
-	width: 150px;
+	width: 100px;
 	padding-right: 10px;
 	font-size: 0.8em;
 }
@@ -290,4 +290,9 @@ a.bookmark:hover {
 	font-size:10px;
 	background-color: gray;
 	font-family: monospace;
+}
+
+div.calculated {
+	background-color: #e0e0e0 !important;
+	border: dashed thin #a0a0a0;
 }

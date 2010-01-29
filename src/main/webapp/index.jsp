@@ -527,6 +527,12 @@ if(request.getParameter("lat") == null) {
 			var userData = eval("("+data+")");
 			$('#userDetailsDisplayName').val(userData['user']['displayName']);
 			$('#userDetailsEmail').val(userData['user']['email']);
+			try {
+				$('#userDetailsHomeLocationLat').val(userData['user']['homeLoc']['latitude']);
+				$('#userDetailsHomeLocationLng').val(userData['user']['homeLoc']['longitude']);
+				updateAddr('userDetailsHomeLocationReverseGeo','userDetailsHomeLocationLat','userDetailsHomeLocationLng');
+			} catch (fubar) {
+			}
 		});
 	}
 
@@ -732,14 +738,16 @@ if(request.getParameter("lat") == null) {
 			<h3><a href="newTodoDescription"> <i18n:message key="todo.details"> Details </i18n:message> </a></h3>
 			<div>
 				<label for="newTodoShortDescr"><i18n:message key="window.newTodo.newTodoShortDescr">Short description</i18n:message></label> <input type="text" name="newTodoShortDescr" id="newTodoShortDescr"/><br/>
-				<label for="newTodoDescription"><i18n:message key="window.newTodo.newTodoDescription">Details</i18n:message></label>
-				<textarea id="newTodoDescription" name="newTodoDesription"></textarea><br/>
+				<label for="newTodoDescription"><i18n:message key="window.newTodo.newTodoDescription">Details</i18n:message></label><br/>
+				<textarea style="width: 100%" id="newTodoDescription" name="newTodoDesription"></textarea><br/>
 			</div>
 			<h3><a href="#newTodoLocation"> <i18n:message key="todo.location"> Location </i18n:message> </a></h3>
 			<div>
 				<label for="newTodoLat"><i18n:message key="etc.latitude">Latitude</i18n:message></label><input id="newTodoLat" name="newTodoLat" onkeyup="updateAddr('todoReverseGeo','newTodoLat','newTodoLng')"/><br/>
 				<label for="newTodoLng"><i18n:message key="etc.longitude">Longitude</i18n:message></label><input id="newTodoLng" name="newTodoLng" onkeyup="updateAddr('todoReverseGeo','newTodoLat','newTodoLng')"/><br/>
+				<div class="calculated">
 				<label id="todoReverseGeo-label" for="todoReverseGeo"><i18n:message key="window.newTodo.reversegeo">Address</i18n:message></label><input id="todoReverseGeo" name="newTodoLng" onkeyup="updateLatLong('todoReverseGeo','newTodoLat','newTodoLng')"/><br/>
+				</div>
 			</div>
 		</div>
 	</form>
@@ -779,8 +787,10 @@ if(request.getParameter("lat") == null) {
 			<input id="userDetailsHomeLocationLat" onkeyup="updateAddr('userDetailsHomeLocationReverseGeo','userDetailsHomeLocationLat','userDetailsHomeLocationLng')"/><br>
 			<label for="userDetailsHomeLocationLng"><i18n:message key="etc.longitude">Longitude</i18n:message></label>
 			<input id="userDetailsHomeLocationLng" onkeyup="updateAddr('userDetailsHomeLocationReverseGeo','userDetailsHomeLocationLat','userDetailsHomeLocationLng')"/><br/>
+			<div class="calculated">
 			<label id="userDetailsHomeLocationReverseGeo-label" for="userDetailsHomeLocationReverseGeo"><i18n:message key="window.userDetailsWindow.reversegeo"></i18n:message></label>
 			<input id="userDetailsHomeLocationReverseGeo" onkeyup="updateLatLong('userDetailsHomeLocationReverseGeo','userDetailsHomeLocationLat','userDetailsHomeLocationLng')"/><br/>
+			</div>
 			<button id="userDetailsUseCurrentLocation" onclick="updateLocation()">
 				<i18n:message key="window.userDetailsWindow.useCurrent">use map center</i18n:message>
 			</button>
