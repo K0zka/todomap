@@ -106,9 +106,12 @@ function initialize() {
         	collapsible : true
            });
 
-		//TODO: this is a half-ass solution to make google map work even if it is not
-		//on the active accordion. 
-        setTimeout('$("#todoDetails").accordion("activate", 1)',1000);
+    	//This code will switch to the detailed description tab
+    	//when the map finished loading.
+    	google.maps.event.addListener(map, "tilesloaded", function() {
+    		$("#todoDetails").accordion("activate", 1);
+    		google.maps.event.clearListeners(map, "tilesloaded");
+        });
 
 		$('#imageWindow').dialog({
 			autoOpen:false,
