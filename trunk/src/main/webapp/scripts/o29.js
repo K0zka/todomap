@@ -82,7 +82,7 @@ function checkLoginStatus() {
 						isAuthenticated = false;
 					}
 				}
-			} catch (errror) {
+			} catch (error) {
 				debug(error);
 			}
 		},
