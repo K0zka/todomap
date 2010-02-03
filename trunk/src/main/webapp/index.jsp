@@ -135,15 +135,27 @@ final Locale locale = (Locale)request.getAttribute("locale");
     	  };
     	})();
 
-
     function initialize() {
 <%
-if(request.getParameter("lat") == null) {
+if(request.getSession(false) != null && request.getSession().getAttribute("returnToLat") != null){
+%>
+		myLatlng = new google.maps.LatLng(<%=request.getSession().getAttribute("returnToLat") %>,<%=request.getSession().getAttribute("returnToLng") %>);
+		zoomL = <%=request.getSession().getAttribute("returnToZoom") %>;
+<%
+} else if(request.getParameter("lat") == null) {
 %>
         myLatlng = ipBasedLocation();
         //locale-based location
         if(myLatlng == null) {
         	myLatlng = new google.maps.LatLng(<i18n:message key="etc.initloc.lat"/>,<i18n:message key="etc.initloc.lng"/>);
+        	if(todomap.geoip != 'Unknown') {
+        		geocoder = new google.maps.Geocoder();
+        		geocoder.geocode(todomap.geoip , function(results, status) {
+        	        if (status == google.maps.GeocoderStatus.OK) {
+        	          map.setCenter(results[0].geometry.location);
+        	        }
+       	      });
+            }
         }
         zoomL = zoomLevel();
 <%
@@ -229,11 +241,12 @@ if(request.getParameter("lat") == null) {
 
 		var tooltipOptions = {
 	            delay : 1000,
+	            showURL: false,
 	            bodyHandler: function() {
 	            	return $('#'+this.id+"-tooltip").html();
 	        	}
 	    };
-        
+
         //Button tooltips
         $('button').tooltip(tooltipOptions);
         //Link tooltips
@@ -248,7 +261,7 @@ if(request.getParameter("lat") == null) {
 		});
 		//form labels
         $('label').tooltip(tooltipOptions);
-        
+
     });
 
 	var flagmode = 'none';
@@ -571,6 +584,12 @@ if(request.getParameter("lat") == null) {
 		$(".authOnly").hide(1000);
 		$(".noAuthOnly").show(1000);
 	}
+
+function updateMapReturnValues() {
+	$('#returnToLat').val(map.getCenter().lat());
+	$('#returnToLng').val(map.getCenter().lng());
+	$('#returnToZoom').val(map.getZoom());
+}
 </script>
 
 
@@ -578,7 +597,7 @@ if(request.getParameter("lat") == null) {
 <body onload="initialize()" style="margin: 0px; padding: 0px;">
 
 <div style="width: 100%; height: 100%;">
-	<span id="sidebar" style="width: 20%; height: 100%; position: absolute; left: 0px;">
+	<div id="sidebar" style="width: 20%; height: 100%; position: absolute; left: 0px;">
 		<div id="toolsAccordion">
 			<h3><a href="#"> <i18n:message key="sidebar.accordion.tools"> Tools </i18n:message></a></h3>
 			<div class="sidebarControls">
@@ -601,9 +620,11 @@ if(request.getParameter("lat") == null) {
 				<button id="statisticsButton"> <i18n:message key="sidebar.button.statistics">Statistics</i18n:message> </button><br/>
 				<button id="helpButton" onclick="$(helpWindow).dialog('open')"> <i18n:message key="sidebar.button.help">Help</i18n:message> </button><br/>
 			</div>
+			<!-- 
 			<h3><a href="#"><i18n:message key="sidebar.accordion.search">Search</i18n:message></a></h3>
 			<div class="sidebarControls">
 			</div>
+			 -->
 			<h3><a href="#"><i18n:message key="sidebar.accordion.bookmarks">Bookmarks</i18n:message></a></h3>
 			<div class="sidebarControls">
 				<span id="bookmarks">bla bla</span>
@@ -623,7 +644,10 @@ if(request.getParameter("lat") == null) {
 			The map is copyrighted by <a href="http://www.google.com/">google<a/>.
 			</i18n:message>
 		</div>
-	</span>
+		<div id='page-tooltip'>
+			&nbsp;
+		</div>
+	</div>
 	<span style="width: 80%; height: 100%; position: absolute; right: 0px;">
 		<div id="map_canvas" style="width: 100%; height: 100%"></div>
 	</span>
@@ -648,10 +672,12 @@ if(request.getParameter("lat") == null) {
 
 <div id="loginWindow" title="Log in">
 
-	
-	
 	<form name="loginForm" action="<c:url value='j_spring_openid_security_check'/>" method="POST">
-	
+
+	<input type="hidden" name="returnToLat" id="returnToLat" value=""/>
+	<input type="hidden" name="returnToLng" id="returnToLng" value=""/>
+	<input type="hidden" name="returnToZoom" id="returnToZoom" value=""/>
+
 	<div id="loginTabs">
 		<ul>
 			<li><a href="#logintab-openid">OpenId</a></li>
@@ -676,7 +702,7 @@ if(request.getParameter("lat") == null) {
 				<img src="img/google-logo.png" style="float: right;"/> 
 				<span><i18n:message key="window.login.googletext">Please click on the button below to log in with your google account!</i18n:message></span>
 			</p>
-			<button id="googleLoginButton" onclick="$('#openidUrl').val('https://www.google.com/accounts/o8/id'); document.loginForm.submit()"><i18n:message key="window.login.login">Log in</i18n:message></button>
+			<button id="googleLoginButton" onclick="updateMapReturnValues(); $('#openidUrl').val('https://www.google.com/accounts/o8/id'); document.loginForm.submit()"><i18n:message key="window.login.login">Log in</i18n:message></button>
 		</div>
 		<div id="logintab-yahooid">
 			<label for="yahooIdInput">
@@ -685,7 +711,7 @@ if(request.getParameter("lat") == null) {
 			<input 
 				id="yahooIdInput" 
 				onkeyup="$('#openidUrl').val('https://me.yahoo.com/'+$('#yahooIdInput').val())"/><br/>
-		    <button onclick="document.loginForm.submit()"><i18n:message key="window.login.login">Log in</i18n:message></button>
+		    <button onclick="updateMapReturnValues(); document.loginForm.submit()"><i18n:message key="window.login.login">Log in</i18n:message></button>
 		</div>
 		<div id="logintab-bloggercom">
 			<label for="bloggerInput">
@@ -694,9 +720,11 @@ if(request.getParameter("lat") == null) {
 			<input 
 				id="bloggerInput" 
 				onkeyup="$('#openidUrl').val($('#bloggerInput').val())"/><br/>
-		    <button onclick="document.loginForm.submit()"><i18n:message key="window.login.login">Log in</i18n:message></button>
+		    <button onclick="updateMapReturnValues(); document.loginForm.submit()"><i18n:message key="window.login.login">Log in</i18n:message></button>
 		</div>
 	</div>
+	<label for="returnToPosition">Return to this position after login</label>
+	<input type="checkbox" id="returnToPosition" name="returnToPosition"/><br/>
 	<% 
 	if(request.getParameter("error") != null 
 			&& session != null 
