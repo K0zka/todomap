@@ -35,12 +35,7 @@ function ipBasedLocation() {
 		return new google.maps.LatLng(google.loader.ClientLocation['latitude'],
 				google.loader.ClientLocation['longitude']);
 	} catch (fubar) {
-		//try to resolve country with internal geoip
-		if(todomap.geoip == 'unknown') {
-			return null;
-		} else {
-			return todomap.geoip;
-		}
+		return null;
 	}
 }
 
