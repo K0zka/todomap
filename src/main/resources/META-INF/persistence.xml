@@ -11,5 +11,6 @@
 		<class>org.todomap.o29.beans.Todo</class>
 		<class>org.todomap.o29.beans.User</class>
 		<class>org.todomap.minigeoip.impl.jpa.IpDomain</class>
+		<class>org.todomap.o29.utils.security.RememberMeToken</class>
 	</persistence-unit>
 </persistence>
