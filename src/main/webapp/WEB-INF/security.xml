@@ -8,6 +8,8 @@
 	<sec:http>
 		<sec:intercept-url pattern="/" />
 		<sec:intercept-url pattern="/index.jsp" />
+		<!-- 28 days -->
+		<sec:remember-me token-repository-ref="rememberMeTokenRepo" key="todomap-remember-me" token-validity-seconds="2419200"/>
 		<sec:logout />
 		<sec:openid-login login-page="/"
 			authentication-failure-url="/?error=true" user-service-ref="userServiceAdapter"
@@ -24,6 +26,10 @@
 			</sec:attribute-exchange>
 		</sec:openid-login>
 	</sec:http>
+
+	<bean id="rememberMeTokenRepo" class="org.todomap.o29.utils.security.JpaPersistentTokenRepository">
+		<property name="entityManagerFactory" ref="entityManager" />
+	</bean>
 
 	<sec:authentication-manager alias="authenticationManager" />
 
