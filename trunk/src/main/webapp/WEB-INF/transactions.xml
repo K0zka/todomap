@@ -39,6 +39,9 @@
 		<aop:pointcut id="bookmarkServiceMethods"
 			expression="execution(* org.todomap.o29.logic.BookmarkService.*(..))" />
 		
+		<aop:pointcut id="rememberMeServiceMethods"
+			expression="execution(* org.springframework.security.web.authentication.rememberme.PersistentTokenRepository.*(..))" />
+		
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="geoipMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="todoServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="userServiceMethods" />
@@ -47,6 +50,7 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="attachmentServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="commentServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="bookmarkServiceMethods" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="rememberMeServiceMethods" />
 
 	</aop:config>
 
