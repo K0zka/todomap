@@ -18,6 +18,23 @@
 	</context-param>
 
 	<filter>
+		<filter-name>rememberMapPosition</filter-name>
+		<filter-class>org.todomap.o29.utils.security.RememberParamsFilter</filter-class>
+		<init-param>
+			<param-name>paramsToSave</param-name>
+			<param-value>returnToLat,returnToLng,returnToZoom</param-value>
+		</init-param>
+		<init-param>
+			<param-name>triggerParam</param-name>
+			<param-value>returnToPosition</param-value>
+		</init-param>
+		<init-param>
+			<param-name>triggerParamValue</param-name>
+			<param-value>on</param-value>
+		</init-param>
+	</filter>
+
+	<filter>
 		<filter-name>enforceEncoding</filter-name>
 		<filter-class>org.todomap.o29.utils.EnforceEncodingFilter</filter-class>
 	</filter>
@@ -52,6 +69,11 @@
 		<filter-name>languageFilter</filter-name>
 		<filter-class>org.todomap.o29.utils.LanguageFilter</filter-class>
 	</filter>
+
+	<filter-mapping>
+		<filter-name>rememberMapPosition</filter-name>
+		<url-pattern>/j_spring_openid_security_check</url-pattern>
+	</filter-mapping>
 
 	<filter-mapping>
 		<filter-name>languageFilter</filter-name>
