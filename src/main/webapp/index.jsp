@@ -176,8 +176,8 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
         map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
 		google.maps.event.addListener(map, "rightclick", function(event) {
-			document.getElementById("newTodoLat").value = event.latLng.lat();
-			document.getElementById("newTodoLng").value = event.latLng.lng();
+			$("#newTodoLat").val(event.latLng.lat());
+			$("#newTodoLng").val(event.latLng.lng());
 			updateAddr('todoReverseGeo','newTodoLat','newTodoLng');
 			if(isAuthenticated) {
 				$("#newTodo").dialog('open');
