@@ -27,7 +27,7 @@ final Locale locale = (Locale)request.getAttribute("locale");
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="google-site-verification" content="<%= configuration.getGoogleWebmastersVerification() %>" />
 <meta name="y_key" content="<%= configuration.getYahooSiteExplorerVerification() %>">
-<meta name="description" content="Keeping track of issues on the map. A direct-democracy tool for town and country-size communities." lang="english"/>
+<meta name="description" content="<i18n:message key="etc.description"/>" lang="<i18n:message key="etc.language"/>"/>
 
 <jsp:include page="WEB-INF/jsp/includes/sitemeta.jsp"/>
 
