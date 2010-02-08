@@ -38,9 +38,7 @@ final Locale locale = (Locale)request.getAttribute("locale");
 </script>
 <script type="text/javascript" src="scripts/jquery-ui-1.7.2.js">
 </script>
-<script type="text/javascript" src="scripts/jquery.dimensions.min.js">
-</script>
-<script type="text/javascript" src="scripts/jquery.tooltip.min.js">
+<script type="text/javascript" src="scripts/jquery.qtip-1.0.0-rc3.min.js">
 </script>
 <script type="text/javascript" src="scripts/jquery-ui-1.7.2.js">
 </script>
@@ -83,24 +81,9 @@ function initialize() {
 
     $(document).ready(function(){
     	$('#descriptionEdit').hide();
-    	$('#todoDescriptionShow').tooltip({
-    		bodyHandler : function() {
-    			return $('#'+this.id+"-tooltip").html();
-    		},
-			delay : 1000
-        	});
-    	$('button').tooltip({
-    		bodyHandler : function() {
-    			return $('#'+this.id+"-tooltip").html();
-    		},
-			delay : 1000
-        	});
-    	$('span').tooltip({
-    		bodyHandler : function() {
-    			return $('#'+this.id+"-tooltip").html();
-    		},
-			delay : 1000
-        	});
+    	applyTooltip('#todoDescriptionShow');
+    	applyTooltip('button');
+    	applyTooltip('span');
     	$("#todoDetails").accordion({
         	navigation: true,
         	collapsible : true
