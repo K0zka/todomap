@@ -35,11 +35,11 @@ final Locale locale = (Locale)request.getAttribute("locale");
 
 <link rel="stylesheet" type="text/css"
 	href="style/jquery-ui-1.7.2.custom.css" media="all" />
+<link rel="stylesheet" type="text/css"
+	href="style/jquery.tooltip.css" media="all" />
 
 <link rel="stylesheet" type="text/css"
 	href="style/default.css" media="all" />
-<link type="text/css" rel="stylesheet" href="style/jquery.tooltip.css" />
-
 <script type="text/javascript" src="http://www.google.com/jsapi">
 </script>
 <script type="text/javascript" src="geoip.js">
@@ -48,11 +48,9 @@ final Locale locale = (Locale)request.getAttribute("locale");
 </script>
 <script type="text/javascript" src="scripts/jquery-1.3.2.min.js">
 </script>
+<script type="text/javascript" src="scripts/jquery.qtip-1.0.0-rc3.min.js">
+</script>
 <script type="text/javascript" src="scripts/jquery-ui-1.7.2.js">
-</script>
-<script type="text/javascript" src="scripts/jquery.dimensions.min.js">
-</script>
-<script type="text/javascript" src="scripts/jquery.tooltip.min.js">
 </script>
 <script type="text/javascript"
 	src="http://maps.google.com/maps/api/js?sensor=false&language=<%= locale.getLanguage() %>">
@@ -239,28 +237,10 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
             });
         $('#loginTabs').tabs();
 
-		var tooltipOptions = {
-	            delay : 1000,
-	            showURL: false,
-	            bodyHandler: function() {
-	            	return $('#'+this.id+"-tooltip").html();
-	        	}
-	    };
-
-        //Button tooltips
-        $('button').tooltip(tooltipOptions);
-        //Link tooltips
-        $('a').tooltip(tooltipOptions);
-        //div tooltips
-		$('div').tooltip({
-            delay : 2000,
-            bodyHandler: function() {
-            	//TODO: return different tooltip for authenticated users and anons.
-           		return $('#'+this.id+"-tooltip").html();
-        	}
-		});
-		//form labels
-        $('label').tooltip(tooltipOptions);
+        applyTooltip('button');
+        applyTooltip('a');
+//        applyTooltip('#map_canvas');
+        applyTooltip('label');
 
     });
 
@@ -312,6 +292,7 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 								    var todo_rel = eval("("+data+")");
 								    var todo = todo_rel['todo-rel'];
 								    var shortDescr = todo['todo']['shortDescr'];
+								    var rating = todo['rating'];
 								    var itemId = todo['todo']['id'];
 							    	var infowindow = new google.maps.InfoWindow({
 							    		content: '<div style="width: 200px; height: 200px;">'
@@ -321,8 +302,13 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 								    		+ '</div>'
 							    		    + '<a href="'+ encodeURI(itemId + '-' + todo['todo']['shortDescr']) + '.html" style="position: absolute; bottom: 10px; font-style: italic; font-size: 10px;" target="_blank"><i18n:message key="etc.more"/></a>'
 							    		    + '<div id="bookmark_togle_'+itemId+'" class="starTogle_'+(todo['bookmarked'] ? '' : 'in')+'active" style="position: absolute; top: 0px; right: 0px;" onclick="togle(\'bookmark_togle_'+itemId+'\',function(t,isAdd){ if(isAdd) {bookmarkItem('+itemId+');} else {unbookmarkItem('+itemId+');}})"></div>'
-							    			+ '<div id="voteup_'+itemId+'" class="voteUp_unselected" style="position: absolute; top: 32px; right: 0px;" onclick="voteUp('+itemId+')"></div>'
-							    			+ '<div id="votedown_'+itemId+'" class="voteDown_unselected" style="position: absolute; bottom: 10px; right: 0px;" onclick="voteDown('+itemId+')"></div>'
+							    		    
+							    			+ '<div id="voteup_'+itemId+'" class="' + (rating && rating['rate'] >= 0 ? 'voteUp_selected' : 'voteUp_unselected') + '" style="position: absolute; top: 32px; right: 0px;" ' 
+							    			+ (rating ? '' : 'onclick="voteUp('+itemId+', function(){updateVoted('+itemId+', true)})"' ) + '></div>'
+							    			
+							    			+ '<div id="votedown_'+itemId+'" class="' + (rating && rating['rate'] < 0 ? 'voteDown_selected' : 'voteDown_unselected') + '" style="position: absolute; bottom: 10px; right: 0px;" ' 
+							    			+ (rating ? '' : 'onclick="voteDown('+itemId+', function(){updateVoted('+itemId+', false)})"') + '></div>'
+
 							    			+ '</div>'
 							        });
 							        infowindow._open(map,marker);
@@ -590,6 +576,14 @@ function updateMapReturnValues() {
 	$('#returnToLng').val(map.getCenter().lng());
 	$('#returnToZoom').val(map.getZoom());
 }
+
+function updateVoted(id, votedUp) {
+	$('votedown_'+id).attr('onclick','');
+	$('voteup_'+id).attr('onclick','');
+//	$('votedown_'+id).addClass((votedUp ? 'voteDown_unselected' : 'voteDown_selected'));
+//	$('voteup_'+id).addClass((votedUp ? 'voteUp_selected' : 'voteUp_unselected'));
+}
+
 </script>
 
 

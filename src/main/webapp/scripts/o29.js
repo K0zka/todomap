@@ -157,7 +157,9 @@ function unbookmarkItem(itemId) {
 		success : refreshBookmarks,
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			handleErrors(XMLHttpRequest);
-		}
+		},
+		contentType : 'application/json',
+		dataType : 'json'
 	});
 }
 
@@ -250,6 +252,33 @@ function togle(who, callback) {
 	if (callback) {
 		callback(who, !oldVal);
 	}
+}
+
+function rate(id, val, callback) {
+	var rating = { rating : {
+			rate : val,
+			comment : 'auto-magic'
+			}
+	};
+	$.ajax({
+		type : 'POST',
+		url : 'services/rating/add/'+id,
+		data : JSON.stringify(rating),
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			handleErrors(XMLHttpRequest);
+		},
+		success : callback,
+		contentType : 'application/json',
+		dataType : 'json'
+	});
+}
+
+function voteDown(id, callback) {
+	rate(id, -10, callback);
+}
+
+function voteUp(id, callback) {
+	rate(id, 10, callback);
 }
 
 function applyTooltip(elemSelector) {
