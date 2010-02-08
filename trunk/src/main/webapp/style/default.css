@@ -244,7 +244,6 @@ div.voteUp_selected {
 	border: none;
 	border-radius:4px;
 	-moz-border-radius:4px;
-	cursor: pointer;
 }
 div.voteUp_unselected:hover {
 	background-color: #b6f366;
@@ -269,7 +268,6 @@ div.voteDown_selected {
 	border: none;
 	border-radius:4px;
 	-moz-border-radius:4px;
-	cursor: pointer;
 }
 div.voteDown_unselected:hover {
 	background-color: #b6f366;
