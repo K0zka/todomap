@@ -719,7 +719,7 @@ function updateVoted(id, votedUp) {
 		    <button onclick="updateMapReturnValues(); document.loginForm.submit()"><i18n:message key="window.login.login">Log in</i18n:message></button>
 		</div>
 	</div>
-	<label for="returnToPosition">Return to this position after login</label>
+	<label for="returnToPosition"><i18n:message key="window.login.returnhere">return here</i18n:message></label>
 	<input type="checkbox" id="returnToPosition" name="returnToPosition"/><br/>
 	<% 
 	if(request.getParameter("error") != null 
