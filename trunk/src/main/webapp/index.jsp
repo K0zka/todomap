@@ -653,14 +653,16 @@ function updateVoted(id, votedUp) {
 </div>
 
 <div id="linksWindow" title="Links to this map">
-	<div style="width: 100%" onclick="javascript:linkToThisMap.select()">
+	<span style="width: 100%" onclick="javascript:linkToThisMap.select()">
 		<label for="linkToThisPage" style="width: 40%"><i18n:message key="window.links.link">Link to this map</i18n:message></label>
-		<input type="text" id="linkToThisMap" value="" style="width: 40%" />
-	</div>
-	<div style="width: 100%" onclick="javascript:rssLinkToThisMap.select()">
+		<img style="cursor: pointer;" src="img/external-link.png" onclick="window.open( $('#linkToThisMap').val(), '_blank' )"></img>
+		<input type="text" id="linkToThisMap" value="" style="width: 40%" /> 
+	</span>
+	<span style="width: 100%" onclick="javascript:rssLinkToThisMap.select()">
 		<label for="rssLinkToThisMap" style="width:40%" ><i18n:message key="window.links.rss">RSS to this map</i18n:message></label>
-		<input type="text" id="rssLinkToThisMap" value="" style="width: 40%"/>
-	</div>
+		<img style="cursor: pointer;" src="img/external-link.png" onclick="window.open( $('#rssLinkToThisMap').val(), '_blank' )"></img>
+		<input type="text" id="rssLinkToThisMap" value="" style="width: 40%"/> 
+	</span>
 </div>
 
 
