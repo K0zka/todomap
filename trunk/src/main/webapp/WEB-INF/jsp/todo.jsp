@@ -253,6 +253,9 @@ function saveData() {
 	<h3><a href="#"> <i18n:message key="todo.location">Location</i18n:message></a></h3>
 	<div style="height: 600px">
 		<div id="map_canvas" style="width: 100%; height: 100%"></div>
+		<div style="position: absolute; top: 0px; right: 0px; color: grey; font-size: 0.8em;">
+			<a href="index.jsp?lat=<%= todo.getLocation().getLatitude() %>&lng=<%= todo.getLocation().getLongitude() %>&zoom=13"> <i18n:message key="etc.returnToMap">return to map</i18n:message> </a>
+		</div>
 		<div style="color: grey; font-size: 0.8em;">
 			<% if(todo.getAddr() != null) { %>
 			<%= todo.getAddr().getCountry() == null ? "-" : todo.getAddr().getCountry() %>
