@@ -58,6 +58,7 @@ final Locale locale = (Locale)request.getAttribute("locale");
 
 <script type="text/javascript">
 
+var isAuthenticated = null;
 var version = <%= todo.getVersion() %>;
 var id = <%= todo.getId() %>;
 var marker;
@@ -314,7 +315,7 @@ function saveData() {
 	<div>
 		<div id="newComment" style="">
 			<textarea id="commentEditor" class="todoDescription"></textarea> <br/>
-			<button id="uploadButton" onclick="submitComment();">submit</button>
+			<button id="commentButton" onclick="submitComment();">submit</button>
 		</div>
 		<span class="authOnly">
 			<button id="addCommentButton" onclick="addComment()">add</button>
