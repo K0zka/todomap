@@ -230,7 +230,8 @@ function saveData() {
 		data: strData,
 		success: function (data, textStatus){
 			$('#todoDescriptionShow').html(editors['todoDescriptionEditor'].get_content());
-			$('#descriptionEdit').hide(1000);
+			//chrome could not tolerate slow hiding, so this remained no-effect....
+			$('#descriptionEdit').hide();
 			$('#todoDescriptionShow').show(1000);
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
