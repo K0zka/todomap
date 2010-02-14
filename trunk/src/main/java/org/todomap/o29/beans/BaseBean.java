@@ -17,7 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -36,9 +35,6 @@ public abstract class BaseBean implements Nameable {
 	List<Comment> comments;
 	@OneToMany(fetch = FetchType.LAZY)
 	List<Rating> ratings;
-
-	@Transient
-	RatingSummary ratingSummary;
 
 	@Column(updatable = false, nullable = false)
 	Date created = new Date();
@@ -66,14 +62,6 @@ public abstract class BaseBean implements Nameable {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "attachedTo")
 	List<Attachment> attachments;
-
-	public RatingSummary getRatingSummary() {
-		return ratingSummary;
-	}
-
-	public void setRatingSummary(RatingSummary ratingSummary) {
-		this.ratingSummary = ratingSummary;
-	}
 
 	@XmlTransient
 	public List<Attachment> getAttachments() {
