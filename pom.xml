@@ -118,6 +118,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>3.0.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
 			<version>3.0.0.RELEASE</version>
 		</dependency>
@@ -291,6 +296,11 @@
 						<groupId>org.eclipse.jetty</groupId>
 						<artifactId>jetty-ajp</artifactId>
 						<version>7.0.1.v20091125</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.activemq</groupId>
+						<artifactId>activemq-core</artifactId>
+						<version>5.3.0</version>
 					</dependency>
 				</dependencies>
 				<configuration>
