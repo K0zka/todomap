@@ -295,7 +295,7 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 								    var rating = todo['rating'];
 								    var itemId = todo['todo']['id'];
 							    	var infowindow = new google.maps.InfoWindow({
-							    		content: '<div style="width: 200px; height: 200px;">'
+							    		content: '<div style="overflow:hidden; width: 200px; height: 200px;">'
 							    			+ '<h3 style="margin: 5px; font-size: 15px; width: 160px;">'+shortDescr+'</h3>'
 							    			+ '<div style="overflow: hidden; margin: 10px; text-align: justify; font-size: 12px; width: 160px; height: 150px;">'
 							    			+ todo['todo']['description']
