@@ -19,6 +19,24 @@
 		</Arg>
 	</New>
 
+	<New id="o29ds" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg>jms/connectionFactory</Arg>
+		<Arg>
+			<New class="org.apache.activemq.ActiveMQConnectionFactory">
+				<Arg>vm://localhost?broker.persistent=false</Arg>
+			</New>
+		</Arg>
+	</New>
+
+	<New id="o29ds" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg>jms/o29mq</Arg>
+		<Arg>
+			<New class="org.apache.activemq.command.ActiveMQQueue">
+				<Arg>o29mq</Arg>
+			</New>
+		</Arg>
+	</New>
+
 	<New id="mail" class="org.eclipse.jetty.plus.jndi.Resource">
 		<Arg>mail/Session</Arg>
 		<Arg>
