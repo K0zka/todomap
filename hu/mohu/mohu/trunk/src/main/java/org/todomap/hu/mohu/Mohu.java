@@ -25,19 +25,21 @@ import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * mo.hu data access API
+ * 
  * @author kocka
- *
+ * 
  */
 public class Mohu {
 
 	/**
 	 * This class helps to build the contact data from the result xml.
+	 * 
 	 * @author kocka
-	 *
+	 * 
 	 */
 	private static final class ResultXmlHandler extends DefaultHandler {
 		private final Contact contact;
-		String cssClass;
+		private String cssClass;
 
 		private ResultXmlHandler(final Contact contact) {
 			this.contact = contact;
@@ -57,9 +59,9 @@ public class Mohu {
 		}
 
 		@Override
-		public void startElement(final String uri,
-				final String localName, final String qName,
-				final Attributes attributes) throws SAXException {
+		public void startElement(final String uri, final String localName,
+				final String qName, final Attributes attributes)
+				throws SAXException {
 			cssClass = attributes.getValue("class");
 		}
 	}
@@ -70,7 +72,8 @@ public class Mohu {
 	/**
 	 * Build a contact from a html fragment fetched from mo.hu.
 	 * 
-	 * @param htmlFragment stringified html
+	 * @param htmlFragment
+	 *            stringified html
 	 * @return contact data
 	 * @throws ParserConfigurationException
 	 * @throws SAXException
@@ -107,9 +110,11 @@ public class Mohu {
 	/**
 	 * Get the list of known agencies.
 	 * 
-	 * @param postalCode	postal code
-	 * @param town			name of the town
-	 * @return				List of contacts, which could be empty
+	 * @param postalCode
+	 *            postal code
+	 * @param town
+	 *            name of the town
+	 * @return List of contacts, which could be empty
 	 * @throws MalformedURLException
 	 * @throws IOException
 	 */
@@ -118,28 +123,27 @@ public class Mohu {
 		final ArrayList<Contact> ret = new ArrayList<Contact>();
 		final HtmlCleaner cleaner = new HtmlCleaner();
 		final HttpClientParams httpClientParams = new HttpClientParams();
-		httpClientParams
-				.setParameter(
-						"http.useragent",
-						"Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/532.9 (KHTML, like Gecko) Chrome/5.0.307.7 Safari/532.9");
+		httpClientParams.setParameter("http.useragent",
+				"Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/532.9 "
+						+ "(KHTML, like Gecko) Chrome/5.0.307.7 Safari/532.9");
 		httpClientParams.setContentCharset("UTF-8");
 		final HttpClient client = new HttpClient(httpClientParams);
 
 		/*
 		 * Make session.
 		 */
-		client
-		.executeMethod(new GetMethod(
-				"http://www.magyarorszag.hu:80/kozigazgatas/intezmenyek/onkig/testonk/jegyzo/polghiv/"));
-		
+		client.executeMethod(new GetMethod("http://www.magyarorszag.hu:80"
+				+ "/kozigazgatas/intezmenyek/onkig/testonk/jegyzo/polghiv/"));
+
 		/*
-		 * Get the list first the usual way, and kick mo.hu if that does nmot work.
+		 * Get the list first the usual way, and kick mo.hu if that does nmot
+		 * work.
 		 */
 		TagNode results = getFindNodeByClass(cleaner.clean(makeRequest(
 				postalCode, town, client)), "div", "resultset resultset-last");
 		if (results == null) {
 			results = getFindNodeByClass(cleaner.clean(makeRequestToPostCity(
-					postalCode, town, client)), "div",
+					town, client)), "div",
 					"resultset resultset-last");
 		}
 
@@ -179,7 +183,9 @@ public class Mohu {
 			final HttpClient client) throws IOException, MalformedURLException,
 			UnsupportedEncodingException {
 		final PostMethod postMethod = new PostMethod(
-				"http://www.magyarorszag.hu:80/kozigazgatas/intezmenyek/onkig/testonk/jegyzo/polghiv/pf/searchofficeinpage/submitOfficeSearch");
+				"http://www.magyarorszag.hu:80"
+						+ "/kozigazgatas/intezmenyek/onkig/testonk/jegyzo/polghiv"
+						+ "/pf/searchofficeinpage/submitOfficeSearch");
 		postMethod.setParameter(
 				"searchofficeinpage_2{actionForm.typedSettlement}", town);
 		postMethod.setParameter(
@@ -197,21 +203,22 @@ public class Mohu {
 
 	/**
 	 * The foolish way to post the name of the town once again.
-	 * 
-	 * @param postalCode
 	 * @param town
 	 * @param client
+	 * 
 	 * @return
 	 * @throws IOException
 	 * @throws MalformedURLException
 	 * @throws UnsupportedEncodingException
 	 */
-	private String makeRequestToPostCity(final String postalCode,
-			final String town, final HttpClient client) throws IOException,
+	private String makeRequestToPostCity(final String town,
+			final HttpClient client) throws IOException,
 			MalformedURLException, UnsupportedEncodingException {
 
 		final PostMethod postMethod = new PostMethod(
-				"http://www.magyarorszag.hu:80/kozigazgatas/intezmenyek/onkig/testonk/jegyzo/polghiv/pf/searchofficeinpage/submitCity");
+				"http://www.magyarorszag.hu:80"
+						+ "/kozigazgatas/intezmenyek/onkig/testonk/jegyzo/polghiv"
+						+ "/pf/searchofficeinpage/submitCity");
 		postMethod
 				.setParameter(
 						"searchofficeinpage_2wlw-select_key:{actionForm.selectedSettlementPostCode}",
