@@ -3,6 +3,34 @@ package org.todomap.hu.mohu;
 public class Contact {
 	String name;
 	String email;
+	String address;
+	String phone;
+	String fax;
+	String URL;
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getFax() {
+		return fax;
+	}
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+	public String getURL() {
+		return URL;
+	}
+	public void setURL(String uRL) {
+		URL = uRL;
+	}
 	public String getName() {
 		return name;
 	}
