@@ -13,7 +13,6 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.params.HttpClientParams;
@@ -24,11 +23,25 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+/**
+ * mo.hu data access API
+ * @author kocka
+ *
+ */
 public class Mohu {
 
 	private final static SAXParserFactory saxParserFactory = SAXParserFactory
 			.newInstance();
 
+	/**
+	 * Build a contact from a html fragment fetched from mo.hu.
+	 * 
+	 * @param htmlFragment stringified html
+	 * @return contact data
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	Contact buildContactFromHtml(final String htmlFragment)
 			throws ParserConfigurationException, SAXException, IOException {
 		final Contact contact = new Contact();
@@ -86,6 +99,15 @@ public class Mohu {
 		return null;
 	}
 
+	/**
+	 * Get the list of known agencies.
+	 * 
+	 * @param postalCode	postal code
+	 * @param town			name of the town
+	 * @return				List of contacts, which could be empty
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
 	List<Contact> listContacts(final String postalCode, final String town)
 			throws MalformedURLException, IOException {
 		final ArrayList<Contact> ret = new ArrayList<Contact>();
@@ -98,7 +120,16 @@ public class Mohu {
 		httpClientParams.setContentCharset("UTF-8");
 		final HttpClient client = new HttpClient(httpClientParams);
 
-		makeSession(client);
+		/*
+		 * Make session.
+		 */
+		client
+		.executeMethod(new GetMethod(
+				"http://www.magyarorszag.hu:80/kozigazgatas/intezmenyek/onkig/testonk/jegyzo/polghiv/"));
+		
+		/*
+		 * Get the list first the usual way, and kick mo.hu if that does nmot work.
+		 */
 		TagNode results = getFindNodeByClass(cleaner.clean(makeRequest(
 				postalCode, town, client)), "div", "resultset resultset-last");
 		if (results == null) {
@@ -107,10 +138,16 @@ public class Mohu {
 					"resultset resultset-last");
 		}
 
+		/*
+		 * make an xml fragment from the result, this could be suboptimal
+		 */
 		final StringWriter stringWriter = new StringWriter();
 		results.serialize(new PrettyXmlSerializer(cleaner.getProperties()),
 				stringWriter);
 
+		/*
+		 * Build the contact data.
+		 */
 		try {
 			ret.add(buildContactFromHtml(stringWriter.toString()));
 		} catch (final ParserConfigurationException e) {
@@ -122,6 +159,17 @@ public class Mohu {
 		return ret;
 	}
 
+	/**
+	 * Send request to mo.hu the usual way.
+	 * 
+	 * @param postalCode
+	 * @param town
+	 * @param client
+	 * @return
+	 * @throws IOException
+	 * @throws MalformedURLException
+	 * @throws UnsupportedEncodingException
+	 */
 	private String makeRequest(final String postalCode, final String town,
 			final HttpClient client) throws IOException, MalformedURLException,
 			UnsupportedEncodingException {
@@ -142,6 +190,17 @@ public class Mohu {
 		return postMethod.getResponseBodyAsString();
 	}
 
+	/**
+	 * The foolish way to post the name of the town once again.
+	 * 
+	 * @param postalCode
+	 * @param town
+	 * @param client
+	 * @return
+	 * @throws IOException
+	 * @throws MalformedURLException
+	 * @throws UnsupportedEncodingException
+	 */
 	private String makeRequestToPostCity(final String postalCode,
 			final String town, final HttpClient client) throws IOException,
 			MalformedURLException, UnsupportedEncodingException {
@@ -160,13 +219,6 @@ public class Mohu {
 		postMethod.setParameter("y", "13");
 		client.executeMethod(postMethod);
 		return postMethod.getResponseBodyAsString();
-	}
-
-	private void makeSession(final HttpClient client) throws IOException,
-			HttpException {
-		client
-				.executeMethod(new GetMethod(
-						"http://www.magyarorszag.hu:80/kozigazgatas/intezmenyek/onkig/testonk/jegyzo/polghiv/"));
 	}
 
 }

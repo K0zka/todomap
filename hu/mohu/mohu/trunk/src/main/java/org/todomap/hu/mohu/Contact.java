@@ -1,5 +1,11 @@
 package org.todomap.hu.mohu;
 
+/**
+ * Government agency contact info.
+ * 
+ * @author kocka
+ *
+ */
 public class Contact {
 	private String address;
 	private String email;
