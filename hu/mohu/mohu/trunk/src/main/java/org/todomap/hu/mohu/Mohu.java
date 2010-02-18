@@ -26,10 +26,67 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class Mohu {
 
-	final static SAXParserFactory saxParserFactory = SAXParserFactory
+	private final static SAXParserFactory saxParserFactory = SAXParserFactory
 			.newInstance();
 
-	List<Contact> listContacts(String postalCode, String town)
+	Contact buildContactFromHtml(final String htmlFragment)
+			throws ParserConfigurationException, SAXException, IOException {
+		final Contact contact = new Contact();
+		final SAXParser parser = saxParserFactory.newSAXParser();
+		parser.parse(new ByteArrayInputStream(htmlFragment.getBytes("UTF-8")),
+				new DefaultHandler() {
+
+					String cssClass;
+
+					@Override
+					public void characters(final char[] ch, final int start,
+							final int length) throws SAXException {
+						final String value = new String(ch, start, length);
+						if ("title".equals(cssClass)) {
+							contact.setName(value);
+						} else if ("address".equals(cssClass)) {
+							contact.setAddress(value);
+						} else if ("phone".equals(cssClass)) {
+							contact.setPhone(value.replace("Telefon: ", ""));
+						}
+					}
+
+					@Override
+					public void endElement(final String uri,
+							final String localName, final String qName)
+							throws SAXException {
+					}
+
+					@Override
+					public void startElement(final String uri,
+							final String localName, final String qName,
+							final Attributes attributes) throws SAXException {
+						cssClass = attributes.getValue("class");
+					}
+				});
+		return contact;
+	}
+
+	@SuppressWarnings("unchecked")
+	private TagNode getFindNodeByClass(final TagNode node, final String name,
+			final String cssClass) {
+		final List<TagNode> children = node.getAllElementsList(true);
+		for (final TagNode child : children) {
+			if (name.equals((child).getName())
+					&& cssClass.equals((child).getAttributeByName("class"))) {
+				return child;
+			} else {
+				final TagNode grandchild = getFindNodeByClass(child, name,
+						cssClass);
+				if (grandchild != null) {
+					return grandchild;
+				}
+			}
+		}
+		return null;
+	}
+
+	List<Contact> listContacts(final String postalCode, final String town)
 			throws MalformedURLException, IOException {
 		final ArrayList<Contact> ret = new ArrayList<Contact>();
 		final HtmlCleaner cleaner = new HtmlCleaner();
@@ -53,16 +110,36 @@ public class Mohu {
 		final StringWriter stringWriter = new StringWriter();
 		results.serialize(new PrettyXmlSerializer(cleaner.getProperties()),
 				stringWriter);
-		
+
 		try {
 			ret.add(buildContactFromHtml(stringWriter.toString()));
-		} catch (ParserConfigurationException e) {
+		} catch (final ParserConfigurationException e) {
 			throw new IOException(e);
-		} catch (SAXException e) {
+		} catch (final SAXException e) {
 			throw new IOException(e);
 		}
-		
+
 		return ret;
+	}
+
+	private String makeRequest(final String postalCode, final String town,
+			final HttpClient client) throws IOException, MalformedURLException,
+			UnsupportedEncodingException {
+		final PostMethod postMethod = new PostMethod(
+				"http://www.magyarorszag.hu:80/kozigazgatas/intezmenyek/onkig/testonk/jegyzo/polghiv/pf/searchofficeinpage/submitOfficeSearch");
+		postMethod.setParameter(
+				"searchofficeinpage_2{actionForm.typedSettlement}", town);
+		postMethod.setParameter(
+				"searchofficeinpage_2{actionForm.typedPostCode}",
+				postalCode == null ? "" : postalCode);
+		postMethod
+				.setParameter(
+						"searchofficeinpage_2wlw-select_key:{actionForm.selectedSettlementPostCode}",
+						"true");
+		postMethod.setParameter("x", "8");
+		postMethod.setParameter("y", "8");
+		client.executeMethod(postMethod);
+		return postMethod.getResponseBodyAsString();
 	}
 
 	private String makeRequestToPostCity(final String postalCode,
@@ -90,79 +167,6 @@ public class Mohu {
 		client
 				.executeMethod(new GetMethod(
 						"http://www.magyarorszag.hu:80/kozigazgatas/intezmenyek/onkig/testonk/jegyzo/polghiv/"));
-	}
-
-	@SuppressWarnings("unchecked")
-	private TagNode getFindNodeByClass(final TagNode node, final String name,
-			final String cssClass) {
-		final List<TagNode> children = node.getAllElementsList(true);
-		for (final TagNode child : children) {
-			if (name.equals(((TagNode) child).getName())
-					&& cssClass.equals(((TagNode) child)
-							.getAttributeByName("class"))) {
-				return (TagNode) child;
-			} else {
-				final TagNode grandchild = getFindNodeByClass((TagNode) child,
-						name, cssClass);
-				if (grandchild != null) {
-					return grandchild;
-				}
-			}
-		}
-		return null;
-	}
-
-	private String makeRequest(final String postalCode, final String town,
-			final HttpClient client) throws IOException, MalformedURLException,
-			UnsupportedEncodingException {
-		final PostMethod postMethod = new PostMethod(
-				"http://www.magyarorszag.hu:80/kozigazgatas/intezmenyek/onkig/testonk/jegyzo/polghiv/pf/searchofficeinpage/submitOfficeSearch");
-		postMethod.setParameter(
-				"searchofficeinpage_2{actionForm.typedSettlement}", town);
-		postMethod.setParameter(
-				"searchofficeinpage_2{actionForm.typedPostCode}",
-				postalCode == null ? "" : postalCode);
-		postMethod
-				.setParameter(
-						"searchofficeinpage_2wlw-select_key:{actionForm.selectedSettlementPostCode}",
-						"true");
-		postMethod.setParameter("x", "8");
-		postMethod.setParameter("y", "8");
-		client.executeMethod(postMethod);
-		return postMethod.getResponseBodyAsString();
-	}
-
-	Contact buildContactFromHtml(String htmlFragment) throws ParserConfigurationException, SAXException, IOException {
-		final Contact contact = new Contact();
-		final SAXParser parser = saxParserFactory.newSAXParser();
-		parser.parse(new ByteArrayInputStream(htmlFragment.getBytes("UTF-8")), new DefaultHandler() {
-
-			String cssClass;
-			
-			@Override
-			public void characters(char[] ch, int start, int length)
-					throws SAXException {
-				final String value = new String(ch, start, length);
-				if("title".equals(cssClass)) {
-					contact.setName(value);
-				} else if ("address".equals(cssClass)) {
-					contact.setAddress(value);
-				} else if ("phone".equals(cssClass)) {
-					contact.setPhone(value.replace("Telefon: ", ""));
-				}
-			}
-
-			@Override
-			public void endElement(String uri, String localName, String qName)
-					throws SAXException {
-			}
-
-			@Override
-			public void startElement(String uri, String localName,
-					String qName, Attributes attributes) throws SAXException {
-				cssClass = attributes.getValue("class");
-			}});
-		return contact;
 	}
 
 }
