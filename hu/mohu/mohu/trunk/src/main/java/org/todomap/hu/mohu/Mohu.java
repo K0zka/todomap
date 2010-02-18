@@ -30,6 +30,40 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class Mohu {
 
+	/**
+	 * This class helps to build the contact data from the result xml.
+	 * @author kocka
+	 *
+	 */
+	private static final class ResultXmlHandler extends DefaultHandler {
+		private final Contact contact;
+		String cssClass;
+
+		private ResultXmlHandler(final Contact contact) {
+			this.contact = contact;
+		}
+
+		@Override
+		public void characters(final char[] ch, final int start,
+				final int length) throws SAXException {
+			final String value = new String(ch, start, length);
+			if ("title".equals(cssClass)) {
+				contact.setName(value);
+			} else if ("address".equals(cssClass)) {
+				contact.setAddress(value);
+			} else if ("phone".equals(cssClass)) {
+				contact.setPhone(value.replace("Telefon: ", ""));
+			}
+		}
+
+		@Override
+		public void startElement(final String uri,
+				final String localName, final String qName,
+				final Attributes attributes) throws SAXException {
+			cssClass = attributes.getValue("class");
+		}
+	}
+
 	private final static SAXParserFactory saxParserFactory = SAXParserFactory
 			.newInstance();
 
@@ -47,36 +81,7 @@ public class Mohu {
 		final Contact contact = new Contact();
 		final SAXParser parser = saxParserFactory.newSAXParser();
 		parser.parse(new ByteArrayInputStream(htmlFragment.getBytes("UTF-8")),
-				new DefaultHandler() {
-
-					String cssClass;
-
-					@Override
-					public void characters(final char[] ch, final int start,
-							final int length) throws SAXException {
-						final String value = new String(ch, start, length);
-						if ("title".equals(cssClass)) {
-							contact.setName(value);
-						} else if ("address".equals(cssClass)) {
-							contact.setAddress(value);
-						} else if ("phone".equals(cssClass)) {
-							contact.setPhone(value.replace("Telefon: ", ""));
-						}
-					}
-
-					@Override
-					public void endElement(final String uri,
-							final String localName, final String qName)
-							throws SAXException {
-					}
-
-					@Override
-					public void startElement(final String uri,
-							final String localName, final String qName,
-							final Attributes attributes) throws SAXException {
-						cssClass = attributes.getValue("class");
-					}
-				});
+				new ResultXmlHandler(contact));
 		return contact;
 	}
 
