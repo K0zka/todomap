@@ -29,7 +29,7 @@ import org.xml.sax.helpers.DefaultHandler;
  * @author kocka
  * 
  */
-public class Mohu {
+public final class Mohu {
 
 	/**
 	 * This class helps to build the contact data from the result xml.
