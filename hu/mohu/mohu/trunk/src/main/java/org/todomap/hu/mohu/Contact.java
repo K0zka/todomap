@@ -12,7 +12,7 @@ public class Contact {
 	private String fax;
 	private String name;
 	private String phone;
-	private String URL;
+	private String url;
 
 	public String getAddress() {
 		return address;
@@ -35,7 +35,7 @@ public class Contact {
 	}
 
 	public String getURL() {
-		return URL;
+		return url;
 	}
 
 	public void setAddress(final String address) {
@@ -59,6 +59,6 @@ public class Contact {
 	}
 
 	public void setURL(final String uRL) {
-		URL = uRL;
+		url = uRL;
 	}
 }
