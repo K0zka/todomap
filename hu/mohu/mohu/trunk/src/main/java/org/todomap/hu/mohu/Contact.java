@@ -6,7 +6,7 @@ package org.todomap.hu.mohu;
  * @author kocka
  *
  */
-public class Contact {
+public final class Contact {
 	private String address;
 	private String email;
 	private String fax;
