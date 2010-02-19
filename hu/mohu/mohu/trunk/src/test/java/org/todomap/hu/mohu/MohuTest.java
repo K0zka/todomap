@@ -1,5 +1,7 @@
 package org.todomap.hu.mohu;
 
+import java.util.List;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -13,7 +15,14 @@ public class MohuTest {
 		mohu.listContacts("6000", "Kecskemét");
 		mohu.listContacts("6001", "Kecskemét");
 		mohu.listContacts("3500", "Miskolc");
+	}
 
+	@Test
+	public void listContactsByLatLng() throws Exception {
+		Mohu mohu = new Mohu();
+		List<Contact> contacts = mohu.listContacts(46.253889d, 20.146111d);
+		Assert.assertNotNull(contacts);
+		Assert.assertFalse(contacts.isEmpty());
 	}
 
 	@Test

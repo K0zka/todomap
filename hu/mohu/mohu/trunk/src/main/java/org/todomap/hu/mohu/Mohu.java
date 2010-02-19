@@ -18,6 +18,11 @@ import org.apache.commons.httpclient.params.HttpClientParams;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.PrettyXmlSerializer;
 import org.htmlcleaner.TagNode;
+import org.todomap.geocoder.Address;
+import org.todomap.geocoder.GeoCodeException;
+import org.todomap.geocoder.GeoCoder;
+import org.todomap.geocoder.LatLng;
+import org.todomap.geocoder.google.GoogleGeocoder;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -29,6 +34,21 @@ import org.xml.sax.helpers.DefaultHandler;
  * 
  */
 public final class Mohu {
+
+	public Mohu(final GeoCoder geoCoder) {
+		super();
+		this.geoCoder = geoCoder;
+	}
+
+	final GeoCoder geoCoder;
+
+	/**
+	 * 
+	 */
+	public Mohu() {
+		super();
+		this.geoCoder = new GoogleGeocoder();
+	}
 
 	/**
 	 * This class helps to build the contact data from the result xml.
@@ -107,6 +127,23 @@ public final class Mohu {
 	}
 
 	/**
+	 * Get the contacts by coordinates
+	 * 
+	 * @param latitude	latitude
+	 * @param longitude	longitude
+	 * @return
+	 * @throws IOException
+	 */
+	public List<Contact> listContacts(double latitude, double longitude) throws IOException {
+		try {
+			final Address address = geoCoder.revert(new LatLng(latitude, longitude));
+			return listContacts("", address.getTown());
+		} catch (final GeoCodeException e) {
+			throw new IOException(e);
+		}
+	}
+	
+	/**
 	 * Get the list of known agencies.
 	 * 
 	 * @param postalCode
@@ -116,7 +153,7 @@ public final class Mohu {
 	 * @return List of contacts, which could be empty
 	 * @throws IOException
 	 */
-	List<Contact> listContacts(final String postalCode, final String town)
+	public List<Contact> listContacts(final String postalCode, final String town)
 			throws IOException {
 		final ArrayList<Contact> ret = new ArrayList<Contact>();
 		final HtmlCleaner cleaner = new HtmlCleaner();
