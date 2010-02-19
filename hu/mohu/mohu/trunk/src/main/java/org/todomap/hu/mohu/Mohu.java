@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public final class Mohu {
 	 * @author kocka
 	 * 
 	 */
-	private static final class ResultXmlHandler extends DefaultHandler {
+	private final static class ResultXmlHandler extends DefaultHandler {
 		private final Contact contact;
 		private String cssClass;
 
@@ -115,11 +114,10 @@ public final class Mohu {
 	 * @param town
 	 *            name of the town
 	 * @return List of contacts, which could be empty
-	 * @throws MalformedURLException
 	 * @throws IOException
 	 */
 	List<Contact> listContacts(final String postalCode, final String town)
-			throws MalformedURLException, IOException {
+			throws IOException {
 		final ArrayList<Contact> ret = new ArrayList<Contact>();
 		final HtmlCleaner cleaner = new HtmlCleaner();
 		final HttpClientParams httpClientParams = new HttpClientParams();
@@ -176,12 +174,10 @@ public final class Mohu {
 	 * @param client
 	 * @return
 	 * @throws IOException
-	 * @throws MalformedURLException
 	 * @throws UnsupportedEncodingException
 	 */
 	private String makeRequest(final String postalCode, final String town,
-			final HttpClient client) throws IOException, MalformedURLException,
-			UnsupportedEncodingException {
+			final HttpClient client) throws IOException {
 		final PostMethod postMethod = new PostMethod(
 				"http://www.magyarorszag.hu:80"
 						+ "/kozigazgatas/intezmenyek/onkig/testonk/jegyzo/polghiv"
@@ -208,12 +204,10 @@ public final class Mohu {
 	 * 
 	 * @return
 	 * @throws IOException
-	 * @throws MalformedURLException
 	 * @throws UnsupportedEncodingException
 	 */
 	private String makeRequestToPostCity(final String town,
-			final HttpClient client) throws IOException,
-			MalformedURLException, UnsupportedEncodingException {
+			final HttpClient client) throws IOException {
 
 		final PostMethod postMethod = new PostMethod(
 				"http://www.magyarorszag.hu:80"
