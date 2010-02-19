@@ -40,7 +40,7 @@ public final class Mohu {
 		this.geoCoder = geoCoder;
 	}
 
-	final GeoCoder geoCoder;
+	private final GeoCoder geoCoder;
 
 	/**
 	 * 
