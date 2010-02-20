@@ -44,13 +44,13 @@ final Locale locale = (Locale)request.getAttribute("locale");
 </script>
 <script type="text/javascript" src="scripts/o29.js">
 </script>
-<script type="text/javascript" src="scripts/ajaxupload.js">
-</script>
 <script type="text/javascript" src="scripts/jquery.rating.js">
 </script>
 <script type="text/javascript" src="scripts/jquery.rte.js">
 </script>
 <script type="text/javascript" src="scripts/jquery.rte.tb.js">
+</script>
+<script type="text/javascript" src="scripts/ajaxfileupload.js">
 </script>
 
 
@@ -119,7 +119,8 @@ function initialize() {
 			frame_class: 'frameBody'
 		});
 		editors['todoDescriptionEditor'] = editor['todoDescriptionEditor'];
-
+		
+		/*
         new AjaxUpload('uploadButton', 
                 {
             	action: 'upload/<%= todo.getId() %>', 
@@ -128,8 +129,39 @@ function initialize() {
             	onComplete: updateAttachments
     			}
         );
+        */
     });
 
+}
+
+function attachFile() {
+	alert('uploading');
+	$.ajaxFileUpload
+	(
+		{
+			url: 'upload/<%= todo.getId() %>',
+			secureuri:false,
+			fileElementId:'fileToUpload',
+			beforeSend:function()
+			{
+				$("#loading").show();
+			},
+			complete:function()
+			{
+				debug('loading');
+			},				
+			success: function (data, status)
+			{
+				debug('success');
+				updateAttachments();
+			},
+			error: function (data, status, e)
+			{
+				alert(e);
+			}
+		}
+	);
+	alert('done');
 }
 
 function handleErrors(request) {
@@ -284,9 +316,9 @@ function saveData() {
 	</div>
 	<h3><a href="#"> <i18n:message key="todo.attachments"> Attachments </i18n:message> <span id="nrOfAttachments" class="counter"><%= todo.getAttachments().size() %></span></a></h3>
 	<div>
-	
+		<input type="file" id="fileToUpload" name="file"/>
 		<span class="authOnly">
-			<button id="uploadButton"><i18n:message key="todo.uploadButton">upload</i18n:message></button>
+			<button id="uploadButton" onclick="return attachFile();"><i18n:message key="todo.uploadButton">upload</i18n:message></button>
 		</span>
 		<span class="noAuthOnly">
 			<i18n:message key="todo.uploadNoAuth">
