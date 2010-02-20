@@ -56,27 +56,27 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-openid</artifactId>
-			<version>3.0.1.RELEASE</version>
+			<version>3.0.2.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>3.0.1.RELEASE</version>
+			<version>3.0.2.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>3.0.1.RELEASE</version>
+			<version>3.0.2.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
-			<version>3.0.1.RELEASE</version>
+			<version>3.0.2.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-			<version>3.0.1.RELEASE</version>
+			<version>3.0.2.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
@@ -114,37 +114,37 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>3.0.0.RELEASE</version>
+			<version>3.0.1.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jms</artifactId>
-			<version>3.0.0.RELEASE</version>
+			<version>3.0.1.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<version>3.0.0.RELEASE</version>
+			<version>3.0.1.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>3.0.0.RELEASE</version>
+			<version>3.0.1.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>3.0.0.RELEASE</version>
+			<version>3.0.1.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
-			<version>3.0.0.RELEASE</version>
+			<version>3.0.1.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>3.0.0.RELEASE</version>
+			<version>3.0.1.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.unitils</groupId>
@@ -186,7 +186,7 @@
 		<dependency>
 			<groupId>org.todomap</groupId>
 			<artifactId>geocoder</artifactId>
-			<version>0.0.1</version>
+			<version>0.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -243,7 +243,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>3.0.0.RELEASE</version>
+			<version>3.0.1.RELEASE</version>
 		</dependency>
 	</dependencies>
 	<description>Todo map</description>
