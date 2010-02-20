@@ -120,16 +120,6 @@ function initialize() {
 		});
 		editors['todoDescriptionEditor'] = editor['todoDescriptionEditor'];
 		
-		/*
-        new AjaxUpload('uploadButton', 
-                {
-            	action: 'upload/<%= todo.getId() %>', 
-            	autoSubmit: true, 
-            	name: 'file',
-            	onComplete: updateAttachments
-    			}
-        );
-        */
     });
 
 }
