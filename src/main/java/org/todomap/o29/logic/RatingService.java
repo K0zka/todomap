@@ -8,6 +8,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.todomap.o29.beans.Rating;
+import org.todomap.o29.beans.RatingSummary;
 
 
 @Consumes("application/json")
@@ -21,4 +22,8 @@ public interface RatingService {
 	@GET
 	@Path("/get/{id}")
 	Rating getRating(@PathParam("id") long id);
+	
+	@GET
+	@Path("/get/{id}/sum")
+	RatingSummary getRatingSummary(@PathParam("id") long id);
 }

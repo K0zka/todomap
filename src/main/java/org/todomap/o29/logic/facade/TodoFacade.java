@@ -7,6 +7,7 @@ import javax.ws.rs.Produces;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.todomap.o29.beans.Rating;
+import org.todomap.o29.beans.RatingSummary;
 import org.todomap.o29.beans.Todo;
 import org.todomap.o29.logic.BookmarkService;
 import org.todomap.o29.logic.RatingService;
@@ -24,6 +25,15 @@ public class TodoFacade {
 	public static class TodoUserRelationship {
 		Todo todo;
 		Rating rating;
+		RatingSummary ratingSummary;
+		public RatingSummary getRatingSummary() {
+			return ratingSummary;
+		}
+
+		public void setRatingSummary(RatingSummary ratingSummary) {
+			this.ratingSummary = ratingSummary;
+		}
+
 		boolean isBookmarked;
 
 		public Todo getTodo() {
@@ -53,12 +63,13 @@ public class TodoFacade {
 
 	@GET
 	@Path("/get/{id}")
-	public TodoUserRelationship getTodo(@PathParam("id") long id) {
+	public TodoUserRelationship getTodo(@PathParam("id") final long id) {
 		final TodoUserRelationship todoUserRel = new TodoUserRelationship();
 		final Todo todo = todoService.getShortTodoById(id);
 		todoUserRel.setTodo(todo);
 		todoUserRel.setBookmarked(bookmarkService.isBookmarked(id));
 		todoUserRel.setRating(ratingService.getRating(id));
+		todoUserRel.setRatingSummary(ratingService.getRatingSummary(id));
 		return todoUserRel;
 	}
 
