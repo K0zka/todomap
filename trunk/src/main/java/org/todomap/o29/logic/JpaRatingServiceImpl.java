@@ -9,6 +9,7 @@ import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
 import org.todomap.o29.beans.BaseBean;
 import org.todomap.o29.beans.Rating;
+import org.todomap.o29.beans.RatingSummary;
 
 public class JpaRatingServiceImpl extends JpaDaoSupport implements
 		RatingService {
@@ -48,6 +49,23 @@ public class JpaRatingServiceImpl extends JpaDaoSupport implements
 						.setParameter("user", userService.getCurrentUser())
 						.setParameter("bean", data).getResultList();
 				return resultList.isEmpty() ? null : resultList.get(0);
+			}
+		});
+	}
+
+	@Override
+	public RatingSummary getRatingSummary(final long id) {
+		return getJpaTemplate().execute(new JpaCallback<RatingSummary>() {
+
+			@Override
+			public RatingSummary doInJpa(EntityManager entityManager)
+					throws PersistenceException {
+				Object[] result = (Object[]) entityManager.createQuery("select avg(rate), count(*) from "+Rating.class.getName()+" r where r.bean.id = :id").setParameter("id", id).getSingleResult();
+				
+				final RatingSummary ret = new RatingSummary();
+				ret.setAverage((Double) result[0]);
+				ret.setNrOfRatings((Long) result[1]);
+				return ret;
 			}
 		});
 	}
