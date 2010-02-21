@@ -293,22 +293,26 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 								    var todo = todo_rel['todo-rel'];
 								    var shortDescr = todo['todo']['shortDescr'];
 								    var rating = todo['rating'];
+								    var ratingSum = todo['ratingSummary'];
 								    var itemId = todo['todo']['id'];
 							    	var infowindow = new google.maps.InfoWindow({
 							    		content: '<div style="overflow:hidden; width: 200px; height: 200px;">'
 							    			+ '<h3 style="margin: 5px; font-size: 15px; width: 160px;">'+shortDescr+'</h3>'
-							    			+ '<div style="overflow: hidden; margin: 10px; text-align: justify; font-size: 12px; width: 160px; height: 150px;">'
+							    			+ '<div class="infowindow">'
 							    			+ todo['todo']['description']
 								    		+ '</div>'
-							    		    + '<a href="'+ encodeURI(itemId + '-' + todo['todo']['shortDescr']) + '.html" style="position: absolute; bottom: 10px; font-style: italic; font-size: 10px;" target="_blank"><i18n:message key="etc.more"/></a>'
+							    		    + '<a href="'+ encodeURI(itemId + '-' + todo['todo']['shortDescr']) + '.html" class="morelink" target="_blank"><i18n:message key="etc.more"/></a>'
 							    		    + '<div id="bookmark_togle_'+itemId+'" class="starTogle_'+(todo['bookmarked'] ? '' : 'in')+'active" style="position: absolute; top: 0px; right: 0px;" onclick="togle(\'bookmark_togle_'+itemId+'\',function(t,isAdd){ if(isAdd) {bookmarkItem('+itemId+');} else {unbookmarkItem('+itemId+');}})"></div>'
 							    		    
 							    			+ '<div id="voteup_'+itemId+'" class="' + (rating && rating['rate'] >= 0 ? 'voteUp_selected' : 'voteUp_unselected') + '" style="position: absolute; top: 32px; right: 0px;" ' 
 							    			+ (rating ? '' : 'onclick="voteUp('+itemId+', function(){updateVoted('+itemId+', true)})"' ) + '></div>'
 							    			
-							    			+ '<div id="votedown_'+itemId+'" class="' + (rating && rating['rate'] < 0 ? 'voteDown_selected' : 'voteDown_unselected') + '" style="position: absolute; bottom: 10px; right: 0px;" ' 
+							    			+ '<div id="votedown_'+itemId+'" class="' + (rating && rating['rate'] < 0 ? 'voteDown_selected' : 'voteDown_unselected') + '" style="position: absolute; bottom: 30px; right: 0px;" ' 
 							    			+ (rating ? '' : 'onclick="voteDown('+itemId+', function(){updateVoted('+itemId+', false)})"') + '></div>'
 
+											+ '<div class="ratingsummary" id="rating-'+itemId+'">'
+							    			+ getRatingSum(ratingSum)
+											+ '</div>'
 							    			+ '</div>'
 							        });
 							        infowindow._open(map,marker);
@@ -387,6 +391,11 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 	
 	}
 
+	function getRatingSum(ratingSum) {
+		return ' '
+		+ ((ratingSum['average'] && ratingSum['nrOfRatings']) ? ('<i18n:message key="etc.average"/>: ' + ratingSum['average'] + ' <i18n:message key="etc.votes"/>: ' + ratingSum['nrOfRatings']) : ('<i18n:message key="etc.novotes"/>'));
+	}
+	
 	function prepareForLevel(level) {
 		if(flagmode != level) {
 			map.clearMarkers();
