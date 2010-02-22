@@ -1,8 +1,6 @@
-
 /**
  * 
  */
-
 h1 {
 	color: #010101;
 	font-family: sans-serif;
@@ -24,7 +22,6 @@ thead {
 
 th {
 	background-color: gray;
-	
 }
 
 input {
@@ -54,34 +51,36 @@ td {
 }
 
 .highligh {
-	background: transparent; color: orange;
+	background: transparent;
+	color: orange;
 }
 
 button {
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	border-radius:4px;
-	font-family:inherit;
-	font-size:10px;
-	font-weight:  bold;
-	color : #EEEEEE;
-	padding:1px 1px;
-	text-decoration:none;
-	white-space:nowrap;
-	background:#0063DC;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	font-family: inherit;
+	font-size: 10px;
+	font-weight: bold;
+	color: #EEEEEE;
+	padding: 1px 1px;
+	text-decoration: none;
+	white-space: nowrap;
+	background: #0063DC;
 	border: none;
 	margin: 2px;
-	cursor:pointer !important;
+	cursor: pointer !important;
 	overflow: hidden;
 }
 
 button:hover {
-	background:#0054BD;
-	color:#FFFFFF;
-	cursor:pointer !important;
+	background: #0054BD;
+	color: #FFFFFF;
+	cursor: pointer !important;
 }
 
 .sidebarControls {
+	
 }
 
 #authOnly {
@@ -99,11 +98,11 @@ button:hover {
 
 .comment {
 	width: 100% !important;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	border-radius:4px;
-	padding:1px 1px;
-	text-decoration:none;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	padding: 1px 1px;
+	text-decoration: none;
 	border: solid 2px #0063DC;
 	margin: 2px;
 	float: left;
@@ -125,11 +124,11 @@ button:hover {
 .attachment {
 	width: 100px !important;
 	height: 116px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	border-radius:4px;
-	padding:1px 1px;
-	text-decoration:none;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	padding: 1px 1px;
+	text-decoration: none;
 	border: solid 2px #0063DC;
 	margin: 2px;
 	float: left;
@@ -180,11 +179,11 @@ button:hover {
 }
 
 .datacontrols {
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	border-radius:4px;
-	padding:1px 1px;
-	text-decoration:none;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	padding: 1px 1px;
+	text-decoration: none;
 	border: solid 2px #0063DC;
 	position: static;
 	bottom: 0px;
@@ -204,24 +203,27 @@ div.starTogle_active {
 	background-image: url("../img/bookmark32.png");
 	background-repeat: no-repeat;
 	border: none;
-	border-radius:4px;
-	-moz-border-radius:4px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
 	cursor: pointer;
 }
-div.starTogle_active:hover{
+
+div.starTogle_active:hover {
 	background-color: #d7d7d7;
 }
+
 div.starTogle_inactive {
 	width: 32px !important;
 	height: 32px !important;
 	background-image: url("../img/bookmark32.gr.png");
 	background-repeat: no-repeat;
 	border: none;
-	border-radius:4px;
-	-moz-border-radius:4px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
 	cursor: pointer;
 }
-div.starTogle_inactive:hover{
+
+div.starTogle_inactive:hover {
 	background-color: #ece13d;
 }
 
@@ -231,8 +233,8 @@ div.voteUp_unselected {
 	background-image: url("../img/up32.gr.png");
 	background-repeat: no-repeat;
 	border: none;
-	border-radius:4px;
-	-moz-border-radius:4px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
 	cursor: pointer;
 }
 
@@ -242,9 +244,10 @@ div.voteUp_selected {
 	background-image: url("../img/up32.png");
 	background-repeat: no-repeat;
 	border: none;
-	border-radius:4px;
-	-moz-border-radius:4px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
 }
+
 div.voteUp_unselected:hover {
 	background-color: #b6f366;
 }
@@ -255,8 +258,8 @@ div.voteDown_unselected {
 	background-image: url("../img/down32.gr.png");
 	background-repeat: no-repeat;
 	border: none;
-	border-radius:4px;
-	-moz-border-radius:4px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
 	cursor: pointer;
 }
 
@@ -266,17 +269,18 @@ div.voteDown_selected {
 	background-image: url("../img/down32.png");
 	background-repeat: no-repeat;
 	border: none;
-	border-radius:4px;
-	-moz-border-radius:4px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
 }
+
 div.voteDown_unselected:hover {
 	background-color: #b6f366;
 }
 
 a.bookmark {
 	width: 90%;
-	font-family:inherit;
-	font-size:10px;
+	font-family: inherit;
+	font-size: 10px;
 	font-family: monospace;
 	margin: 5px;
 	line-height: 1em;
@@ -284,8 +288,8 @@ a.bookmark {
 
 a.bookmark:hover {
 	width: 90%;
-	font-family:inherit;
-	font-size:10px;
+	font-family: inherit;
+	font-size: 10px;
 	background-color: gray;
 	font-family: monospace;
 }
@@ -293,4 +297,29 @@ a.bookmark:hover {
 div.calculated {
 	background-color: #e0e0e0 !important;
 	border: dashed thin #a0a0a0;
+}
+
+div.ratingsummary {
+	position: absolute;
+	bottom: 10px;
+	right: 0px; font-style : italic;
+	font-size: 10px;
+	color: grey;
+	font-style: italic;
+}
+
+a.morelink {
+	position: absolute;
+	bottom: 10px;
+	font-style: italic;
+	font-size: 10px;
+}
+
+div.infowindow {
+	overflow: hidden;
+	margin: 10px;
+	text-align: justify;
+	font-size: 12px;
+	width: 160px;
+	height: 150px;
 }
