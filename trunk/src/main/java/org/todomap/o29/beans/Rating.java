@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -90,11 +91,13 @@ public class Rating {
 	}
 
 	@XmlElement(name = "userid")
+	@Transient
 	public long getUserId() {
 		return user == null ? -1 : user.getId();
 	}
 
 	@XmlElement(name = "beanid")
+	@Transient
 	public long getBeanId() {
 		return bean == null ? -1 : bean.getId();
 	}
