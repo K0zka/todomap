@@ -18,6 +18,10 @@
 		</tx:attributes>
 	</tx:advice>
 
+	<bean name="jmsInterceptor" class="org.todomap.o29.utils.aop.JmsIntegrationAspect">
+		<constructor-arg ref="jmsTemplate"/>
+	</bean>
+
 	<aop:config>
 	
 		<aop:pointcut id="geoipMethods"
@@ -51,6 +55,16 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="commentServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="bookmarkServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="rememberMeServiceMethods" />
+		
+		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="geoipMethods" />
+		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="todoServiceMethods" />
+		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="userServiceMethods" />
+		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="ratingServiceMethods" />
+		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="homeServiceMethods" />
+		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="attachmentServiceMethods" />
+		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="commentServiceMethods" />
+		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="bookmarkServiceMethods" />
+		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="rememberMeServiceMethods" />
 
 	</aop:config>
 

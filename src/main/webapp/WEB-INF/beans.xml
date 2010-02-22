@@ -121,6 +121,14 @@
 		<property name="jndiName" value="jdbc/o29ds" />
 	</bean>
 
+	<bean id="jmsConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="jms/connectionFactory" />
+	</bean>
+
+	<bean id="jmsQueue" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="jms/o29mq"/>
+	</bean>
+
 	<bean id="geoCoder" class="org.todomap.geocoder.google.GoogleGeocoder">
 		<property name="apiKey" value="PLEASE GET A KEY" />
 	</bean>
@@ -154,6 +162,11 @@
 	<bean id="translator" class="org.todomap.latetrans.GoogleTranslator">
 	</bean>
 
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="defaultDestination" ref="jmsQueue"/>
+		<property name="connectionFactory" ref="jmsConnectionFactory"/>
+	</bean>
+	
 	<bean id="timerFactory" class="org.springframework.scheduling.timer.TimerFactoryBean">
 		<property name="scheduledTimerTasks">
 			<list>

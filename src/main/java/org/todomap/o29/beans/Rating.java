@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -25,9 +26,24 @@ public class Rating {
 	@SequenceGenerator(name = "rating_seq", allocationSize = 1, initialValue = 0, sequenceName = "base_seq")
 	long id;
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "bean_id", nullable = false)
-	@XmlTransient
 	BaseBean bean;
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
@@ -71,5 +87,15 @@ public class Rating {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	@XmlElement(name = "userid")
+	public long getUserId() {
+		return user == null ? -1 : user.getId();
+	}
+
+	@XmlElement(name = "beanid")
+	public long getBeanId() {
+		return bean == null ? -1 : bean.getId();
 	}
 }
