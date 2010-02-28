@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -35,6 +36,17 @@ public abstract class BaseBean implements Nameable {
 	List<Comment> comments;
 	@OneToMany(fetch = FetchType.LAZY)
 	List<Rating> ratings;
+
+	@ManyToMany()
+	List<Tag> tags;
+	
+	public List<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
+	}
 
 	@Column(updatable = false, nullable = false)
 	Date created = new Date();
