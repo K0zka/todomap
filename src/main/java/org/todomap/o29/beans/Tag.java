@@ -5,8 +5,10 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -14,14 +16,15 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 public class Tag {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tag_seq")
+	@SequenceGenerator(name = "tag_seq", allocationSize = 1, initialValue = 0, sequenceName = "tag_seq")
 	long id;
 	@Column(nullable = false, length = 2)
 	String langcode;
 	@Column(nullable = false, length = 64)
 	String tag;
 
-	@ManyToMany
+	@ManyToMany(mappedBy="tags")
 	List<BaseBean> taggedBeans;
 
 	@XmlTransient
