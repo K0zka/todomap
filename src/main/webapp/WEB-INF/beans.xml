@@ -27,6 +27,7 @@
 			<ref bean="bookmarks"/>
 			<ref bean="base"/>
 			<ref bean="todofacade"/>
+			<ref bean="tags"/>
 		</jaxrs:serviceBeans>
 		<!--
 			<jaxrs:extensionMappings> <alias name="xml" alias="application/xml"/>
@@ -59,6 +60,10 @@
 	<bean id="homes" class="org.todomap.o29.logic.JpaHomeServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
 		<property name="userService" ref="users" />
+	</bean>
+
+	<bean id="tags" class="org.todomap.o29.logic.JpaTagService">
+		<property name="entityManagerFactory" ref="entityManager" />
 	</bean>
 
 	<bean id="attachments" class="org.todomap.o29.logic.JpaAttachmentService"
