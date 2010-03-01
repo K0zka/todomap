@@ -43,7 +43,7 @@ public class JpaTagService extends JpaDaoSupport implements TagService {
 	}
 
 	@Override
-	public void addTag(final long id, final String language, final String tag) {
+	public long addTag(final long id, final String language, final String tag) {
 		final BaseBean baseBean = baseService.getById(id);
 		final Tag storedTag = getJpaTemplate().execute(new JpaCallback<Tag>() {
 
@@ -69,8 +69,11 @@ public class JpaTagService extends JpaDaoSupport implements TagService {
 				}
 			}
 		});
-		baseBean.getTags().add(storedTag);
-		getJpaTemplate().persist(baseBean);
+		if (!baseBean.getTags().contains(storedTag)) {
+			baseBean.getTags().add(storedTag);
+			getJpaTemplate().persist(baseBean);
+		}
+		return storedTag.getId();
 	}
 
 	@Override
