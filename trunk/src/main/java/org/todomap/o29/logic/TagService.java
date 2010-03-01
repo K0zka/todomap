@@ -47,5 +47,5 @@ public interface TagService {
 
 	@POST
 	@Path("/add/{lang}/{id}")
-	public void addTag(@PathParam("id") long id, @PathParam("lang") String language, String tag);
+	public long addTag(@PathParam("id") long id, @PathParam("lang") String language, String tag);
 }
