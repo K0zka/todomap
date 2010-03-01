@@ -1,5 +1,6 @@
 package org.todomap.o29.logic;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,25 +74,27 @@ public class JpaTagService extends JpaDaoSupport implements TagService {
 
 	@Override
 	public List<TagCloudElem> getTagCloud(final String language) {
-		ArrayList<TagCloudElem> ret = new ArrayList<TagCloudElem>();
-		for (final Tag tag : listTags(language)) {
-			ret.add(getJpaTemplate().execute(new JpaCallback<TagCloudElem>() {
+		return getJpaTemplate().execute(new JpaCallback<List<TagCloudElem>>() {
 
-				@Override
-				public TagCloudElem doInJpa(final EntityManager entityManager)
-						throws PersistenceException {
-					final Long result = (Long) entityManager.createQuery(
-							"select count(*) from " + BaseBean.class.getName()
-									+ " b where :tagid in tags").setParameter(
-							"tagid", tag.getId()).getSingleResult();
-					final TagCloudElem tagCloudElem = new TagCloudElem();
-					tagCloudElem.setTag(tag);
-					tagCloudElem.setWight(result);
-					return tagCloudElem;
+			@SuppressWarnings("unchecked")
+			@Override
+			public List<TagCloudElem> doInJpa(EntityManager entityManager)
+					throws PersistenceException {
+				final List<Object[]> list = entityManager.createNativeQuery("select id, tag, count(*) " +
+						"from tag t join base_tag bt on t.id = bt.tag_id " +
+						"where langcode = :lang group by id, tag").setParameter("lang", language).getResultList();
+				final ArrayList<TagCloudElem> ret = new ArrayList<TagCloudElem>();
+				for(final Object[] record : list) {
+					final TagCloudElem tce = new TagCloudElem();
+					tce.setWeight(((BigInteger) record[2]).longValue());
+					tce.getTag().setId(((BigInteger) record[0]).longValue());
+					tce.getTag().setLangcode(language);
+					tce.getTag().setTag((String) record[1]);
+					ret.add(tce);
 				}
-			}));
-		}
-		return ret;
+				return ret;
+			}
+		});
 	}
 
 	@SuppressWarnings("unchecked")
