@@ -24,11 +24,11 @@ public interface TagService {
 		public void setTag(Tag tag) {
 			this.tag = tag;
 		}
-		long weight;
-		public long getWeight() {
+		float weight;
+		public float getWeight() {
 			return weight;
 		}
-		public void setWeight(long weight) {
+		public void setWeight(float weight) {
 			this.weight = weight;
 		}
 	}
