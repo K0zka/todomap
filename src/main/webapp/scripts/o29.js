@@ -297,3 +297,26 @@ function applyTooltip(elemSelector) {
 		}
 	});
 }
+
+function addTag(id, lang, tag) {
+	$.ajax({
+		type: 'POST',
+		url: 'services/tags/add/'+lang+'/'+id,
+		data: tag,
+		success : function(){refreshTagClouds(lang);}
+		});
+}
+
+function refreshTagClouds(lang) {
+	
+	$.get('services/tags/cloud/'+lang, function(response) {
+		var tagCloud = eval('('+response+')');
+		var tags = [];
+		for(var i = 0; i < tagCloud.tagc.length; i++) {
+			var tag = {tag : tagCloud.tagc[i].tag.tag, count : tagCloud.tagc[i].weight};
+			tags[tags.length] = tag;
+		}
+		$('div.tagcloud').tagCloud(tags);
+	});
+
+}
