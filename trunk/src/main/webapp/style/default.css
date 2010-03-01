@@ -323,3 +323,21 @@ div.infowindow {
 	width: 160px;
 	height: 150px;
 }
+
+#todoExtraWindow_thanks {
+	font-size: 0.8em;
+	width: 100% !important;
+	background: yellow;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+
+ul.autocomplete {
+	background: red;
+}
+
+a.tagcloudlink {
+	color: #0063DC;
+	font-family: monospace;
+}
