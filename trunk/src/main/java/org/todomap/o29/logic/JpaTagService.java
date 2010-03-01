@@ -1,5 +1,6 @@
 package org.todomap.o29.logic;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,13 +81,17 @@ public class JpaTagService extends JpaDaoSupport implements TagService {
 			@Override
 			public List<TagCloudElem> doInJpa(EntityManager entityManager)
 					throws PersistenceException {
-				final List<Object[]> list = entityManager.createNativeQuery("select id, tag, count(*) " +
-						"from tag t join base_tag bt on t.id = bt.tag_id " +
-						"where langcode = :lang group by id, tag").setParameter("lang", language).getResultList();
+				final List<Object[]> list = entityManager
+						.createNativeQuery(
+								"select id, tag, count(*)/"
+										+ "(select avg(cnt) from (select tag_id, count(*) cnt from base_tag group by tag_id) as foo) "
+										+ "from tag t join base_tag bt on t.id = bt.tag_id "
+										+ "where langcode = :lang group by id, tag")
+						.setParameter("lang", language).getResultList();
 				final ArrayList<TagCloudElem> ret = new ArrayList<TagCloudElem>();
-				for(final Object[] record : list) {
+				for (final Object[] record : list) {
 					final TagCloudElem tce = new TagCloudElem();
-					tce.setWeight(((BigInteger) record[2]).longValue());
+					tce.setWeight(((BigDecimal) record[2]).floatValue());
 					tce.getTag().setId(((BigInteger) record[0]).longValue());
 					tce.getTag().setLangcode(language);
 					tce.getTag().setTag((String) record[1]);
