@@ -7,31 +7,30 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.todomap.o29.beans.Tag;
-
-import com.sun.xml.txw2.annotation.XmlElement;
 
 @Path("/tags/")
 @Produces("application/json")
 public interface TagService {
 	
-	@XmlElement(value="tagc")
+	@XmlRootElement(name = "tagc")
 	public class TagCloudElem {
-		Tag tag;
+		Tag tag = new Tag();
 		public Tag getTag() {
 			return tag;
 		}
 		public void setTag(Tag tag) {
 			this.tag = tag;
 		}
-		public long getWight() {
-			return wight;
+		long weight;
+		public long getWeight() {
+			return weight;
 		}
-		public void setWight(long wight) {
-			this.wight = wight;
+		public void setWeight(long weight) {
+			this.weight = weight;
 		}
-		long wight;
 	}
 	
 	@GET
