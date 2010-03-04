@@ -1,7 +1,9 @@
 package org.todomap.o29.logic;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +15,7 @@ import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
 import org.todomap.o29.beans.BaseBean;
 import org.todomap.o29.beans.Tag;
+import org.todomap.o29.utils.HtmlUtil;
 
 public class JpaTagService extends JpaDaoSupport implements TagService {
 
@@ -44,6 +47,7 @@ public class JpaTagService extends JpaDaoSupport implements TagService {
 
 	@Override
 	public long addTag(final long id, final String language, final String tag) {
+		final String cleanTextTag = cleanup(tag);
 		final BaseBean baseBean = baseService.getById(id);
 		final Tag storedTag = getJpaTemplate().execute(new JpaCallback<Tag>() {
 
@@ -56,12 +60,12 @@ public class JpaTagService extends JpaDaoSupport implements TagService {
 								"select object(t) from "
 										+ Tag.class.getName()
 										+ " t where t.tag = :tag and t.langcode = :lang")
-						.setParameter("tag", tag)
+						.setParameter("tag", cleanTextTag)
 						.setParameter("lang", language).getResultList();
 				if (resultList.isEmpty()) {
 					Tag newTag = new Tag();
 					newTag.setLangcode(language);
-					newTag.setTag(tag);
+					newTag.setTag(cleanTextTag);
 					entityManager.persist(newTag);
 					return newTag;
 				} else {
@@ -74,6 +78,14 @@ public class JpaTagService extends JpaDaoSupport implements TagService {
 			getJpaTemplate().persist(baseBean);
 		}
 		return storedTag.getId();
+	}
+
+	private String cleanup(final String tag) {
+		try {
+			return URLDecoder.decode(HtmlUtil.textify(tag).trim(), "ISO-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			return "";
+		}
 	}
 
 	@Override
