@@ -17,6 +17,17 @@ public class HtmlUtil {
 
 	private final static String[] acceptedTags = {"div","span","b","i","strong","a", "img", "br"};
 	
+	public static String textify(final String htmlFragment) {
+		final CleanerProperties cleanerProperties = mkCleanerProperties();
+		final HtmlCleaner cleaner = new HtmlCleaner(cleanerProperties);
+		try {
+			TagNode node = cleaner.clean(htmlFragment);
+			return node.getText().toString();
+		} catch (final IOException e) {
+			return "";
+		}
+	}
+	
 	static boolean isAcceptedTag(final String name) {
 		for(final String acceptedTag : acceptedTags) {
 			if(acceptedTag.equalsIgnoreCase(name)) {
