@@ -55,7 +55,10 @@ final Locale locale = (Locale)request.getAttribute("locale");
 <script type="text/javascript"
 	src="http://maps.google.com/maps/api/js?sensor=false&language=<%= locale.getLanguage() %>">
 </script>
-
+<script type="text/javascript" src="scripts/jquery.heavylogic.autocomplete-1.0.js">
+</script>
+<script type="text/javascript" src="scripts/jquery.tagcloud-2.js">
+</script>
 <script type="text/javascript" src="scripts/o29.js">
 </script>
 
@@ -218,7 +221,15 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
             width: 650,
             height: 400,
             position: 'top',
-            title: '<i18n:message key="window.login.title"/>'               
+            title: '<i18n:message key="window.login.title"/>'
+            });
+        $('#todoExtraWindow').dialog({
+        	modal: false,
+            autoOpen : false,
+            show: 'slide',
+            width: 650,
+            height: 400,
+            title: '<i18n:message key="todo.extraWindow.title"/>'
             });
         $("#linksWindow").dialog({
             autoOpen : false,
@@ -236,11 +247,22 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
             title:	'<i18n:message key="window.userDetailsWindow.title"/>'
             });
         $('#loginTabs').tabs();
+        $('#todoExtraTabs').tabs();
+        $('#addTags').autocomplete(
+                'addtags-autocompletelist',
+                'autocomplete',
+                'services/tags/list/<%=locale.getLanguage()%>/', 
+                function(){ debug('click me babe, I am not afraid'); },
+                'lastTodoId',
+                '<%=locale.getLanguage()%>'
+         );
 
         applyTooltip('button');
         applyTooltip('a');
 //        applyTooltip('#map_canvas');
         applyTooltip('label');
+
+        refreshTagClouds('<%=locale.getLanguage()%>');
 
     });
 
@@ -463,10 +485,14 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 			type : 'POST',
 			url : 'services/todos/new',
 			data: strData,
-			success: function(msg){
+			success: function(newTodo){
 				refreshMarkers();
 				$("#newTodo").dialog('close');
 				$('#submitNewTodoButton').removeAttr('disabled');
+				$('#todoExtraWindow').dialog('open');
+				$('#todoExtraWindow_thanks').show();
+				$('#lastTodoId').val(newTodo.todo.id);
+				setTimeout(function(){$('#todoExtraWindow_thanks').hide(1000);}, 4000);
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 				handleErrors(XMLHttpRequest);
@@ -674,6 +700,28 @@ function updateVoted(id, votedUp) {
 	</span>
 </div>
 
+<div id="todoExtraWindow" style="overflow: hidden">
+	<input type="hidden" id="lastTodoId"/>
+	<div id="todoExtraWindow_thanks">
+		<i18n:message key="todo.done">Thank you! Your TODO was registered in the database.</i18n:message>
+		<i18n:message key="todo.more">Could you help with more information?</i18n:message>
+	</div>
+	<div id="todoExtraTabs" style="width:100%; height: 100%">
+		<ul>
+			<li><a href="#todoextra-tagcloud">Tag cloud</a></li>
+			<li><a href="#todoextra-attach">Attachments</a></li>
+		</ul>
+		<div id="todoextra-tagcloud">
+			<div id="newTodoTagCloud" class="tagcloud"></div>
+			<div style="position: absolute; bottom: 0px;">
+			<input id="addTags"/>
+			<button id="addTag" onclick="addTag($('#lastTodoId').val(), '<%=locale.getLanguage()%>', $('#addTags').val())"><i18n:message key="tag.add">add tag</i18n:message></button>
+			</div>
+		</div>
+		<div id="todoextra-attach">
+		</div>
+	</div>
+</div>
 
 <div id="loginWindow" title="Log in">
 
