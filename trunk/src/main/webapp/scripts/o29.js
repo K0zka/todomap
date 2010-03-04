@@ -302,7 +302,7 @@ function addTag(id, lang, tag) {
 	$.ajax({
 		type: 'POST',
 		url: 'services/tags/add/'+lang+'/'+id,
-		data: tag,
+		data: escape(tag),
 		success : function(){refreshTagClouds(lang);}
 		});
 }
@@ -316,7 +316,11 @@ function refreshTagClouds(lang) {
 			var tag = {tag : tagCloud.tagc[i].tag.tag, count : tagCloud.tagc[i].weight};
 			tags[tags.length] = tag;
 		}
-		$('div.tagcloud').tagCloud(tags);
+		$('div.tagcloud').tagCloud(tags, 
+				{
+					click : function(tag){ alert(tag); addTag($('#lastTodoId').val(), lang, tag); }
+				}
+		);
 	});
 
 }
