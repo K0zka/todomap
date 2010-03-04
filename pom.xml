@@ -347,7 +347,7 @@
 		<snapshotRepository>
 			<id>todomap.org</id>
 			<name>todomap.org maven repository - releases</name>
-			<url>scp://todomap.org:/var/www/mavenrepo/</url>
+			<url>scp://todomap.org:/var/www/mavenrepo-snapshots/</url>
 		</snapshotRepository>
 		<site>
 			<id>todomap.org</id>
