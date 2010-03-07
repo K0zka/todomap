@@ -48,4 +48,8 @@ public interface TagService {
 	@POST
 	@Path("/add/{lang}/{id}")
 	public long addTag(@PathParam("id") long id, @PathParam("lang") String language, String tag);
+	
+	@GET
+	@Path("/tagsof/{id}")
+	List<Tag> listTagsOfbean(@PathParam("id") long id);
 }
