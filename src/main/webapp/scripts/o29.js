@@ -303,12 +303,24 @@ function addTag(id, lang, tag) {
 		type: 'POST',
 		url: 'services/tags/add/'+lang+'/'+id,
 		data: escape(tag),
-		success : function(){refreshTagClouds(lang);}
+		success : function(){
+			refreshTagClouds(lang);
+			$.get('services/tags/tagsof/'+id, function(response) {
+				var lst = '<ul>'
+				var tags = eval('('+response+')');
+				for(i = 0; i < tags.tag.length; i++) {
+					lst = lst + '<li>'+tags.tag[i]['$']+'</li>';
+				}
+				lst = lst + '</ul>'
+				$('#tagList').html(lst);
+			});
+			}
 		});
 }
 
 function refreshTagClouds(lang) {
 	
+	// add tags
 	$.get('services/tags/cloud/'+lang, function(response) {
 		var tagCloud = eval('('+response+')');
 		var tags = [];
@@ -318,7 +330,7 @@ function refreshTagClouds(lang) {
 		}
 		$('div.tagcloud').tagCloud(tags, 
 				{
-					click : function(tag){ alert(tag); addTag($('#lastTodoId').val(), lang, tag); }
+					click : function(tag){ addTag($('#lastTodoId').val(), lang, tag); }
 				}
 		);
 	});

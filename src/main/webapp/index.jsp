@@ -712,10 +712,15 @@ function updateVoted(id, votedUp) {
 			<li><a href="#todoextra-attach">Attachments</a></li>
 		</ul>
 		<div id="todoextra-tagcloud">
-			<div id="newTodoTagCloud" class="tagcloud"></div>
-			<div style="position: absolute; bottom: 0px;">
-			<input id="addTags"/>
-			<button id="addTag" onclick="addTag($('#lastTodoId').val(), '<%=locale.getLanguage()%>', $('#addTags').val())"><i18n:message key="tag.add">add tag</i18n:message></button>
+			<div style="width: 70%; float: left">
+				<div id="newTodoTagCloud" class="tagcloud" style="width: 100%; height: 100%;"></div>
+			</div>
+			<div style="width: 30%; float: left">
+				<div id="tagList" class="tagList" style="width: 100%; height: 100%;"></div>
+			</div>
+			<div style="position: absolute; bottom: 10px;">
+				<input id="addTags"/>
+				<button id="addTag" onclick="addTag($('#lastTodoId').val(), '<%=locale.getLanguage()%>', $('#addTags').val())"><i18n:message key="tag.add">add tag</i18n:message></button>
 			</div>
 		</div>
 		<div id="todoextra-attach">
