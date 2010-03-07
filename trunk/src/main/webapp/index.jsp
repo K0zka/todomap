@@ -61,6 +61,8 @@ final Locale locale = (Locale)request.getAttribute("locale");
 </script>
 <script type="text/javascript" src="scripts/o29.js">
 </script>
+<script type="text/javascript" src="scripts/ajaxfileupload.js">
+</script>
 
 <script type="text/javascript">
 
@@ -619,6 +621,27 @@ function updateVoted(id, votedUp) {
 //	$('voteup_'+id).addClass((votedUp ? 'voteUp_selected' : 'voteUp_unselected'));
 }
 
+function attachFile() {
+	$.ajaxFileUpload
+	(
+		{
+			url: 'upload/'+ $('#lastTodoId').val(),
+			secureuri:false,
+			fileElementId:'fileToUpload',
+			success: function (data, status)
+			{
+				debug('success');
+				updateAttachments($('#lastTodoId').val());
+			},
+			error: function (data, status, e)
+			{
+				alert(e);
+			}
+		}
+	);
+}
+
+
 </script>
 
 
@@ -724,6 +747,15 @@ function updateVoted(id, votedUp) {
 			</div>
 		</div>
 		<div id="todoextra-attach">
+			<div style="width: 100%" id="attachments">
+				
+			</div>
+			<div style="position: absolute; bottom: 10px;">
+				<input type="file" id="fileToUpload" name="file"/>
+				<button id="uploadButton" onclick="return attachFile();">
+					<i18n:message key="todo.uploadButton">upload</i18n:message>
+				</button>
+			</div>
 		</div>
 	</div>
 </div>
