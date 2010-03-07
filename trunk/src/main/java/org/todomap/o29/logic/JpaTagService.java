@@ -99,10 +99,10 @@ public class JpaTagService extends JpaDaoSupport implements TagService {
 				final List<Object[]> list = entityManager
 						.createNativeQuery(
 								"select id, tag, count(*)/"
-										+ "(select avg(cnt) from (select tag_id, count(*) cnt from base_tag group by tag_id) as foo) "
+										+ "(select avg(cnt) from (select tag_id, count(*) cnt from base_tag group by tag_id) as foo) score "
 										+ "from tag t join base_tag bt on t.id = bt.tag_id "
-										+ "where langcode = :lang group by id, tag")
-						.setParameter("lang", language).getResultList();
+										+ "where langcode = :lang group by id, tag order by score desc limit 50")
+										.setParameter("lang", language).getResultList();
 				final ArrayList<TagCloudElem> ret = new ArrayList<TagCloudElem>();
 				for (final Object[] record : list) {
 					final TagCloudElem tce = new TagCloudElem();
@@ -129,4 +129,8 @@ public class JpaTagService extends JpaDaoSupport implements TagService {
 				params);
 	}
 
+	public List<Tag> listTagsOfbean(final long id){
+		return getBaseService().getById(id).getTags();
+	}
+	
 }
