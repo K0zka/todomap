@@ -53,7 +53,7 @@ $.fn.extend({
 						var tags = eval('('+data+')');
 						var frg = '<ul>'
 						for(var i = 0; i < tags.tag.length; i++) {
-							frg += '<li onclick="addTag('+$('#'+id).val()+',\''+lang+'\',\''+tags.tag[i]['$']+'\')">' + tags.tag[i]['$'] + '</li>'
+							frg += '<li onclick="addTag('+$('#'+id).val()+',\''+lang+'\',\''+tags.tag[i].name+'\'); $(\'#addTags\').val(\'\')">' + tags.tag[i].name + '</li>'
 						}
 						frg += '</ul>';
 						
