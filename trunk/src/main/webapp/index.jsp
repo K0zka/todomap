@@ -492,6 +492,7 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 				$("#newTodo").dialog('close');
 				$('#submitNewTodoButton').removeAttr('disabled');
 				$('#tagList').empty();
+				$('#attachments').empty();
 				$('#todoExtraWindow').dialog('open');
 				$('#todoExtraWindow_thanks').show();
 				$('#lastTodoId').val(newTodo.todo.id);
