@@ -46,8 +46,8 @@ public class JpaTagService extends JpaDaoSupport implements TagService {
 	}
 
 	@Override
-	public long addTag(final long id, final String language, final String tag) {
-		final String cleanTextTag = cleanup(tag);
+	public long addTag(final long id, final String language, final Tag tag) {
+		final String cleanTextTag = cleanup(tag.getName());
 		final BaseBean baseBean = baseService.getById(id);
 		final Tag storedTag = getJpaTemplate().execute(new JpaCallback<Tag>() {
 
@@ -59,13 +59,13 @@ public class JpaTagService extends JpaDaoSupport implements TagService {
 						.createQuery(
 								"select object(t) from "
 										+ Tag.class.getName()
-										+ " t where t.tag = :tag and t.langcode = :lang")
+										+ " t where t.name = :tag and t.langcode = :lang")
 						.setParameter("tag", cleanTextTag)
 						.setParameter("lang", language).getResultList();
 				if (resultList.isEmpty()) {
 					Tag newTag = new Tag();
 					newTag.setLangcode(language);
-					newTag.setTag(cleanTextTag);
+					newTag.setName(cleanTextTag);
 					entityManager.persist(newTag);
 					return newTag;
 				} else {
@@ -82,7 +82,8 @@ public class JpaTagService extends JpaDaoSupport implements TagService {
 
 	private String cleanup(final String tag) {
 		try {
-			return URLDecoder.decode(HtmlUtil.textify(tag).trim(), "ISO-8859-1");
+			String trim = HtmlUtil.textify(tag).trim();
+			return URLDecoder.decode(trim, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			return "";
 		}
@@ -109,7 +110,7 @@ public class JpaTagService extends JpaDaoSupport implements TagService {
 					tce.setWeight(((BigDecimal) record[2]).floatValue());
 					tce.getTag().setId(((BigInteger) record[0]).longValue());
 					tce.getTag().setLangcode(language);
-					tce.getTag().setTag((String) record[1]);
+					tce.getTag().setName((String) record[1]);
 					ret.add(tce);
 				}
 				return ret;
@@ -125,7 +126,7 @@ public class JpaTagService extends JpaDaoSupport implements TagService {
 		params.put("tag", prefix.concat("%"));
 		return getJpaTemplate().findByNamedParams(
 				"select object(t) from " + Tag.class.getName()
-						+ " t where t.langcode = :lang and t.tag like :tag",
+						+ " t where t.langcode = :lang and t.name like :tag",
 				params);
 	}
 
