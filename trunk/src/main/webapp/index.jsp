@@ -732,8 +732,8 @@ function attachFile() {
 	</div>
 	<div id="todoExtraTabs" style="width:100%; height: 100%">
 		<ul>
-			<li><a href="#todoextra-tagcloud">Tag cloud</a></li>
-			<li><a href="#todoextra-attach">Attachments</a></li>
+			<li><a href="#todoextra-tagcloud"><i18n:message key="sidebar.accordion.tagcloud">Tag cloud</i18n:message></a></li>
+			<li><a href="#todoextra-attach"><i18n:message key="todo.attachments">Attachments</i18n:message></a></li>
 		</ul>
 		<div id="todoextra-tagcloud">
 			<div style="width: 70%; float: left">
