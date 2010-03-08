@@ -298,41 +298,75 @@ function applyTooltip(elemSelector) {
 	});
 }
 
-function addTag(id, lang, tag) {
-	$.ajax({
-		type: 'POST',
-		url: 'services/tags/add/'+lang+'/'+id,
-		data: escape(tag),
-		success : function(){
-			refreshTagClouds(lang);
-			$.get('services/tags/tagsof/'+id, function(response) {
-				var lst = '<ul>'
-				var tags = eval('('+response+')');
-				for(i = 0; i < tags.tag.length; i++) {
-					lst = lst + '<li>'+tags.tag[i]['$']+'</li>';
-				}
-				lst = lst + '</ul>'
-				$('#tagList').html(lst);
-			});
-			}
-		});
+function refreshTagsOf(id) {
+	$.get('services/tags/tagsof/'+id , function(response) {
+		var lst = '<ul>'
+		var tags = eval('('+response+')');
+		for(i = 0; i < tags.tag.length; i++) {
+			lst = lst + '<li>'+tags.tag[i].name+'</li>';
+		}
+		lst = lst + '</ul>'
+		$('#tagList').html(lst);
+	});
 }
 
-function refreshTagClouds(lang) {
+function addTag(id, lang, tag) {
+	$.ajax( {
+		type : 'POST',
+		url : 'services/tags/add/' + lang + '/' + id,
+		data : JSON.stringify( {
+			tag : {
+				name : tag
+			}
+		}),
+		contentType : 'application/json',
+		dataType : 'json',
+		success : function() {
+			refreshTagClouds(lang);
+			refreshTagsOf(id);
+		}
+	});
+
+}
 	
+function refreshTagClouds(lang) {
+	debug('refreshTagClouds' +lang);
 	// add tags
 	$.get('services/tags/cloud/'+lang, function(response) {
 		var tagCloud = eval('('+response+')');
-		var tags = [];
+		$('div.tagcloud').empty();
+		var tagList = '';
 		for(var i = 0; i < tagCloud.tagc.length; i++) {
-			var tag = {tag : tagCloud.tagc[i].tag.tag, count : tagCloud.tagc[i].weight};
-			tags[tags.length] = tag;
+			tagList = tagList + '<a rel='+tagCloud.tagc[i].weight+' href="#" onclick="addTag( $(\'#lastTodoId\').val(), \''+lang+'\', \''+tagCloud.tagc[i].tag.name + '\')">'+tagCloud.tagc[i].tag.name +'</a> ';
 		}
-		$('div.tagcloud').tagCloud(tags, 
-				{
-					click : function(tag){ addTag($('#lastTodoId').val(), lang, tag); }
-				}
-		);
+		$('div.tagcloud').html(tagList);
+		$('div.tagcloud').tagcloud( {
+			size : {
+				start : 6,
+				end : 14,
+				unit : 0.5
+			},
+			color : {
+				start : '#000',
+				end : '#555'
+			}
+		});
 	});
 
+}
+
+function updateAttachments(todoId) {
+	$.get('services/attachments/'+todoId+'/get.shrt', function(data) {
+			var attachments = eval('('+data+')');
+			var html = ''
+			$('#attachments').empty();
+			$.each(attachments['atchmnt'], function(i, val) {
+				html = html + '<div id="attachment-'+val['id']+'" class="attachment" onclick="downloadAttachment('+val['id']+')">'
+					+ '<img alt="'+ val['id'] +'" src="thumbnail/'+val['id']+'"/>' 
+					+ '<span>'+val['filename']+'</span>'
+					+ '</div>'
+			});
+			$('#attachments').html(html);
+			increaseCounter('nrOfAttachments');
+		});
 }
