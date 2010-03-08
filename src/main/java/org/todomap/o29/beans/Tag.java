@@ -21,8 +21,8 @@ public class Tag {
 	long id;
 	@Column(nullable = false, length = 2)
 	String langcode;
-	@Column(nullable = false, length = 64)
-	String tag;
+	@Column(nullable = false, length = 64, name="tag")
+	String name;
 
 	@ManyToMany(mappedBy="tags")
 	List<BaseBean> taggedBeans;
@@ -52,11 +52,12 @@ public class Tag {
 		this.langcode = langcode;
 	}
 
-	public String getTag() {
-		return tag;
+	public String getName() {
+		return name;
 	}
 
-	public void setTag(String tag) {
-		this.tag = tag;
+	public void setName(String name) {
+		this.name = name;
 	}
+
 }
