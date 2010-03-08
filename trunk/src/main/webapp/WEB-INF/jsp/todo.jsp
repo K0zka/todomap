@@ -52,6 +52,8 @@ final Locale locale = (Locale)request.getAttribute("locale");
 </script>
 <script type="text/javascript" src="scripts/ajaxfileupload.js">
 </script>
+<script type="text/javascript" src="scripts/mbscrollable-1.5.7.js">
+</script>
 
 
 <title><%= todo.getShortDescr() %></title>
@@ -119,13 +121,22 @@ function initialize() {
 			frame_class: 'frameBody'
 		});
 		editors['todoDescriptionEditor'] = editor['todoDescriptionEditor'];
+
+		$("#comments").mbScrollable({
+	        dir:"vertical",
+	        elementsInPage:3,
+	        elementMargin:6,
+	        shadow:"#999 2px 2px 2px",
+	        slideTimer:600,
+	        autoscroll:false,
+	        scrollTimer:6000
+	      });
 		
     });
 
 }
 
 function attachFile() {
-	alert('uploading');
 	$.ajaxFileUpload
 	(
 		{
@@ -143,7 +154,7 @@ function attachFile() {
 			success: function (data, status)
 			{
 				debug('success');
-				updateAttachments();
+				updateAttachments(<%= todo.getId() %>);
 			},
 			error: function (data, status, e)
 			{
@@ -151,7 +162,6 @@ function attachFile() {
 			}
 		}
 	);
-	alert('done');
 }
 
 function handleErrors(request) {
@@ -171,21 +181,6 @@ function downloadAttachment(id) {
 		});
 }
 
-function updateAttachments(file, response) {
-	$.get('services/attachments/<%= todo.getId() %>/get.shrt', function(data) {
-			var attachments = eval('('+data+')');
-			var html = ''
-			$('#attachments').empty();
-			$.each(attachments['atchmnt'], function(i, val) {
-				html = html + '<div id="attachment-'+val['id']+'" class="attachment" onclick="downloadAttachment('+val['id']+')">'
-					+ '<img alt="'+ val['id'] +'" src="thumbnail/'+val['id']+'"/>'
-					+ '<span>'+val['filename']+'</span>'
-					+ '</div>'
-			});
-			$('#attachments').html(html);
-			increaseCounter('nrOfAttachments');
-		});
-}
 
 var editors;
 

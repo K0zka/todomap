@@ -57,7 +57,7 @@ final Locale locale = (Locale)request.getAttribute("locale");
 </script>
 <script type="text/javascript" src="scripts/jquery.heavylogic.autocomplete-1.0.js">
 </script>
-<script type="text/javascript" src="scripts/jquery.tagcloud-2.js">
+<script type="text/javascript" src="scripts/jquery.tagcloud.js">
 </script>
 <script type="text/javascript" src="scripts/o29.js">
 </script>
@@ -491,6 +491,7 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 				refreshMarkers();
 				$("#newTodo").dialog('close');
 				$('#submitNewTodoButton').removeAttr('disabled');
+				$('#tagList').empty();
 				$('#todoExtraWindow').dialog('open');
 				$('#todoExtraWindow_thanks').show();
 				$('#lastTodoId').val(newTodo.todo.id);
