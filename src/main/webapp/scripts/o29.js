@@ -347,8 +347,8 @@ function refreshTagClouds(lang) {
 				unit : 0.5
 			},
 			color : {
-				start : '#000',
-				end : '#555'
+				start : '#0063DC',
+				end : '#1073EC'
 			}
 		});
 	});
