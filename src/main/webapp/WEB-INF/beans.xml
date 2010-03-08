@@ -64,6 +64,7 @@
 
 	<bean id="tags" class="org.todomap.o29.logic.JpaTagService">
 		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="baseService" ref="base"/>
 	</bean>
 
 	<bean id="attachments" class="org.todomap.o29.logic.JpaAttachmentService"
