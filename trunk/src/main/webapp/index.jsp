@@ -725,8 +725,8 @@ function attachFile() {
 </div>
 
 <div id="todoExtraWindow" style="overflow: hidden">
-	<input type="hidden" id="lastTodoId"/>
 	<div id="todoExtraWindow_thanks">
+		<input type="hidden" id="lastTodoId"/>
 		<i18n:message key="todo.done">Thank you! Your TODO was registered in the database.</i18n:message>
 		<i18n:message key="todo.more">Could you help with more information?</i18n:message>
 	</div>
