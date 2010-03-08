@@ -1,9 +1,7 @@
 package org.todomap.o29.logic;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +45,7 @@ public class JpaTagService extends JpaDaoSupport implements TagService {
 
 	@Override
 	public long addTag(final long id, final String language, final Tag tag) {
-		final String cleanTextTag = cleanup(tag.getName());
+		final String cleanTextTag = HtmlUtil.textify(tag.getName()).trim();
 		final BaseBean baseBean = baseService.getById(id);
 		final Tag storedTag = getJpaTemplate().execute(new JpaCallback<Tag>() {
 
@@ -78,15 +76,6 @@ public class JpaTagService extends JpaDaoSupport implements TagService {
 			getJpaTemplate().persist(baseBean);
 		}
 		return storedTag.getId();
-	}
-
-	private String cleanup(final String tag) {
-		try {
-			String trim = HtmlUtil.textify(tag).trim();
-			return URLDecoder.decode(trim, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			return "";
-		}
 	}
 
 	@Override
