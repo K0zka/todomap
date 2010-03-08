@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+	http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+
+
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-jaxrs-binding.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+	<bean id="config" class="org.todomap.o29.logic.Configuration">
+	</bean>
+
+	<jaxrs:server name="o29" address="/">
+		<jaxrs:serviceBeans>
+			<ref bean="todos" />
+			<ref bean="users" />
+			<ref bean="homes" />
+			<ref bean="ratings" />
+			<ref bean="attachments" />
+			<ref bean="comments" />
+			<ref bean="bookmarks"/>
+			<ref bean="base"/>
+			<ref bean="todofacade"/>
+			<ref bean="tags"/>
+		</jaxrs:serviceBeans>
+		<!--
+			<jaxrs:extensionMappings> <alias name="xml" alias="application/xml"/>
+			</jaxrs:extensionMappings>
+		-->
+	</jaxrs:server>
+
+	<bean id="todos" class="org.todomap.o29.logic.JpaTodoServiceImpl">
+		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="geoCoder" ref="geoCoder" />
+		<property name="translatorService" ref="translatorService" />
+		<property name="userService" ref="users" />
+	</bean>
+
+	<bean id="users" class="org.todomap.o29.logic.JpaUserServiceImpl">
+		<property name="entityManagerFactory" ref="entityManager" />
+	</bean>
+
+	<bean id="comments" class="org.todomap.o29.logic.JpaCommentServiceImpl">
+		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="translatorService" ref="translatorService" />
+		<property name="userService" ref="users" />
+	</bean>
+
+	<bean id="ratings" class="org.todomap.o29.logic.JpaRatingServiceImpl">
+		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="userService" ref="users" />
+	</bean>
+
+	<bean id="homes" class="org.todomap.o29.logic.JpaHomeServiceImpl">
+		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="userService" ref="users" />
+	</bean>
+
+	<bean id="tags" class="org.todomap.o29.logic.JpaTagService">
+		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="baseService" ref="base"/>
+	</bean>
+
+	<bean id="attachments" class="org.todomap.o29.logic.JpaAttachmentService"
+		init-method="init">
+		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="userService" ref="users" />
+		<property name="acceptedMime">
+			<list>
+				<value>audio/mpeg</value>
+				<value>audio/ogg</value>
+				<value>audio/vorbis</value>
+				<value>image/gif</value>
+				<value>image/jpeg</value>
+				<value>image/png</value>
+				<value>text/plain</value>
+				<value>video/mpeg</value>
+				<value>video/mp4</value>
+				<value>video/ogg</value>
+				<value>application/pdf</value>
+				<value>application/msword</value>
+				<value>application/vnd.ms-powerpoint</value>
+				<value>application/vnd.ms-excel</value>
+				<value>application/vnd.oasis.opendocument.presentation</value>
+				<value>application/vnd.oasis.opendocument.text</value>
+				<value>application/vnd.oasis.opendocument.spreadsheet</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="base" class="org.todomap.o29.logic.JpaBaseService">
+		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="userService" ref="users"/>
+	</bean>
+
+	<bean id="bookmarks" class="org.todomap.o29.logic.JpaBookmarkService">
+		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="baseService" ref="base"/>
+		<property name="userService" ref="users"/>
+	</bean>
+
+	<bean id="entityManager"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="persistenceUnitName" value="o29" />
+		<property name="persistenceProvider">
+			<bean class="org.hibernate.ejb.HibernatePersistence" />
+		</property>
+		<property name="jpaPropertyMap">
+			<map>
+
+				<entry key="hibernate.show_sql" value="false" />
+				<entry key="hibernate.format_sql" value="true" />
+				<entry key="hibernate.hbm2ddl.auto" value="update" />
+
+			</map>
+		</property>
+	</bean>
+
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="jdbc/o29ds" />
+	</bean>
+
+	<bean id="jmsConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="jms/connectionFactory" />
+	</bean>
+
+	<bean id="jmsQueue" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="jms/o29mq"/>
+	</bean>
+
+	<bean id="geoCoder" class="org.todomap.geocoder.google.GoogleGeocoder">
+		<property name="apiKey" value="PLEASE GET A KEY" />
+	</bean>
+
+	<bean id="todofacade" class="org.todomap.o29.logic.facade.TodoFacade">
+		<property name="todoService" ref="todos"/>
+		<property name="ratingService" ref="ratings"/>
+		<property name="bookmarkService" ref="bookmarks"/>
+	</bean>
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="location" value="classpath:o29.properties" />
+	</bean>
+
+	<bean id="geoipResolver" class="org.todomap.minigeoip.impl.jpa.JpaGeoipResolver">
+		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="txManager" ref="transactionManager" />
+	</bean>
+
+	<bean id="geoipLogic" class="org.todomap.o29.logic.GeoIpLogic"
+		init-method="init">
+		<property name="resolver" ref="geoipResolver" />
+	</bean>
+
+	<bean id="translatorService" class="org.todomap.o29.logic.TranslatorServiceImpl">
+		<constructor-arg ref="translator" />
+	</bean>
+
+	<bean id="translator" class="org.todomap.latetrans.GoogleTranslator">
+	</bean>
+
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="defaultDestination" ref="jmsQueue"/>
+		<property name="connectionFactory" ref="jmsConnectionFactory"/>
+	</bean>
+	
+	<bean id="timerFactory" class="org.springframework.scheduling.timer.TimerFactoryBean">
+		<property name="scheduledTimerTasks">
+			<list>
+				<bean class="org.springframework.scheduling.timer.ScheduledTimerTask">
+					<property name="delay" value="10000" />
+					<!-- every day -->
+					<property name="period" value="86400000" />
+					<property name="timerTask">
+						<bean class="org.todomap.o29.utils.jobs.ReverseGeocodeTask">
+							<property name="geoCoder" ref="geoCoder"/>
+							<property name="jpaTemplate">
+								<bean class="org.springframework.orm.jpa.JpaTemplate">
+									<property name="entityManagerFactory" ref="entityManager"/>
+								</bean>
+							</property>
+							<property name="manager" ref="transactionManager"/>
+						</bean>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+</beans>
