@@ -60,4 +60,8 @@ public class Tag {
 		this.name = name;
 	}
 
+	public String toString() {
+		return name;
+	}
+	
 }
