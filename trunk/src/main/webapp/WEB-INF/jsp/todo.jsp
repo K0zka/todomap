@@ -3,7 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="i18n" %>
 <%@page import="org.apache.commons.lang.StringUtils"%>
-<%@page import="java.util.Locale"%><html>
+<%@page import="java.util.Locale"%>
+<%@page import="org.todomap.o29.beans.Tag"%><html>
 <%@page import="org.todomap.o29.beans.Todo"%>
 <%@page import="org.todomap.o29.beans.Attachment"%>
 <%@page import="org.todomap.o29.beans.Comment"%>
@@ -291,6 +292,13 @@ function saveData() {
 	</div>
 	<h3><a href="#"><i18n:message key="todo.details">Details</i18n:message></a></h3>
 	<div>
+		<span class="tags">
+			<ul>
+				<% for(Tag tag : todo.getTags()) { %>
+					<li><%= tag.getName() %></li>
+				<% } %>
+			</ul>
+		</span>
 		<span id="descriptionNoEdit">
 			<span id="todoDescriptionShow" ondblclick="editDescription()" style="cursor: text; width: 100%; height: 100%"><%= todo.getDescription() %></span>
 		</span>
