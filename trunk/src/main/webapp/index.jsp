@@ -28,8 +28,8 @@ final Locale locale = (Locale)request.getAttribute("locale");
 <meta name="google-site-verification" content="<%= configuration.getGoogleWebmastersVerification() %>" />
 <meta name="y_key" content="<%= configuration.getYahooSiteExplorerVerification() %>">
 <meta name="description" content="<i18n:message key="etc.description"/>" lang="<i18n:message key="etc.language"/>"/>
-
-<jsp:include page="WEB-INF/jsp/includes/sitemeta.jsp"/>
+<meta name="keywords" content="<i18n:message key="etc.keywords">democracy, direct democracy, map, public infrastructure, issues</i18n:message>" />
+<link REL="SHORTCUT ICON" HREF="img/earth.ico"/>
 
 <title>todomap</title>
 
