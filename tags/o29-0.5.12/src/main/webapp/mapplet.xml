@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+<ModulePrefs title="TodoMap"
+             description="Map-based issue tracker"
+             author="Laszlo Hornyak"
+             author_email="kocka.dev.null@gmail.com"
+             height="150">
+  <Require feature="sharedmap"/>
+</ModulePrefs>
+<Content type="html"><![CDATA[
+	
+<script>
+  var map = new GMap2();
+</script>
+	
+]]></Content>
+</Module>
