@@ -67,7 +67,8 @@
 </script>
 <script type="text/javascript" src="scripts/mbscrollable-1.5.7.js">
 </script>
-
+<script type="text/javascript" src="scripts/jquery.heavylogic.autocomplete-1.0.js">
+</script>
 
 <title><%=todo.getShortDescr()%></title>
 
@@ -295,6 +296,8 @@ function saveData() {
 </head>
 <body onload="initialize()">
 
+<input type="hidden" id="lastTodoId" value="<%=todo.getId() %>"/>
+
 <div style="width: 100%; height: 800px;">
 <div id="todoDetails">
 
@@ -346,7 +349,7 @@ function saveData() {
 			</ul>
 			</span>
 			<span class="authOnly">
-				<button onclick="$(tagWindow).dialog('open')">+/-</button>
+				<button onclick="$('#tagWindow').dialog('open')">+/-</button>
 			</span>
 		</span>
 		<span id="descriptionNoEdit">
