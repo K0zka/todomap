@@ -385,16 +385,15 @@ span.tags {
 	font-family: inherit;
 	font-size: 10px;
 	font-weight: bold;
-	color: #EEEEEE;
+	color: #0063DC;
 	text-decoration: none;
 	white-space: nowrap;
-	background: #0063DC;
-	border: none;
+	border: 1px solid #0063DC;
 	padding: 10px;
 	margin: 10px;
 	cursor: pointer !important;
 }
 
 span.tags ul {
-	list-style-type: none;
+	list-style-type: square;
 }
