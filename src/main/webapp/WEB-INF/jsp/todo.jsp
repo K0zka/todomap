@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="i18n" %>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="java.util.Locale"%>
-<%@page import="org.todomap.o29.beans.Tag"%><html>
+<%@page import="org.todomap.o29.beans.Tag"%>
 <%@page import="org.todomap.o29.beans.Todo"%>
 <%@page import="org.todomap.o29.beans.Attachment"%>
 <%@page import="org.todomap.o29.beans.Comment"%>
@@ -18,7 +18,13 @@ final Locale locale = (Locale)request.getAttribute("locale");
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<jsp:include page="includes/sitemeta.jsp"/>
+<% if(todo.getTags().size() > 0) { %>
+<meta name="keywords" content="<%= StringUtils.join(todo.getTags(), ',') %>" />
+<% } else { %>
+<meta name="keywords" content="<i18n:message key="etc.keywords">democracy, direct democracy, map, public infrastructure, issues</i18n:message>" />
+<% }  %>
+
+<link REL="SHORTCUT ICON" HREF="img/earth.ico"/>
 
 <script type="text/javascript"
 	src="http://maps.google.com/maps/api/js?sensor=false&language=<%= locale.getLanguage() %>">
