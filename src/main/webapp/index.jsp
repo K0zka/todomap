@@ -29,6 +29,8 @@ final Locale locale = (Locale)request.getAttribute("locale");
 <meta name="y_key" content="<%= configuration.getYahooSiteExplorerVerification() %>">
 <meta name="description" content="<i18n:message key="etc.description"/>" lang="<i18n:message key="etc.language"/>"/>
 <meta name="keywords" content="<i18n:message key="etc.keywords">democracy, direct democracy, map, public infrastructure, issues</i18n:message>" />
+
+<link rel="license" href="http://creativecommons.org/licenses/by/3.0/"/>
 <link REL="SHORTCUT ICON" HREF="img/earth.ico"/>
 
 <title>todomap</title>
@@ -698,6 +700,7 @@ function attachFile() {
 			The map is copyrighted by <a href="http://www.google.com/">google<a/>.
 			</i18n:message>
 		</div>
+		<a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;username=kozka"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=kozka"></script>
 		<div id='page-tooltip'>
 			&nbsp;
 		</div>
