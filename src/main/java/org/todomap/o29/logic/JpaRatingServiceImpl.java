@@ -7,6 +7,7 @@ import javax.persistence.PersistenceException;
 
 import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
+import org.todomap.o29.beans.AnonRating;
 import org.todomap.o29.beans.BaseBean;
 import org.todomap.o29.beans.Rating;
 import org.todomap.o29.beans.RatingSummary;
@@ -61,10 +62,13 @@ public class JpaRatingServiceImpl extends JpaDaoSupport implements
 			public RatingSummary doInJpa(EntityManager entityManager)
 					throws PersistenceException {
 				Object[] result = (Object[]) entityManager.createQuery("select avg(rate), count(*) from "+Rating.class.getName()+" r where r.bean.id = :id").setParameter("id", id).getSingleResult();
+				Object[] anonResult = (Object[]) entityManager.createQuery("select avg(rate), count(*) from "+AnonRating.class.getName()+" r where r.bean.id = :id").setParameter("id", id).getSingleResult();
 				
 				final RatingSummary ret = new RatingSummary();
 				ret.setAverage((Double) result[0]);
 				ret.setNrOfRatings((Long) result[1]);
+				ret.setAnonAverage((Double) anonResult[0]);
+				ret.setNrOfAnonRatings((Long) anonResult[1]);
 				return ret;
 			}
 		});

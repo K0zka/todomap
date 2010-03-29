@@ -6,6 +6,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class RatingSummary {
 	long nrOfRatings;
 	Double average;
+	long nrOfAnonRatings;
+	public long getNrOfAnonRatings() {
+		return nrOfAnonRatings;
+	}
+	public void setNrOfAnonRatings(long nrOfAnonRatings) {
+		this.nrOfAnonRatings = nrOfAnonRatings;
+	}
+	Double anonAverage;
+	public Double getAnonAverage() {
+		return anonAverage;
+	}
+	public void setAnonAverage(Double anonAverage) {
+		this.anonAverage = anonAverage;
+	}
 	public long getNrOfRatings() {
 		return nrOfRatings;
 	}
