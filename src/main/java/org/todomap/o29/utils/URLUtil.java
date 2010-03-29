@@ -42,4 +42,19 @@ public class URLUtil {
 		}
 		return bean.getClass().getSimpleName().toLowerCase();
 	}
+	
+	public static long extractId(final String requestURI) {
+		final int slashPos = requestURI.lastIndexOf('/');
+		final int separatorPos = slashPos == -1 ? requestURI.indexOf('-')
+				: requestURI.indexOf('-', slashPos);
+		if (separatorPos == -1) {
+			return 0;
+		} else {
+			String idStr = requestURI.substring(slashPos == -1 ? 0
+					: slashPos + 1, separatorPos);
+			return Long.parseLong(idStr);
+		}
+	}
+
+	
 }
