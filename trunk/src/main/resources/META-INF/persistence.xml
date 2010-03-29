@@ -7,6 +7,7 @@
 		<class>org.todomap.o29.beans.BaseBean</class>
 		<class>org.todomap.o29.beans.Comment</class>
 		<class>org.todomap.o29.beans.Attachment</class>
+		<class>org.todomap.o29.beans.AnonRating</class>
 		<class>org.todomap.o29.beans.Rating</class>
 		<class>org.todomap.o29.beans.Todo</class>
 		<class>org.todomap.o29.beans.Tag</class>
