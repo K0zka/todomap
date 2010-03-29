@@ -1,6 +1,18 @@
-<html>
+
+<%@page import="org.todomap.o29.utils.URLUtil"%>
+<%@page import="org.todomap.o29.beans.Todo"%>
+<%@page import="org.todomap.o29.beans.BaseBean"%>
+<%@page import="java.util.Locale"%>
+<%@page import="org.todomap.o29.beans.Locatable"%>
+<%@page import="org.todomap.o29.beans.Coordinate"%>
+<%@page import="org.todomap.geocoder.Address"%><html>
+<%
+	final BaseBean item = (BaseBean) request.getAttribute("data");
+	final Locale locale = (Locale) request.getAttribute("locale");
+%>
 
 <head>
+<base href="<%= URLUtil.getApplicationRoot(request) %>"/>
 <style type="text/css">
 img.control {
 	cursor: pointer;
@@ -59,44 +71,35 @@ p.intro {
 
 </style>
 
-<script type="text/javascript" src="script/jquery-1.3.2.min.js">
-</script>
-
-<script type="text/javascript">
-	function anonVote(id, value) {
-		
-	}
-</script>
+<script type="text/javascript" src="script/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="scripts/anonrating.js"></script>
 
 </head>
 <body lang="hungarian">
 <h1>Lorem ipsum dolor sit amet</h1>
 
 <div id="desc">
+<% if(item instanceof Locatable) { 
+	final Coordinate location = ((Locatable)item).getLocation();
+	final Address address = ((Locatable)item).getAddr();
+%>
+
+<script type="text/javascript" src="scripts/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="scripts/anonrating.js"></script>
+
 <span id="map">
 <img
-	src="http://maps.google.com/maps/api/staticmap?center=51.477222,0&zoom=14&size=240x180&markers=color:red|label:B|51.477222,0&sensor=false"><br/>
-Budapest, Bartok Bela utca 42
+	src="http://maps.google.com/maps/api/staticmap?center=<%= location.getLatitude() %>,<%= location.getLongitude() %>&zoom=14&size=240x180&markers=color:red|label:X|<%= location.getLatitude() %>,<%= location.getLongitude() %>&sensor=false"><br/>
+<%= address.getTown() %>, <%= address.getAddress() %>
 </span>
-<p class="intro">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco
-laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit
-amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<% } %>
+<p class="intro"><%= ((Todo)item).getDescription() %>
 </div>
 
 <img id="voteUp" src="img/Add.png" alt="vote up" class="control"
-	onclick="anonVote(10,10)" />
+	onclick="anonRate(<%= item.getId() %>, +10, showRatings)" />
 <img id="voteDown" src="img/Remove.png" alt="vote down" class="control"
-	onclick="anonVote(10,-10)" />
+	onclick="anonRate(<%= item.getId() %>, -10, showRatings)" />
 <img id="logo" alt="todomap logo" src="img/todomap-logo.jpg">
 </body>
 </html>

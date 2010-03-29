@@ -13,9 +13,13 @@
 
 <%@page import="org.todomap.o29.beans.BaseBean"%>
 <%@page import="java.util.Locale"%>
-<%@page import="org.todomap.o29.beans.Todo"%><html>
+<%@page import="org.todomap.o29.beans.Todo"%>
+<%@page import="java.net.URLEncoder"%>
+<%@page import="org.todomap.o29.utils.URLUtil"%>
+<%@page import="org.todomap.o29.beans.Locatable"%><html>
 
 <head>
+<base href="<%= URLUtil.getApplicationRoot(request) %>"/>
 <style type="text/css">
 img.control {
 	cursor: pointer;
@@ -51,6 +55,15 @@ h1 {
 	cursor: pointer;
 }
 
+#thx {
+	text-align: justify;
+	font-size: x-small;
+	width: 115px;
+	height: 100%;
+	overflow: hidden;
+	cursor: pointer;
+}
+
 #logo {
 	position: absolute;
 	bottom: 0px;
@@ -66,21 +79,30 @@ h1 {
 }
 </style>
 
+<script type="text/javascript" src="scripts/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="scripts/anonrating.js"></script>
+
 <script type="text/javascript">
 function popup() {
-	window.open('640x480.html','_blank','height=640, width=480, location=no, toolbar=no, menubar=no, titlebar=no, status=no');
+	window.open('embed/640x480/<%= URLEncoder.encode(item.getId() + "-" + item.getName(), "UTF-8") %>.html','_blank','height=640, width=480, location=no, toolbar=no, menubar=no, titlebar=no, status=no');
 }
+
 </script>
 
 </head>
 <body lang="hungarian">
 <h1><%= item.getName() %></h1>
+<span id="question">
 <div id="desc" onclick="popup()"><%= ((Todo)item).getDescription() %></div>
-<div id="addr"><%= ((Todo)item).getAddr().getTown() %><br/><%= ((Todo)item).getAddr().getAddress() %></div>
-<img id="voteUp" src="../../img/Add.png" alt="vote up" class="control"
-	onclick="alert('vote up')" />
-<img id="voteDown" src="../../img/Remove.png" alt="vote down" class="control"
-	onclick="alert('vote up')" />
-<img id="logo" alt="todomap logo" src="../../img/todomap-logo.jpg"/>
+<div id="addr"><%= ((Locatable)item).getAddr().getTown() %><br/><%= ((Locatable)item).getAddr().getAddress() %></div>
+<img id="voteUp" src="img/Add.png" alt="vote up" class="control"
+	onclick="anonRate(<%= item.getId() %>, 10, showRatings)" />
+<img id="voteDown" src="img/Remove.png" alt="vote down" class="control"
+	onclick="anonRate(<%= item.getId() %>, -10, showRatings)" />
+</span>
+<span id="thx" style="visibility: hidden">
+	thank you!
+</span>
+<img id="logo" alt="todomap logo" src="img/todomap-logo.jpg"/>
 </body>
 </html>
