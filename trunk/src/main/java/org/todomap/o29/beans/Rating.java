@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Rating {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rating_seq")
-	@SequenceGenerator(name = "rating_seq", allocationSize = 1, initialValue = 0, sequenceName = "base_seq")
+	@SequenceGenerator(name = "rating_seq", allocationSize = 1, initialValue = 0, sequenceName = "rating_seq")
 	long id;
 
 	public long getId() {
