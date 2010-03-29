@@ -124,12 +124,6 @@
 	</servlet>
 
 	<servlet>
-		<servlet-name>todoFullPageServlet</servlet-name>
-		<servlet-class>org.todomap.o29.utils.TodoFullPageServlet</servlet-class>
-		<load-on-startup>2</load-on-startup>
-	</servlet>
-
-	<servlet>
 		<servlet-name>rssServlet</servlet-name>
 		<servlet-class>org.todomap.o29.utils.RssServlet</servlet-class>
 	</servlet>
@@ -189,10 +183,16 @@
 		<url-pattern>rss.xml/region/*</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>spring</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
 	<servlet-mapping>
-		<servlet-name>todoFullPageServlet</servlet-name>
-		<url-pattern>*.html</url-pattern>
-	</servlet-mapping>
+        <servlet-name>spring</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>CXFServlet</servlet-name>
@@ -207,7 +207,7 @@
 		<error-code>500</error-code>
 		<location>/WEB-INF/jsp/errors/error.jsp</location>
 	</error-page>
-	
+
 	<error-page>
 		<error-code>404</error-code>
 		<location>/WEB-INF/jsp/errors/404.jsp</location>
