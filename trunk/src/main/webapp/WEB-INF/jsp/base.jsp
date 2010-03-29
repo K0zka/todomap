@@ -267,24 +267,25 @@ function saveData() {
 
 <div id="todoDetails">
 
-	<% if(item instanceof Locatable) { %>
+	<% if(item instanceof Locatable) { 
+		final Coordinate location = ((Locatable)item).getLocation();
+		final Address address = ((Locatable)item).getAddr();
+	%>
 	<span id="locationinfo">
 	<h3><i18n:message key="todo.location">Location</i18n:message></h3>
 	<div style="position: absolute; top: 0px; right: 0px; color: grey; font-size: 0.8em;">
 		<a href="index.jsp?lat=<%=((Locatable)item).getLocation().getLatitude()%>&lng=<%=((Locatable)item).getLocation().getLongitude()%>&zoom=13"> <i18n:message key="etc.returnToMap">return to map</i18n:message> </a>
 	</div>
+	<img
+		src="http://maps.google.com/maps/api/staticmap?center=<%=location.getLatitude() %>,<%= location.getLongitude() %>&zoom=14&size=240x180&markers=color:red|label:X|<%=location.getLatitude() %>,<%= location.getLongitude() %>&sensor=false">
 	<div style="color: grey; font-size: 0.8em;">
 		<%
-			if (((Locatable)item).getAddr() != null) {
+			if (address != null) {
 		%>
-		<%=((Locatable)item).getAddr().getCountry() == null ? "-" : ((Locatable)item)
-					.getAddr().getCountry()%>
-		&gt; <%=((Locatable)item).getAddr().getState() == null ? "-" : ((Locatable)item)
-					.getAddr().getState()%>
-		&gt; <%=((Locatable)item).getAddr().getTown() == null ? "-" : ((Locatable)item)
-					.getAddr().getTown()%>
-		&gt; <%=((Locatable)item).getAddr().getAddress() == null ? "-" : ((Locatable)item)
-					.getAddr().getAddress()%>
+		<%= address.getCountry() == null ? "-" : address.getCountry()%>
+		&gt; <%=address.getState() == null ? "-" : address.getState()%>
+		&gt; <%=address.getTown() == null ? "-" : address.getTown()%>
+		&gt; <%=address.getAddress() == null ? "-" : address.getAddress()%>
 		<%
 			}
 		%>
@@ -424,4 +425,6 @@ function saveData() {
 
 </body>
 
-</html>
+
+<%@page import="org.todomap.o29.beans.Coordinate"%>
+<%@page import="org.todomap.geocoder.Address"%></html>
