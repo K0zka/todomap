@@ -34,6 +34,8 @@
 			expression="execution(* org.todomap.o29.logic.UserService.*(..))" />
 		<aop:pointcut id="ratingServiceMethods"
 			expression="execution(* org.todomap.o29.logic.RatingService.*(..))" />
+		<aop:pointcut id="anonratingServiceMethods"
+			expression="execution(* org.todomap.o29.logic.RatingService.*(..))" />
 		<aop:pointcut id="homeServiceMethods"
 			expression="execution(* org.todomap.o29.logic.HomeService.*(..))" />
 		<aop:pointcut id="attachmentServiceMethods"
@@ -52,6 +54,7 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="todoServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="userServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="ratingServiceMethods" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="anonratingServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="homeServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="attachmentServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="commentServiceMethods" />
@@ -63,6 +66,7 @@
 		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="todoServiceMethods" />
 		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="userServiceMethods" />
 		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="ratingServiceMethods" />
+		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="anonratingServiceMethods" />
 		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="homeServiceMethods" />
 		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="attachmentServiceMethods" />
 		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="commentServiceMethods" />
