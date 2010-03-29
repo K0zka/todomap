@@ -6,6 +6,13 @@ h1 {
 	font-family: sans-serif;
 }
 
+/**
+ * The stupid blue border around images in firefox.
+ */
+img {
+	border: none; 
+}
+
 p.startquote {
 	font-style: italic;
 	text-align: justify;
@@ -309,8 +316,9 @@ div.ratingsummary {
 	font-style: italic;
 }
 
-a.morelink {
+span.morelink {
 	position: absolute;
+	cursor: pointer;
 	bottom: 10px;
 	font-style: italic;
 	font-size: 10px;
