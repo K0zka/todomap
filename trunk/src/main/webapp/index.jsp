@@ -2,18 +2,21 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="i18n" %>
+<%@ taglib prefix="i18n" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%@page import="java.util.Locale"%>
-<%@page import="org.springframework.security.core.context.SecurityContextHolder"%><html>
-
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="org.springframework.security.core.AuthenticationException" %>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 
 <%@page import="org.todomap.o29.logic.Configuration"%>
 <%@page import="org.todomap.o29.utils.VersionUtil"%>
 <%@page import="org.todomap.o29.utils.URLUtil"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
 <%
 final Configuration configuration = (Configuration)WebApplicationContextUtils
 	.getRequiredWebApplicationContext(config.getServletContext()).getBean("config");
@@ -199,6 +202,11 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
            });
         $("#userDetailsAccordion").accordion({});
         $('#newTodoAccordion').accordion({});
+        $('#todoWindow').dialog({
+            autoOpen : false,
+            width: 600,
+            height: 400
+        });
         $("#helpWindow").dialog({
             autoOpen : false,
             title	:	'<i18n:message key="window.help"/>'
@@ -321,13 +329,17 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 								    var rating = todo['rating'];
 								    var ratingSum = todo['ratingSummary'];
 								    var itemId = todo['todo']['id'];
+								    var fullLink = encodeURI(itemId + '-' + todo['todo']['shortDescr'] + '.html');
 							    	var infowindow = new google.maps.InfoWindow({
 							    		content: '<div style="overflow:hidden; width: 200px; height: 200px;">'
 							    			+ '<h3 style="margin: 5px; font-size: 15px; width: 160px;">'+shortDescr+'</h3>'
 							    			+ '<div class="infowindow">'
 							    			+ todo['todo']['description']
 								    		+ '</div>'
-							    		    + '<a href="'+ encodeURI(itemId + '-' + todo['todo']['shortDescr']) + '.html" class="morelink" target="_blank"><i18n:message key="etc.more"/></a>'
+								    		+ '<span class="morelink">'
+								    		+ '<a onclick="openInTodoWindow(\''+fullLink+'\')"><i18n:message key="etc.more"/></a>'
+							    		    + '<a href="'+ fullLink + '" target="_blank"><img src="img/external-link.png"/></a>'
+							    		    + '</span>'
 							    		    + '<div id="bookmark_togle_'+itemId+'" class="starTogle_'+(todo['bookmarked'] ? '' : 'in')+'active" style="position: absolute; top: 0px; right: 0px;" onclick="togle(\'bookmark_togle_'+itemId+'\',function(t,isAdd){ if(isAdd) {bookmarkItem('+itemId+');} else {unbookmarkItem('+itemId+');}})"></div>'
 							    		    
 							    			+ '<div id="voteup_'+itemId+'" class="' + (rating && rating['rate'] >= 0 ? 'voteUp_selected' : 'voteUp_unselected') + '" style="position: absolute; top: 32px; right: 0px;" ' 
@@ -645,6 +657,10 @@ function attachFile() {
 	);
 }
 
+function openInTodoWindow(url) {
+	$('#todoWindow').dialog('open');
+	$('#todoWindow_contentFrame').attr('src',url);
+}
 
 </script>
 
@@ -713,6 +729,10 @@ function attachFile() {
 
 <div id="helpWindow">
 	<i18n:message key="etc.underconstruction">TODO.</i18n:message>
+</div>
+
+<div id="todoWindow">
+	<iframe id="todoWindow_contentFrame" style="width: 100%; height: 100%; border: none;" src="about:blank"></iframe>
 </div>
 
 <div id="linksWindow" title="Links to this map">
