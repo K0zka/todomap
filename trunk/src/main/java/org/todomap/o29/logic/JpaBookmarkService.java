@@ -22,7 +22,7 @@ public class JpaBookmarkService extends JpaDaoSupport implements BookmarkService
 	}
 
 	@Override
-	public void bookmark(final long itemId) {
+	public void addBookmark(final long itemId) {
 		final User currentUser = userService.getCurrentUser();
 		currentUser.getBookmarks().add(baseService.getById(itemId));
 		getJpaTemplate().persist(currentUser);
@@ -49,7 +49,7 @@ public class JpaBookmarkService extends JpaDaoSupport implements BookmarkService
 	}
 
 	@Override
-	public void unbookmark(long itemId) {
+	public void removeBookmark(long itemId) {
 		final User currentUser = userService.getCurrentUser();
 		currentUser.getBookmarks().remove(baseService.getById(itemId));
 		getJpaTemplate().persist(currentUser);

@@ -61,11 +61,11 @@ public interface BookmarkService {
 	
 	@Path("/bookmark/{id}")
 	@POST
-	void bookmark(@PathParam("id") long itemId);
+	void addBookmark(@PathParam("id") long itemId);
 	
 	@POST
 	@Path("/unbookmark/{id}")
-	void unbookmark(@PathParam("id") long itemId);
+	void removeBookmark(@PathParam("id") long itemId);
 
 	@GET
 	@Path("/")
