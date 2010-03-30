@@ -76,7 +76,7 @@ p.intro {
 
 </head>
 <body lang="hungarian">
-<h1><%= ((Todo)item).getDescription() %></h1>
+<h1><%= item.getName() %></h1>
 
 <div id="desc">
 <% if(item instanceof Locatable) { 
@@ -93,7 +93,7 @@ p.intro {
 <%= address.getTown() %>, <%= address.getAddress() %>
 </span>
 <% } %>
-<p class="intro"><%= ((Todo)item).getShortDescr() %>
+<p class="intro"><%= ((Todo)item). %>
 </div>
 
 <img id="voteUp" src="img/Add.png" alt="vote up" class="control"
