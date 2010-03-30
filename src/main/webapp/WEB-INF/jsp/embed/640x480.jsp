@@ -76,7 +76,7 @@ p.intro {
 
 </head>
 <body lang="hungarian">
-<h1>Lorem ipsum dolor sit amet</h1>
+<h1><%= ((Todo)item).getDescription() %></h1>
 
 <div id="desc">
 <% if(item instanceof Locatable) { 
