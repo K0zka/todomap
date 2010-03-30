@@ -93,7 +93,7 @@ p.intro {
 <%= address.getTown() %>, <%= address.getAddress() %>
 </span>
 <% } %>
-<p class="intro"><%= ((Todo)item). %>
+<p class="intro"><%= ((Todo)item).getShortDescr() %>
 </div>
 
 <img id="voteUp" src="img/Add.png" alt="vote up" class="control"
