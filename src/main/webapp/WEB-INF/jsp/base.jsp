@@ -387,10 +387,8 @@ function saveData() {
 	<div id="embed">
 		<i18n:message key="ratings.embed.copypaste">Copy-paste this code to the html code of your site:</i18n:message>
 		<br/>
-		<textarea id="iframebox">
-<iframe width="125" height="125" src="<%= URLUtil.getApplicationRoot(request) %>/embed/125x125.html">
-</iframe>
-		</textarea>
+		<textarea id="iframebox"><iframe width="125" height="125" style="border: none;" src="<%= URLUtil.getApplicationRoot(request) %>/embed/125x125/<%= URLEncoder.encode(item.getId() + "-" +"embed","UTF-8") %>.html">
+</iframe></textarea>
 		<br/>
 		<button onclick="$('#embed').hide(100); $('#voteEmbedButton').show(100);">done</button>
 	</div>
@@ -466,4 +464,6 @@ function saveData() {
 <%@page import="org.todomap.o29.logic.RatingService"%>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@page import="org.todomap.o29.beans.RatingSummary"%>
-<%@page import="org.todomap.o29.utils.URLUtil"%></html>
+<%@page import="org.todomap.o29.utils.URLUtil"%>
+<%@page import="org.apache.cxf.wsdl.http.UrlEncoded"%>
+<%@page import="java.net.URLEncoder"%></html>
