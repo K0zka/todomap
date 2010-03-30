@@ -678,9 +678,9 @@ function openInTodoWindow(url) {
 				<button id="yourDetailsButton"  onclick="$('#userDetailsWindow').dialog('open'); getUserDetails();"> <i18n:message key="sidebar.button.yourdetails"> Your details </i18n:message> </button><br/>
 				</span>
 				<span class="noAuthOnly">
-				<button id="loginButton" onclick="$(loginWindow).dialog('open')"> <i18n:message key="sidebar.button.login"> Log in / Register </i18n:message> </button><br/>
+				<button id="loginButton" onclick="$('#loginWindow').dialog('open')"> <i18n:message key="sidebar.button.login"> Log in / Register </i18n:message> </button><br/>
 				</span>
-				<button id="embedButton" onclick="$(linksWindow).dialog('open')"> <i18n:message key="sidebar.button.links"> Link to this map </i18n:message> </button><br/>
+				<button id="embedButton" onclick="$('#linksWindow').dialog('open')"> <i18n:message key="sidebar.button.links"> Link to this map </i18n:message> </button><br/>
 				<button id="gotoButton" onclick="$('#wheretogoWindow').dialog('open')"> <i18n:message key="sidebar.button.goto"> Enter address </i18n:message> </button><br/>
 				<span class="authOnly">
 				<button id="homeButton"  onclick="goHome()"> <i18n:message key="sidebar.button.gohome"> Go Home </i18n:message> </button><br/>
