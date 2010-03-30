@@ -137,6 +137,8 @@ function initialize() {
 		
     });
 
+    $('#embed').hide(0);
+    
 }
 
 function attachFile() {
@@ -371,6 +373,36 @@ function saveData() {
 			}
 		%>
 	</span>
+
+	<h3><i18n:message key="todo.ratingdetails">Ratings details</i18n:message></h3>
+	<ul>
+		<li><i18n:message key="ratings.authenticated">Authenticated users:</i18n:message> <%= ratings.getNrOfRatings() %></li>
+		<li><i18n:message key="ratings.authenticated_avg">Authenticated users average:</i18n:message> <%= ratings.getAverage() == null ? "-" :  ratings.getAverage() %></li>
+		<li><i18n:message key="ratings.anon">Anon users:</i18n:message> <%= ratings.getNrOfAnonRatings() %></li>
+		<li><i18n:message key="ratings.anon_avg">Anon users average:</i18n:message> <%= ratings.getAnonAverage() == null ? "-" : ratings.getAnonAverage() %></li>
+	</ul>
+	
+	<button id="voteEmbedButton" onclick="$('#embed').show(100); $('#voteEmbedButton').hide(100);">&lt;embed&gt;</button>
+	
+	<div id="embed">
+		<i18n:message key="ratings.embed.copypaste">Copy-paste this code to the html code of your site:</i18n:message>
+		<br/>
+		<textarea id="iframebox">
+<iframe width="125" height="125" src="<%= URLUtil.getApplicationRoot(request) %>/embed/125x125.html">
+</iframe>
+		</textarea>
+		<br/>
+		<button onclick="$('#embed').hide(100); $('#voteEmbedButton').show(100);">done</button>
+	</div>
+	
+	<div id="ratingDetails">
+		<input name="simpleRating" type="radio" class="star"/> 
+		<input name="simpleRating" type="radio" class="star"/> 
+		<input name="simpleRating" type="radio" class="star"/> 
+		<input name="simpleRating" type="radio" class="star"/> 
+		<input name="simpleRating" type="radio" class="star"/>
+	</div>
+
 	<h3><i18n:message key="todo.comments">Comments</i18n:message> <span id="nrOfComments" class="counter"><%=item.getComments().size()%></span></h3>
 	<div id="newComment" style="">
 		<textarea id="commentEditor" class="todoDescription"></textarea> <br/>
@@ -402,21 +434,7 @@ function saveData() {
 			}
 		%>
 	</div>
-	<h3><i18n:message key="todo.ratingdetails">Ratings details</i18n:message></h3>
-	<ul>
-		<li><i18n:message key="ratings.authenticated">Authenticated users:</i18n:message> <%= ratings.getNrOfRatings() %></li>
-		<li><i18n:message key="ratings.authenticated_avg">Authenticated users average:</i18n:message> <%= ratings.getAverage() == null ? "-" :  ratings.getAverage() %></li>
-		<li><i18n:message key="ratings.anon">Anon users:</i18n:message> <%= ratings.getNrOfAnonRatings() %></li>
-		<li><i18n:message key="ratings.anon_avg">Anon users average:</i18n:message> <%= ratings.getAnonAverage() == null ? "-" : ratings.getAnonAverage() %></li>
-	</ul>
 	
-	<div id="ratingDetails">
-		<input name="simpleRating" type="radio" class="star"/> 
-		<input name="simpleRating" type="radio" class="star"/> 
-		<input name="simpleRating" type="radio" class="star"/> 
-		<input name="simpleRating" type="radio" class="star"/> 
-		<input name="simpleRating" type="radio" class="star"/>
-	</div>
 </div>
 
 </div>
@@ -431,6 +449,9 @@ function saveData() {
 	<div id="authorId-tooltip">
 		<p><img src="img/user.png"/> <i18n:message key="tooltip.authorId">This is the unique ID of the user. Names are not neccesarily unique.</i18n:message></p>
 	</div>
+	<div id="voteEmbedButton-tooltip">
+		<p><img src="img/gear.png"/> <i18n:message key="tooltip.voteEmbedButton">Embed this!</i18n:message> </p>
+	</div>
 </span>
 
 
@@ -444,4 +465,5 @@ function saveData() {
 <%@page import="org.todomap.geocoder.Address"%>
 <%@page import="org.todomap.o29.logic.RatingService"%>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
-<%@page import="org.todomap.o29.beans.RatingSummary"%></html>
+<%@page import="org.todomap.o29.beans.RatingSummary"%>
+<%@page import="org.todomap.o29.utils.URLUtil"%></html>
