@@ -51,10 +51,10 @@ public class SecurityFilter implements Filter {
 
 	}
 
-	private boolean isProtectedMethod(final String method, String uri) {
+	static boolean isProtectedMethod(final String method, final String uri) {
 		return (("POST".equalsIgnoreCase(method)
 				|| "PUT".equalsIgnoreCase(method) || "DELETE"
-				.equalsIgnoreCase(method)) && uri.startsWith("/anon/"));
+				.equalsIgnoreCase(method)) && (uri.indexOf("/anon/") == -1));
 	}
 
 	@Override
