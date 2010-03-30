@@ -13,6 +13,8 @@
 <%
 	final BaseBean item = (BaseBean) request.getAttribute("data");
 	final Locale locale = (Locale) request.getAttribute("locale");
+	final RatingService ratingService = (RatingService) WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext()).getBean("ratings");
+	final RatingSummary ratings = ratingService.getRatingSummary(item.getId());
 %>
 <i18n:setLocale value="<%= locale %>"/>
 <i18n:setBundle basename="Messages"/>
@@ -274,7 +276,7 @@ function saveData() {
 	<span id="locationinfo">
 	<h3><i18n:message key="todo.location">Location</i18n:message></h3>
 	<div style="position: absolute; top: 0px; right: 0px; color: grey; font-size: 0.8em;">
-		<a href="index.jsp?lat=<%=((Locatable)item).getLocation().getLatitude()%>&lng=<%=((Locatable)item).getLocation().getLongitude()%>&zoom=13"> <i18n:message key="etc.returnToMap">return to map</i18n:message> </a>
+		<a rel="nofollow" href="index.jsp?lat=<%=((Locatable)item).getLocation().getLatitude()%>&lng=<%=((Locatable)item).getLocation().getLongitude()%>&zoom=13"> <i18n:message key="etc.returnToMap">return to map</i18n:message> </a>
 	</div>
 	<img
 		src="http://maps.google.com/maps/api/staticmap?center=<%=location.getLatitude() %>,<%= location.getLongitude() %>&zoom=14&size=240x180&markers=color:red|label:X|<%=location.getLatitude() %>,<%= location.getLongitude() %>&sensor=false">
@@ -303,6 +305,18 @@ function saveData() {
 		}
 	%>
 	<h3><i18n:message key="todo.details">Details</i18n:message></h3>
+	<% if(item instanceof Todo) { %>
+	<span id="descriptionNoEdit">
+		<span id="todoDescriptionShow" ondblclick="editDescription()" style="cursor: text; width: 100%; height: 100%"><%=((Todo)item).getDescription()%></span>
+	</span>
+	<% } %>
+	<span id="descriptionEdit" style="display: none">
+		<textarea id="todoDescriptionEditor" class="todoDescription"></textarea>
+		<button id="saveButton" onclick="saveData()"><i18n:message key="etc.save">save</i18n:message></button>
+	</span>
+
+	<h3><i18n:message key="todo.tags">tags</i18n:message></h3>
+
 	<span class="tags">
 		<span id="tagList">
 		<ul>
@@ -325,15 +339,8 @@ function saveData() {
 			<button onclick="$('#addTagSpan').show(1000)">+/-</button>
 		</span>
 	</span>
-	<% if(item instanceof Todo) { %>
-	<span id="descriptionNoEdit">
-		<span id="todoDescriptionShow" ondblclick="editDescription()" style="cursor: text; width: 100%; height: 100%"><%=((Todo)item).getDescription()%></span>
-	</span>
-	<% } %>
-	<span id="descriptionEdit" style="display: none">
-		<textarea id="todoDescriptionEditor" class="todoDescription"></textarea>
-		<button id="saveButton" onclick="saveData()"><i18n:message key="etc.save">save</i18n:message></button>
-	</span>
+
+
 	<h3><i18n:message key="todo.attachments"> Attachments </i18n:message> <span id="nrOfAttachments" class="counter"><%=item.getAttachments().size()%></span></h3>
 	<span class="authOnly">
 		<input type="file" id="fileToUpload" name="file"/>
@@ -396,6 +403,13 @@ function saveData() {
 		%>
 	</div>
 	<h3><i18n:message key="todo.ratingdetails">Ratings details</i18n:message></h3>
+	<ul>
+		<li><i18n:message key="ratings.authenticated">Authenticated users:</i18n:message> <%= ratings.getNrOfRatings() %></li>
+		<li><i18n:message key="ratings.authenticated_avg">Authenticated users average:</i18n:message> <%= ratings.getAverage() == null ? "-" :  ratings.getAverage() %></li>
+		<li><i18n:message key="ratings.anon">Anon users:</i18n:message> <%= ratings.getNrOfAnonRatings() %></li>
+		<li><i18n:message key="ratings.anon_avg">Anon users average:</i18n:message> <%= ratings.getAnonAverage() == null ? "-" : ratings.getAnonAverage() %></li>
+	</ul>
+	
 	<div id="ratingDetails">
 		<input name="simpleRating" type="radio" class="star"/> 
 		<input name="simpleRating" type="radio" class="star"/> 
@@ -427,4 +441,7 @@ function saveData() {
 
 
 <%@page import="org.todomap.o29.beans.Coordinate"%>
-<%@page import="org.todomap.geocoder.Address"%></html>
+<%@page import="org.todomap.geocoder.Address"%>
+<%@page import="org.todomap.o29.logic.RatingService"%>
+<%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
+<%@page import="org.todomap.o29.beans.RatingSummary"%></html>
