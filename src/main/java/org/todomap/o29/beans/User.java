@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -27,6 +28,17 @@ public class User extends BaseBean {
 	Coordinate homeLoc;
 	@Column
 	Short homeZoomLevel;
+	
+	public List<Link> getUserLinks() {
+		return userLinks;
+	}
+
+	public void setUserLinks(List<Link> userLinks) {
+		this.userLinks = userLinks;
+	}
+
+	@OneToMany
+	List<Link> userLinks;
 	
 	public String getDisplayName() {
 		return displayName;
