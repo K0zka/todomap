@@ -21,6 +21,15 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="Todomap <%= VersionUtil.getVersionNumber() %>"/>
+<% if(item instanceof User) {
+	for(final Link link : ((User)item).getUserLinks()) {
+%>
+<link rel="me" href="<%= link.getUrl() %>"/>
+<%
+	}
+} 
+%>
 
 <%
 	if (item.getTags().size() > 0) {
@@ -265,7 +274,7 @@ function saveData() {
 <body onload="initialize()">
 
 
-<div style="width: 100%; height: 800px;">
+<div style="width: 100%;">
 
 <a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;username=kozka"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=kozka"></script>
 
@@ -332,7 +341,7 @@ function saveData() {
 		</ul>
 		</span>
 		
-		<span id="addTagSpan" style="visibility: hidden;">
+		<span id="addTagSpan" style="display: none;">
 				<input id="addTags"/>
 				<button id="addTag" onclick="addTag( <%=item.getId()%> , '<%=locale.getLanguage()%>', $('#addTags').val()); $('#addTags').val(''); $('#addTagSpan').hide(1000)"><i18n:message key="tag.add">add tag</i18n:message></button>
 		</span>
@@ -437,7 +446,7 @@ function saveData() {
 
 </div>
 
-<span style="visibility: hidden">
+<span style="display: none;">
 	<div id="todoDescriptionShow-tooltip">
 		<p><img src="img/edit.png"/> <i18n:message key="tooltip.todoDescriptionShow">Double click the text to start editing.</i18n:message></p>
 	</div>
@@ -453,7 +462,7 @@ function saveData() {
 </span>
 
 
-<input type="hidden" id="lastTodoId" value="<%=item.getId() %>" style="visibility: hidden;"/>
+<input type="hidden" id="lastTodoId" value="<%=item.getId() %>" style="display: none;"/>
 
 
 </body>
@@ -466,4 +475,7 @@ function saveData() {
 <%@page import="org.todomap.o29.beans.RatingSummary"%>
 <%@page import="org.todomap.o29.utils.URLUtil"%>
 <%@page import="org.apache.cxf.wsdl.http.UrlEncoded"%>
-<%@page import="java.net.URLEncoder"%></html>
+<%@page import="java.net.URLEncoder"%>
+<%@page import="org.todomap.o29.beans.User"%>
+<%@page import="org.todomap.o29.beans.Link"%>
+<%@page import="org.todomap.o29.utils.VersionUtil"%></html>
