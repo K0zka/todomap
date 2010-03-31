@@ -943,7 +943,7 @@ function openInTodoWindow(url) {
 </div>
 
 <!-- tooltips here -->
-<div id="tooltips" style="visibility: hidden; overflow: hidden; display: none;">
+<div id="tooltips" style="overflow: hidden; display: none;">
 	<div id="homeButton-tooltip">
 		<p><img src="img/gohome.png"/> <i18n:message key="tooltip.homeButton"> Position the map to your home location </i18n:message> </p>
 	</div>
