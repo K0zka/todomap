@@ -1,5 +1,8 @@
 package org.todomap.o29.logic;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -24,5 +27,7 @@ public interface BaseService {
 	@POST //delete would be nice, but it is not supported by 'some browsers'
 	@Path("/remove/{id}")
 	BaseBean removebyId(@PathParam("id") long id);
-	
+
+	List<Date> listActiveDays(final String countryCode);
+	List<BaseBean> list(final String countryCode, final Date day);
 }
