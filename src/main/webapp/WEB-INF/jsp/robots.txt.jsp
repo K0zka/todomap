@@ -1,7 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page import="org.todomap.o29.utils.URLUtil"%><%@ page language="java" contentType="text/txt; charset=UTF-8"
     pageEncoding="UTF-8"%>
 User-agent: *
 Allow: /
 Allow: /*.html
 Disallow: /services/
-Sitemap: sitemap_todos.xml
+Disallow: /embed/
+Sitemap: <%=URLUtil.getApplicationRoot(request) %>/sitemap/date_breakdown.xml
