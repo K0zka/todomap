@@ -195,6 +195,16 @@
     </servlet-mapping>
 
 	<servlet-mapping>
+        <servlet-name>spring</servlet-name>
+        <url-pattern>robots.txt</url-pattern>
+    </servlet-mapping>
+
+	<servlet-mapping>
+        <servlet-name>spring</servlet-name>
+        <url-pattern>/sitemaps/*</url-pattern>
+    </servlet-mapping>
+
+	<servlet-mapping>
 		<servlet-name>CXFServlet</servlet-name>
 		<url-pattern>/services/*</url-pattern>
 	</servlet-mapping>

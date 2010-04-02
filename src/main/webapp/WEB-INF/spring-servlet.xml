@@ -11,11 +11,15 @@
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<value>
+				/robots.txt=robotsController
 				/*.html=fullPageController
 				/embed/125x125/*.html=embed125x125Controller
 				/embed/640x480/*.html=embed640x480Controller
+				/sitemaps/*.xml=sitemapsController
+				/sitemaps/*.txt=linksForTheDayController
 			</value>
 		</property>
+		<property name="alwaysUseFullPath" value="true"/>
 	</bean>
 
 	<bean id="fullPageController" class="org.todomap.o29.controller.BaseController">
@@ -32,6 +36,16 @@
 		<constructor-arg ref="base" />
 		<constructor-arg value="embed/640x480" />
 	</bean>
+
+	<bean id="sitemapsController" class="org.todomap.o29.controller.SitemapsController">
+		<constructor-arg ref="base" />
+	</bean>
+
+	<bean id="linksForTheDayController" class="org.todomap.o29.controller.LinksForTheDayController">
+		<constructor-arg ref="base" />
+	</bean>
+
+	<bean id="robotsController" class="org.todomap.o29.controller.RobotsController"/>
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
