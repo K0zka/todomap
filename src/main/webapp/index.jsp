@@ -839,7 +839,7 @@ function openInTodoWindow(url) {
 		</div>
 	</div>
 	<label for="returnToPosition"><i18n:message key="window.login.returnhere">return here</i18n:message></label>
-	<input type="checkbox" id="returnToPosition" name="returnToPosition"/><br/>
+	<input type="checkbox" id="returnToPosition" name="returnToPosition" checked="checked"/><br/>
 	<% 
 	if(request.getParameter("error") != null 
 			&& session != null 
