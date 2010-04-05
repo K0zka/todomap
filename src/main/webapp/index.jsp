@@ -64,6 +64,8 @@ final Locale locale = (Locale)request.getAttribute("locale");
 </script>
 <script type="text/javascript" src="scripts/jquery.tagcloud.js">
 </script>
+<script type="text/javascript" src="scripts/jquery.cookie.js">
+</script>
 <script type="text/javascript" src="scripts/o29.js">
 </script>
 <script type="text/javascript" src="scripts/ajaxfileupload.js">
@@ -258,7 +260,7 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
             height: 450,
             title:	'<i18n:message key="window.userDetailsWindow.title"/>'
             });
-        $('#loginTabs').tabs();
+        $('#loginTabs').tabs( { cookie: { name: 'todomap-login-tab', expires: 30 } } );
         $('#todoExtraTabs').tabs();
         $('#addTags').autocomplete(
                 'addtags-autocompletelist',
@@ -688,7 +690,7 @@ function openInTodoWindow(url) {
 			</div>
 			<h3><a href="#"><i18n:message key="sidebar.accordion.info">Info</i18n:message></a></h3>
 			<div class="sidebarControls">
-				<button id="infoButton" onclick="$(productInfoWindow).dialog('open')"> <i18n:message key="sidebar.button.about">About todomap </i18n:message></button><br/>
+				<button id="infoButton" onclick="$('#productInfoWindow').dialog('open')"> <i18n:message key="sidebar.button.about">About todomap </i18n:message></button><br/>
 				<button id="statisticsButton"> <i18n:message key="sidebar.button.statistics">Statistics</i18n:message> </button><br/>
 				<button id="helpButton" onclick="$(helpWindow).dialog('open')"> <i18n:message key="sidebar.button.help">Help</i18n:message> </button><br/>
 			</div>
@@ -937,6 +939,9 @@ function openInTodoWindow(url) {
 			<button id="userDetailsUseCurrentLocation" onclick="updateLocation()">
 				<i18n:message key="window.userDetailsWindow.useCurrent">use map center</i18n:message>
 			</button>
+		</div>
+		<h3><a href="#profileLinks"> <i18n:message key="window.userDetailsWindow.profileLinks">Profile Links</i18n:message></a></h3>
+		<div>
 		</div>
 	</div>
 	<button id="saveUserDetailsButton" onclick="saveUserDetails()"><i18n:message key="etc.save">Save</i18n:message></button>
