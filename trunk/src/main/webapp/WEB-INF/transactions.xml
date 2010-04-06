@@ -46,7 +46,9 @@
 			expression="execution(* org.todomap.o29.logic.BookmarkService.*(..))" />
 		<aop:pointcut id="tagServiceMethods"
 			expression="execution(* org.todomap.o29.logic.TagService.*(..))" />
-		
+		<aop:pointcut id="projectServiceMethods"
+			expression="execution(* org.todomap.o29.logic.ProjectService.*(..))" />
+
 		<aop:pointcut id="rememberMeServiceMethods"
 			expression="execution(* org.springframework.security.web.authentication.rememberme.PersistentTokenRepository.*(..))" />
 		
@@ -61,6 +63,7 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="bookmarkServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="rememberMeServiceMethods" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="tagServiceMethods" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="projectServiceMethods" />
 		
 		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="geoipMethods" />
 		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="todoServiceMethods" />
@@ -73,6 +76,7 @@
 		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="bookmarkServiceMethods" />
 		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="rememberMeServiceMethods" />
 		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="tagServiceMethods" />
+		<aop:advisor advice-ref="jmsInterceptor" pointcut-ref="projectServiceMethods" />
 
 	</aop:config>
 

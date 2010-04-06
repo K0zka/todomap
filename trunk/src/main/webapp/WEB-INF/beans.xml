@@ -18,6 +18,7 @@
 
 	<jaxrs:server name="o29" address="/">
 		<jaxrs:serviceBeans>
+			<ref bean="projects" />
 			<ref bean="todos" />
 			<ref bean="users" />
 			<ref bean="homes" />
@@ -35,6 +36,11 @@
 			</jaxrs:extensionMappings>
 		-->
 	</jaxrs:server>
+
+	<bean id="projects" class="org.todomap.o29.logic.JpaProjectService">
+		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="userService" ref="users" />
+	</bean>
 
 	<bean id="todos" class="org.todomap.o29.logic.JpaTodoServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
@@ -122,7 +128,7 @@
 		<property name="jpaPropertyMap">
 			<map>
 
-				<entry key="hibernate.show_sql" value="false" />
+				<entry key="hibernate.show_sql" value="true" />
 				<entry key="hibernate.format_sql" value="true" />
 				<entry key="hibernate.hbm2ddl.auto" value="update" />
 
