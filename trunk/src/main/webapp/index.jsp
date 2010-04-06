@@ -585,7 +585,19 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 				$('#userDetailsHomeLocationLat').val(userData['user']['homeLoc']['latitude']);
 				$('#userDetailsHomeLocationLng').val(userData['user']['homeLoc']['longitude']);
 				updateAddr('userDetailsHomeLocationReverseGeo','userDetailsHomeLocationLat','userDetailsHomeLocationLng');
+				//TODO: this code only handles n > 1 case for user links
+				//I wonder why cxf does not serialize an empty or single-element array instead.
+				//but aanyway this needs work.
+				$('#userLinks').empty();
+				var links = '<ul>';
+				for(i = 0; i < userData['user']['userLinks'].length; i++) {
+					links = links + '<li><a href="' + userData['user']['userLinks'][i]['url'] + '">' + userData['user']['userLinks'][i]['desc'] + '</a></li>';
+				}
+				links = links + '<ul>';
+				debug(links);
+				$('#userLinks').html(links);
 			} catch (fubar) {
+				debug(fubar);
 			}
 		});
 	}
@@ -942,6 +954,7 @@ function openInTodoWindow(url) {
 		</div>
 		<h3><a href="#profileLinks"> <i18n:message key="window.userDetailsWindow.profileLinks">Profile Links</i18n:message></a></h3>
 		<div>
+			<span id="userLinks"></span>
 		</div>
 	</div>
 	<button id="saveUserDetailsButton" onclick="saveUserDetails()"><i18n:message key="etc.save">Save</i18n:message></button>
