@@ -80,7 +80,7 @@ final Locale locale = (Locale)request.getAttribute("locale");
     var myLatlng;
     var zoomL;
 	var infoWindows = new Array();
-    
+
     (function () {
     	google.maps.Marker.prototype.todoId = -1;
 
@@ -182,20 +182,22 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
           center: new google.maps.LatLng(myLatlng.lat(), myLatlng.lng()),
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
-        
+
         map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
 		google.maps.event.addListener(map, "rightclick", function(event) {
-			$("#newTodoLat").val(event.latLng.lat());
-			$("#newTodoLng").val(event.latLng.lng());
-			updateAddr('todoReverseGeo','newTodoLat','newTodoLng');
-			if(isAuthenticated) {
-				$("#newTodo").dialog('open');
-			} else {
-				$("#loginWindow").dialog('open');
+			map.setOptions({draggableCursor:undefined});
+		});
+        
+		google.maps.event.addListener(map, "click", function(event) {
+			debug(map.draggableCursor);
+			if(map.draggableCursor == 'crosshair') {
+				popupAddTodoWindow(event);
+				map.setOptions({draggableCursor:undefined});
 			}
-        });
-	    
+		});
+
+		
 		google.maps.event.addListener(map, "bounds_changed", refreshMarkers);
         
     }
@@ -676,6 +678,23 @@ function openInTodoWindow(url) {
 	$('#todoWindow_contentFrame').attr('src',url);
 }
 
+function enterAddIssue() {
+	map.setOptions({
+		draggableCursor: 'crosshair'
+      });
+}
+
+function popupAddTodoWindow(event) {
+	$("#newTodoLat").val(event.latLng.lat());
+	$("#newTodoLng").val(event.latLng.lng());
+	updateAddr('todoReverseGeo','newTodoLat','newTodoLng');
+	if(isAuthenticated) {
+		$("#newTodo").dialog('open');
+	} else {
+		$("#loginWindow").dialog('open');
+	}
+}
+
 </script>
 
 
@@ -698,6 +717,7 @@ function openInTodoWindow(url) {
 				<button id="gotoButton" onclick="$('#wheretogoWindow').dialog('open')"> <i18n:message key="sidebar.button.goto"> Enter address </i18n:message> </button><br/>
 				<span class="authOnly">
 				<button id="homeButton"  onclick="goHome()"> <i18n:message key="sidebar.button.gohome"> Go Home </i18n:message> </button><br/>
+				<button id="addIssueButton"  onclick="enterAddIssue()"> <i18n:message key="sidebar.button.addIssue"> Add issue </i18n:message> </button><br/>
 				</span>
 			</div>
 			<h3><a href="#"><i18n:message key="sidebar.accordion.info">Info</i18n:message></a></h3>
