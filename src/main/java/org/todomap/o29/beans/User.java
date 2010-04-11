@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -37,7 +38,7 @@ public class User extends BaseBean {
 		this.userLinks = userLinks;
 	}
 
-	@OneToMany
+	@OneToMany(fetch=FetchType.LAZY)
 	List<Link> userLinks;
 	
 	public String getDisplayName() {
