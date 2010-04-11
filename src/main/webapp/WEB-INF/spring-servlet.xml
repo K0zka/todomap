@@ -17,6 +17,7 @@
 				/embed/640x480/*.html=embed640x480Controller
 				/sitemaps/*.xml=sitemapsController
 				/sitemaps/*.txt=linksForTheDayController
+				/chart=chartController
 			</value>
 		</property>
 		<property name="alwaysUseFullPath" value="true"/>
@@ -46,6 +47,10 @@
 	</bean>
 
 	<bean id="robotsController" class="org.todomap.o29.controller.RobotsController"/>
+
+	<bean id="chartController" class="org.todomap.o29.controller.ChartController">
+		<constructor-arg ref="ratings"/>
+	</bean>
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
