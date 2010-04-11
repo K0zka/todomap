@@ -21,6 +21,7 @@ class Invocation {
 		this.methodName = methodName;
 		this.arguments = arguments;
 		this.result = result;
+		this.callTime = new Date();
 	}
 
 	public Object getResult() {
