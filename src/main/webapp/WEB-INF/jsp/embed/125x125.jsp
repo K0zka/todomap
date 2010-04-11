@@ -96,12 +96,12 @@ function popup() {
 <div id="desc" onclick="popup()"><%= ((Todo)item).getDescription() %></div>
 <div id="addr"><%= ((Locatable)item).getAddr().getTown() %><br/><%= ((Locatable)item).getAddr().getAddress() %></div>
 <img id="voteUp" src="img/Add.png" alt="vote up" class="control"
-	onclick="anonRate(<%= item.getId() %>, 10, showRatings)" />
+	onclick="anonRate(<%= item.getId() %>, 10, function() {showRatings(<%=item.getId() %>);})" />
 <img id="voteDown" src="img/Remove.png" alt="vote down" class="control"
-	onclick="anonRate(<%= item.getId() %>, -10, showRatings)" />
+	onclick="anonRate(<%= item.getId() %>, -10, function() {showRatings(<%=item.getId() %>);})" />
 </span>
-<span id="thx" style="visibility: hidden">
-	thank you!
+<span id="thx" style="display: none">
+	<img id="voteResults" src="img/todomap-logo.jpg"/>
 </span>
 <img id="logo" alt="todomap logo" src="img/todomap-logo.jpg"/>
 </body>

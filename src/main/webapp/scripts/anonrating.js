@@ -7,7 +7,8 @@ function anonRate(id, value, onSuccess) {
 	});
 }
 
-function showRatings() {
+function showRatings(id) {
 	$('#question').hide();
-	$('#ratingSummary').hide();
+	$('#thx').show();
+	$('#voteResults').attr('src','chart?w=120&h=120&id='+id);
 }
