@@ -10,6 +10,7 @@ import org.springframework.orm.jpa.support.JpaDaoSupport;
 import org.todomap.o29.beans.AnonRating;
 import org.todomap.o29.beans.BaseBean;
 import org.todomap.o29.beans.Rating;
+import org.todomap.o29.beans.RatingReport;
 import org.todomap.o29.beans.RatingSummary;
 
 public class JpaRatingServiceImpl extends JpaDaoSupport implements
@@ -61,9 +62,17 @@ public class JpaRatingServiceImpl extends JpaDaoSupport implements
 			@Override
 			public RatingSummary doInJpa(EntityManager entityManager)
 					throws PersistenceException {
-				Object[] result = (Object[]) entityManager.createQuery("select avg(rate), count(*) from "+Rating.class.getName()+" r where r.bean.id = :id").setParameter("id", id).getSingleResult();
-				Object[] anonResult = (Object[]) entityManager.createQuery("select avg(rate), count(*) from "+AnonRating.class.getName()+" r where r.bean.id = :id").setParameter("id", id).getSingleResult();
-				
+				Object[] result = (Object[]) entityManager.createQuery(
+						"select avg(rate), count(*) from "
+								+ Rating.class.getName()
+								+ " r where r.bean.id = :id").setParameter(
+						"id", id).getSingleResult();
+				Object[] anonResult = (Object[]) entityManager.createQuery(
+						"select avg(rate), count(*) from "
+								+ AnonRating.class.getName()
+								+ " r where r.bean.id = :id").setParameter(
+						"id", id).getSingleResult();
+
 				final RatingSummary ret = new RatingSummary();
 				ret.setAverage((Double) result[0]);
 				ret.setNrOfRatings((Long) result[1]);
@@ -71,6 +80,43 @@ public class JpaRatingServiceImpl extends JpaDaoSupport implements
 				ret.setNrOfAnonRatings((Long) anonResult[1]);
 				return ret;
 			}
+		});
+	}
+
+	@Override
+	public RatingReport getAnonRatingReport(final long id) {
+		return getJpaTemplate().execute(new JpaCallback<RatingReport>() {
+
+			@Override
+			public RatingReport doInJpa(final EntityManager entityManager)
+					throws PersistenceException {
+				final RatingReport ratingReport = new RatingReport();
+				final List<Object[]> resultList = entityManager.createQuery(
+						"select count(*), rate from " + AnonRating.class.getName()
+								+ " r where r.bean.id = :id group by r.rate order by r.rate").setParameter(
+						"id", id).getResultList();
+				for(final Object[] result : resultList) {
+					final RatingReport.RatingReportItem item = new RatingReport.RatingReportItem();
+					item.setValue((Short)result[1]);
+					item.setCount((Long)result[0]);
+					ratingReport.getItems().add(item);
+				}
+				return ratingReport;
+			}
+
+		});
+	}
+
+	@Override
+	public RatingReport getRatingReport(final long id) {
+		return getJpaTemplate().execute(new JpaCallback<RatingReport>() {
+
+			@Override
+			public RatingReport doInJpa(EntityManager entityManager)
+					throws PersistenceException {
+				return null;
+			}
+
 		});
 	}
 
