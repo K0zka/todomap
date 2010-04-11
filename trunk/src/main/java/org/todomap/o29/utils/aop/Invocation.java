@@ -10,44 +10,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "invocation")
 class Invocation {
-	public Invocation() {
-		super();
-	}
+	Object[] arguments;
 
-	public Invocation(String interfaceName, String methodName,
-			Object[] arguments, Object result) {
+	Date callTime;
+
+	String interfaceName;
+
+	String methodName;
+
+	Object result;
+
+	public Invocation(final String interfaceName, final String methodName,
+			final Object[] arguments, final Object result) {
 		super();
 		this.interfaceName = interfaceName;
 		this.methodName = methodName;
 		this.arguments = arguments;
 		this.result = result;
 		this.callTime = new Date();
-	}
-
-	public Object getResult() {
-		return result;
-	}
-
-	public void setResult(Object result) {
-		this.result = result;
-	}
-
-	String interfaceName;
-
-	public String getInterfaceName() {
-		return interfaceName;
-	}
-
-	public void setInterfaceName(String interfaceName) {
-		this.interfaceName = interfaceName;
-	}
-
-	public String getMethodName() {
-		return methodName;
-	}
-
-	public void setMethodName(String methodName) {
-		this.methodName = methodName;
 	}
 
 	@XmlElementWrapper(name = "arguments")
@@ -59,16 +39,35 @@ class Invocation {
 		return callTime;
 	}
 
-	public void setCallTime(Date callTime) {
-		this.callTime = callTime;
+	public String getInterfaceName() {
+		return interfaceName;
 	}
 
-	public void setArguments(Object[] arguments) {
+	public String getMethodName() {
+		return methodName;
+	}
+
+	public Object getResult() {
+		return result;
+	}
+
+	public void setArguments(final Object[] arguments) {
 		this.arguments = arguments;
 	}
 
-	String methodName;
-	Object[] arguments;
-	Object result;
-	Date callTime;
+	public void setCallTime(final Date callTime) {
+		this.callTime = callTime;
+	}
+
+	public void setInterfaceName(final String interfaceName) {
+		this.interfaceName = interfaceName;
+	}
+
+	public void setMethodName(final String methodName) {
+		this.methodName = methodName;
+	}
+
+	public void setResult(final Object result) {
+		this.result = result;
+	}
 }

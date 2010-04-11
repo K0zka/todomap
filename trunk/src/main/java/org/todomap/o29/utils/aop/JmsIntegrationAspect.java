@@ -38,6 +38,16 @@ public final class JmsIntegrationAspect implements MethodInterceptor {
 		this.jmsTemplate = jmsTemplate;
 	}
 
+	private boolean ignoreMessage(final MethodInvocation invocation) {
+		final String methodName = invocation.getMethod().getName();
+		for (final String prefix : triggerMethods) {
+			if (methodName.startsWith(prefix)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	@Override
 	public Object invoke(final MethodInvocation invocation) throws Throwable {
 		final Object result = invocation.proceed();
@@ -56,7 +66,8 @@ public final class JmsIntegrationAspect implements MethodInterceptor {
 			try {
 				marshaller.marshal(inv, writer);
 			} catch (final MarshalException marshalException) {
-				logger.error("Message could not be serialized", marshalException);
+				logger.error("Message could not be serialized",
+						marshalException);
 			}
 			final String message = writer.toString();
 			jmsTemplate.send(new MessageCreator() {
@@ -74,15 +85,5 @@ public final class JmsIntegrationAspect implements MethodInterceptor {
 			logger.debug("created message: " + message);
 		}
 		return result;
-	}
-
-	private boolean ignoreMessage(final MethodInvocation invocation) {
-		final String methodName = invocation.getMethod().getName();
-		for (final String prefix : triggerMethods) {
-			if (methodName.startsWith(prefix)) {
-				return false;
-			}
-		}
-		return true;
 	}
 }
