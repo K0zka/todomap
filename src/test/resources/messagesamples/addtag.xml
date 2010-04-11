@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<invocation>
+	<arguments>
+		<arguments xsi:type="xs:long" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">121</arguments>
+		<arguments xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">en</arguments>
+		<arguments xsi:type="tag"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<id>0</id>
+			<name>addtag3</name>
+		</arguments>
+	</arguments>
+	<callTime>2010-04-11T13:35:42.534+02:00</callTime>
+	<interfaceName>org.todomap.o29.logic.TagService</interfaceName>
+	<methodName>addTag</methodName>
+	<result xsi:type="xs:long" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">70</result>
+</invocation>

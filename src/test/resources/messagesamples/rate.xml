@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<invocation>
+	<arguments>
+		<arguments xsi:type="xs:long" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">121</arguments>
+		<arguments xsi:type="rating"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<beanid>121</beanid>
+			<comment>auto-magic</comment>
+			<created>2010-04-10T11:25:41.714+02:00</created>
+			<id>4</id>
+			<rate>10</rate>
+			<userid>22</userid>
+		</arguments>
+	</arguments>
+	<interfaceName>org.todomap.o29.logic.RatingService</interfaceName>
+	<methodName>addRating</methodName>
+</invocation>

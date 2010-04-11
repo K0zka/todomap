@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<invocation>
+	<arguments>
+		<arguments xsi:type="xs:long" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">115</arguments>
+		<arguments xsi:type="comment"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<created>2010-04-10T11:37:55.397+02:00</created>
+			<id>307</id>
+			<language>en</language>
+			<version>0</version>
+			<text>&lt;span style="font-weight: bold;"&gt;comment&lt;/span&gt;
+				&lt;span style="font-style: italic;"&gt;me&lt;/span&gt; babe,
+				&lt;span style="font-style: italic;"&gt;I&lt;/span&gt; am &lt;span
+				style="text-decoration: line-through;"&gt;not&lt;/span&gt;
+				afraid&lt;br /&gt;</text>
+		</arguments>
+	</arguments>
+	<interfaceName>org.todomap.o29.logic.CommentService</interfaceName>
+	<methodName>addComment</methodName>
+	<result xsi:type="comment" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		<created>2010-04-10T11:37:55.397+02:00</created>
+		<id>307</id>
+		<language>en</language>
+		<version>0</version>
+		<text>&lt;span style="font-weight: bold;"&gt;comment&lt;/span&gt;
+			&lt;span style="font-style: italic;"&gt;me&lt;/span&gt; babe,
+			&lt;span style="font-style: italic;"&gt;I&lt;/span&gt; am &lt;span
+			style="text-decoration: line-through;"&gt;not&lt;/span&gt;
+			afraid&lt;br /&gt;</text>
+	</result>
+</invocation>
+
