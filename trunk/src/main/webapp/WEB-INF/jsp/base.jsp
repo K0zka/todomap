@@ -234,6 +234,13 @@ function addComment() {
 	$('#addCommentButton').hide(1000);
 }
 
+function showDetailText() {
+	$('#todoDescriptionShow').html(editors['todoDescriptionEditor'].get_content());
+	//chrome could not tolerate slow hiding, so this remained no-effect....
+	$('#descriptionEdit').hide();
+	$('#todoDescriptionShow').show(1000);
+}
+
 function saveData() {
 	var todo = {"todo":
 		{
@@ -253,12 +260,7 @@ function saveData() {
 		type : 'POST',
 		url : 'services/todos/update',
 		data: strData,
-		success: function (data, textStatus){
-			$('#todoDescriptionShow').html(editors['todoDescriptionEditor'].get_content());
-			//chrome could not tolerate slow hiding, so this remained no-effect....
-			$('#descriptionEdit').hide();
-			$('#todoDescriptionShow').show(1000);
-		},
+		success: showDetailText,
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			handleErrors(XMLHttpRequest);
 		},
@@ -309,7 +311,7 @@ function saveData() {
 		if (item.getCreator() != null
 				&& !StringUtils.isEmpty(item.getCreator().getDisplayName())) {
 	%>
-	<div style="position: absolute; bottom: 0px; right: 0px; color: grey; font-size: 0.8em;">
+	<div style="color: grey; font-size: 0.8em;">
 		<i18n:message key="todo.submittedby">Submitted by</i18n:message> <%=item.getCreator().getDisplayName()%> <span id="authorId" class="authorId">[<%=item.getCreator().getId()%>]</span>
 	</div>
 	<%
@@ -324,6 +326,7 @@ function saveData() {
 	<span id="descriptionEdit" style="display: none">
 		<textarea id="todoDescriptionEditor" class="todoDescription"></textarea>
 		<button id="saveButton" onclick="saveData()"><i18n:message key="etc.save">save</i18n:message></button>
+		<button id="cancelButton" onclick="showDetailText()"><i18n:message key="etc.cancel">cancel</i18n:message></button>
 	</span>
 
 	<h3><i18n:message key="todo.tags">tags</i18n:message></h3>
