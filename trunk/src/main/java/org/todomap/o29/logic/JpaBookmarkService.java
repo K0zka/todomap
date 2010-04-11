@@ -22,10 +22,11 @@ public class JpaBookmarkService extends JpaDaoSupport implements BookmarkService
 	}
 
 	@Override
-	public void addBookmark(final long itemId) {
+	public User addBookmark(final long itemId) {
 		final User currentUser = userService.getCurrentUser();
 		currentUser.getBookmarks().add(baseService.getById(itemId));
 		getJpaTemplate().persist(currentUser);
+		return currentUser;
 	}
 
 	@Override

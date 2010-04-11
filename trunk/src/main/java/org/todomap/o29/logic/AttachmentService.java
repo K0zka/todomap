@@ -46,7 +46,7 @@ public interface AttachmentService {
 
 	@POST
 	@Path("/add")
-	void addAttachment(Attachment attachment, InputStream data) throws IOException;
+	Attachment addAttachment(Attachment attachment, InputStream data) throws IOException;
 
 	@GET
 	@Path("/{id}/get")

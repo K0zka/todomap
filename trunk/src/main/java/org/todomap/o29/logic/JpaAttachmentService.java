@@ -51,12 +51,12 @@ public class JpaAttachmentService extends JpaDaoSupport implements
 	}
 
 	@Override
-	public void addAttachment(Attachment attachment, InputStream data)
+	public Attachment addAttachment(Attachment attachment, InputStream data)
 			throws IOException {
 		if (!acceptedMime.contains(attachment.getMime())) {
 			logger.info("Attachment was ignored:" + attachment.getMime() + " "
 					+ attachment.getFileName());
-			return;
+			return null;
 		}
 		attachment.setCreator(userService.getCurrentUser());
 		getJpaTemplate().persist(attachment);
@@ -78,6 +78,7 @@ public class JpaAttachmentService extends JpaDaoSupport implements
 				BufferedImage.TYPE_INT_RGB);
 		newImage.getGraphics().drawImage(scaledInstance, 0, 0, null);
 		ImageIO.write(newImage, "jpg", thumbnailFile);
+		return attachment;
 	}
 
 	public void init() {

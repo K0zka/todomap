@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.todomap.o29.beans.Coordinate;
+import org.todomap.o29.beans.User;
 
 @Path("/bookmarks/")
 @Produces("application/json")
@@ -61,7 +62,7 @@ public interface BookmarkService {
 	
 	@Path("/bookmark/{id}")
 	@POST
-	void addBookmark(@PathParam("id") long itemId);
+	User addBookmark(@PathParam("id") long itemId);
 	
 	@POST
 	@Path("/unbookmark/{id}")
