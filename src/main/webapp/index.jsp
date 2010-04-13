@@ -222,14 +222,16 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
             height: 400,
             title: '<i18n:message key="window.newTodo.title"/>'
            });
+        
         $("#productInfoWindow").dialog({
             modal: true,
             width: 600,
             height: 400,
             show: 'slide',
-            autoOpen : false,
+            autoOpen : ($.cookie('todomap-intro-cookie') == undefined),
             title: '<i18n:message key="window.productInfoWindow.title">About todomap</i18n:message>'
            });
+        $.cookie('todomap-intro-cookie', 'true', { path: '/', expires: 65535 });
         $("#loginWindow").dialog({
         	modal: true,
             autoOpen : <%= request.getParameter("error") != null %>,
@@ -263,6 +265,7 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
             title:	'<i18n:message key="window.userDetailsWindow.title"/>'
             });
         $('#loginTabs').tabs( { cookie: { name: 'todomap-login-tab', expires: 30 } } );
+        $('#infoTabs').tabs( { cookie: { name: 'todomap-info-tab', expires: 30 } } );
         $('#todoExtraTabs').tabs();
         $('#addTags').autocomplete(
                 'addtags-autocompletelist',
@@ -888,25 +891,36 @@ function popupAddTodoWindow(event) {
 </div>
 
 <div id="productInfoWindow">
-	<h2>
-	<i18n:message key="window.productInfoWindow.head">Todomap - development version</i18n:message>
-	</h2>
-	<p>
-	<i18n:message key="window.productInfoWindow.version">This site is running todomap version</i18n:message> <%= VersionUtil.getVersionNumber() %>
-	</p>
-	<p>
-	<i18n:message key="window.productInfoWindow.betanote"> Please note that this is an <strong>early beta</strong> version of the application under active development since Q3 2009.</i18n:message>
-	</p>
-	<p>
-	<i18n:message key="window.productInfoWindow.more">
-	To find out more about the software, please visit the project page at 
-	<a id="googleCodeLink" target="_blank" href="http://code.google.com/p/todomap/">google code</a>! Your contribution 
-	to todomap's success is highly appreciated!
-	</i18n:message>
-	</p>
-	<p>
-		<img alt="todomap logo" src="img/todomap-logo.jpg">
-	</p>
+	<div id="infoTabs">
+		<ul>
+			<li><a href="#infotab-intro"><i18n:message key="window.productInfoWindow.intro">Intro</i18n:message></a></li>
+			<li><a href="#infotab-about"><i18n:message key="window.productInfoWindow.about">About todomap</i18n:message></a></li>
+		</ul>
+		<div id="infotab-intro">
+			<i18n:message key="window.productInfoWindow.introText">detailed info</i18n:message>
+		</div>
+		<div id="infotab-about">
+			<h2>
+			<i18n:message key="window.productInfoWindow.head">Todomap - development version</i18n:message>
+			</h2>
+			<p>
+			<i18n:message key="window.productInfoWindow.version">This site is running todomap version</i18n:message> <%= VersionUtil.getVersionNumber() %>
+			</p>
+			<p>
+			<i18n:message key="window.productInfoWindow.betanote"> Please note that this is an <strong>early beta</strong> version of the application under active development since Q3 2009.</i18n:message>
+			</p>
+			<p>
+			<i18n:message key="window.productInfoWindow.more">
+			To find out more about the software, please visit the project page at 
+			<a id="googleCodeLink" target="_blank" href="http://code.google.com/p/todomap/">google code</a>! Your contribution 
+			to todomap's success is highly appreciated!
+			</i18n:message>
+			</p>
+			<p>
+				<img alt="todomap logo" src="img/todomap-logo.jpg">
+			</p>
+		</div>
+	</div>
 </div>
 
 <div id="newTodo">
