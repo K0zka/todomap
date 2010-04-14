@@ -15,7 +15,7 @@
 				/*.html=fullPageController
 				/embed/125x125/*.html=embed125x125Controller
 				/embed/640x480/*.html=embed640x480Controller
-				/sitemaps/*.xml=sitemapsController
+				/sitemaps/date_breakdown.xml=sitemapsController
 				/sitemaps/*.txt=linksForTheDayController
 				/chart=chartController
 			</value>
