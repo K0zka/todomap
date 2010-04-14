@@ -20,6 +20,10 @@ class Invocation {
 
 	Object result;
 
+	public Invocation() {
+		//non-arg constructor needed by jaxb.
+	}
+	
 	public Invocation(final String interfaceName, final String methodName,
 			final Object[] arguments, final Object result) {
 		super();
