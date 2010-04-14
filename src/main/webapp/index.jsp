@@ -746,13 +746,13 @@ function popupAddTodoWindow(event) {
 			</i18n:message>
 		</div>
 		<a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;username=kozka"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=kozka"></script>
-		<div id='tooltip'>
-			&nbsp;
-		</div>
 	</div>
 	<span style="width: 80%; height: 100%; position: absolute; right: 0px;">
 		<div id="map_canvas" class="tooltipable" style="width: 100%; height: 100%"></div>
 	</span>
+	<div id='tooltip'>
+		&nbsp;
+	</div>
 </div>
 
 
