@@ -105,9 +105,6 @@ function initialize() {
     checkLoginStatus();
     $(document).ready(function(){
     	$('#descriptionEdit').hide();
-    	applyTooltip('#todoDescriptionShow');
-    	applyTooltip('button');
-    	applyTooltip('span');
 
         $('#addTags').autocomplete(
                 'addtags-autocompletelist',
