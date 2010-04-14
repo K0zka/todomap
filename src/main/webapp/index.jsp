@@ -40,8 +40,6 @@ final Locale locale = (Locale)request.getAttribute("locale");
 
 <link rel="stylesheet" type="text/css"
 	href="style/jquery-ui-1.7.2.custom.css" media="all" />
-<link rel="stylesheet" type="text/css"
-	href="style/jquery.tooltip.css" media="all" />
 
 <link rel="stylesheet" type="text/css"
 	href="style/default.css" media="all" />
@@ -67,6 +65,8 @@ final Locale locale = (Locale)request.getAttribute("locale");
 <script type="text/javascript" src="scripts/jquery.cookie.js">
 </script>
 <script type="text/javascript" src="scripts/o29.js">
+</script>
+<script type="text/javascript" src="scripts/trolltip.js">
 </script>
 <script type="text/javascript" src="scripts/ajaxfileupload.js">
 </script>
@@ -275,11 +275,6 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
                 'lastTodoId',
                 '<%=locale.getLanguage()%>'
          );
-
-        applyTooltip('button');
-        applyTooltip('a');
-//        applyTooltip('#map_canvas');
-        applyTooltip('label');
 
         refreshTagClouds('<%=locale.getLanguage()%>');
 
@@ -710,33 +705,30 @@ function popupAddTodoWindow(event) {
 			<h3><a href="#"> <i18n:message key="sidebar.accordion.tools"> Tools </i18n:message></a></h3>
 			<div class="sidebarControls">
 				<span class="authOnly">
-				<button id="logoutButton"  onclick="logOut()"> <i18n:message key="sidebar.button.logout"> Log out </i18n:message> </button><br/>
-				<button id="yourDetailsButton"  onclick="$('#userDetailsWindow').dialog('open'); getUserDetails();"> <i18n:message key="sidebar.button.yourdetails"> Your details </i18n:message> </button><br/>
+				<button id="logoutButton" class="tooltipable" onclick="logOut()"> <i18n:message key="sidebar.button.logout"> Log out </i18n:message> </button><br/>
+				<button id="yourDetailsButton" class="tooltipable" onclick="$('#userDetailsWindow').dialog('open'); getUserDetails();"> <i18n:message key="sidebar.button.yourdetails"> Your details </i18n:message> </button><br/>
 				</span>
 				<span class="noAuthOnly">
-				<button id="loginButton" onclick="$('#loginWindow').dialog('open')"> <i18n:message key="sidebar.button.login"> Log in / Register </i18n:message> </button><br/>
+				<button id="loginButton" class="tooltipable" onclick="$('#loginWindow').dialog('open')"> <i18n:message key="sidebar.button.login"> Log in / Register </i18n:message> </button><br/>
 				</span>
-				<button id="embedButton" onclick="$('#linksWindow').dialog('open')"> <i18n:message key="sidebar.button.links"> Link to this map </i18n:message> </button><br/>
-				<button id="gotoButton" onclick="$('#wheretogoWindow').dialog('open')"> <i18n:message key="sidebar.button.goto"> Enter address </i18n:message> </button><br/>
+				<button id="embedButton" class="tooltipable" onclick="$('#linksWindow').dialog('open')"> <i18n:message key="sidebar.button.links"> Link to this map </i18n:message> </button><br/>
+				<button id="gotoButton" class="tooltipable" onclick="$('#wheretogoWindow').dialog('open')"> <i18n:message key="sidebar.button.goto"> Enter address </i18n:message> </button><br/>
 				<span class="authOnly">
-				<button id="homeButton"  onclick="goHome()"> <i18n:message key="sidebar.button.gohome"> Go Home </i18n:message> </button><br/>
+				<button id="homeButton" class="tooltipable" onclick="goHome()"> <i18n:message key="sidebar.button.gohome"> Go Home </i18n:message> </button><br/>
 				<button id="addIssueButton"  onclick="enterAddIssue()"> <i18n:message key="sidebar.button.addIssue"> Add issue </i18n:message> </button><br/>
 				</span>
 			</div>
 			<h3><a href="#"><i18n:message key="sidebar.accordion.info">Info</i18n:message></a></h3>
 			<div class="sidebarControls">
-				<button id="infoButton" onclick="$('#productInfoWindow').dialog('open')"> <i18n:message key="sidebar.button.about">About todomap </i18n:message></button><br/>
-				<button id="statisticsButton"> <i18n:message key="sidebar.button.statistics">Statistics</i18n:message> </button><br/>
-				<button id="helpButton" onclick="$(helpWindow).dialog('open')"> <i18n:message key="sidebar.button.help">Help</i18n:message> </button><br/>
+				<button id="infoButton" class="tooltipable" onclick="$('#productInfoWindow').dialog('open')"> <i18n:message key="sidebar.button.about">About todomap </i18n:message></button><br/>
+				<button id="statisticsButton" class="tooltipable"> <i18n:message key="sidebar.button.statistics">Statistics</i18n:message> </button><br/>
+				<button id="helpButton" class="tooltipable" onclick="$(helpWindow).dialog('open')"> <i18n:message key="sidebar.button.help">Help</i18n:message> </button><br/>
 			</div>
-			<!-- 
-			<h3><a href="#"><i18n:message key="sidebar.accordion.search">Search</i18n:message></a></h3>
-			<div class="sidebarControls">
-			</div>
-			 -->
 			<h3><a href="#"><i18n:message key="sidebar.accordion.bookmarks">Bookmarks</i18n:message></a></h3>
 			<div class="sidebarControls">
-				<span id="bookmarks">bla bla</span>
+				<span id="bookmarks">
+					&nbsp;
+				</span>
 			</div>
 		</div>
 		<div class="versionInfo">
@@ -754,12 +746,12 @@ function popupAddTodoWindow(event) {
 			</i18n:message>
 		</div>
 		<a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;username=kozka"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=kozka"></script>
-		<div id='page-tooltip'>
+		<div id='tooltip'>
 			&nbsp;
 		</div>
 	</div>
 	<span style="width: 80%; height: 100%; position: absolute; right: 0px;">
-		<div id="map_canvas" style="width: 100%; height: 100%"></div>
+		<div id="map_canvas" class="tooltipable" style="width: 100%; height: 100%"></div>
 	</span>
 </div>
 
@@ -805,7 +797,7 @@ function popupAddTodoWindow(event) {
 			</div>
 			<div style="position: absolute; bottom: 10px;">
 				<input id="addTags"/>
-				<button id="addTag" onclick="addTag($('#lastTodoId').val(), '<%=locale.getLanguage()%>', $('#addTags').val())"><i18n:message key="tag.add">add tag</i18n:message></button>
+				<button id="addTag" class="tooltipable" onclick="addTag($('#lastTodoId').val(), '<%=locale.getLanguage()%>', $('#addTags').val())"><i18n:message key="tag.add">add tag</i18n:message></button>
 			</div>
 		</div>
 		<div id="todoextra-attach">
@@ -842,7 +834,7 @@ function popupAddTodoWindow(event) {
 				<img src="img/logo_openid.png"/>
 			</div>
 			<div>
-			    <label for="j_username"><i18n:message key="window.login.username"> Your <a id="openIdLink" href="https://openid.org/home">OpenID</a> Identity:</i18n:message></label> 
+			    <label for="j_username"><i18n:message key="window.login.username"> Your <a id="openIdLink" class="tooltipable" href="https://openid.org/home">OpenID</a> Identity:</i18n:message></label> 
 			    <input id="openidUrl" type='text' name='openid_identifier' value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>'/><br/>
 			</div>
 			<div>
@@ -912,7 +904,7 @@ function popupAddTodoWindow(event) {
 			<p>
 			<i18n:message key="window.productInfoWindow.more">
 			To find out more about the software, please visit the project page at 
-			<a id="googleCodeLink" target="_blank" href="http://code.google.com/p/todomap/">google code</a>! Your contribution 
+			<a id="googleCodeLink" class="tooltipable" target="_blank" href="http://code.google.com/p/todomap/">google code</a>! Your contribution 
 			to todomap's success is highly appreciated!
 			</i18n:message>
 			</p>
@@ -937,7 +929,7 @@ function popupAddTodoWindow(event) {
 				<label for="newTodoLat"><i18n:message key="etc.latitude">Latitude</i18n:message></label><input id="newTodoLat" name="newTodoLat" onkeyup="updateAddr('todoReverseGeo','newTodoLat','newTodoLng')"/><br/>
 				<label for="newTodoLng"><i18n:message key="etc.longitude">Longitude</i18n:message></label><input id="newTodoLng" name="newTodoLng" onkeyup="updateAddr('todoReverseGeo','newTodoLat','newTodoLng')"/><br/>
 				<div class="calculated">
-				<label id="todoReverseGeo-label" for="todoReverseGeo"><i18n:message key="window.newTodo.reversegeo">Address</i18n:message></label><input id="todoReverseGeo" name="newTodoLng" onkeyup="updateLatLong('todoReverseGeo','newTodoLat','newTodoLng')"/><br/>
+				<label id="todoReverseGeo-label" class="tooltipable" for="todoReverseGeo"><i18n:message key="window.newTodo.reversegeo">Address</i18n:message></label><input id="todoReverseGeo" name="newTodoLng" onkeyup="updateLatLong('todoReverseGeo','newTodoLat','newTodoLng')"/><br/>
 				</div>
 			</div>
 		</div>
@@ -980,7 +972,7 @@ function popupAddTodoWindow(event) {
 			<input id="userDetailsHomeLocationLng" onkeyup="updateAddr('userDetailsHomeLocationReverseGeo','userDetailsHomeLocationLat','userDetailsHomeLocationLng')"/><br/>
 			<div class="calculated">
 			<label id="userDetailsHomeLocationReverseGeo-label" for="userDetailsHomeLocationReverseGeo"><i18n:message key="window.userDetailsWindow.reversegeo"></i18n:message></label>
-			<input id="userDetailsHomeLocationReverseGeo" onkeyup="updateLatLong('userDetailsHomeLocationReverseGeo','userDetailsHomeLocationLat','userDetailsHomeLocationLng')"/><br/>
+			<input class="tooltipable" id="userDetailsHomeLocationReverseGeo" onkeyup="updateLatLong('userDetailsHomeLocationReverseGeo','userDetailsHomeLocationLat','userDetailsHomeLocationLng')"/><br/>
 			</div>
 			<button id="userDetailsUseCurrentLocation" onclick="updateLocation()">
 				<i18n:message key="window.userDetailsWindow.useCurrent">use map center</i18n:message>
@@ -1027,7 +1019,7 @@ function popupAddTodoWindow(event) {
 		<p> <i18n:message key="tooltip.openIdLink"> Find your OpenID provider at openid.org! </i18n:message> </p>
 	</div>
 	<div id="map_canvas-tooltip">
-		<p> <img src="img/earth.png"/> <i18n:message key="tooltip.map_canvas"> Right click to add a new TODO! </i18n:message> </p>
+		<p> <img src="img/earth.png"/> <i18n:message key="tooltip.map_canvas"> You can navigate on the map or click on the flags for details. </i18n:message> </p>
 	</div>
 	<div id="googleCodeLink-tooltip">
 		<p> <img src="img/gear.png"/> <i18n:message key="tooltip.googleCodeLink"> This link will take you to the developer site where you can find the
@@ -1047,6 +1039,11 @@ function popupAddTodoWindow(event) {
 	<div id="userDetailsHomeLocationReverseGeo-label-tooltip">
 		<p>
 			<img src="img/mail.png"> <i18n:message key="tooltip.reverseGeo"/>
+		</p>
+	</div>
+	<div id="addTag-tooltip">
+		<p>
+			<i18n:message key="toolTip.addTag"></i18n:message>
 		</p>
 	</div>
 </div>
