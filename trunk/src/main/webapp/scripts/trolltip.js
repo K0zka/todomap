@@ -8,9 +8,6 @@ var pointingOnTooltipable = false;
 var pointingOnTooltip = false;
 var helpShowingFor = '';
 
-function trolltip_init() {
-}
-
 function trolltip_showHelp(id) {
 	var helpEnabled = $('#helpEnabled').attr('checked');
 	if(pointingOnTooltipable) {
