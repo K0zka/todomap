@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+	<sec:http>
+		<sec:intercept-url pattern="/" />
+		<sec:intercept-url pattern="/index.jsp" />
+		<!-- 28 days -->
+		<sec:remember-me token-repository-ref="rememberMeTokenRepo" key="todomap-remember-me" token-validity-seconds="2419200"/>
+		<sec:logout />
+		<sec:openid-login login-page="/"
+			authentication-failure-url="/?error=true" user-service-ref="userServiceAdapter"
+			authentication-success-handler-ref="userServiceAdapter">
+			<sec:attribute-exchange>
+				<sec:openid-attribute name="email"
+					type="http://schema.openid.net/contact/email" required="true"/>
+				<sec:openid-attribute name="lname"
+					type="http://schema.openid.net/namePerson/last"/>
+				<sec:openid-attribute name="fname"
+					type="http://schema.openid.net/namePerson/first"/>
+				<sec:openid-attribute name="name"
+					type="http://schema.openid.net/namePerson/friendly"/>
+			</sec:attribute-exchange>
+		</sec:openid-login>
+	</sec:http>
+
+	<bean id="rememberMeTokenRepo" class="org.todomap.o29.utils.security.JpaPersistentTokenRepository">
+		<property name="entityManagerFactory" ref="entityManager" />
+	</bean>
+
+	<sec:authentication-manager alias="authenticationManager" />
+
+	<bean id="userServiceAdapter" class="org.todomap.o29.utils.security.UserDetailServiceImpl">
+		<property name="userService" ref="users" />
+	</bean>
+
+</beans>
