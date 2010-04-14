@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.todomap</groupId>
 	<artifactId>o29</artifactId>
 	<packaging>war</packaging>
-	<version>0.5.15-SNAPSHOT</version>
+	<version>0.5.15</version>
 	<name>o29</name>
 	<repositories>
 		<repository>
@@ -276,9 +275,9 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:svn:http://todomap.googlecode.com/svn/trunk/</connection>
-		<developerConnection>scm:svn:https://todomap.googlecode.com/svn/trunk/</developerConnection>
-		<url>http://code.google.com/p/todomap/source/browse/</url>
+		<connection>scm:svn:http://todomap.googlecode.com/svn/tags/o29-0.5.15</connection>
+		<developerConnection>scm:svn:https://todomap.googlecode.com/svn/tags/o29-0.5.15</developerConnection>
+		<url>http://code.google.com/p/todomap/source/browse/tags/o29-0.5.15</url>
 	</scm>
 	<build>
 		<plugins>
