@@ -281,23 +281,6 @@ function voteUp(id, callback) {
 	rate(id, 10, callback);
 }
 
-function applyTooltip(elemSelector) {
-	$(elemSelector).each(function() {
-		var exists = false;
-		var selector = '#' + $(this).attr('id') + '-tooltip';
-		$(selector).each(function() {
-			exists = true
-		});
-
-		if (exists) {
-			$(this).qtip( {
-				content : $(selector).html(),
-				style : {name : 'light'}
-			});
-		}
-	});
-}
-
 function refreshTagsOf(id) {
 	$.get('services/tags/tagsof/'+id , function(response) {
 		var lst = '<ul>'
