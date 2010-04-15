@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<invocation>
+	<arguments>
+		<arguments xsi:type="todo"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<created>2010-04-10T11:23:10.207+02:00</created>
+			<id>304</id>
+			<language>hu</language>
+			<version>0</version>
+			<addr>
+				<address>Múzeum utca 6</address>
+				<country>HU</country>
+				<state>Budapest</state>
+				<town>Budapest</town>
+			</addr>
+			<description>gubanc</description>
+			<location>
+				<latitude>47.49072136060857</latitude>
+				<longitude>19.066520507812495</longitude>
+			</location>
+			<shortDescr>gubanc</shortDescr>
+		</arguments>
+	</arguments>
+	<interfaceName>org.todomap.o29.logic.TodoService</interfaceName>
+	<methodName>addTodo</methodName>
+	<result xsi:type="todo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		<created>2010-04-10T11:23:10.207+02:00</created>
+		<id>304</id>
+		<language>hu</language>
+		<version>0</version>
+		<addr>
+			<address>Múzeum utca 6</address>
+			<country>HU</country>
+			<state>Budapest</state>
+			<town>Budapest</town>
+		</addr>
+		<description>gubanc</description>
+		<location>
+			<latitude>47.49072136060857</latitude>
+			<longitude>19.066520507812495</longitude>
+		</location>
+		<shortDescr>gubanc</shortDescr>
+	</result>
+</invocation>
