@@ -716,7 +716,7 @@ function popupAddTodoWindow(event) {
 				<button id="gotoButton" class="tooltipable" onclick="$('#wheretogoWindow').dialog('open')"> <i18n:message key="sidebar.button.goto"> Enter address </i18n:message> </button><br/>
 				<span class="authOnly">
 				<button id="homeButton" class="tooltipable" onclick="goHome()"> <i18n:message key="sidebar.button.gohome"> Go Home </i18n:message> </button><br/>
-				<button id="addIssueButton"  onclick="enterAddIssue()"> <i18n:message key="sidebar.button.addIssue"> Add issue </i18n:message> </button><br/>
+				<button id="addIssueButton" class="tooltipable"  onclick="enterAddIssue()"> <i18n:message key="sidebar.button.addIssue"> Add issue </i18n:message> </button><br/>
 				</span>
 			</div>
 			<h3><a href="#"><i18n:message key="sidebar.accordion.info">Info</i18n:message></a></h3>
@@ -1045,6 +1045,11 @@ function popupAddTodoWindow(event) {
 	<div id="addTag-tooltip">
 		<p>
 			<i18n:message key="toolTip.addTag"></i18n:message>
+		</p>
+	</div>
+	<div id="addIssueButton-tooltip">
+		<p>
+			<img src="img/wizard.png"/><i18n:message key="toolTip.addIssueButton">add issue</i18n:message>
 		</p>
 	</div>
 </div>
