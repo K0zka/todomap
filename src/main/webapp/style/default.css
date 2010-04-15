@@ -430,7 +430,8 @@ login-tab-content {
 	padding: 10px;
 	margin: 10px;
 	display: none;
-	opacity: 0.65;
+	background-color: white;
+	opacity: 0.75;
 }
 
 #tooltip img {
