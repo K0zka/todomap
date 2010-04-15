@@ -81,7 +81,7 @@
 </script>
 
 <% if(item instanceof Todo) {%>
-<title><%=((Todo)item).getShortDescr()%></title>
+<title><%=((Todo)item).getShortDescr()%> - <i18n:message key="title">todomap</i18n:message></title>
 <% } %>
 <script type="text/javascript">
 
@@ -131,20 +131,8 @@ function initialize() {
 		});
 		editors['todoDescriptionEditor'] = editor['todoDescriptionEditor'];
 
-		$("#comments").mbScrollable({
-	        dir:"vertical",
-	        elementsInPage:3,
-	        elementMargin:6,
-	        shadow:"#999 2px 2px 2px",
-	        slideTimer:600,
-	        autoscroll:false,
-	        scrollTimer:6000
-	      });
-		
     });
 
-    $('#embed').hide(0);
-    
 }
 
 function attachFile() {
@@ -393,7 +381,7 @@ function saveData() {
 	
 	<button id="voteEmbedButton" onclick="$('#embed').show(100); $('#voteEmbedButton').hide(100);">&lt;embed&gt;</button>
 	
-	<div id="embed">
+	<div id="embed" style="display: none;">
 		<i18n:message key="ratings.embed.copypaste">Copy-paste this code to the html code of your site:</i18n:message>
 		<br/>
 		<textarea id="iframebox"><iframe width="125" height="125" style="border: none;" src="<%= URLUtil.getApplicationRoot(request) %>/embed/125x125/<%= URLEncoder.encode(item.getId() + "-" +"embed","UTF-8") %>.html">
