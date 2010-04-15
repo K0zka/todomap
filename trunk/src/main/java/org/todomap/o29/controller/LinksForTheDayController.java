@@ -26,8 +26,11 @@ public class LinksForTheDayController implements Controller {
 		final Date day = new SimpleDateFormat("yyyy-MM-dd").parse(request
 				.getRequestURI().replace(".txt", "").replace("/sitemaps/", ""));
 		final Locale locale = (Locale) request.getAttribute("locale");
-		final ModelAndView modelAndView = new ModelAndView("links.txt");
-		modelAndView.addObject("beans", baseService.list(locale.getCountry(), day));
+		final ModelAndView modelAndView = new ModelAndView(request
+				.getRequestURI().endsWith("txt") ? "links.txt"
+				: "sitemap.day.xml");
+		modelAndView.addObject("beans", baseService.list(locale.getCountry(),
+				day));
 		return modelAndView;
 	}
 
