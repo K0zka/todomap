@@ -35,8 +35,9 @@ final Locale locale = (Locale)request.getAttribute("locale");
 
 <link rel="license" href="http://creativecommons.org/licenses/by/3.0/"/>
 <link REL="SHORTCUT ICON" HREF="img/earth.ico"/>
+<link rel="icon" href="img/earth.ico"/>
 
-<title>todomap</title>
+<title><i18n:message key="title">todomap</i18n:message></title>
 
 <link rel="stylesheet" type="text/css"
 	href="style/jquery-ui-1.7.2.custom.css" media="all" />
