@@ -6,3 +6,4 @@ Allow: /*.html
 Disallow: /services/
 Disallow: /embed/
 Sitemap: <%=URLUtil.getApplicationRoot(request) %>sitemaps/date_breakdown.xml
+Sitemap: <%=URLUtil.getApplicationRoot(request) %>sitemaps/sitemaps.xml
