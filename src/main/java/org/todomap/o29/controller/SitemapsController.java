@@ -20,7 +20,7 @@ public class SitemapsController implements Controller {
 	@Override
 	public ModelAndView handleRequest(final HttpServletRequest request,
 			final HttpServletResponse response) throws Exception {
-		final ModelAndView modelAndView = new ModelAndView("sitemaps.xml");
+		final ModelAndView modelAndView = new ModelAndView(request.getRequestURI().endsWith("sitemaps.xml") ? "sitemaps.super.xml" : "sitemaps.xml");
 		final Locale locale = (Locale) request.getAttribute("locale");
 		modelAndView.addObject("dates", baseService.listActiveDays(locale
 				.getCountry()));
