@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -18,6 +20,19 @@ import org.todomap.geocoder.Address;
 @XmlRootElement(name="todo")
 @DiscriminatorValue("todo")
 public class Todo extends BaseBean implements Translatable, Locatable {
+	public TodoStatus getStatus() {
+		return status;
+	}
+	public void setStatus(TodoStatus status) {
+		this.status = status;
+	}
+	public TodoResolution getResolution() {
+		return resolution;
+	}
+	public void setResolution(TodoResolution resolution) {
+		this.resolution = resolution;
+	}
+
 	@Embedded
 	Coordinate location;
 	@Column(nullable=false, name="shdsc")
@@ -29,6 +44,13 @@ public class Todo extends BaseBean implements Translatable, Locatable {
 	@Column(name="address")
 	Address addr;
 
+	@Column(name="status")
+	@Enumerated(EnumType.STRING)
+	TodoStatus status = TodoStatus.Open;
+	@Column(name="resolution", nullable=true)
+	@Enumerated(EnumType.STRING)
+	TodoResolution resolution;
+	
 	public List<Project> getProjects() {
 		return projects;
 	}
