@@ -5,14 +5,17 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@XmlRootElement(name="project")
+@XmlRootElement(name = "project")
 @DiscriminatorValue("project")
 public class Project extends BaseBean {
 
@@ -50,6 +53,29 @@ public class Project extends BaseBean {
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	public ProjectStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ProjectStatus status) {
+		this.status = status;
+	}
+
+	@Enumerated(EnumType.STRING)
+	@Column(name="status")
+	ProjectStatus status;
+	
+	@OneToMany(mappedBy="project")
+	List<ProjectRssFeed> rssfeeds;
+
+	public List<ProjectRssFeed> getRssfeeds() {
+		return rssfeeds;
+	}
+
+	public void setRssfeeds(List<ProjectRssFeed> rssfeeds) {
+		this.rssfeeds = rssfeeds;
 	}
 
 }
