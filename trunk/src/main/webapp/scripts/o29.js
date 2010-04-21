@@ -353,3 +353,33 @@ function updateAttachments(todoId) {
 			increaseCounter('nrOfAttachments');
 		});
 }
+
+/**
+ * Todo status operations.
+ */
+
+function closeTodo(id, resolution, callback) {
+	$.ajax({
+		type : 'POST',
+		url : 'services/todos/close/' + id + '/' + resolution,
+		contentType : 'application/json',
+		dataType : 'json',
+		success : function(data) {
+			var todo = eval('('+data+')');
+			callback(todo);
+		}
+	});
+}
+
+function rejectClose(callback) {
+	$.ajax({
+		type : 'POST',
+		url : 'services/todos/reject-close/' + id ,
+		contentType : 'application/json',
+		dataType : 'json',
+		success : function(data) {
+			var todo = eval('('+data+')');
+			callback(todo);
+		}
+	});
+}
