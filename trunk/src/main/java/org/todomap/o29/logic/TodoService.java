@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.todomap.geocoder.Address;
 import org.todomap.o29.beans.Coordinate;
 import org.todomap.o29.beans.Todo;
+import org.todomap.o29.beans.TodoResolution;
 
 @Path("/todos/")
 @Produces("application/json")
@@ -148,5 +149,13 @@ public interface TodoService {
 	@XmlElementWrapper(name = "todos")
 	List<Todo> getByLocation(@PathParam("countrycode") String countryCode,
 			@PathParam("state") String state, @PathParam("town") String town);
+
+	@POST
+	@Path("/close/{id}/{res}")
+	Todo closeIssue(@PathParam("id") long todoId, @PathParam("res") TodoResolution resolution);
+
+	@POST
+	@Path("/reject-close/{id}")
+	Todo rejectClose(@PathParam("id") long todoId);
 
 }

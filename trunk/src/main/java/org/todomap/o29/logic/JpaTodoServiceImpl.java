@@ -17,6 +17,9 @@ import org.todomap.geocoder.GeoCoder;
 import org.todomap.geocoder.LatLng;
 import org.todomap.o29.beans.Coordinate;
 import org.todomap.o29.beans.Todo;
+import org.todomap.o29.beans.TodoResolution;
+import org.todomap.o29.beans.TodoStatus;
+import org.todomap.o29.beans.User;
 import org.todomap.o29.utils.HtmlUtil;
 
 public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
@@ -288,4 +291,34 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 		return ret;
 	}
 
+	@Override
+	public Todo closeIssue(final long todoId, final TodoResolution resolution) {
+		final Todo todo = getById(todoId);
+		final User currentUser = userService.getCurrentUser();
+		final TodoStatus status = todo.getStatus() == null ? TodoStatus.Open : todo
+				.getStatus();
+		final boolean isOwner = currentUser.getId() == todo.getCreator().getId();
+		if(isOwner && (status == TodoStatus.Pending || status == TodoStatus.Open)) {
+			todo.setStatus(TodoStatus.Closed);
+			todo.setResolution(resolution);
+			getJpaTemplate().persist(todo);
+		} else if(!isOwner && status == TodoStatus.Open) {
+			todo.setStatus(TodoStatus.Pending);
+			todo.setResolution(resolution);
+			getJpaTemplate().persist(todo);
+		}
+		return todo;
+	}
+
+	@Override
+	public Todo rejectClose(long todoId) {
+		final Todo todo = getById(todoId);
+		final User currentUser = userService.getCurrentUser();
+		if(todo.getCreator().getId() == currentUser.getId()){
+			todo.setStatus(TodoStatus.Closed);
+			getJpaTemplate().persist(todo);
+		}
+		return todo;
+	}
+	
 }
