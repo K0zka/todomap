@@ -52,8 +52,6 @@ final Locale locale = (Locale)request.getAttribute("locale");
 </script>
 <script type="text/javascript" src="scripts/jquery-1.3.2.min.js">
 </script>
-<script type="text/javascript" src="scripts/jquery.qtip-1.0.0-rc3.min.js">
-</script>
 <script type="text/javascript" src="scripts/jquery-ui-1.7.2.js">
 </script>
 <script type="text/javascript"
