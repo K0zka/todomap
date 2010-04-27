@@ -125,13 +125,14 @@ function refreshBookmarks() {
 										function(i, val) {
 											$('#bookmarks')
 													.append(
-															"<a class='bookmark' href=\""
+															"<a class='bookmark' href='#' onclick='map.panTo(new google.maps.LatLng("+val.coordinate.latitude + "," +val.coordinate.longitude +")); map.setZoom(15);'>"
+																	+ val['text']
+																	+ "</a> " 
+																	+"<a href=\""
 																	+ val['id']
 																	+ '-'
 																	+ val['text']
-																	+ ".html\" target=\"_blank\">"
-																	+ val['text']
-																	+ "</a> <img src='img/external-link.png' onclick='' style='cursor:pointer;'/> <br/>");
+																	+ ".html\" target=\"_blank\"> <img src='img/external-link.png' style='cursor:pointer;'/></a> <br/>");
 										});
 					});
 }
