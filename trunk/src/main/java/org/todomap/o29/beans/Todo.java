@@ -1,5 +1,6 @@
 package org.todomap.o29.beans;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -51,6 +52,15 @@ public class Todo extends BaseBean implements Translatable, Locatable {
 	@Enumerated(EnumType.STRING)
 	TodoResolution resolution;
 	
+	@Column(name="closedate")
+	Date closeDate;
+	
+	public Date getCloseDate() {
+		return closeDate;
+	}
+	public void setCloseDate(Date closeDate) {
+		this.closeDate = closeDate;
+	}
 	public List<Project> getProjects() {
 		return projects;
 	}

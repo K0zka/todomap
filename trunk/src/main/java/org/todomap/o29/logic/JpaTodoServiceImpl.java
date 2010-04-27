@@ -1,6 +1,7 @@
 package org.todomap.o29.logic;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -128,14 +129,15 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 				// TODO: average is not a perfect method. We could just
 				// use google GEO.
 				final Query query = em
-						.createQuery("select avg(t.location.longitude), avg(t.location.latitude), count(t) from "
+						.createQuery("select avg(t.location.longitude), avg(t.location.latitude), count(t), t.status from "
 								+ Todo.class.getName()
 								+ " t "
 								+ " where t.addr.country = :country "
 								+ (state == null ? ""
 										: " and t.addr.state = :state")
 								+ (town == null ? ""
-										: " and t.addr.town = :town "));
+										: " and t.addr.town = :town ")
+								+ " group by t.status");
 				query.setParameter("country", country);
 				if (state != null) {
 					query.setParameter("state", state);
@@ -144,10 +146,20 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 					query.setParameter("town", town);
 				}
 
-				final Object[] result = (Object[]) query.getSingleResult();
-				group.setLocation(new Coordinate((Double) result[0],
-						(Double) result[1]));
-				group.setNrOfIssues(((Long) result[2]).intValue());
+				List<Object[]> resultList = query.getResultList();
+				for (final Object[] result : resultList) {
+					final TodoStatus todoStatus = (TodoStatus) result[3];
+					final int value = ((Long) result[2]).intValue();
+					if (todoStatus == null || todoStatus == TodoStatus.Open) {
+						group.setNrOfIssues(value);
+					} else if (todoStatus == TodoStatus.Closed) {
+						group.setNrOfClosedIssues(value);
+					} else if (todoStatus == TodoStatus.Closed) {
+						group.setNrOfPendingIssues(value);
+					}
+					group.setLocation(new Coordinate((Double) result[0],
+							(Double) result[1]));
+				}
 
 				return null;
 			}
@@ -219,7 +231,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 	@Override
 	public List<Todo> getByLocation(final String countryCode,
 			final String state, final String town) {
-		final HashMap<String, String> params = new HashMap<String, String>();
+		final HashMap<String, Object> params = new HashMap<String, Object>();
 		if (state != null) {
 			params.put("state", state);
 		}
@@ -227,6 +239,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 		if (town != null) {
 			params.put("town", state);
 		}
+		params.put("status", TodoStatus.Closed);
 		return getJpaTemplate()
 				.findByNamedParams(
 						"select todo from "
@@ -236,7 +249,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 										: "and todo.addr.town = :town ")
 								+ (state == null ? ""
 										: "and todo.addr.state = :state ")
-								+ "order by todo.created desc ", params);
+								+ "order by todo.created desc where todo.status != :status", params);
 	}
 
 	static double min(final double a, final double b) {
@@ -295,14 +308,17 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 	public Todo closeIssue(final long todoId, final TodoResolution resolution) {
 		final Todo todo = getById(todoId);
 		final User currentUser = userService.getCurrentUser();
-		final TodoStatus status = todo.getStatus() == null ? TodoStatus.Open : todo
-				.getStatus();
-		final boolean isOwner = currentUser.getId() == todo.getCreator().getId();
-		if(isOwner && (status == TodoStatus.Pending || status == TodoStatus.Open)) {
+		final TodoStatus status = todo.getStatus() == null ? TodoStatus.Open
+				: todo.getStatus();
+		final boolean isOwner = currentUser.getId() == todo.getCreator()
+				.getId();
+		if (isOwner
+				&& (status == TodoStatus.Pending || status == TodoStatus.Open)) {
 			todo.setStatus(TodoStatus.Closed);
 			todo.setResolution(resolution);
+			todo.setCloseDate(new Date());
 			getJpaTemplate().persist(todo);
-		} else if(!isOwner && status == TodoStatus.Open) {
+		} else if (!isOwner && status == TodoStatus.Open) {
 			todo.setStatus(TodoStatus.Pending);
 			todo.setResolution(resolution);
 			getJpaTemplate().persist(todo);
@@ -314,11 +330,11 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 	public Todo rejectClose(long todoId) {
 		final Todo todo = getById(todoId);
 		final User currentUser = userService.getCurrentUser();
-		if(todo.getCreator().getId() == currentUser.getId()){
+		if (todo.getCreator().getId() == currentUser.getId()) {
 			todo.setStatus(TodoStatus.Closed);
 			getJpaTemplate().persist(todo);
 		}
 		return todo;
 	}
-	
+
 }

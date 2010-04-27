@@ -42,6 +42,24 @@ public interface TodoService {
 		String name;
 
 		int nrOfIssues;
+		int nrOfClosedIssues;
+		int nrOfPendingIssues;
+
+		public int getNrOfClosedIssues() {
+			return nrOfClosedIssues;
+		}
+
+		public void setNrOfClosedIssues(int nrOfClosedIssues) {
+			this.nrOfClosedIssues = nrOfClosedIssues;
+		}
+
+		public int getNrOfPendingIssues() {
+			return nrOfPendingIssues;
+		}
+
+		public void setNrOfPendingIssues(int nrOfPendingIssues) {
+			this.nrOfPendingIssues = nrOfPendingIssues;
+		}
 
 		Address address;
 
