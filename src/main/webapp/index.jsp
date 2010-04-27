@@ -323,6 +323,8 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 						    marker.setTodoId(val['id']);
 						    if(val['status'] == 'Closed') {
 						    	marker.setIcon('img/fixed.png');
+						    } else if(val['status'] == 'Pending') {
+							    	marker.setIcon('img/pending.png');
 							} else {
 								marker.setIcon('img/flag.png');
 							}
