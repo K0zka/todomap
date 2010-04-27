@@ -16,6 +16,7 @@ import org.todomap.geocoder.Address;
 import org.todomap.o29.beans.Coordinate;
 import org.todomap.o29.beans.Todo;
 import org.todomap.o29.beans.TodoResolution;
+import org.todomap.o29.beans.TodoStatus;
 
 @Path("/todos/")
 @Produces("application/json")
@@ -95,6 +96,7 @@ public interface TodoService {
 	public class TodoSummary extends Flag {
 		long id;
 		String shortDescr;
+		TodoStatus status;
 
 		@XmlElement(name = "id")
 		public long getId() {
@@ -112,6 +114,14 @@ public interface TodoService {
 
 		public void setShortDescr(String shortDescr) {
 			this.shortDescr = shortDescr;
+		}
+
+		public TodoStatus getStatus() {
+			return status;
+		}
+
+		public void setStatus(TodoStatus status) {
+			this.status = status;
 		}
 	}
 

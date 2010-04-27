@@ -100,7 +100,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 		final ArrayList<TodoSummary> ret = new ArrayList<TodoSummary>();
 		for (final Object row : getJpaTemplate()
 				.find(
-						"select a.id, a.shortDescr, a.location from "
+						"select a.id, a.shortDescr, a.location, a.status from "
 								+ Todo.class.getName()
 								+ " a "
 								+ "where a.location.longitude between ? and ? and a.location.latitude between ? and ?",
@@ -109,6 +109,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 			todoSummary.setId((Long) ((Object[]) row)[0]);
 			todoSummary.setShortDescr((String) ((Object[]) row)[1]);
 			todoSummary.setLocation((Coordinate) ((Object[]) row)[2]);
+			todoSummary.setStatus((TodoStatus) ((Object[]) row)[3]);
 			ret.add(todoSummary);
 		}
 		return ret;
