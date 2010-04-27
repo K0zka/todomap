@@ -276,6 +276,7 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
          );
 
         refreshTagClouds('<%=locale.getLanguage()%>');
+        refreshBookmarks();
 
     });
 
@@ -401,7 +402,9 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 					    		content: '<div style="width: 200px; height: 100px; overflow: hidden;">'
 					    			+ '<h3 style="margin: 5px; font-size: 15px; width: 160px;">'+getAddress(val['address'])+'</h3>'
 					    			+ '<div style="overflow: hidden; margin: 10px; text-align: justify; font-size: 12px; width: 160px; height: 50px;">'
-					    			+ '<i18n:message key="etc.openIssues"/> : '+  val['nrOfIssues']
+					    			+ '<i18n:message key="etc.openIssues"/> : '+  val['nrOfIssues'] + '<br>'
+					    			+ '<i18n:message key="etc.pendingIssues"/> : '+  val['nrOfPendingIssues'] + '<br>'
+					    			+ '<i18n:message key="etc.closedIssues"/> : '+  val['nrOfClosedIssues'] + '<br>'
 						    		+ '</div>'
 					    		    + '<img src="img/search32.png" style="position: absolute; top: 0px; right: 0px; cursor: pointer;" onclick="map.panTo(new google.maps.LatLng('+latitude+','+longitude+')); closeAllInfoWindow(); map.setZoom('+zoom+');"/>'
 					    		    + '<a style="color: #FFFFFF;" href="'+getRssUrlForAddr(val['address'])+'" target="_blank"><img src="img/feed32.png" style="position: absolute; top: 32px; right: 0px; cursor: pointer;"/></a>'
@@ -425,9 +428,6 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 				$.get("services/todos/area/country/"+sw.lat() + "," + sw.lng() + "," + ne.lat() + "," + ne.lng(), fn);
 			}
 		}
-
-		setTimeout('refreshBookmarks()', 1000);
-	
 	}
 
 	function getRatingSum(ratingSum) {
