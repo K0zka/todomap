@@ -321,7 +321,11 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 						        title:val['descr']
 						    });
 						    marker.setTodoId(val['id']);
-						    marker.setIcon('img/flag.png');
+						    if(val['status'] == 'Closed') {
+						    	marker.setIcon('img/fixed.png');
+							} else {
+								marker.setIcon('img/flag.png');
+							}
 						    map.addMarker(marker);
 						    google.maps.event.addListener(marker, 'click', function() {
 							    $.get("services/todofacade/get/"+val['id'], function(data){
