@@ -17,7 +17,7 @@ final String chanelLink = (String)request.getAttribute("chanelLink");
 
 <i18n:setLocale value="<%= (Locale)request.getAttribute("locale") %>"/>
 <i18n:setBundle basename="Messages"/>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:georss="http://www.georss.org/georss">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:georss="http://www.georss.org/georss" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#">
   <channel>
     <title><i18n:message key="rss.area.title">Todomap RSS feed for area</i18n:message></title>
     <description><i18n:message key="rss.area.description">RSS feed for area</i18n:message></description>
@@ -33,6 +33,8 @@ final String chanelLink = (String)request.getAttribute("chanelLink");
       <pubDate><%= sdf.format(todo.getCreated()) %></pubDate>
       <guid><%= URLUtil.getUrl(request, todo)%></guid>
       <georss:point><%= todo.getLocation().getLatitude() %> <%= todo.getLocation().getLongitude() %></georss:point>
+      <geo:lat><%= todo.getLocation().getLatitude() %></geo:lat>
+      <geo:long><%= todo.getLocation().getLongitude() %></geo:long>
     </item>
 	<% } %>
   </channel>
