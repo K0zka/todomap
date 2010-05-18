@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.todomap.o29.utils.aop;
+package org.todomap.o29.utils.integration;
 
 import java.util.Date;
 
