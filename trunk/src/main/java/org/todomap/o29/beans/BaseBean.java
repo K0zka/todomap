@@ -67,6 +67,9 @@ public abstract class BaseBean implements Nameable {
 	@Column()
 	Boolean spamChecked;
 
+	@OneToMany
+	List<IntegrationMessage> messages;
+
 	public Boolean getSpamChecked() {
 		return spamChecked;
 	}
