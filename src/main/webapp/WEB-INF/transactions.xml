@@ -18,7 +18,7 @@
 		</tx:attributes>
 	</tx:advice>
 
-	<bean name="jmsInterceptor" class="org.todomap.o29.utils.aop.JmsIntegrationAspect">
+	<bean name="jmsInterceptor" class="org.todomap.o29.utils.integration.JmsIntegrationAspect">
 		<constructor-arg ref="jmsTemplate"/>
 	</bean>
 

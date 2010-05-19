@@ -239,7 +239,12 @@
 	</taglib>
 
 	<resource-env-ref>
-		<resource-env-ref-name>jms/o29mq</resource-env-ref-name>
+		<resource-env-ref-name>jms/o29intresp</resource-env-ref-name>
+		<resource-env-ref-type>javax.jms.Queue</resource-env-ref-type>
+	</resource-env-ref>
+
+	<resource-env-ref>
+		<resource-env-ref-name>jms/o29events</resource-env-ref-name>
 		<resource-env-ref-type>javax.jms.Queue</resource-env-ref-type>
 	</resource-env-ref>
 
