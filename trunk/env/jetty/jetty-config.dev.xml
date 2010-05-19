@@ -28,11 +28,20 @@
 		</Arg>
 	</New>
 
-	<New id="o29ds" class="org.eclipse.jetty.plus.jndi.Resource">
-		<Arg>jms/o29mq</Arg>
+	<New id="o29intresp" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg>jms/o29intresp</Arg>
 		<Arg>
 			<New class="org.apache.activemq.command.ActiveMQQueue">
-				<Arg>o29mq</Arg>
+				<Arg>o29intresp</Arg>
+			</New>
+		</Arg>
+	</New>
+
+	<New id="o29events" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg>jms/o29events</Arg>
+		<Arg>
+			<New class="org.apache.activemq.command.ActiveMQQueue">
+				<Arg>o29events</Arg>
 			</New>
 		</Arg>
 	</New>
