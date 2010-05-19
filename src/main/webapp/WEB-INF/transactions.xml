@@ -20,6 +20,7 @@
 
 	<bean name="jmsInterceptor" class="org.todomap.o29.utils.integration.JmsIntegrationAspect">
 		<constructor-arg ref="jmsTemplate"/>
+		<property name="entityManagerFactory" ref="entityManager"/>
 	</bean>
 
 	<aop:config>
