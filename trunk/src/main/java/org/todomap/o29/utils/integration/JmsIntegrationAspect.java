@@ -7,6 +7,8 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
 import javax.jms.StreamMessage;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.MarshalException;
 import javax.xml.bind.Marshaller;
@@ -17,14 +19,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
+import org.springframework.orm.jpa.JpaCallback;
+import org.springframework.orm.jpa.support.JpaDaoSupport;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.todomap.o29.beans.BaseBean;
+import org.todomap.o29.beans.User;
 
 /**
  * Send the updated/new/deleted data out on the wire.
  * 
  * @author kocka
  */
-public final class JmsIntegrationAspect implements MethodInterceptor {
+public final class JmsIntegrationAspect extends JpaDaoSupport implements MethodInterceptor {
 
 	private final static Logger logger = LoggerFactory
 			.getLogger(JmsIntegrationAspect.class);
@@ -62,7 +69,7 @@ public final class JmsIntegrationAspect implements MethodInterceptor {
 			final StringWriter writer = new StringWriter();
 			final Method method = invocation.getMethod();
 			final Invocation inv = new Invocation(method.getDeclaringClass()
-					.getName(), method.getName(), arguments, result);
+					.getName(), method.getName(), arguments, result, getUser());
 			try {
 				marshaller.marshal(inv, writer);
 			} catch (final MarshalException marshalException) {
@@ -85,5 +92,21 @@ public final class JmsIntegrationAspect implements MethodInterceptor {
 			logger.debug("created message: " + message);
 		}
 		return result;
+	}
+
+	private User getUser() {
+		final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(authentication == null || !authentication.isAuthenticated()) {
+			return null;
+		} else {
+			return getJpaTemplate().execute(new JpaCallback<User>() {
+
+				@Override
+				public User doInJpa(EntityManager manager)
+						throws PersistenceException {
+					return (User) manager.createQuery("select object(u) from "+User.class.getName()+" u where openIdUrl = ?").setParameter(1, authentication.getName()).getSingleResult();
+				}
+			});
+		}
 	}
 }
