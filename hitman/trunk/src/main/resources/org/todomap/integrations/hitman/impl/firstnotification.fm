@@ -1,0 +1,20 @@
+Tisztelt ${title}!
+
+A todomap.org rendszerben új problémát regisztráltak az ön által felügyelt területen a következő leírással:
+
+ - Rövid leírás: ${shortDescription}
+ - Részletes leírás: ${description}
+ - Cimkék: ${tags}
+ - Cím: ${postalcode} ${town}, ${addr}
+ - GPS-koordináták: ${lat} ${long}
+ - bejegyzés dátuma: ${created}
+
+A problémával kapcsolatos további információkat a következő címen tekintheti meg:
+
+http://hu.todomap.org/${id}-.html
+
+Üdvözlettel:
+todomap.org szerver
+
+Ezt a generált levelet ön azért kapta, mert a Belügyminisztérium hivatalos listáján az ön címe szerepel az érintett terület 
+önkormányzati e-mail címeként.

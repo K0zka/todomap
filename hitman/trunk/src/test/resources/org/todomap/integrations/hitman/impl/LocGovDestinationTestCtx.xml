@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="destination" class="org.todomap.integrations.hitman.impl.LocGovDestination">
+		<property name="templateDir" value="org/todomap/integrations/hitman/impl"/>
+		<property name="from" value="kocka.dev.null@gmail.com"/>
+		<property name="mailSender" ref="mailSender"/>
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="mailSender" class="org.todomap.integrations.hitman.impl.FakeMailSender"/>
+
+	<bean id="dataSource" class="org.unitils.database.UnitilsDataSourceFactoryBean"/>
+
+</beans>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<invocation>
+	<arguments>
+		<arguments xsi:type="todo"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<created>2010-05-19T07:56:47.714+02:00</created>
+			<id>357</id>
+			<language>en</language>
+			<version>0</version>
+			<addr>
+				<address>Denevér út 9</address>
+				<country>HU</country>
+				<postalCode>1112</postalCode>
+				<state>Budapest</state>
+				<town>Budapest</town>
+			</addr>
+			<description>i am not afraid</description>
+			<location>
+				<latitude>47.48410932978122</latitude>
+				<longitude>18.998027618408198</longitude>
+			</location>
+			<shortDescr>test me babe</shortDescr>
+			<status>Open</status>
+		</arguments>
+	</arguments>
+	<callTime>2010-05-19T07:57:02.214+02:00</callTime>
+	<interfaceName>org.todomap.o29.logic.TodoService</interfaceName>
+	<methodName>addTodo</methodName>
+	<result xsi:type="todo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		<created>2010-05-19T07:56:47.714+02:00</created>
+		<id>357</id>
+		<language>en</language>
+		<version>0</version>
+		<addr>
+			<address>Denevér út 9</address>
+			<country>HU</country>
+			<postalCode>1112</postalCode>
+			<state>Budapest</state>
+			<town>Budapest</town>
+		</addr>
+		<description>i am not afraid</description>
+		<location>
+			<latitude>47.48410932978122</latitude>
+			<longitude>18.998027618408198</longitude>
+		</location>
+		<shortDescr>test me babe</shortDescr>
+		<status>Open</status>
+	</result>
+	<user>
+		<created>2010-03-01T19:26:58.010+01:00</created>
+		<id>22</id>
+		<version>17</version>
+		<displayName>kozka</displayName>
+		<email>kocka@dev.null</email>
+		<homeLoc>
+			<latitude>19.083</latitude>
+			<longitude>47.5</longitude>
+		</homeLoc>
+		<openIdUrl>https://www.google.com/accounts/o8/id?id=AItOawnNba6yM51w_OBpYC4CldSaZ1z54-FLiP4
+		</openIdUrl>
+		<userLinks>
+			<desc>my blog</desc>
+			<id>1</id>
+			<url>http://iwillworkforfood.blogspot.com/</url>
+		</userLinks>
+	</user>
+</invocation>
