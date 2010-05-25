@@ -13,6 +13,7 @@
 		<class>org.todomap.o29.beans.Tag</class>
 		<class>org.todomap.o29.beans.User</class>
 		<class>org.todomap.o29.beans.Link</class>
+		<class>org.todomap.o29.beans.IntegrationMessage</class>
 		<class>org.todomap.minigeoip.impl.jpa.IpDomain</class>
 		<class>org.todomap.o29.utils.security.RememberMeToken</class>
 	</persistence-unit>
