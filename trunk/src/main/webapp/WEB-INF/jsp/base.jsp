@@ -52,6 +52,8 @@
 	href="style/jquery.rating.css" media="all" />
 <link rel="stylesheet" type="text/css"
 	href="style/default.css" media="all" />
+<link rel="stylesheet" type="text/css"
+	href="style/base.css" media="all" />
 <link type="text/css" rel="stylesheet" href="style/jquery.rte.css" />
 <link type="text/css" rel="stylesheet" href="style/jquery.tooltip.css" />
 
@@ -60,8 +62,6 @@
 <script type="text/javascript" src="scripts/jquery-1.3.2.min.js">
 </script>
 <script type="text/javascript" src="scripts/jquery-ui-1.7.2.js">
-</script>
-<script type="text/javascript" src="scripts/jquery.qtip-1.0.0-rc3.min.js">
 </script>
 <script type="text/javascript" src="scripts/jquery-ui-1.7.2.js">
 </script>
@@ -97,6 +97,7 @@ function initialize() {
 	if(self != top) {
 		debug('parent exists');
 		$('#locationinfo').hide(0);
+		$('#returntomapDiv').hide(0);
 	} else {
 		debug('parent does not exist');
 	}
@@ -260,10 +261,65 @@ function saveData() {
 </head>
 <body onload="initialize()">
 
+<a name="top"/>
 
 <div style="width: 100%;">
 
-<a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;username=kozka"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=kozka"></script>
+<div class="baseheader">
+	<div id="sharethis">
+		<a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;username=kozka"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=kozka"></script>
+	</div>
+	<div id="embedButton">
+		<button id="voteEmbedButton" onclick="$('#embed').show(100);">&lt;embed&gt;</button>
+	</div>
+	<% if(item instanceof Todo) { %>
+	<div id="closeIssueButton">
+		<button id="closeIssueButton" onclick="$('#closeIssue').show(100);"><i18n:message key="todo.close.close">close issue</i18n:message></button>
+	</div>
+	<div id="returntomapDiv">
+		<button id="returntomap" type="button" onclick="window.location='index.jsp?lat=<%=((Locatable)item).getLocation().getLatitude()%>&lng=<%=((Locatable)item).getLocation().getLongitude()%>&zoom=13'"> <i18n:message key="etc.returnToMap">return to map</i18n:message> </button>
+	</div>
+	<% } %>
+	<%
+		if (item.getCreator() != null
+				&& !StringUtils.isEmpty(item.getCreator().getDisplayName())) {
+	%>
+	<div style="color: grey; font-size: 0.8em;">
+		<i18n:message key="todo.submittedby">Submitted by</i18n:message> <a href="<%= URLUtil.getApplicationRoot(request) + item.getCreator().getId() + ".html" %>"> <%=item.getCreator().getDisplayName()%> <span id="authorId" class="authorId">[<%=item.getCreator().getId()%>]</span></a>
+	</div>
+	<%
+		}
+	%>
+</div>
+
+
+<% if(item instanceof Todo) {
+	Todo todo = (Todo)item;
+%>
+
+<% if(todo.getStatus() == TodoStatus.Open || todo.getStatus() == null) { %>
+	<div id="closeIssue" style="display: none;">
+		<input type="radio" checked="checked" name="resolution" value="Fixed" id="close-Fixed"> <label for="close-Fixed"> <i18n:message key="todo.close.resolution.Fixed"/> </label><br/>
+		<input type="radio" value="Canceled" name="resolution" id="close-Canceled"> <label for="close-Canceled"> <i18n:message key="todo.close.resolution.Canceled"/> </label><br/>
+		<input type="radio" value="VotedDown" name="resolution" id="close-VotedDown"> <label for="close-VotedDown"> <i18n:message key="todo.close.resolution.VotedDown"/> </label><br/>
+		<input type="radio" value="Outdated" name="resolution" id="close-Outdated"> <label for="close-Outdated"> <i18n:message key="todo.close.resolution.Outdated"/> </label><br/>
+		<input type="radio" value="Duplicate" name="resolution" id="close-Duplicate"> <label for="close-Duplicate"> <i18n:message key="todo.close.resolution.Duplicate"/> </label><br/>
+		<button onclick="closeTodo(<%= todo.getId() %>, 'Fixed', function(){ $('#closeIssue').hide(); ('#closeIssueButton').hide(); });"> <i18n:message key="todo.close.close">close issue</i18n:message> </button>
+		<button onclick="$('#closeIssue').hide(100);"><i18n:message key="etc.cancel">Cancel</i18n:message></button>
+	</div>
+<% } %>
+
+<% } %> 
+
+	<div id="embed" style="display: none;">
+		<i18n:message key="ratings.embed.copypaste">Copy-paste this code to the html code of your site:</i18n:message>
+		<br/>
+		<textarea id="iframebox"><![CDATA[ <iframe width="125" height="125" style="border: none;" src="<%= URLUtil.getApplicationRoot(request) %>/embed/125x125/<%= URLEncoder.encode(item.getId() + "-" +"embed","UTF-8") %>.html">
+</iframe>]]></textarea>
+		<br/>
+		<button onclick="$('#embed').hide(100);">done</button>
+	</div>
+
 
 <div id="todoDetails">
 
@@ -273,9 +329,6 @@ function saveData() {
 	%>
 	<span id="locationinfo">
 	<h3><i18n:message key="todo.location">Location</i18n:message></h3>
-	<div style="position: absolute; top: 0px; right: 0px; color: grey; font-size: 0.8em;">
-		<a rel="nofollow" href="index.jsp?lat=<%=((Locatable)item).getLocation().getLatitude()%>&lng=<%=((Locatable)item).getLocation().getLongitude()%>&zoom=13"> <i18n:message key="etc.returnToMap">return to map</i18n:message> </a>
-	</div>
 	<img
 		src="http://maps.google.com/maps/api/staticmap?center=<%=location.getLatitude() %>,<%= location.getLongitude() %>&zoom=14&size=240x180&markers=color:red|label:X|<%=location.getLatitude() %>,<%= location.getLongitude() %>&sensor=false">
 	<div style="color: grey; font-size: 0.8em;">
@@ -292,16 +345,6 @@ function saveData() {
 	</div>
 	</span>
 	<% } %>
-	<%
-		if (item.getCreator() != null
-				&& !StringUtils.isEmpty(item.getCreator().getDisplayName())) {
-	%>
-	<div style="color: grey; font-size: 0.8em;">
-		<i18n:message key="todo.submittedby">Submitted by</i18n:message> <%=item.getCreator().getDisplayName()%> <span id="authorId" class="authorId">[<%=item.getCreator().getId()%>]</span>
-	</div>
-	<%
-		}
-	%>
 	<h3><i18n:message key="todo.details">Details</i18n:message></h3>
 	<% if(item instanceof Todo) { %>
 	<span id="descriptionNoEdit">
@@ -379,16 +422,7 @@ function saveData() {
 		<li><i18n:message key="ratings.anon_avg">Anon users average:</i18n:message> <%= ratings.getAnonAverage() == null ? "-" : ratings.getAnonAverage() %></li>
 	</ul>
 	
-	<button id="voteEmbedButton" onclick="$('#embed').show(100); $('#voteEmbedButton').hide(100);">&lt;embed&gt;</button>
 	
-	<div id="embed" style="display: none;">
-		<i18n:message key="ratings.embed.copypaste">Copy-paste this code to the html code of your site:</i18n:message>
-		<br/>
-		<textarea id="iframebox"><iframe width="125" height="125" style="border: none;" src="<%= URLUtil.getApplicationRoot(request) %>/embed/125x125/<%= URLEncoder.encode(item.getId() + "-" +"embed","UTF-8") %>.html">
-</iframe></textarea>
-		<br/>
-		<button onclick="$('#embed').hide(100); $('#voteEmbedButton').show(100);">done</button>
-	</div>
 	
 	<div id="ratingDetails">
 		<input name="simpleRating" type="radio" class="star"/> 
@@ -466,4 +500,5 @@ function saveData() {
 <%@page import="java.net.URLEncoder"%>
 <%@page import="org.todomap.o29.beans.User"%>
 <%@page import="org.todomap.o29.beans.Link"%>
-<%@page import="org.todomap.o29.utils.VersionUtil"%></html>
+<%@page import="org.todomap.o29.utils.VersionUtil"%>
+<%@page import="org.todomap.o29.beans.TodoStatus"%></html>
