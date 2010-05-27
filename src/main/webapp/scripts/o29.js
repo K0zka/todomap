@@ -365,10 +365,7 @@ function closeTodo(id, resolution, callback) {
 		url : 'services/todos/close/' + id + '/' + resolution,
 		contentType : 'application/json',
 		dataType : 'json',
-		success : function(data) {
-			var todo = eval('('+data+')');
-			callback(todo);
-		}
+		success : callback
 	});
 }
 
