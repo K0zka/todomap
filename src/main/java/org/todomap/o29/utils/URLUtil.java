@@ -17,14 +17,14 @@ public class URLUtil {
 		return getApplicationRoot(request, "WEB-INF");
 	}
 
-	public static String getApplicationRoot(final HttpServletRequest request, String file) {
+	public static String getApplicationRoot(final HttpServletRequest request,
+			String file) {
 		final StringBuffer requestURL = request.getRequestURL();
 		final int contextLoc = requestURL.indexOf(file);
 		requestURL.replace(contextLoc, requestURL.length(), "");
 		return requestURL.toString();
 	}
 
-	
 	public static String getUrl(final HttpServletRequest request,
 			final BaseBean bean) {
 		return getApplicationRoot(request) + bean.getId() + "-"
@@ -42,19 +42,19 @@ public class URLUtil {
 		}
 		return bean.getClass().getSimpleName().toLowerCase();
 	}
-	
+
 	public static long extractId(final String requestURI) {
 		final int slashPos = requestURI.lastIndexOf('/');
-		final int separatorPos = slashPos == -1 ? requestURI.indexOf('-')
-				: requestURI.indexOf('-', slashPos);
-		if (separatorPos == -1) {
-			return 0;
-		} else {
-			String idStr = requestURI.substring(slashPos == -1 ? 0
-					: slashPos + 1, separatorPos);
-			return Long.parseLong(idStr);
+		int lastLine = requestURI.indexOf('-', slashPos);
+		if (lastLine == -1) {
+			lastLine = requestURI.lastIndexOf('.');
 		}
+		if (lastLine == -1) {
+			return 0;
+		}
+		String idStr = requestURI.substring(slashPos == -1 ? 0 : slashPos + 1,
+				lastLine);
+		return Long.parseLong(idStr);
 	}
 
-	
 }
