@@ -84,7 +84,7 @@ public final class JmsIntegrationAspect extends JpaDaoSupport implements MethodI
 						throws JMSException {
 					final StreamMessage streamMessage = session
 							.createStreamMessage();
-					streamMessage.writeBytes(message.getBytes());
+					streamMessage.writeString(message);
 					logger.debug("message created");
 					return streamMessage;
 				}
