@@ -10,16 +10,21 @@
 	<bean id="spamFilter" class="org.todomap.spamegg.LinkSleeveSpamFilter">
 	</bean>
 
+	<bean id="spamFilterAdapter" class="org.todomap.integrations.hitman.impl.SpamFilterAdapter">
+		<property name="filter" ref="spamFilter"/>
+	</bean>
+
 	<bean id="eventListener" class="org.todomap.integrations.hitman.impl.EventListener">
 		<property name="filters">
 			<list>
-				<ref bean="spamFilter"/>
+				<ref bean="spamFilterAdapter"/>
 			</list>
 		</property>
 		<property name="destinations">
 			<list>
 				<bean class="org.todomap.integrations.hitman.impl.LocGovDestination">
 					<property name="mailSender" ref="mailSender"/>
+					<property name="dataSource" ref="datasource"/>
 				</bean>
 			</list>
 		</property>
@@ -30,7 +35,7 @@
 	</bean>
 
 	<bean id="jmsContainer"
-		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		class="org.springframework.jms.listener.SimpleMessageListenerContainer">
 		<property name="connectionFactory" ref="jmsConnectionFactory" />
 		<property name="destination" ref="jmsQueue" />
 		<property name="messageListener" ref="eventListener" />
@@ -52,6 +57,10 @@
 
 	<bean id="jmsQueue" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="jms/o29events" />
+	</bean>
+
+	<bean id="datasource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="jdbc/hitman-ds" />
 	</bean>
 
 	<bean id="responseQueue" class="org.springframework.jndi.JndiObjectFactoryBean">

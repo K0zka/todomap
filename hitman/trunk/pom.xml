@@ -5,7 +5,8 @@
   <artifactId>hitman</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>hitman JEE5 Webapp</name>
+  <name>hitman</name>
+  <description>Hitman is a temporary integration solution for todomap.</description>
   <url>http://maven.apache.org</url>
   <dependencies>
 
@@ -40,6 +41,13 @@
     <dependency>
     	<groupId>org.springframework</groupId>
     	<artifactId>spring-core</artifactId>
+    	<version>3.0.2.RELEASE</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-web</artifactId>
     	<version>3.0.2.RELEASE</version>
     	<type>jar</type>
     	<scope>compile</scope>
@@ -126,6 +134,20 @@
     	<type>jar</type>
     	<scope>test</scope>
     </dependency>
+    <dependency>
+    	<groupId>org.slf4j</groupId>
+    	<artifactId>slf4j-api</artifactId>
+    	<version>1.6.0</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.slf4j</groupId>
+    	<artifactId>slf4j-log4j12</artifactId>
+    	<version>1.6.0</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -138,6 +160,45 @@
           <target>1.6</target>
         </configuration>
       </plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>7.0.1.v20091125</version>
+				<dependencies>
+					<dependency>
+						<groupId>commons-dbcp</groupId>
+						<artifactId>commons-dbcp</artifactId>
+						<version>1.2.2</version>
+					</dependency>
+					<dependency>
+						<groupId>postgresql</groupId>
+						<artifactId>postgresql</artifactId>
+						<version>8.3-603.jdbc4</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.jetty</groupId>
+						<artifactId>jetty-ajp</artifactId>
+						<version>7.0.1.v20091125</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.activemq</groupId>
+						<artifactId>activemq-core</artifactId>
+						<version>5.3.0</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<webAppConfig>
+						<jettyEnvXml>${basedir}/env/jetty/jetty-config.dev.xml</jettyEnvXml>
+						<contextPath>/</contextPath>
+					</webAppConfig>
+					<connectors>
+						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+							<port>7070</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
+				</configuration>
+			</plugin>
     </plugins>
     <finalName>hitman</finalName>
   </build>

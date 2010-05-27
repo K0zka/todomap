@@ -6,7 +6,7 @@ import java.util.List;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
-import javax.jms.TextMessage;
+import javax.jms.StreamMessage;
 
 import org.todomap.integrations.hitman.Destination;
 import org.todomap.integrations.hitman.Filter;
@@ -18,7 +18,7 @@ public class EventListener implements MessageListener {
 
 	public void onMessage(Message message) {
 		try {
-			String msg = ((TextMessage) message).getText();
+			String msg = ((StreamMessage)message).readString();
 
 			for (Filter filter : filters) {
 				if(msg == null) {
