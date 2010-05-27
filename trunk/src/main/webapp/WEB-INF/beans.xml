@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
-	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:jms="http://www.springframework.org/schema/jms"
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/jms http://www.springframework.org/schema/mvc/spring-jms-3.0.xsd
 	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
 	http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
 
@@ -26,10 +27,10 @@
 			<ref bean="anonratings" />
 			<ref bean="attachments" />
 			<ref bean="comments" />
-			<ref bean="bookmarks"/>
-			<ref bean="base"/>
-			<ref bean="todofacade"/>
-			<ref bean="tags"/>
+			<ref bean="bookmarks" />
+			<ref bean="base" />
+			<ref bean="todofacade" />
+			<ref bean="tags" />
 		</jaxrs:serviceBeans>
 		<!--
 			<jaxrs:extensionMappings> <alias name="xml" alias="application/xml"/>
@@ -65,9 +66,9 @@
 	</bean>
 
 	<bean id="anonratings" class="org.todomap.o29.logic.JpaAnonRatingService">
-		<property name="entityManagerFactory" ref="entityManager"/>
-		<property name="ratingService" ref="ratings"/>
-		<property name="baseService" ref="base"/>
+		<property name="entityManagerFactory" ref="entityManager" />
+		<property name="ratingService" ref="ratings" />
+		<property name="baseService" ref="base" />
 	</bean>
 
 	<bean id="homes" class="org.todomap.o29.logic.JpaHomeServiceImpl">
@@ -77,7 +78,7 @@
 
 	<bean id="tags" class="org.todomap.o29.logic.JpaTagService">
 		<property name="entityManagerFactory" ref="entityManager" />
-		<property name="baseService" ref="base"/>
+		<property name="baseService" ref="base" />
 	</bean>
 
 	<bean id="attachments" class="org.todomap.o29.logic.JpaAttachmentService"
@@ -109,13 +110,13 @@
 
 	<bean id="base" class="org.todomap.o29.logic.JpaBaseService">
 		<property name="entityManagerFactory" ref="entityManager" />
-		<property name="userService" ref="users"/>
+		<property name="userService" ref="users" />
 	</bean>
 
 	<bean id="bookmarks" class="org.todomap.o29.logic.JpaBookmarkService">
 		<property name="entityManagerFactory" ref="entityManager" />
-		<property name="baseService" ref="base"/>
-		<property name="userService" ref="users"/>
+		<property name="baseService" ref="base" />
+		<property name="userService" ref="users" />
 	</bean>
 
 	<bean id="entityManager"
@@ -145,7 +146,11 @@
 	</bean>
 
 	<bean id="jmsQueue" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="jms/o29mq"/>
+		<property name="jndiName" value="jms/o29events" />
+	</bean>
+
+	<bean id="responseQueue" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="jms/o29intresp" />
 	</bean>
 
 	<bean id="geoCoder" class="org.todomap.geocoder.google.GoogleGeocoder">
@@ -153,9 +158,9 @@
 	</bean>
 
 	<bean id="todofacade" class="org.todomap.o29.logic.facade.TodoFacade">
-		<property name="todoService" ref="todos"/>
-		<property name="ratingService" ref="ratings"/>
-		<property name="bookmarkService" ref="bookmarks"/>
+		<property name="todoService" ref="todos" />
+		<property name="ratingService" ref="ratings" />
+		<property name="bookmarkService" ref="bookmarks" />
 	</bean>
 
 	<bean
@@ -182,10 +187,25 @@
 	</bean>
 
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-		<property name="defaultDestination" ref="jmsQueue"/>
-		<property name="connectionFactory" ref="jmsConnectionFactory"/>
+		<property name="defaultDestination" ref="jmsQueue" />
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
 	</bean>
-	
+
+	<bean id="integrationMessageListener"  class="org.todomap.o29.utils.integration.IntegrationMessageListener">
+		<property name="entityManagerFactory" ref="entityManager" />
+	</bean>
+
+	<bean id="messageListener"
+		class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<constructor-arg>
+			<ref bean="integrationMessageListener"/>
+		</constructor-arg>
+		<property name="defaultListenerMethod" value="onMessage" />
+		<property name="messageConverter">
+			<null />
+		</property>
+	</bean>
+
 	<bean id="timerFactory" class="org.springframework.scheduling.timer.TimerFactoryBean">
 		<property name="scheduledTimerTasks">
 			<list>
@@ -195,13 +215,13 @@
 					<property name="period" value="86400000" />
 					<property name="timerTask">
 						<bean class="org.todomap.o29.utils.jobs.ReverseGeocodeTask">
-							<property name="geoCoder" ref="geoCoder"/>
+							<property name="geoCoder" ref="geoCoder" />
 							<property name="jpaTemplate">
 								<bean class="org.springframework.orm.jpa.JpaTemplate">
-									<property name="entityManagerFactory" ref="entityManager"/>
+									<property name="entityManagerFactory" ref="entityManager" />
 								</bean>
 							</property>
-							<property name="manager" ref="transactionManager"/>
+							<property name="manager" ref="transactionManager" />
 						</bean>
 					</property>
 				</bean>
