@@ -25,6 +25,10 @@
 		</property>
 	</bean>
 
+	<bean id="fileDest" class="org.todomap.integrations.hitman.impl.FileDestination" init-method="init">
+		<property name="destination" value="target/messages"/>
+	</bean>
+
 	<bean id="jmsContainer"
 		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="jmsConnectionFactory" />
