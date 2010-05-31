@@ -31,7 +31,9 @@ public class FileDestination implements Destination {
 				.currentTimeMillis()
 				+ ".xml");
 		try {
-			IOUtils.write(message, new FileWriter(outputFile));
+			FileWriter fileWriter = new FileWriter(outputFile);
+			IOUtils.write(message, fileWriter);
+			IOUtils.closeQuietly(fileWriter);
 		} catch (IOException e) {
 			logger.error("Could not save message: " + message, e);
 		}
