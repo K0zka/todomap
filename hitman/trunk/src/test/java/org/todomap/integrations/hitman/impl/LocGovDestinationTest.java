@@ -19,4 +19,7 @@ public class LocGovDestinationTest extends UnitilsJUnit4 {
 		String message = IOUtils.toString(Thread.currentThread().getContextClassLoader().getResourceAsStream("org/todomap/integrations/hitman/impl/testevent1.xml"));
 		destination.send(message);
 	}
+	
+	
+	
 }

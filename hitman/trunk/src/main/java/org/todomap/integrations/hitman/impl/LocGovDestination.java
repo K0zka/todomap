@@ -2,12 +2,13 @@ package org.todomap.integrations.hitman.impl;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
 import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.ConnectionCallback;
+import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -29,7 +30,7 @@ public class LocGovDestination extends JdbcDaoSupport implements Destination {
 		String name;
 		String email;
 	}
-	
+
 	public MailSender getMailSender() {
 		return mailSender;
 	}
@@ -60,26 +61,34 @@ public class LocGovDestination extends JdbcDaoSupport implements Destination {
 			}
 
 			Configuration config = new Configuration();
-			config.setTemplateLoader(new ClassTemplateLoader(LocGovDestination.class, ""));
+			config.setTemplateLoader(new ClassTemplateLoader(
+					LocGovDestination.class, ""));
 			Template template = config.getTemplate("firstnotification.fm");
 			StringWriter stringWriter = new StringWriter();
 			HashMap<String, String> data = new HashMap<String, String>();
-			data.put("lat", Utils.getXpathValue("/invocation/result/location/latitude/text()", dom));
-			data.put("long", Utils.getXpathValue("/invocation/result/location/longitude/text()", dom));
-			data.put("id", Utils.getXpathValue("/invocation/result/id/text()", dom));
-			data.put("created", Utils.getXpathValue("/invocation/result/created/text()", dom));
-			data.put("created", Utils.getXpathValue("/invocation/result/text()", dom));
+			data.put("lat", Utils.getXpathValue(
+					"/invocation/result/location/latitude/text()", dom));
+			data.put("long", Utils.getXpathValue(
+					"/invocation/result/location/longitude/text()", dom));
+			data.put("id", Utils.getXpathValue("/invocation/result/id/text()",
+					dom));
+			data.put("created", Utils.getXpathValue(
+					"/invocation/result/created/text()", dom));
+			data.put("created", Utils.getXpathValue(
+					"/invocation/result/text()", dom));
 			data.put("shortDescription", "");
 			data.put("description", "");
 			data.put("postalcode", "");
 			data.put("town", "");
 			data.put("addr", "");
 			data.put("tags", "");
-			getAddress();
-			data.put("title", "");
+			Address address = getAddress(Integer.parseInt(Utils.getXpathValue(
+					"/invocation/result/addr/postalCode/text()", dom)), Utils
+					.getXpathValue("/invocation/result/addr/town/text()", dom));
+			data.put("title", address.name);
 			template.process(data, stringWriter);
 			SimpleMailMessage mail = new SimpleMailMessage();
-			mail.setTo("");
+			mail.setTo(address.email);
 			mail.setFrom(from);
 			mail.setText(stringWriter.toString());
 			mail.setSubject("");
@@ -91,15 +100,59 @@ public class LocGovDestination extends JdbcDaoSupport implements Destination {
 		}
 	}
 
-	private void getAddress() {
-		
-		getJdbcTemplate().execute(new ConnectionCallback() {
-			
-			public Object doInConnection(Connection connection) throws SQLException,
-					DataAccessException {
-				return null;
-			}
-		});
+	private Address getAddress(final int postCode, final String town) {
+
+		/*
+		 * Budapest
+		 */
+		if (postCode > 1000 && postCode < 2000) {
+			return getJdbcTemplate()
+					.execute(
+							"SELECT majoremail, majorname from addr where pcode/ 10 = ? /10",
+							new PreparedStatementCallback<Address>() {
+
+								@Override
+								public Address doInPreparedStatement(
+										PreparedStatement statement)
+										throws SQLException,
+										DataAccessException {
+									statement.setInt(1, postCode);
+									ResultSet resultSet = statement
+											.executeQuery();
+									if (!resultSet.next()) {
+										return null;
+									}
+									Address address = new Address();
+									address.email = resultSet
+											.getString("majoremail");
+									address.name = resultSet
+											.getString("majorname");
+									return address;
+								}
+							});
+		}
+
+		return getJdbcTemplate().execute(
+				"SELECT majoremail, majorname from addr where town = ?",
+				new PreparedStatementCallback<Address>() {
+
+					@Override
+					public Address doInPreparedStatement(
+							PreparedStatement statement) throws SQLException,
+							DataAccessException {
+						statement.setString(1, town);
+						ResultSet resultSet = statement.executeQuery();
+						if (resultSet.next()) {
+							final Address addr = new Address();
+							addr.email = resultSet.getString("majoremail");
+							addr.name = resultSet.getString("majorname");
+							return addr;
+						} else {
+							return null;
+						}
+					}
+				});
+
 	}
 
 	public String getTemplateDir() {
