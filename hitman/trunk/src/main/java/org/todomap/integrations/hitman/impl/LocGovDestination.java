@@ -76,10 +76,10 @@ public class LocGovDestination extends JdbcDaoSupport implements Destination {
 					"/invocation/result/created/text()", dom));
 			data.put("created", Utils.getXpathValue(
 					"/invocation/result/text()", dom));
-			data.put("shortDescription", "");
-			data.put("description", "");
-			data.put("postalcode", "");
-			data.put("town", "");
+			data.put("shortDescription", Utils.getXpathValue("/invocation/result/shortDescr/text()", dom));
+			data.put("description", Utils.getXpathValue("/invocation/result/description/text()", dom));
+			data.put("postalcode", Utils.getXpathValue("/invocation/result/addr/postalCode/text()", dom));
+			data.put("town", Utils.getXpathValue("/invocation/result/addr/town/text()", dom));
 			data.put("addr", "");
 			data.put("tags", "");
 			Address address = getAddress(Integer.parseInt(Utils.getXpathValue(
@@ -91,7 +91,7 @@ public class LocGovDestination extends JdbcDaoSupport implements Destination {
 			mail.setTo(address.email);
 			mail.setFrom(from);
 			mail.setText(stringWriter.toString());
-			mail.setSubject("");
+			mail.setSubject(Utils.getXpathValue("/invocation/result/shortDescr/text()", dom) + " - todomap");
 			mailSender.send(mail);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -108,7 +108,7 @@ public class LocGovDestination extends JdbcDaoSupport implements Destination {
 		if (postCode > 1000 && postCode < 2000) {
 			return getJdbcTemplate()
 					.execute(
-							"SELECT majoremail, majorname from addr where pcode/ 10 = ? /10",
+							"SELECT majoremail, majorname from addr where pcode / 10 = ?",
 							new PreparedStatementCallback<Address>() {
 
 								@Override
@@ -116,7 +116,7 @@ public class LocGovDestination extends JdbcDaoSupport implements Destination {
 										PreparedStatement statement)
 										throws SQLException,
 										DataAccessException {
-									statement.setInt(1, postCode);
+									statement.setInt(1, postCode / 10);
 									ResultSet resultSet = statement
 											.executeQuery();
 									if (!resultSet.next()) {
