@@ -48,7 +48,7 @@ public abstract class SpamFilterTests {
 			Address[] from = message.getFrom();
 			Object content = message.getContent();
 			String fromAddress = from[0].toString();
-			if (spamFilter.isSpam(new Content(new User(fromAddress, "",
+			if (!spamFilter.isSpam(new Content(new User(fromAddress, "",
 					fromAddress, "", ""), "", "", "email", content.toString()))) {
 				hamCntr++;
 			}
