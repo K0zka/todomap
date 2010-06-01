@@ -25,6 +25,7 @@
 				<bean class="org.todomap.integrations.hitman.impl.LocGovDestination">
 					<property name="mailSender" ref="mailSender"/>
 					<property name="dataSource" ref="datasource"/>
+					<property name="from" value="kocka.dev.null@gmail.com"></property>
 				</bean>
 				<ref bean="fileDest"/>
 			</list>
