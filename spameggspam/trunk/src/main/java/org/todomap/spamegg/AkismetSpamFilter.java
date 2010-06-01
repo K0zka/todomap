@@ -15,6 +15,16 @@ import org.apache.commons.httpclient.methods.PostMethod;
  */
 public class AkismetSpamFilter implements SpamFilter {
 
+	private String serviceDomain = "rest.akismet.com";
+
+	public String getServiceDomain() {
+		return serviceDomain;
+	}
+
+	public void setServiceDomain(String serviceDomain) {
+		this.serviceDomain = serviceDomain;
+	}
+
 	private static final String versionUrl = "$HeadURL: https://todomap.googlecode.com/svn/spameggspam/trunk/src/main $";
 
 	private String apikey;
@@ -71,7 +81,7 @@ public class AkismetSpamFilter implements SpamFilter {
 		final HttpClient client = new HttpClient();
 		final PostMethod post = new PostMethod();
 		try {
-			post.setURI(new URI("http://" + apikey + ".rest.akismet.com/1.1/"
+			post.setURI(new URI("http://" + apikey + '.'+serviceDomain+"/1.1/"
 					+ operationName, false));
 			post.getParams().setParameter("http.useragent",
 					appName + "| SpamEggSpam/" + getVersion());

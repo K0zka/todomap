@@ -6,8 +6,9 @@
 	<name>SpamEggSpam - Spam filter POJO's</name>
 	<version>0.0.1-SNAPSHOT</version>
 	<description>
-	SpamEggSpam gives easy to use wrappers for common spam filtering solutions: akismet, linksleeve 
-	"Well, there's spam egg sausage and spam, that's not got much spam in it."
+		SpamEggSpam gives easy to use wrappers for common spam filtering solutions:
+		akismet, linksleeve
+		"Well, there's spam egg sausage and spam, that's not got much spam in it."
 	</description>
 	<inceptionYear>2010</inceptionYear>
 	<ciManagement>
@@ -51,8 +52,10 @@
 		</site>
 	</distributionManagement>
 	<scm>
-		<connection>scm:svn:http://todomap.googlecode.com/svn/spameggspam/trunk</connection>
-		<developerConnection>scm:svn:https://todomap.googlecode.com/svn//spameggspam/trunk</developerConnection>
+		<connection>scm:svn:http://todomap.googlecode.com/svn/spameggspam/trunk
+		</connection>
+		<developerConnection>scm:svn:https://todomap.googlecode.com/svn//spameggspam/trunk
+		</developerConnection>
 		<url>http://code.google.com/p/todomap/source/browse/</url>
 	</scm>
 	<dependencies>
@@ -67,6 +70,13 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.1</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -77,6 +87,21 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<systemPropertyVariables>
+						<mail.store.protocol>imaps</mail.store.protocol>
+						<mail.imaps.host>imap.gmail.com</mail.imaps.host>
+						<mail.imaps.user>${mail.imaps.user}</mail.imaps.user>
+						<mail.imaps.password>${mail.imaps.password}</mail.imaps.password>
+						<mail.imaps.port>993</mail.imaps.port>
+						<mail.imaps.starttls.required>true</mail.imaps.starttls.required>
+					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 		</plugins>

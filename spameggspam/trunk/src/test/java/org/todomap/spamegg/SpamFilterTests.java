@@ -1,9 +1,63 @@
 package org.todomap.spamegg;
 
+import java.io.IOException;
+
+import javax.mail.Address;
+import javax.mail.Authenticator;
+import javax.mail.Folder;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Store;
+
 import org.junit.Test;
 
 public abstract class SpamFilterTests {
 	abstract SpamFilter getSpamFilter();
+
+	/**
+	 * Get all the spam from my google mail box and check them through the
+	 * service, count the difference.
+	 * 
+	 * @throws MessagingException
+	 * @throws IOException
+	 * @throws SpamFilterException
+	 */
+	@Test
+	public void testPerformance() throws MessagingException,
+			SpamFilterException, IOException {
+		final SpamFilter spamFilter = getSpamFilter();
+		Session session = Session.getInstance(System.getProperties(),
+				new Authenticator() {
+
+					@Override
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(System
+								.getProperty("mail.imaps.user"), System
+								.getProperty("mail.imaps.password"));
+					}
+				});
+		Store store = session.getStore();
+		store.connect();
+		Folder folder = store.getFolder("[Gmail]").getFolder("Spam");
+		folder.open(Folder.READ_ONLY);
+		Message[] messages = folder.getMessages();
+		int hamCntr = 0;
+		for (Message message : messages) {
+			Address[] from = message.getFrom();
+			Object content = message.getContent();
+			String fromAddress = from[0].toString();
+			if (spamFilter.isSpam(new Content(new User(fromAddress, "",
+					fromAddress, "", ""), "", "", "email", content.toString()))) {
+				hamCntr++;
+			}
+		}
+		System.out.println("Total messages:" + folder.getMessageCount());
+		System.out
+				.println("gmail spam considered ham:"
+						+ hamCntr);
+	}
 
 	@Test
 	public void testIsSpam() throws SpamFilterException {
