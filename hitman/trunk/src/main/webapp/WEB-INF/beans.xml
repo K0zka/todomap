@@ -26,6 +26,7 @@
 					<property name="mailSender" ref="mailSender"/>
 					<property name="dataSource" ref="datasource"/>
 				</bean>
+				<ref bean="fileDest"/>
 			</list>
 		</property>
 	</bean>
