@@ -13,7 +13,7 @@
 			<New class="org.apache.commons.dbcp.BasicDataSource">
 				<Set name="driverClassName">org.postgresql.Driver</Set>
 				<Set name="url">jdbc:postgresql://localhost/test</Set>
-				<Set name="username">o29_dev</Set>
+				<Set name="username">hitman_test</Set>
 				<Set name="password">aprocskakapalocska</Set>
 			</New>
 		</Arg>
