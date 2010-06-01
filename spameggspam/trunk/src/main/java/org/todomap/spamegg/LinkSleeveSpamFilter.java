@@ -33,7 +33,7 @@ public class LinkSleeveSpamFilter implements SpamFilter {
 		try {
 			client.executeMethod(method);
 			final String response = method.getResponseBodyAsString();
-			return "-slv-1-/slv-".equals(response);
+			return "-slv-1-/slv-".equals(response.trim());
 		} catch (final HttpException e) {
 			throw new SpamFilterException(e.getMessage(), e);
 		} catch (final IOException e) {
