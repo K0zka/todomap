@@ -1,6 +1,5 @@
 package org.todomap.integrations.hitman.impl;
 
-import org.springframework.jms.core.JmsTemplate;
 import org.todomap.integrations.hitman.Filter;
 import org.todomap.spamegg.Content;
 import org.todomap.spamegg.SpamFilter;
@@ -10,7 +9,15 @@ import org.w3c.dom.Document;
 
 public class SpamFilterAdapter implements Filter {
 
-	JmsTemplate senderTemplate;
+	ResponseService responseService;
+	public ResponseService getResponseService() {
+		return responseService;
+	}
+
+	public void setResponseService(ResponseService responseService) {
+		this.responseService = responseService;
+	}
+
 	SpamFilter filter;
 
 	public SpamFilter getFilter() {
@@ -34,6 +41,10 @@ public class SpamFilterAdapter implements Filter {
 					Utils.getXpathValue(
 							"/invocation/result/description/text()", document));
 			if (filter.isSpam(content)) {
+				responseService.send(new IntegrationNotificationMessage(
+						"org.todomap.spamfilter", "spam", "Content is spam",
+						Long.parseLong(Utils.getXpathValue(
+								"/invocation/result/id/text()", document))));
 				return null;
 			} else {
 				return message;

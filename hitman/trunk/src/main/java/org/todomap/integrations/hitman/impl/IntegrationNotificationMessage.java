@@ -11,6 +11,19 @@ public class IntegrationNotificationMessage {
 	String customMessage;
 	Long beanId;
 
+	public IntegrationNotificationMessage() {
+		super();
+	}
+
+	public IntegrationNotificationMessage(String endpointId, String messageId,
+			String customMessage, Long beanId) {
+		super();
+		this.endpointId = endpointId;
+		this.messageId = messageId;
+		this.customMessage = customMessage;
+		this.beanId = beanId;
+	}
+
 	public Long getBeanId() {
 		return beanId;
 	}
