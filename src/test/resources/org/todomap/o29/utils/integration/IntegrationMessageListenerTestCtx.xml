@@ -6,6 +6,12 @@
 	<bean id="listener"
 		class="org.todomap.o29.utils.integration.IntegrationMessageListener">
 		<property name="entityManagerFactory" ref="entityManager"/>
+		<property name="txManager" ref="txManager"/>
+		<property name="baseService" ref="baseService"></property>
+	</bean>
+
+	<bean id="baseService" class="org.todomap.o29.logic.JpaBaseService">
+		<property name="entityManagerFactory" ref="entityManager"/>
 	</bean>
 
 	<bean id="listenerContainer" class="org.springframework.jms.listener.SimpleMessageListenerContainer">
@@ -37,6 +43,11 @@
 				<entry key="hibernate.hbm2ddl.auto" value="update" />
 			</map>
 		</property>
+	</bean>
+
+	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManager"/>
+		<property name="dataSource" ref="dataSource"/>
 	</bean>
 
 	<bean id="dataSource" class="org.unitils.database.UnitilsDataSourceFactoryBean">

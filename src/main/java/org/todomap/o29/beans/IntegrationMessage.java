@@ -55,7 +55,7 @@ public class IntegrationMessage {
 	public void setBeanId(Long beanId) {
 		this.beanId = beanId;
 	}
-	Date received;
+	Date received = new Date();
 	
 	String endpointId;
 	String messageId;
