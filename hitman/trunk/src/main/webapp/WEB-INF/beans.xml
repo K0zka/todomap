@@ -7,33 +7,50 @@
 
 	<!-- external services -->
 
-	<bean id="spamFilter" class="org.todomap.spamegg.LinkSleeveSpamFilter">
+	<bean id="spamFilter" class="org.todomap.spamegg.AkismetSpamFilter">
+		<property name="apikey" value="73773ff76ecd" />
+		<property name="appName" value="todomap.org" />
+		<property name="frontpage" value="http://todomap.org/" />
 	</bean>
 
 	<bean id="spamFilterAdapter" class="org.todomap.integrations.hitman.impl.SpamFilterAdapter">
-		<property name="filter" ref="spamFilter"/>
+		<property name="filter" ref="spamFilter" />
+		<property name="responseService" ref="responseService" />
+	</bean>
+
+	<bean id="responseService" class="org.todomap.integrations.hitman.impl.ResponseService">
+		<property name="senderTemplate">
+			<bean class="org.springframework.jms.core.JmsTemplate">
+				<property name="connectionFactory" ref="jmsConnectionFactory" />
+				<property name="defaultDestination" ref="responseQueue" />
+			</bean>
+		</property>
 	</bean>
 
 	<bean id="eventListener" class="org.todomap.integrations.hitman.impl.EventListener">
 		<property name="filters">
 			<list>
-				<ref bean="spamFilterAdapter"/>
+				<ref bean="spamFilterAdapter" />
 			</list>
 		</property>
 		<property name="destinations">
 			<list>
-				<bean class="org.todomap.integrations.hitman.impl.LocGovDestination">
-					<property name="mailSender" ref="mailSender"/>
-					<property name="dataSource" ref="datasource"/>
-					<property name="from" value="kocka.dev.null@gmail.com"></property>
-				</bean>
-				<ref bean="fileDest"/>
+				<ref bean="locGovDest"/>
+				<ref bean="fileDest" />
 			</list>
 		</property>
 	</bean>
 
-	<bean id="fileDest" class="org.todomap.integrations.hitman.impl.FileDestination" init-method="init">
-		<property name="destination" value="target/messages"/>
+	<bean id="locGovDest" class="org.todomap.integrations.hitman.impl.LocGovDestination">
+		<property name="mailSender" ref="mailSender" />
+		<property name="dataSource" ref="datasource" />
+		<property name="from" value="kocka.dev.null@example.com" />
+		<property name="responseService" ref="responseService" />
+	</bean>
+
+	<bean id="fileDest" class="org.todomap.integrations.hitman.impl.FileDestination"
+		init-method="init">
+		<property name="destination" value="target/messages" />
 	</bean>
 
 	<bean id="jmsContainer"
@@ -46,7 +63,8 @@
 	<!-- communication infrastructure -->
 
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="session" ref="mailSession"/>
+		<property name="session" ref="mailSession" />
+		<property name="protocol" value="smtps" />
 	</bean>
 
 	<bean id="mailSession" class="org.springframework.jndi.JndiObjectFactoryBean">
@@ -67,6 +85,12 @@
 
 	<bean id="responseQueue" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="jms/o29intresp" />
+	</bean>
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="location" value="classpath:hitman.properties" />
 	</bean>
 
 </beans>
