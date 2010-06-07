@@ -4,6 +4,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="ratingsum")
 public class RatingSummary {
+	long bookmarked;
+	public long getBookmarked() {
+		return bookmarked;
+	}
+	public void setBookmarked(long bookmarked) {
+		this.bookmarked = bookmarked;
+	}
 	long nrOfRatings;
 	Double average;
 	long nrOfAnonRatings;
