@@ -1,5 +1,6 @@
 package org.todomap.o29.logic;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -78,6 +79,12 @@ public class JpaRatingServiceImpl extends JpaDaoSupport implements
 				ret.setNrOfRatings((Long) result[1]);
 				ret.setAnonAverage((Double) anonResult[0]);
 				ret.setNrOfAnonRatings((Long) anonResult[1]);
+				ret
+						.setBookmarked(((BigInteger) entityManager
+								.createNativeQuery(
+										"SELECT count(*) from o29user_base where bookmarks_id = ?")
+								.setParameter(1, id).getSingleResult())
+								.longValue());
 				return ret;
 			}
 		});
@@ -91,14 +98,16 @@ public class JpaRatingServiceImpl extends JpaDaoSupport implements
 			public RatingReport doInJpa(final EntityManager entityManager)
 					throws PersistenceException {
 				final RatingReport ratingReport = new RatingReport();
-				final List<Object[]> resultList = entityManager.createQuery(
-						"select count(*), rate from " + AnonRating.class.getName()
-								+ " r where r.bean.id = :id group by r.rate order by r.rate").setParameter(
-						"id", id).getResultList();
-				for(final Object[] result : resultList) {
+				final List<Object[]> resultList = entityManager
+						.createQuery(
+								"select count(*), rate from "
+										+ AnonRating.class.getName()
+										+ " r where r.bean.id = :id group by r.rate order by r.rate")
+						.setParameter("id", id).getResultList();
+				for (final Object[] result : resultList) {
 					final RatingReport.RatingReportItem item = new RatingReport.RatingReportItem();
-					item.setValue((Short)result[1]);
-					item.setCount((Long)result[0]);
+					item.setValue((Short) result[1]);
+					item.setCount((Long) result[0]);
 					ratingReport.getItems().add(item);
 				}
 				return ratingReport;
