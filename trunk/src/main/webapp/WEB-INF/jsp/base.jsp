@@ -416,6 +416,7 @@ function saveData() {
 
 	<h3><i18n:message key="todo.ratingdetails">Ratings details</i18n:message></h3>
 	<ul>
+		<li><i18n:message key="ratings.bookmarkedby">Bookmarked by:</i18n:message> <%= ratings.getBookmarked() %></li>
 		<li><i18n:message key="ratings.authenticated">Authenticated users:</i18n:message> <%= ratings.getNrOfRatings() %></li>
 		<li><i18n:message key="ratings.authenticated_avg">Authenticated users average:</i18n:message> <%= ratings.getAverage() == null ? "-" :  ratings.getAverage() %></li>
 		<li><i18n:message key="ratings.anon">Anon users:</i18n:message> <%= ratings.getNrOfAnonRatings() %></li>
