@@ -22,7 +22,7 @@ public class User extends BaseBean {
 	String displayName;
 	@Column(nullable=true, length=64)
 	String email;
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.LAZY)
 	@XmlTransient
 	List<BaseBean> bookmarks;
 	@Embedded
