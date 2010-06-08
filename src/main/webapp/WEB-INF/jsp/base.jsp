@@ -31,6 +31,11 @@
 } 
 %>
 
+<%-- TODO: string escaping! --%>
+<% if( (item.getCreator() != null) && (item.getCreator().getDisplayName() != null)) { %>
+<meta name="author" content="<%=item.getCreator().getDisplayName().replace("\\","\\\\").replace("\"","\\\"")%>"/>
+<% } %>
+
 <%
 	if (item.getTags().size() > 0) {
 %>
