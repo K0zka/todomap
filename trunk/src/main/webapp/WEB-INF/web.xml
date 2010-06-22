@@ -124,11 +124,6 @@
 	</servlet>
 
 	<servlet>
-		<servlet-name>rssServlet</servlet-name>
-		<servlet-class>org.todomap.o29.utils.RssServlet</servlet-class>
-	</servlet>
-
-	<servlet>
 		<servlet-name>regionRssServlet</servlet-name>
 		<servlet-class>org.todomap.o29.utils.RegionRssServlet</servlet-class>
 	</servlet>
@@ -174,7 +169,7 @@
 	</servlet-mapping>
 
 	<servlet-mapping>
-		<servlet-name>rssServlet</servlet-name>
+		<servlet-name>spring</servlet-name>
 		<url-pattern>rss.xml/*</url-pattern>
 	</servlet-mapping>
 
