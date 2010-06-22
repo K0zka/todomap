@@ -9,6 +9,10 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Root;
 
 import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
@@ -228,29 +232,30 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 		this.geoCoder = geoCoder;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Todo> getByLocation(final String countryCode,
 			final String state, final String town) {
-		final HashMap<String, Object> params = new HashMap<String, Object>();
-		if (state != null) {
-			params.put("state", state);
-		}
-		params.put("country", countryCode);
-		if (town != null) {
-			params.put("town", state);
-		}
-		params.put("status", TodoStatus.Closed);
-		return getJpaTemplate()
-				.findByNamedParams(
-						"select todo from "
-								+ Todo.class.getName()
-								+ " todo where todo.addr.country = :country "
-								+ (town == null ? ""
-										: "and todo.addr.town = :town ")
-								+ (state == null ? ""
-										: "and todo.addr.state = :state ")
-								+ "order by todo.created desc where todo.status != :status", params);
+		return getJpaTemplate().execute(new JpaCallback<List<Todo>>() {
+
+			@Override
+			public List<Todo> doInJpa(final EntityManager entityManager)
+					throws PersistenceException {
+				final CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+				final CriteriaQuery<Todo> query = builder.createQuery(Todo.class);
+				final Root<Todo> root = query.from(Todo.class);
+				final Path<Object> path = root.get("addr");
+				if(countryCode != null) {
+					query.where(builder.equal(path.get("country"), countryCode));
+				}
+				if(state != null) {
+					query.where(builder.equal(path.get("state"), state));
+				}
+				if(town != null) {
+					query.where(builder.equal(path.get("town"), state));
+				}
+				return entityManager.createQuery(query).getResultList();
+			}
+		});
 	}
 
 	static double min(final double a, final double b) {
