@@ -20,6 +20,9 @@
 				/sitemaps/*.txt=linksForTheDayController
 				/sitemaps/*.xml=linksForTheDayController
 				/chart=chartController
+				/rss.xml/region/*=regionRssController
+				/rss.xml/region/*/*=regionRssController
+				/rss.xml/region/*/*/*=regionRssController
 				/rss.xml/*=rssController
 			</value>
 		</property>
@@ -56,6 +59,10 @@
 	</bean>
 
 	<bean id="rssController" class="org.todomap.o29.controller.RssController">
+		<constructor-arg ref="todos"/>
+	</bean>
+	
+	<bean id="regionRssController" class="org.todomap.o29.controller.RegionRssController">
 		<constructor-arg ref="todos"/>
 	</bean>
 
