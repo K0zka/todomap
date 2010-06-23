@@ -124,16 +124,6 @@
 	</servlet>
 
 	<servlet>
-		<servlet-name>upload</servlet-name>
-		<servlet-class>org.todomap.o29.utils.UploadServlet</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>download</servlet-name>
-		<servlet-class>org.todomap.o29.utils.DownloadServlet</servlet-class>
-	</servlet>
-
-	<servlet>
 		<servlet-name>geoip</servlet-name>
 		<servlet-class>org.todomap.o29.utils.GeoipServlet</servlet-class>
 	</servlet>
@@ -149,17 +139,17 @@
 	</servlet-mapping>
 
 	<servlet-mapping>
-		<servlet-name>download</servlet-name>
+		<servlet-name>spring</servlet-name>
 		<url-pattern>/download/*</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
-		<servlet-name>download</servlet-name>
+		<servlet-name>spring</servlet-name>
 		<url-pattern>/thumbnail/*</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
-		<servlet-name>upload</servlet-name>
+		<servlet-name>spring</servlet-name>
 		<url-pattern>/upload/*</url-pattern>
 	</servlet-mapping>
 
