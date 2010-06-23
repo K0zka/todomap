@@ -1,39 +1,48 @@
-package org.todomap.o29.utils;
+package org.todomap.o29.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.Controller;
 import org.todomap.o29.beans.Attachment;
 import org.todomap.o29.beans.BaseBean;
+import org.todomap.o29.logic.AttachmentService;
+import org.todomap.o29.logic.BaseService;
 
+public final class DownloadController implements Controller{
 
-public class DownloadServlet extends SpringServlet {
+	final BaseService baseService;
+	public DownloadController(BaseService baseService,
+			AttachmentService attachmentService) {
+		super();
+		this.baseService = baseService;
+		this.attachmentService = attachmentService;
+	}
 
-	private static final long serialVersionUID = 1827555980223764337L;
-
+	final AttachmentService attachmentService;
+	
 	@Override
-	protected void doGet(final HttpServletRequest req,
-			final HttpServletResponse resp) throws ServletException,
-			IOException {
-		final long id = getId(req);
+	public ModelAndView handleRequest(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		final long id = getId(request);
 		final BaseBean bean = baseService.getById(id);
 		if(bean instanceof Attachment) {
 			final Attachment attachment = (Attachment)bean;
-			if(req.getRequestURI().indexOf("thumbnail") != -1) {
-				findThumbnail(resp, attachment);
+			if(request.getRequestURI().indexOf("thumbnail") != -1) {
+				findThumbnail(response, attachment);
 			} else {
-				findData(resp, attachment);
+				findData(response, attachment);
 			}
 		} else {
 			
 		}
+		return null;
 	}
-
 	void findData(final HttpServletResponse resp,
 			final Attachment attachment) throws IOException {
 		final InputStream data = attachmentService.getData(attachment);
@@ -72,5 +81,6 @@ public class DownloadServlet extends SpringServlet {
 		resp.setContentType(mime);
 		IOUtils.copy(data, resp.getOutputStream());
 	}
+
 
 }

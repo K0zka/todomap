@@ -24,9 +24,23 @@
 				/rss.xml/region/*/*=regionRssController
 				/rss.xml/region/*/*/*=regionRssController
 				/rss.xml/*=rssController
+				/download/*=downloadController
+				/thumbnail/*=downloadController
+				/upload/*=uploadController
 			</value>
 		</property>
 		<property name="alwaysUseFullPath" value="true"/>
+	</bean>
+
+	<bean id="downloadController" class="org.todomap.o29.controller.DownloadController">
+		<constructor-arg ref="base"/>
+		<constructor-arg ref="attachments"/>
+	</bean>
+
+	<bean id="uploadController" class="org.todomap.o29.controller.UploadController">
+		<constructor-arg ref="users"/>
+		<constructor-arg ref="attachments"/>
+		<constructor-arg ref="base"/>
 	</bean>
 
 	<bean id="fullPageController" class="org.todomap.o29.controller.BaseController">

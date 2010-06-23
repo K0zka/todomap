@@ -1,6 +1,5 @@
-package org.todomap.o29.utils;
+package org.todomap.o29.controller;
 
-import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
 
@@ -13,34 +12,50 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.Controller;
 import org.todomap.o29.beans.Attachment;
 import org.todomap.o29.beans.BaseBean;
 import org.todomap.o29.beans.User;
+import org.todomap.o29.logic.AttachmentService;
+import org.todomap.o29.logic.BaseService;
+import org.todomap.o29.logic.UserService;
 
-public class UploadServlet extends SpringServlet {
 
-	private static final long serialVersionUID = 5126647297488027223L;
+public final class UploadController implements Controller {
 
-	private final static Logger logger = Logger.getLogger(UploadServlet.class);
+	final UserService userService;
+	public UploadController(UserService userService,
+			AttachmentService attachmentService, BaseService baseService) {
+		super();
+		this.userService = userService;
+		this.attachmentService = attachmentService;
+		this.baseService = baseService;
+	}
+
+	final AttachmentService attachmentService;
+	final BaseService baseService;
+	private final static Logger logger = LoggerFactory.getLogger(UploadController.class);
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	public ModelAndView handleRequest(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		logger.info("uploading...");
 		
 		final User user = userService.getCurrentUser();
 		if(user == null) {
-			resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
-			return;
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			return null;
 		}
 		
-		final long id = getId(req);
+		final long id = getId(request);
 		
 		final ServletFileUpload fileUpload = new ServletFileUpload(new DiskFileItemFactory());
 		try {
 			@SuppressWarnings("unchecked")
-			final List<FileItem> items = fileUpload.parseRequest(req);
+			final List<FileItem> items = fileUpload.parseRequest(request);
 			for(final FileItem item : items) {
 				if("file".equals(item.getFieldName())) {
 					final Attachment attachment = new Attachment();
@@ -60,17 +75,18 @@ public class UploadServlet extends SpringServlet {
 					attachmentService.addAttachment(attachment, item.getInputStream());
 				}
 			}
-			resp.getWriter().println("ok");
+			response.getWriter().println("ok");
 		} catch (FileUploadException e) {
 			throw new ServletException(e);
 		}
 		
-		
+		return null;
 	}
-
+	
 	final long getId(final HttpServletRequest req) {
 		String[] split = req.getPathInfo().split("/");
 		return Long.parseLong(split[split.length - 1]);
 	}
-	
+
+
 }
