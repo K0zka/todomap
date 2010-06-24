@@ -26,8 +26,8 @@ public interface UserService {
 	long addUserLink(Link link);
 	
 	@POST
-	@Path("/user/link/remove")
-	long removeLink(long id);
+	@Path("/user/link/{id}/remove")
+	long removeLink(@PathParam("id") long id);
 
 	@GET
 	@Path("/user/link/list")
