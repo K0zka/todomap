@@ -9,6 +9,7 @@ import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.todomap.o29.beans.Link;
 import org.todomap.o29.beans.User;
 
 public class JpaUserServiceImpl extends JpaDaoSupport implements UserService {
@@ -40,6 +41,31 @@ public class JpaUserServiceImpl extends JpaDaoSupport implements UserService {
 	public User getCurrentUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		return authentication == null ? null : getUserByOpenIdUrl(authentication.getName());
+	}
+
+	@Override
+	public long addUserLink(Link link) {
+		final User currentUser = getCurrentUser();
+		link.setLinkOwner(currentUser);
+		getJpaTemplate().persist(link);
+		return link.getId();
+	}
+
+	@Override
+	public List<Link> listUserLinks() {
+		return getCurrentUser().getUserLinks();
+	}
+
+	@Override
+	public long removeLink(long id) {
+		final User currentUser = getCurrentUser();
+		for(Link link : currentUser.getUserLinks()) {
+			if(link.getId() == id) {
+				getJpaTemplate().remove(link);
+				return id;
+			}
+		}
+		return 0;
 	}
 
 }
