@@ -123,7 +123,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 	TodoGroup getGroupByAddress(final Address address) {
 		final TodoGroup group = new TodoGroup();
 
-		getJpaTemplate().execute(new JpaCallback() {
+		getJpaTemplate().execute(new JpaCallback<Object>() {
 
 			@Override
 			public Object doInJpa(final EntityManager em)
@@ -180,15 +180,14 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 		levels.put("town", "x.addr.country, x.addr.state, x.addr.town");
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<TodoGroup> getTodoGroupsFromArea(final String level,
 			final double nex, final double ney, final double swx,
 			final double swy) {
 
-		return (List<TodoGroup>) getJpaTemplate().execute(new JpaCallback() {
+		return getJpaTemplate().execute(new JpaCallback<List<TodoGroup>>() {
 
 			@Override
-			public Object doInJpa(EntityManager em) throws PersistenceException {
+			public List<TodoGroup> doInJpa(EntityManager em) throws PersistenceException {
 				final Query groupQuery = em.createQuery("select distinct "
 						+ levels.get(level) + " from " + Todo.class.getName()
 						+ " x where x.location.longitude between ? and ? "
@@ -199,7 +198,7 @@ public class JpaTodoServiceImpl extends JpaDaoSupport implements TodoService {
 				groupQuery.setParameter(4, swx);
 
 				final ArrayList<TodoGroup> ret = new ArrayList<TodoGroup>();
-				final List resultList = groupQuery.getResultList();
+				final List<?> resultList = groupQuery.getResultList();
 				for (final Object resultObj : resultList) {
 					final Address addr = new Address();
 					buildAddress(resultObj, addr);

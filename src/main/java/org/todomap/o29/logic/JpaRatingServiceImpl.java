@@ -38,10 +38,10 @@ public class JpaRatingServiceImpl extends JpaDaoSupport implements
 	@Override
 	@SuppressWarnings("unchecked")
 	public Rating getRating(final long id) {
-		return (Rating) getJpaTemplate().execute(new JpaCallback() {
+		return getJpaTemplate().execute(new JpaCallback<Rating>() {
 
 			@Override
-			public Object doInJpa(final EntityManager em)
+			public Rating doInJpa(final EntityManager em)
 					throws PersistenceException {
 				final BaseBean data = getJpaTemplate().find(BaseBean.class, id);
 				List<Rating> resultList = em
@@ -98,6 +98,7 @@ public class JpaRatingServiceImpl extends JpaDaoSupport implements
 			public RatingReport doInJpa(final EntityManager entityManager)
 					throws PersistenceException {
 				final RatingReport ratingReport = new RatingReport();
+				@SuppressWarnings("unchecked")
 				final List<Object[]> resultList = entityManager
 						.createQuery(
 								"select count(*), rate from "

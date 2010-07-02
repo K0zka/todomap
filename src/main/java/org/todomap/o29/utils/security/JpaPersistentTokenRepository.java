@@ -37,10 +37,9 @@ public class JpaPersistentTokenRepository extends JpaDaoSupport implements
 				persistentToken.getDate());
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void removeUserTokens(final String username) {
-		getJpaTemplate().execute(new JpaCallback() {
+		getJpaTemplate().execute(new JpaCallback<Object>() {
 
 			@Override
 			public Object doInJpa(EntityManager entityManager)

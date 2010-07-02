@@ -27,10 +27,10 @@ public class JpaUserServiceImpl extends JpaDaoSupport implements UserService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public User getUserByOpenIdUrl(final String url) {
-		return (User) getJpaTemplate().execute(new JpaCallback() {
+		return getJpaTemplate().execute(new JpaCallback<User>() {
 			
 			@Override
-			public Object doInJpa(EntityManager em) throws PersistenceException {
+			public User doInJpa(EntityManager em) throws PersistenceException {
 				List<User> resultList = em.createQuery("select OBJECT(usr) from "+User.class.getName()+ " usr where openIdUrl = :url").setParameter("url", url).getResultList();
 				return resultList.size() == 0 ? null : resultList.get(0);
 			}
