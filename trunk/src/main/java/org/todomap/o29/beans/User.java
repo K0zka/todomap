@@ -38,7 +38,7 @@ public class User extends BaseBean {
 		this.userLinks = userLinks;
 	}
 
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="linkOwner")
 	List<Link> userLinks;
 	
 	public String getDisplayName() {

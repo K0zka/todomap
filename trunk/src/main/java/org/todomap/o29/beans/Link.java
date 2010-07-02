@@ -5,9 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
+@XmlRootElement(name="link")
 public class Link {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "link_seq")
@@ -35,4 +39,14 @@ public class Link {
 	}
 	@Column(nullable=false)
 	String url;
+	
+	@XmlTransient
+	public User getLinkOwner() {
+		return linkOwner;
+	}
+	public void setLinkOwner(User linkOwner) {
+		this.linkOwner = linkOwner;
+	}
+	@ManyToOne()
+	User linkOwner;
 }
