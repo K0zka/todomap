@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
-	xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:jms="http://www.springframework.org/schema/jms"
-	xmlns:cxfjms="http://cxf.apache.org/transports/jms"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:jms="http://cxf.apache.org/transports/jms"
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-	http://www.springframework.org/schema/jms http://www.springframework.org/schema/mvc/spring-jms-3.0.xsd
+	http://cxf.apache.org/transports/jms http://cxf.apache.org/schemas/configuration/jms.xsd
 	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
 	http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
 
 
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-jms.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-extension-jaxrs-binding.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
 	<bean id="config" class="org.todomap.o29.logic.Configuration">
 	</bean>
 
-	<jaxrs:server name="o29" address="/">
+	<jaxws:server name="jaxws-server" bus="soap" address="/soap">
+		<jaxws:serviceBean>
+			<ref bean="ratings" />
+		</jaxws:serviceBean>
+	</jaxws:server>
+	
+	<jaxrs:server name="o29" address="/rest/">
 		<jaxrs:serviceBeans>
 			<ref bean="projects" />
 			<ref bean="todos" />
@@ -33,11 +39,30 @@
 			<ref bean="todofacade" />
 			<ref bean="tags" />
 		</jaxrs:serviceBeans>
-		<!--
-			<jaxrs:extensionMappings> <alias name="xml" alias="application/xml"/>
-			</jaxrs:extensionMappings>
-		-->
+		<!-- <jaxrs:extensionMappings> <alias name="xml" alias="application/xml"/> 
+			</jaxrs:extensionMappings> -->
 	</jaxrs:server>
+
+	<jms:conduit id="jmsconduit">
+		<jms:address destinationStyle="queue"
+			jndiConnectionFactoryName="ConnectionFactory" jndiDestinationName="dynamicQueues/test.cxf.jmstransport.queue">
+			<jms:JMSNamingProperty name="java.naming.factory.initial"
+				value="org.apache.activemq.jndi.ActiveMQInitialContextFactory" />
+			<jms:JMSNamingProperty name="java.naming.provider.url"
+				value="tcp://localhost:61615" />
+		</jms:address>
+	</jms:conduit>
+
+	<jms:destination name="{http://service.test/}IHelloPort.jms-destination">
+		<jms:address destinationStyle="queue"
+			jndiConnectionFactoryName="ConnectionFactory" jndiDestinationName="dynamicQueues/test.cxf.jmstransport.queue"
+			connectionUserName="testUser" connectionPassword="testPassword">
+			<jms:JMSNamingProperty name="java.naming.factory.initial"
+				value="org.apache.activemq.jndi.ActiveMQInitialContextFactory" />
+			<jms:JMSNamingProperty name="java.naming.provider.url"
+				value="tcp://localhost:61615" />
+		</jms:address>
+	</jms:destination>
 
 	<bean id="projects" class="org.todomap.o29.logic.JpaProjectService">
 		<property name="entityManagerFactory" ref="entityManager" />
@@ -192,17 +217,18 @@
 		<property name="connectionFactory" ref="jmsConnectionFactory" />
 	</bean>
 
-	<bean id="integrationMessageListener"  class="org.todomap.o29.utils.integration.IntegrationMessageListener">
+	<bean id="integrationMessageListener"
+		class="org.todomap.o29.utils.integration.IntegrationMessageListener">
 		<property name="entityManagerFactory" ref="entityManager" />
-		<property name="txManager" ref="transactionManager"/>
-		<property name="baseService" ref="base"/>
+		<property name="txManager" ref="transactionManager" />
+		<property name="baseService" ref="base" />
 	</bean>
 
 	<bean id="messageListener"
 		class="org.springframework.jms.listener.SimpleMessageListenerContainer">
-		<property name="messageListener" ref="integrationMessageListener"/>
-		<property name="connectionFactory" ref="jmsConnectionFactory"/>
-		<property name="destination" ref="responseQueue"/>
+		<property name="messageListener" ref="integrationMessageListener" />
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+		<property name="destination" ref="responseQueue" />
 	</bean>
 
 	<bean id="timerFactory" class="org.springframework.scheduling.timer.TimerFactoryBean">

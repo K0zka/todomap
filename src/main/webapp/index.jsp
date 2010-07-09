@@ -269,7 +269,7 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
         $('#addTags').autocomplete(
                 'addtags-autocompletelist',
                 'autocomplete',
-                'services/tags/list/<%=locale.getLanguage()%>/', 
+                'services/rest/tags/list/<%=locale.getLanguage()%>/', 
                 function(){ debug('click me babe, I am not afraid'); },
                 'lastTodoId',
                 '<%=locale.getLanguage()%>'
@@ -300,7 +300,7 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 			prepareForLevel('all');
 
 			//update the todos on the map
-			$.get("services/todos/area.sht/"+sw.lat() + "," + sw.lng() + "," + ne.lat() + "," + ne.lng(), function(data){
+			$.get("services/rest/todos/area.sht/"+sw.lat() + "," + sw.lng() + "," + ne.lat() + "," + ne.lng(), function(data){
 					var response = eval("("+data+")");
 					$.each(response['todo-sum'], function(i, val) {
 
@@ -330,7 +330,7 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 							}
 						    map.addMarker(marker);
 						    google.maps.event.addListener(marker, 'click', function() {
-							    $.get("services/todofacade/get/"+val['id'], function(data){
+							    $.get("services/rest/todofacade/get/"+val['id'], function(data){
 								    var todo_rel = eval("("+data+")");
 								    var todo = todo_rel['todo-rel'];
 								    var shortDescr = todo['todo']['shortDescr'];
@@ -425,13 +425,13 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 		
 			if (zoomLevel >= 10) {
 				prepareForLevel('town');
-				$.get("services/todos/area/town/"+sw.lat() + "," + sw.lng() + "," + ne.lat() + "," + ne.lng(), fn);
+				$.get("services/rest/todos/area/town/"+sw.lat() + "," + sw.lng() + "," + ne.lat() + "," + ne.lng(), fn);
 			} else if (zoomLevel > 5) {
 				prepareForLevel('state');
-				$.get("services/todos/area/state/"+sw.lat() + "," + sw.lng() + "," + ne.lat() + "," + ne.lng(), fn);
+				$.get("services/rest/todos/area/state/"+sw.lat() + "," + sw.lng() + "," + ne.lat() + "," + ne.lng(), fn);
 			} else {
 				prepareForLevel('country');
-				$.get("services/todos/area/country/"+sw.lat() + "," + sw.lng() + "," + ne.lat() + "," + ne.lng(), fn);
+				$.get("services/rest/todos/area/country/"+sw.lat() + "," + sw.lng() + "," + ne.lat() + "," + ne.lng(), fn);
 			}
 		}
 	}
@@ -506,7 +506,7 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 		var strData = JSON.stringify(submitData);
 		$.ajax({
 			type : 'POST',
-			url : 'services/todos/new',
+			url : 'services/rest/todos/new',
 			data: strData,
 			success: function(newTodo){
 				refreshMarkers();
@@ -547,7 +547,7 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 		var strData = JSON.stringify(data);
 		$.ajax({
 			type	: 'POST',
-			url		: 'services/rating/add/' + todoId,
+			url		: 'services/rest/rating/add/' + todoId,
 			data	: strData,
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 				handleErrors(XMLHttpRequest);
@@ -571,7 +571,7 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 			}
 		};
 		$.ajax({
-			url		: 'services/home/user/set',
+			url		: 'services/rest/home/user/set',
 			type	: 'POST',
 			data	: JSON.stringify(user),
 			success	:$('#userDetailsWindow').dialog('close'),
@@ -581,7 +581,7 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 	}
 
 	function getUserDetails() {
-		$.get("services/home/user/get", function(data) {
+		$.get("services/rest/home/user/get", function(data) {
 			debug(data);
 			var userData = eval("("+data+")");
 			$('#userDetailsDisplayName').val(userData['user']['displayName']);
@@ -589,14 +589,22 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 			try {
 				$('#userDetailsHomeLocationLat').val(userData['user']['homeLoc']['latitude']);
 				$('#userDetailsHomeLocationLng').val(userData['user']['homeLoc']['longitude']);
+				$.each(userData.user.userLinks, function() {debug('x')});
 				updateAddr('userDetailsHomeLocationReverseGeo','userDetailsHomeLocationLat','userDetailsHomeLocationLng');
 				//TODO: this code only handles n > 1 case for user links
 				//I wonder why cxf does not serialize an empty or single-element array instead.
 				//but aanyway this needs work.
 				$('#userLinks').empty();
 				var links = '<ul>';
-				for(i = 0; i < userData['user']['userLinks'].length; i++) {
-					links = links + '<li><a href="' + userData['user']['userLinks'][i]['url'] + '">' + userData['user']['userLinks'][i]['desc'] + '</a></li>';
+				if($.isArray(userData['user']['userLinks'])) {
+					for(i = 0; i < userData['user']['userLinks'].length; i++) {
+						links = links + 
+							'<li><a target="_blank" href="' + userData['user']['userLinks'][i]['url'] + '">' 
+							+ userData['user']['userLinks'][i]['desc'] 
+							+ '</a> <a class="removeitemlink" onclick="removeUserLink('+userData['user']['userLinks'][i]['id']+')">x</a></li>';
+					}
+				} else {
+					console.log('not array');
 				}
 				links = links + '<ul>';
 				debug(links);
@@ -985,7 +993,47 @@ function popupAddTodoWindow(event) {
 		</div>
 		<h3><a href="#profileLinks"> <i18n:message key="window.userDetailsWindow.profileLinks">Profile Links</i18n:message></a></h3>
 		<div>
-			<span id="userLinks"></span>
+			<span id="userLinks">
+			</span>
+			<script type="text/javascript">
+			function removeUserLink(id) {
+				$.ajax( {
+					type : 'POST',
+					url : 'services/rest/users/user/link/'+id+'/remove',
+					success : function(data) {
+						console.log(data);
+					},
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+						handleErrors(XMLHttpRequest);
+					},
+					contentType : 'application/json',
+					dataType : 'json'
+				});
+			}
+			function addUserLink() {
+				var data = {link: {url: $('#userLinkAdd_url').val(), desc: $('#userLinkAdd_desc').val()}};
+				$.ajax( {
+					type : 'POST',
+					url : 'services/rest/users/user/link/add',
+					data : JSON.stringify(data),
+					success : function() {},
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+						handleErrors(XMLHttpRequest);
+					},
+					contentType : 'application/json',
+					dataType : 'json'
+				});
+			}
+			</script>
+			<button id="userLinkAdd" onclick="$('#userLinkAddForm').show(); $('#userLinkAdd').hide()">add</button>
+			<div id="userLinkAddForm" style="display: none">
+				<label for="userLinkAdd_desc">Description</label>
+				<input type="text" id="userLinkAdd_desc"><br/>
+				<label for="userLinkAdd_url">URL</label>
+				<input type="text" id="userLinkAdd_url"><br/>
+				<button onclick="addUserLink()">Add</button>
+				<button onclick="$('#userLinkAddForm').hide(); $('#userLinkAdd').show()">Cancel</button>
+			</div>
 		</div>
 	</div>
 	<button id="saveUserDetailsButton" onclick="saveUserDetails()"><i18n:message key="etc.save">Save</i18n:message></button>

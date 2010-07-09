@@ -62,7 +62,7 @@ function zoomLevel() {
 function checkLoginStatus() {
 	$.ajax( {
 		type : 'GET',
-		url : 'services/home/auth',
+		url : 'services/rest/home/auth',
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			handleErrors(XMLHttpRequest);
 		},
@@ -115,7 +115,7 @@ checkLoginStatus_periodically();
 function refreshBookmarks() {
 	$
 			.get(
-					'services/bookmarks',
+					'services/rest/bookmarks',
 					function(data) {
 						bookmarks = eval('(' + data + ')');
 						$('#bookmarks').empty();
@@ -141,7 +141,7 @@ function bookmarkItem(itemId) {
 	debug('Bookmarking ' + itemId);
 	$.ajax( {
 		type : 'POST',
-		url : 'services/bookmarks/bookmark/' + itemId,
+		url : 'services/rest/bookmarks/bookmark/' + itemId,
 		data : itemId,
 		success : refreshBookmarks,
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -153,7 +153,7 @@ function bookmarkItem(itemId) {
 function unbookmarkItem(itemId) {
 	$.ajax( {
 		type : 'POST',
-		url : 'services/bookmarks/unbookmark/' + itemId,
+		url : 'services/rest/bookmarks/unbookmark/' + itemId,
 		data : itemId,
 		success : refreshBookmarks,
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -178,7 +178,7 @@ function isBookmarked(itemId) {
 function unBookmarkItem(itemId) {
 	$.ajax( {
 		type : 'DELETE',
-		url : 'services/bookmarks/' + itemId
+		url : 'services/rest/bookmarks/' + itemId
 	});
 }
 
@@ -193,7 +193,7 @@ function setCounter(name, value) {
 function deleteResource(id, callback) {
 	$.ajax( {
 		type : 'POST',
-		url : 'services/base/remove/' + id,
+		url : 'services/rest/base/remove/' + id,
 		success : callback
 	});
 }
@@ -201,7 +201,7 @@ function deleteResource(id, callback) {
 function deleteAttachment(id, callback) {
 	$.ajax( {
 		type : 'POST',
-		url : 'services/attachments/delete/' + id,
+		url : 'services/rest/attachments/delete/' + id,
 		success : callback
 	});
 }
@@ -263,7 +263,7 @@ function rate(id, val, callback) {
 	};
 	$.ajax({
 		type : 'POST',
-		url : 'services/rating/add/'+id,
+		url : 'services/rest/rating/add/'+id,
 		data : JSON.stringify(rating),
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			handleErrors(XMLHttpRequest);
@@ -283,7 +283,7 @@ function voteUp(id, callback) {
 }
 
 function refreshTagsOf(id) {
-	$.get('services/tags/tagsof/'+id , function(response) {
+	$.get('services/rest/tags/tagsof/'+id , function(response) {
 		var lst = '<ul>'
 		var tags = eval('('+response+')');
 		for(i = 0; i < tags.tag.length; i++) {
@@ -297,7 +297,7 @@ function refreshTagsOf(id) {
 function addTag(id, lang, tag) {
 	$.ajax( {
 		type : 'POST',
-		url : 'services/tags/add/' + lang + '/' + id,
+		url : 'services/rest/tags/add/' + lang + '/' + id,
 		data : JSON.stringify( {
 			tag : {
 				name : tag
@@ -316,7 +316,7 @@ function addTag(id, lang, tag) {
 function refreshTagClouds(lang) {
 	debug('refreshTagClouds' +lang);
 	// add tags
-	$.get('services/tags/cloud/'+lang, function(response) {
+	$.get('services/rest/tags/cloud/'+lang, function(response) {
 		var tagCloud = eval('('+response+')');
 		$('div.tagcloud').empty();
 		var tagList = '';
@@ -340,7 +340,7 @@ function refreshTagClouds(lang) {
 }
 
 function updateAttachments(todoId) {
-	$.get('services/attachments/'+todoId+'/get.shrt', function(data) {
+	$.get('services/rest/attachments/'+todoId+'/get.shrt', function(data) {
 			var attachments = eval('('+data+')');
 			var html = ''
 			$('#attachments').empty();
@@ -362,7 +362,7 @@ function updateAttachments(todoId) {
 function closeTodo(id, resolution, callback) {
 	$.ajax({
 		type : 'POST',
-		url : 'services/todos/close/' + id + '/' + resolution,
+		url : 'services/rest/todos/close/' + id + '/' + resolution,
 		contentType : 'application/json',
 		dataType : 'json',
 		success : callback
@@ -372,7 +372,7 @@ function closeTodo(id, resolution, callback) {
 function rejectClose(callback) {
 	$.ajax({
 		type : 'POST',
-		url : 'services/todos/reject-close/' + id ,
+		url : 'services/rest/todos/reject-close/' + id ,
 		contentType : 'application/json',
 		dataType : 'json',
 		success : function(data) {
