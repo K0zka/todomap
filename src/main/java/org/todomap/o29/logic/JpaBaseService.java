@@ -114,7 +114,7 @@ public class JpaBaseService extends JpaDaoSupport implements BaseService {
 				final FullTextEntityManager fullTextEntityManager = org.hibernate.search.jpa.Search
 						.getFullTextEntityManager(em);
 				final MultiFieldQueryParser parser = new MultiFieldQueryParser(
-						Version.LUCENE_29, new String[] {"text","description","shortDescr","displayName"},
+						Version.LUCENE_29, new String[] {"text","description","shortDescr","displayName","town","state","address"},
 						new StandardAnalyzer(Version.LUCENE_29));
 				try {
 					final org.apache.lucene.search.Query query = parser
