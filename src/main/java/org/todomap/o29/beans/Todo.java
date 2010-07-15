@@ -14,12 +14,16 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
 import org.todomap.geocoder.Address;
 
 @Entity
 @Table(name="todo")
 @XmlRootElement(name="todo")
 @DiscriminatorValue("todo")
+@Indexed
 public class Todo extends BaseBean implements Translatable, Locatable {
 	public TodoStatus getStatus() {
 		return status;
@@ -37,12 +41,15 @@ public class Todo extends BaseBean implements Translatable, Locatable {
 	@Embedded
 	Coordinate location;
 	@Column(nullable=false, name="shdsc")
+	@Field
 	String shortDescr;
 	@Column(nullable=false, name="dsc")
 	@Lob
+	@Field
 	String description;
 	@Embedded
 	@Column(name="address")
+	@IndexedEmbedded
 	Address addr;
 
 	@Column(name="status")

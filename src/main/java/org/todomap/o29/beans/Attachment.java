@@ -8,14 +8,20 @@ import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 @Entity
 @XmlRootElement(name="attachment")
 @DiscriminatorValue("attachment")
+@Indexed
 public class Attachment extends BaseBean implements Translatable {
 	
+	@Field
 	@Column
 	String fileName;
 
+	@Field
 	@Column
 	String description;
 	

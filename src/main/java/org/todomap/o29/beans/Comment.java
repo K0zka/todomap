@@ -10,6 +10,9 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Store;
+
 @Entity
 @Table(name="cmnt")
 @DiscriminatorValue("cmnt")
@@ -31,6 +34,7 @@ public class Comment extends BaseBean implements Translatable {
 
 	@Column
 	@Lob
+	@Field(store=Store.COMPRESS)
 	String text;
 
 	public String getText() {
