@@ -13,23 +13,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
-@Table(name="o29user")
-@XmlRootElement(name="user")
+@Table(name = "o29user")
+@XmlRootElement(name = "user")
 public class User extends BaseBean {
-	@Column(name="openidurl",nullable=false, unique=true, updatable=false,length=128)
+	@Column(name = "openidurl", nullable = false, unique = true, updatable = false, length = 128)
 	String openIdUrl;
-	@Column(name="displayname")
+	@Column(name = "displayname")
 	String displayName;
-	@Column(nullable=true, length=64)
+	@Column(nullable = true, length = 64)
 	String email;
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@XmlTransient
 	List<BaseBean> bookmarks;
 	@Embedded
 	Coordinate homeLoc;
 	@Column
 	Short homeZoomLevel;
-	
+
 	public List<Link> getUserLinks() {
 		return userLinks;
 	}
@@ -38,9 +38,9 @@ public class User extends BaseBean {
 		this.userLinks = userLinks;
 	}
 
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="linkOwner")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "linkOwner")
 	List<Link> userLinks;
-	
+
 	public String getDisplayName() {
 		return displayName;
 	}
@@ -92,7 +92,8 @@ public class User extends BaseBean {
 
 	@Override
 	public String getName() {
-		return getDisplayName() == null ? String.valueOf(getId()) : getDisplayName();
+		return getDisplayName() == null ? String.valueOf(getId())
+				: getDisplayName();
 	}
 
 }

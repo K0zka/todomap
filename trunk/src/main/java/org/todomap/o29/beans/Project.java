@@ -14,12 +14,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.search.annotations.Field;
+
 @Entity
 @XmlRootElement(name = "project")
 @DiscriminatorValue("project")
 public class Project extends BaseBean {
 
 	@Column(name = "name", nullable = false, length = 128)
+	@Field
 	String name;
 
 	public List<Todo> getTodos() {
@@ -51,6 +54,7 @@ public class Project extends BaseBean {
 	String description;
 
 	@Override
+	@Field
 	public String getName() {
 		return name;
 	}
@@ -65,6 +69,7 @@ public class Project extends BaseBean {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name="status")
+	@Field
 	ProjectStatus status;
 	
 	@OneToMany(mappedBy="project")

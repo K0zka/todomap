@@ -24,15 +24,23 @@ import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.search.annotations.Store;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "type", length = 8)
 @Table(name = "base")
 @XmlRootElement(name = "base")
+@Indexed
 public abstract class BaseBean implements Nameable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "base_seq")
 	@SequenceGenerator(name = "base_seq", allocationSize = 1, initialValue = 0, sequenceName = "base_seq")
+	@DocumentId
 	long id;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "bean")
 	List<Comment> comments;
@@ -41,6 +49,7 @@ public abstract class BaseBean implements Nameable {
 
 	@ManyToMany()
 	@JoinTable(name="base_tag", joinColumns=@JoinColumn(name="base_id"), inverseJoinColumns=@JoinColumn(name="tag_id"))
+	@IndexedEmbedded
 	List<Tag> tags;
 	
 	public List<Tag> getTags() {
@@ -52,6 +61,7 @@ public abstract class BaseBean implements Nameable {
 	}
 
 	@Column(updatable = false, nullable = false)
+	@Field(store=Store.YES)
 	Date created = new Date();
 
 	@Version
@@ -62,6 +72,7 @@ public abstract class BaseBean implements Nameable {
 	User creator;
 
 	@Column
+	@Field
 	String language;
 
 	@Column()
