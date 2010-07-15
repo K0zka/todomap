@@ -18,16 +18,22 @@ public interface BaseService {
 	@GET
 	@Path("/get/{id}")
 	BaseBean getById(@PathParam("id") long id);
-	
+
 	/**
 	 * 
 	 * @param id
 	 * @return
 	 */
-	@POST //delete would be nice, but it is not supported by 'some browsers'
+	@POST
+	// delete would be nice, but it is not supported by 'some browsers'
 	@Path("/remove/{id}")
 	BaseBean removebyId(@PathParam("id") long id);
 
 	List<Date> listActiveDays(final String countryCode);
+
 	List<BaseBean> list(final String countryCode, final Date day);
+
+	@GET
+	@Path("/search/{text}")
+	List<BaseBean> search(@PathParam("text") String freeText);
 }
