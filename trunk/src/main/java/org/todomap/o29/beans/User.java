@@ -12,13 +12,18 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 @Entity
 @Table(name = "o29user")
 @XmlRootElement(name = "user")
+@Indexed
 public class User extends BaseBean {
 	@Column(name = "openidurl", nullable = false, unique = true, updatable = false, length = 128)
 	String openIdUrl;
 	@Column(name = "displayname")
+	@Field
 	String displayName;
 	@Column(nullable = true, length = 64)
 	String email;
