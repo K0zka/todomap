@@ -49,7 +49,7 @@ public class Todo extends BaseBean implements Translatable, Locatable {
 	String description;
 	@Embedded
 	@Column(name="address")
-	@IndexedEmbedded
+	@IndexedEmbedded(prefix="addr")
 	Address addr;
 
 	@Column(name="status")
