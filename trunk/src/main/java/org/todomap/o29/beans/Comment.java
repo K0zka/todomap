@@ -11,12 +11,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
 
 @Entity
 @Table(name="cmnt")
 @DiscriminatorValue("cmnt")
 @XmlRootElement(name="comment")
+@Indexed
 public class Comment extends BaseBean implements Translatable {
 	@ManyToOne
 	@JoinColumn(name="bean_id")

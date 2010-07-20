@@ -10,6 +10,7 @@ import org.springframework.orm.jpa.support.JpaDaoSupport;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.todomap.o29.beans.Link;
+import org.todomap.o29.beans.Todo;
 import org.todomap.o29.beans.User;
 
 public class JpaUserServiceImpl extends JpaDaoSupport implements UserService {
@@ -66,6 +67,12 @@ public class JpaUserServiceImpl extends JpaDaoSupport implements UserService {
 			}
 		}
 		return 0;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Todo> listTodoBookmarks(final User user) {
+		return getJpaTemplate().find("select object(todo) from "+Todo.class.getName()+ " todo where ? in elements(todo.listeners)", user);
 	}
 
 }

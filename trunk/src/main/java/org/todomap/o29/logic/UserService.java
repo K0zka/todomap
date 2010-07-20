@@ -8,6 +8,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
 import org.todomap.o29.beans.Link;
+import org.todomap.o29.beans.Todo;
 import org.todomap.o29.beans.User;
 
 
@@ -36,6 +37,8 @@ public interface UserService {
 	@GET
 	@Path("userbyopenid/{url}")
 	User getUserByOpenIdUrl(@PathParam("url") String name);
+	
+	List<Todo> listTodoBookmarks(User user);
 	
 	void persist(User user);
 }

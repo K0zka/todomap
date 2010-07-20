@@ -1,7 +1,10 @@
 package org.todomap.o29.logic;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
+import org.todomap.o29.beans.Todo;
 import org.todomap.o29.beans.User;
 import org.todomap.o29.logic.UserService;
 import org.unitils.UnitilsJUnit4;
@@ -44,4 +47,10 @@ public class JpaUserServiceImplTest extends UnitilsJUnit4 {
 		Assert.assertNull(user);
 	}
 
+	@Test
+	public void testListTodoBookmarks() {
+		List<Todo> bookmarks = userService.listTodoBookmarks(userService.getUserByOpenIdUrl("http://bobek.example.com/"));
+		Assert.assertNotNull(bookmarks);
+	}
+	
 }
