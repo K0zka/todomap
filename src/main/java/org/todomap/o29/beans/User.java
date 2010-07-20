@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -27,7 +29,10 @@ public class User extends BaseBean {
 	String displayName;
 	@Column(nullable = true, length = 64)
 	String email;
+
 	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name="o29user_base")
+	@JoinColumn(name="o29user_id")
 	@XmlTransient
 	List<BaseBean> bookmarks;
 	@Embedded

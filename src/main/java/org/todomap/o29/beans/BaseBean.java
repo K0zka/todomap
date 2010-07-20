@@ -1,5 +1,6 @@
 package org.todomap.o29.beans;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,11 +48,33 @@ public abstract class BaseBean implements Nameable {
 	@OneToMany(fetch = FetchType.LAZY)
 	List<Rating> ratings;
 
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "o29user_base", 
+			joinColumns = @JoinColumn(referencedColumnName = "ID", name = "bookmarks_id"), 
+			inverseJoinColumns = @JoinColumn(name = "o29user_id"))
+	List<User> listeners = new ArrayList<User>();
+
+	public List<User> getListeners() {
+		return listeners;
+	}
+
+	public void setListeners(List<User> listeners) {
+		this.listeners = listeners;
+	}
+
+	public List<IntegrationMessage> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(List<IntegrationMessage> messages) {
+		this.messages = messages;
+	}
+
 	@ManyToMany()
-	@JoinTable(name="base_tag", joinColumns=@JoinColumn(name="base_id"), inverseJoinColumns=@JoinColumn(name="tag_id"))
+	@JoinTable(name = "base_tag", joinColumns = @JoinColumn(name = "base_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
 	@IndexedEmbedded
 	List<Tag> tags;
-	
+
 	public List<Tag> getTags() {
 		return tags;
 	}
@@ -61,7 +84,7 @@ public abstract class BaseBean implements Nameable {
 	}
 
 	@Column(updatable = false, nullable = false)
-	@Field(store=Store.YES)
+	@Field(store = Store.YES)
 	Date created = new Date();
 
 	@Version

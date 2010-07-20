@@ -3,6 +3,7 @@ package org.todomap.o29.logic;
 import java.util.List;
 
 import org.todomap.o29.beans.Link;
+import org.todomap.o29.beans.Todo;
 import org.todomap.o29.beans.User;
 
 public class FakeUserService implements UserService {
@@ -47,6 +48,12 @@ public class FakeUserService implements UserService {
 	public long removeLink(long id) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<Todo> listTodoBookmarks(User user) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

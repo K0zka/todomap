@@ -18,9 +18,9 @@
 	<bean id="config" class="org.todomap.o29.logic.Configuration">
 	</bean>
 
-	<jaxws:server name="jaxws-server" bus="soap" address="/soap">
+	<jaxws:server name="jaxws-server" bus="soap" address="/soap/">
 		<jaxws:serviceBean>
-			<ref bean="ratings" />
+			<ref bean="ratings" local="ratings"/>
 		</jaxws:serviceBean>
 	</jaxws:server>
 	
@@ -86,7 +86,7 @@
 		<property name="userService" ref="users" />
 	</bean>
 
-	<bean id="ratings" class="org.todomap.o29.logic.JpaRatingServiceImpl">
+	<bean id="ratings" name="ratings" class="org.todomap.o29.logic.JpaRatingServiceImpl">
 		<property name="entityManagerFactory" ref="entityManager" />
 		<property name="userService" ref="users" />
 	</bean>
@@ -134,7 +134,7 @@
 		</property>
 	</bean>
 
-	<bean id="base" class="org.todomap.o29.logic.JpaBaseService">
+	<bean id="base" class="org.todomap.o29.logic.JpaBaseService" init-method="init">
 		<property name="entityManagerFactory" ref="entityManager" />
 		<property name="userService" ref="users" />
 	</bean>
@@ -158,6 +158,8 @@
 				<entry key="hibernate.show_sql" value="true" />
 				<entry key="hibernate.format_sql" value="true" />
 				<entry key="hibernate.hbm2ddl.auto" value="update" />
+				<entry key="hibernate.search.default.directory_provider" value="org.hibernate.search.store.FSDirectoryProvider"/>
+				<entry key="hibernate.search.default.indexBase" value="target/lucene-index"></entry>
 
 			</map>
 		</property>
