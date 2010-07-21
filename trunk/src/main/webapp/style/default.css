@@ -438,3 +438,17 @@ login-tab-content {
 	font-size: 10px;
 }
 
+#searchWindowContent {
+	width: 600;
+	height: 400;
+}
+
+.searchresultrow {
+	width: 100%;
+	margin: 20 20 10 10;
+	cursor: pointer;
+}
+
+.searchresultrow :hover {
+	background: pink;
+}
