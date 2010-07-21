@@ -214,6 +214,14 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
             autoOpen : false,
             title	:	'<i18n:message key="window.help"/>'
            });
+        $('#searchWindow').dialog({
+            autoOpen : false,
+            title	:	'<i18n:message key="window.search"/>',
+            position: 'left',
+            stack: false,
+            maxHeight : 400,
+            maxWidth : 400
+        });
         $("#newTodo").dialog({
             modal: true,
             autoOpen : false,
@@ -706,6 +714,27 @@ function popupAddTodoWindow(event) {
 	}
 }
 
+function search() {
+	var text = $('#searchtext').val();
+	if(text != ''){
+		$.ajax({
+			  type: 'GET',
+			  url: 'services/rest/base/search/'+text,
+			  success: function(data) {
+			  	var content = '';
+			  	$.each(data.base, function(i, item){
+				  		debug(item.todo);
+				  		content = content + '<div class="searchresultrow" onclick="openInTodoWindow(\''+item.todo.id+'.html\')">'+item.todo.shortDescr+'</div>'
+				  	});
+			  	$('#searchWindowContent').html(content);
+			  	$('#searchWindow').dialog('open');
+			  },
+			contentType : 'application/json',
+			dataType : 'json'
+			});
+	}
+}
+
 </script>
 
 
@@ -714,6 +743,11 @@ function popupAddTodoWindow(event) {
 
 <div style="width: 100%; height: 100%;">
 	<div id="sidebar" style="width: 20%; height: 100%; position: absolute; left: 0px;">
+		<!-- search -->
+		<div class="search">
+			<input type="text" id="searchtext" style="width: 80%; float: left"> <button style="width: 32px" onclick="search()"><img src="img/search32.png" style="width: 20px; height: 20px"/></button>
+		</div>
+		<!-- //search -->
 		<div id="toolsAccordion">
 			<h3><a href="#"> <i18n:message key="sidebar.accordion.tools"> Tools </i18n:message></a></h3>
 			<div class="sidebarControls">
@@ -766,6 +800,10 @@ function popupAddTodoWindow(event) {
 	<div id='tooltip'>
 		&nbsp;
 	</div>
+</div>
+
+<div id="searchWindow">
+	<span id="searchWindowContent"></span>
 </div>
 
 
