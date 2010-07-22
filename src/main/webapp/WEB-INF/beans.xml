@@ -158,6 +158,7 @@
 				<entry key="hibernate.show_sql" value="true" />
 				<entry key="hibernate.format_sql" value="true" />
 				<entry key="hibernate.hbm2ddl.auto" value="update" />
+				<entry key="hibernate.search.default.locking_strategy" value="none"/>
 				<entry key="hibernate.search.default.directory_provider" value="org.hibernate.search.store.FSDirectoryProvider"/>
 				<entry key="hibernate.search.default.indexBase" value="target/lucene-index"></entry>
 
