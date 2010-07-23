@@ -3,6 +3,10 @@ package org.todomap.o29.logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
+
+import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
 import org.todomap.o29.beans.BaseBean;
 import org.todomap.o29.beans.Locatable;
@@ -78,6 +82,30 @@ public class JpaBookmarkService extends JpaDaoSupport implements BookmarkService
 			}
 			return false;
 		}
+	}
+
+	@Override
+	public List<ListenerUser> getListeners(final long todoId) {
+		final BaseBean baseBean = getJpaTemplate().find(BaseBean.class, todoId);
+		return getJpaTemplate().execute(new JpaCallback<List<ListenerUser>>() {
+
+			@Override
+			public List<ListenerUser> doInJpa(EntityManager manager)
+					throws PersistenceException {
+				
+				@SuppressWarnings("unchecked")
+				List<Object[]> results = manager.createQuery("select u.id, u.displayName from "+User.class.getName()+" u where :base in elements(u.bookmarks)").setParameter("base", baseBean).getResultList();
+				
+				ArrayList<BookmarkService.ListenerUser> ret = new ArrayList<BookmarkService.ListenerUser>();
+				for(Object[] row : results) {
+					ListenerUser listener = new ListenerUser();
+					listener.setId((Long)row[0]);
+					listener.setName((String)row[1]);
+					ret.add(listener);
+				}
+				return ret;
+			}
+		});
 	}
 	
 }
