@@ -18,6 +18,24 @@ import org.todomap.o29.beans.User;
 @Produces("application/json")
 public interface BookmarkService {
 	
+	@XmlRootElement(name="user")
+	class ListenerUser {
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public Long getId() {
+			return id;
+		}
+		public void setId(Long id) {
+			this.id = id;
+		}
+		String name;
+		Long id;
+	}
+	
 	@XmlRootElement(name="bookmark")
 	class Bookmark {
 
@@ -76,4 +94,9 @@ public interface BookmarkService {
 	@GET
 	@Path("/isbookmarked/")
 	public boolean isBookmarked(long todoId);
+
+	@GET
+	@Path("/listeners/{id}")
+	List<ListenerUser> getListeners(@PathParam("id") long todoId);
+
 }
