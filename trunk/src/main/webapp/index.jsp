@@ -745,7 +745,7 @@ function search() {
 	<div id="sidebar" style="width: 20%; height: 100%; position: absolute; left: 0px;">
 		<!-- search -->
 		<div class="search">
-			<input type="text" id="searchtext" style="width: 80%; float: left"> <button style="width: 32px" onclick="search()"><img src="img/search32.png" style="width: 20px; height: 20px"/></button>
+			<input type="text" onchange="search()" id="searchtext" style="width: 80%; float: left"> <button style="width: 32px" onclick="search()" class="tooltipable" id="searchButton"><img src="img/search32.png" style="width: 20px; height: 20px"/></button>
 		</div>
 		<!-- //search -->
 		<div id="toolsAccordion">
@@ -1079,6 +1079,9 @@ function search() {
 
 <!-- tooltips here -->
 <div id="tooltips" style="overflow: hidden; display: none;">
+	<div id="searchButton-tooltip">
+		<p><img src="img/search.png"/><i18n:message key="tooltip.searchButton"> Search the site content </i18n:message></p>
+	</div>
 	<div id="homeButton-tooltip">
 		<p><img src="img/gohome.png"/> <i18n:message key="tooltip.homeButton"> Position the map to your home location </i18n:message> </p>
 	</div>
