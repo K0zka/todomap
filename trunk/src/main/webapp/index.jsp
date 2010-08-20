@@ -749,7 +749,7 @@ function search() {
 		</div>
 		<!-- //search -->
 		<div id="toolsAccordion">
-			<h3><a href="#"> <i18n:message key="sidebar.accordion.tools"> Tools </i18n:message></a></h3>
+			<h3><a href="#" id="toolsAccordionLink" class="tooltipable"><i18n:message key="sidebar.accordion.tools"> Tools </i18n:message></a></h3>
 			<div class="sidebarControls">
 				<span class="authOnly">
 				<button id="logoutButton" class="tooltipable" onclick="logOut()"> <i18n:message key="sidebar.button.logout"> Log out </i18n:message> </button><br/>
@@ -765,13 +765,13 @@ function search() {
 				<button id="addIssueButton" class="tooltipable"  onclick="enterAddIssue()"> <i18n:message key="sidebar.button.addIssue"> Add issue </i18n:message> </button><br/>
 				</span>
 			</div>
-			<h3><a href="#"><i18n:message key="sidebar.accordion.info">Info</i18n:message></a></h3>
+			<h3><a href="#" id="infoAccordionLink" class="tooltipable"><i18n:message key="sidebar.accordion.info">Info</i18n:message></a></h3>
 			<div class="sidebarControls">
 				<button id="infoButton" class="tooltipable" onclick="$('#productInfoWindow').dialog('open')"> <i18n:message key="sidebar.button.about">About todomap </i18n:message></button><br/>
 				<button id="statisticsButton" class="tooltipable"> <i18n:message key="sidebar.button.statistics">Statistics</i18n:message> </button><br/>
 				<button id="helpButton" class="tooltipable" onclick="$(helpWindow).dialog('open')"> <i18n:message key="sidebar.button.help">Help</i18n:message> </button><br/>
 			</div>
-			<h3><a href="#"><i18n:message key="sidebar.accordion.bookmarks">Bookmarks</i18n:message></a></h3>
+			<h3><a href="#" id="bookmarksAccordionLink" class="tooltipable"><i18n:message key="sidebar.accordion.bookmarks">Bookmarks</i18n:message></a></h3>
 			<div class="sidebarControls">
 				<span id="bookmarks">
 					&nbsp;
@@ -1143,6 +1143,21 @@ function search() {
 	<div id="addIssueButton-tooltip">
 		<p>
 			<img src="img/wizard.png"/><i18n:message key="toolTip.addIssueButton">add issue</i18n:message>
+		</p>
+	</div>
+	<div id="bookmarksAccordionLink-tooltip">
+		<p>
+			<img src="img/bookmark.png" /><i18n:message key="toolTip.bookmarksAccordion">Bookmarks</i18n:message>
+		</p>
+	</div>
+	<div id="infoAccordionLink-tooltip">
+		<p>
+			<img src="img/bookmark.png" /><i18n:message key="toolTip.infoAccordion">Informations</i18n:message>
+		</p>
+	</div>
+	<div id="toolsAccordionLink-tooltp">
+		<p>
+			<img src="img/configure.png"/><i18n:message key="toolTip.toolsAccordion">Tools</i18n:message>
 		</p>
 	</div>
 </div>
