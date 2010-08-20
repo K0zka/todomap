@@ -573,8 +573,8 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 			'displayName'	:$('#userDetailsDisplayName').val(),
 			'email'			:$('#userDetailsEmail').val(),
 			'homeLoc'		: {
-				'longitude' 	: $('#userDetailsHomeLocationLat').val(),
-				'latitude'		: $('#userDetailsHomeLocationLng').val()
+				'latitude' 	: $('#userDetailsHomeLocationLat').val(),
+				'longitude'		: $('#userDetailsHomeLocationLng').val()
 				}
 			}
 		};
