@@ -84,7 +84,7 @@ public interface BookmarkService {
 	
 	@POST
 	@Path("/unbookmark/{id}")
-	void removeBookmark(@PathParam("id") long itemId);
+	User removeBookmark(@PathParam("id") long itemId);
 
 	@GET
 	@Path("/")
