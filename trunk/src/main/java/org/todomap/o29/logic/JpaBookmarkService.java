@@ -54,10 +54,11 @@ public class JpaBookmarkService extends JpaDaoSupport implements BookmarkService
 	}
 
 	@Override
-	public void removeBookmark(long itemId) {
+	public User removeBookmark(long itemId) {
 		final User currentUser = userService.getCurrentUser();
 		currentUser.getBookmarks().remove(baseService.getById(itemId));
 		getJpaTemplate().persist(currentUser);
+		return currentUser;
 	}
 
 	public BaseService getBaseService() {
@@ -97,7 +98,7 @@ public class JpaBookmarkService extends JpaDaoSupport implements BookmarkService
 				List<Object[]> results = manager.createQuery("select u.id, u.displayName from "+User.class.getName()+" u where :base in elements(u.bookmarks)").setParameter("base", baseBean).getResultList();
 				
 				ArrayList<BookmarkService.ListenerUser> ret = new ArrayList<BookmarkService.ListenerUser>();
-				for(Object[] row : results) {
+				for(final Object[] row : results) {
 					ListenerUser listener = new ListenerUser();
 					listener.setId((Long)row[0]);
 					listener.setName((String)row[1]);
