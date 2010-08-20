@@ -143,7 +143,7 @@ function bookmarkItem(itemId) {
 		type : 'POST',
 		url : 'services/rest/bookmarks/bookmark/' + itemId,
 		data : itemId,
-		success : refreshBookmarks,
+		success : function() {refreshBookmarks(); $('#toolsAccordion').accordion('activate',2)},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			handleErrors(XMLHttpRequest);
 		}
@@ -155,7 +155,7 @@ function unbookmarkItem(itemId) {
 		type : 'POST',
 		url : 'services/rest/bookmarks/unbookmark/' + itemId,
 		data : itemId,
-		success : refreshBookmarks,
+		success : function() {refreshBookmarks(); $('#toolsAccordion').accordion('activate',2)},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			handleErrors(XMLHttpRequest);
 		},
