@@ -8,6 +8,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
 import org.todomap.o29.beans.BaseBean;
 
@@ -35,5 +36,6 @@ public interface BaseService {
 
 	@GET
 	@Path("/search/{text}")
+	@XmlElementWrapper(name="results")
 	List<BaseBean> search(@PathParam("text") String freeText);
 }
