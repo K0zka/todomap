@@ -23,7 +23,7 @@ public class JpaBaseService extends JpaDaoSupport implements BaseService {
 
 	private final Logger logger = LoggerFactory.getLogger(JpaBaseService.class);
 
-	public void init() throws InterruptedException {
+	public void reIndex() throws InterruptedException {
 		getJpaTemplate().execute(new JpaCallback<Object>() {
 
 			@Override
