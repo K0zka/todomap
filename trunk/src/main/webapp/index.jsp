@@ -768,14 +768,23 @@ function search() {
 			<h3><a href="#" id="infoAccordionLink" class="tooltipable"><i18n:message key="sidebar.accordion.info">Info</i18n:message></a></h3>
 			<div class="sidebarControls">
 				<button id="infoButton" class="tooltipable" onclick="$('#productInfoWindow').dialog('open')"> <i18n:message key="sidebar.button.about">About todomap </i18n:message></button><br/>
-				<button id="statisticsButton" class="tooltipable"> <i18n:message key="sidebar.button.statistics">Statistics</i18n:message> </button><br/>
+				<button id="statisticsButton" class="tooltipable" onclick="$('#statisticsWindow').dialog('open')"> <i18n:message key="sidebar.button.statistics">Statistics</i18n:message> </button><br/>
 				<button id="helpButton" class="tooltipable" onclick="$(helpWindow).dialog('open')"> <i18n:message key="sidebar.button.help">Help</i18n:message> </button><br/>
 			</div>
 			<h3><a href="#" id="bookmarksAccordionLink" class="tooltipable"><i18n:message key="sidebar.accordion.bookmarks">Bookmarks</i18n:message></a></h3>
 			<div class="sidebarControls">
-				<span id="bookmarks">
-					&nbsp;
+				<span class="authOnly">
+					<span id="bookmarks">
+						&nbsp;
+					</span>
 				</span>
+				<!-- 
+				<span  class="noAuthOnly">
+					<p>
+						<img alt="bookmark" src="img/bookmark.png"> You have to log in to see your bookmarks.
+					</p>
+				</span>
+				 -->
 			</div>
 		</div>
 		<div class="versionInfo">
@@ -1076,6 +1085,8 @@ function search() {
 	</div>
 	<button id="saveUserDetailsButton" onclick="saveUserDetails()"><i18n:message key="etc.save">Save</i18n:message></button>
 </div>
+
+<jsp:include page="WEB-INF/jsp/includes/statistics.jsp"></jsp:include>
 
 <!-- tooltips here -->
 <div id="tooltips" style="overflow: hidden; display: none;">
