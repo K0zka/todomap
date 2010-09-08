@@ -1,10 +1,15 @@
 package org.todomap.o29.logic;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.todomap.geocoder.Address;
 
 @Path("/statistics/")
 public interface StatisticsService {
@@ -58,8 +63,37 @@ public interface StatisticsService {
 		int nrOfUnresolvedTodos;
 	}
 
+	@XmlRootElement(name="area")
+	class Area {
+		String name;
+		int size;
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public int getSize() {
+			return size;
+		}
+		public void setSize(int size) {
+			this.size = size;
+		}
+		public List<Area> getSubAreas() {
+			return subAreas;
+		}
+		public void setSubAreas(List<Area> subAreas) {
+			this.subAreas = subAreas;
+		}
+		List<Area> subAreas = new ArrayList<StatisticsService.Area>();
+	}
+	
 	@GET
 	@Path("/totals")
 	public Totals getTotals();
+
+	@POST
+	@Path("/heatmap")
+	public List<Area> getHeatMap(Address address);
 
 }
