@@ -1062,9 +1062,7 @@ function search() {
 				$.ajax( {
 					type : 'POST',
 					url : 'services/rest/users/user/link/'+id+'/remove',
-					success : function(data) {
-						console.log(data);
-					},
+					success : getUserDetails,
 					error : function(XMLHttpRequest, textStatus, errorThrown) {
 						handleErrors(XMLHttpRequest);
 					},
@@ -1078,7 +1076,7 @@ function search() {
 					type : 'POST',
 					url : 'services/rest/users/user/link/add',
 					data : JSON.stringify(data),
-					success : function() {},
+					success : getUserDetails,
 					error : function(XMLHttpRequest, textStatus, errorThrown) {
 						handleErrors(XMLHttpRequest);
 					},
