@@ -70,14 +70,15 @@ function checkLoginStatus() {
 			var isLoggedIn = eval("(" + msg + ")");
 			try {
 				if (isLoggedIn != isAuthenticated) {
+					debug('changing to '+isLoggedIn);
 					if (isLoggedIn) {
 						$("#loginWindow").dialog('close');
-						$(".authOnly").show(1000);
-						$(".noAuthOnly").hide(1000);
+						$("span.authOnly").show(1000);
+						$("span.noAuthOnly").hide(1000);
 						isAuthenticated = true;
 					} else {
-						$(".authOnly").hide(1000);
-						$(".noAuthOnly").show(1000);
+						$("span.authOnly").hide(1000);
+						$("span.noAuthOnly").show(1000);
 						isAuthenticated = false;
 					}
 				}
@@ -119,20 +120,19 @@ function refreshBookmarks() {
 					function(data) {
 						bookmarks = eval('(' + data + ')');
 						$('#bookmarks').empty();
-						$
-								.each(
-										bookmarks['bookmark'],
-										function(i, val) {
-											$('#bookmarks')
-													.append(
-															"<a class='bookmark' href='#' onclick='map.panTo(new google.maps.LatLng("+val.coordinate.latitude + "," +val.coordinate.longitude +")); map.setZoom(15);'>"
-																	+ val['text']
-																	+ "</a> " 
-																	+"<a href=\""
-																	+ val['id']
-																	+ '-'
-																	+ val['text']
-																	+ ".html\" target=\"_blank\"> <img src='img/external-link.png' style='cursor:pointer;'/></a> <br/>");
+						$.each(
+									bookmarks['bookmark'],
+									function(i, val) {
+										$('#bookmarks')
+												.append(
+														"<a class='bookmark' href='#' onclick=';openInfoBubble("+val.id+", null)'>"
+																+ val['text']
+																+ "</a> " 
+																+"<a href=\""
+																+ val['id']
+																+ '-'
+																+ val['text']
+																+ ".html\" target=\"_blank\"> <img src='img/external-link.png' style='cursor:pointer;'/></a> <br/>");
 										});
 					});
 }
