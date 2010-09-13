@@ -197,7 +197,7 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
 		});
 
 		
-		google.maps.event.addListener(map, "bounds_changed", refreshMarkers);
+		google.maps.event.addListener(map, "bounds_changed", delayRefreshMarkers);
         
     }
     $(document).ready(function(){
@@ -289,7 +289,21 @@ if(request.getSession(false) != null && request.getSession().getAttribute("retur
     });
 
 	var flagmode = 'none';
-    
+
+	
+	function delayRefreshMarkers() {
+		var zoomLevel = map.getZoom();
+		var latitude = map.getCenter().lat();
+		var longitude = map.getCenter().lng();
+		setTimeout(function() {
+			if(zoomLevel != map.getZoom() || latitude != map.getCenter().lat() || longitude != map.getCenter().lng()) {
+				//do not refresh
+			} else {
+				refreshMarkers();
+			}
+		}, 200);
+	}
+	
 	function refreshMarkers() {
 		
 		var center = map.getCenter();
