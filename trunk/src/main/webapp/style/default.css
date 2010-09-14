@@ -452,3 +452,35 @@ login-tab-content {
 .searchresultrow :hover {
 	background: pink;
 }
+
+.totalsElem {
+	width: 100px;
+	height: 100px;
+	padding: 5px;
+	margin: 5px;
+	float: left;
+}
+
+.totalsElem p img {
+	width: 64px;
+	height: 64px;
+	float: left;
+}
+
+.totalsElem p {
+	font-family: sans-serif;
+	font-size: 10px;
+}
+
+#userDetailsNotifyWindow img {
+	height: 32px;
+	width: 32px;
+	float: left;
+	padding-right: 5px;
+	padding-bottom: 5px;
+}
+
+#userDetailsNotifyWindow p {
+	text-align: justify;
+	padding: 10px;
+}

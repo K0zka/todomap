@@ -11,28 +11,31 @@ final Locale locale = (Locale)request.getAttribute("locale");
 $(document).ready(function(){
 	$('#userDetailsNotifyWindow').dialog({
     	autoOpen : false,
-        width: 240,
-        height: 120,
+        width: 360,
+        height: 210,
         title:	'<i18n:message key="window.userDetailsNotify.title"/>'
 	});
-	setTimeout(function() {
-		$.get('services/rest/home/auth', function(data) {
-			if(data == 'true') {
-				debug('signed in');
-				$.getJSON('services/rest/home/user/get', function(data) {
-					if(data.user.email == '' && data.user.displayName == '') {
-						$('#userDetailsNotifyWindow').dialog('open');
-					}
-				});
-			}
-		});
-		
-	}, 1000);
+	if($.cookie('todomap-userdata-cookie') == undefined) {
+		setTimeout(checkUserData, 10000);
+	};
 });
+
+function checkUserData() {
+	$.get('services/rest/home/auth', function(data) {
+		if(data == 'true') {
+			debug('signed in');
+			$.getJSON('services/rest/home/user/get', function(data) {
+				if(data.user.email == '' && data.user.displayName == '') {
+					$('#userDetailsNotifyWindow').dialog('open');
+				}
+			});
+		}
+	});
+}
 
 </script>
 
 <div id="userDetailsNotifyWindow">
-	<i18n:message key="window.userDetailsNotify.question"/> <br/>
-	<button><i18n:message key="etc.no"/></button> <button onclick="$('#userDetailsWindow').dialog('open'); getUserDetails(); $('#userDetailsNotifyWindow').dialog('close');"><i18n:message key="etc.yes"/></button>
+	<p> <img alt="info icon" src="img/info.png"/> <i18n:message key="window.userDetailsNotify.question"/> </p><br/>
+	<button onclick="$.cookie('todomap-userdata-cookie', 'false', { path: '/', expires: 65535 });$('#userDetailsNotifyWindow').dialog('close');"><i18n:message key="etc.no"/></button> <button onclick="$('#userDetailsWindow').dialog('open'); getUserDetails(); $('#userDetailsNotifyWindow').dialog('close');"><i18n:message key="etc.yes"/></button>
 </div>
