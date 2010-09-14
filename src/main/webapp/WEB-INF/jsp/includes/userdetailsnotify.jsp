@@ -20,9 +20,9 @@ $(document).ready(function(){
 			if(data == 'true') {
 				debug('signed in');
 				$.getJSON('services/rest/home/user/get', function(data) {
-//					if(data.user.email == '' && data.user.displayName == '') {
+					if(data.user.email == '' && data.user.displayName == '') {
 						$('#userDetailsNotifyWindow').dialog('open');
-//					}
+					}
 				});
 			}
 		});
