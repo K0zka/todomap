@@ -96,6 +96,10 @@ public interface BookmarkService {
 	public boolean isBookmarked(long todoId);
 
 	@GET
+	@Path("/listenerscnt/{id}")
+	Long getNumberOfListeners(long id);
+	
+	@GET
 	@Path("/listeners/{id}")
 	List<ListenerUser> getListeners(@PathParam("id") long todoId);
 
