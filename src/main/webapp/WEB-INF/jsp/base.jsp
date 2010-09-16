@@ -419,6 +419,9 @@ function saveData() {
 		%>
 	</span>
 
+<jsp:include page="baseincludes/nroflisteners.jsp"></jsp:include>
+
+
 	<h3><i18n:message key="todo.ratingdetails">Ratings details</i18n:message></h3>
 	<ul>
 		<li><i18n:message key="ratings.bookmarkedby">Bookmarked by:</i18n:message> <%= ratings.getBookmarked() %></li>
