@@ -484,3 +484,28 @@ login-tab-content {
 	text-align: justify;
 	padding: 10px;
 }
+
+#tagList {
+	width: 100%;
+}
+
+#tagList ul {
+	list-style: none;
+}
+
+#tagList ul li {
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	float: left;
+	margin-right: 10px;
+	background-color: #e0e0f0;
+	padding: 2px;
+	cursor: default;
+}
+
+#tagList ul li:hover {
+	float: left;
+	margin-right: 10px;
+	color: #ffffff;
+	background-color: #909090;
+}
