@@ -32,9 +32,24 @@ function replaceWithListenerList() {
 
 	<h3><i18n:message key="todo.ratingdetails">Ratings details</i18n:message></h3>
 	<ul>
-		<li><i18n:message key="ratings.bookmarkedby">Bookmarked by:</i18n:message> <span id="nrOfListeners" onclick="replaceWithListenerList();"><%= ratings.getBookmarked() %></span></li>
+		<li><i18n:message key="ratings.bookmarkedby">Bookmarked by:</i18n:message> <span id="nrOfListeners" class="tooltipable" onclick="replaceWithListenerList();"><%= ratings.getBookmarked() %>...</span></li>
 		<li><i18n:message key="ratings.authenticated">Authenticated users:</i18n:message> <%= ratings.getNrOfRatings() %></li>
 		<li><i18n:message key="ratings.authenticated_avg">Authenticated users average:</i18n:message> <%= ratings.getAverage() == null ? "-" :  ratings.getAverage() %></li>
 		<li><i18n:message key="ratings.anon">Anon users:</i18n:message> <%= ratings.getNrOfAnonRatings() %></li>
 		<li><i18n:message key="ratings.anon_avg">Anon users average:</i18n:message> <%= ratings.getAnonAverage() == null ? "-" : ratings.getAnonAverage() %></li>
 	</ul>
+
+	<div id="ratingDetails">
+		<input name="simpleRating" type="radio" class="star"/> 
+		<input name="simpleRating" type="radio" class="star"/> 
+		<input name="simpleRating" type="radio" class="star"/> 
+		<input name="simpleRating" type="radio" class="star"/> 
+		<input name="simpleRating" type="radio" class="star"/>
+	</div>
+
+<br/>
+<span style="display: none;">
+	<div id="nrOfListeners-tooltip">
+		<p><img src="img/user.png"/> <i18n:message key="tooltip.nrOfListeners">The number of users, who bookmarked this item. They may receive notifications on related events.</i18n:message></p>
+	</div>
+</span>

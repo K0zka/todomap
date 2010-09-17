@@ -421,14 +421,6 @@ function saveData() {
 
 <jsp:include page="baseincludes/ratingdetails.jsp"></jsp:include>
 
-	<div id="ratingDetails">
-		<input name="simpleRating" type="radio" class="star"/> 
-		<input name="simpleRating" type="radio" class="star"/> 
-		<input name="simpleRating" type="radio" class="star"/> 
-		<input name="simpleRating" type="radio" class="star"/> 
-		<input name="simpleRating" type="radio" class="star"/>
-	</div>
-
 	<h3><i18n:message key="todo.comments">Comments</i18n:message> <span id="nrOfComments" class="counter"><%=item.getComments().size()%></span></h3>
 	<div id="newComment" style="">
 		<textarea id="commentEditor" class="todoDescription"></textarea> <br/>
