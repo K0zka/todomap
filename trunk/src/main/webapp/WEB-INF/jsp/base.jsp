@@ -419,20 +419,8 @@ function saveData() {
 		%>
 	</span>
 
-<jsp:include page="baseincludes/nroflisteners.jsp"></jsp:include>
+<jsp:include page="baseincludes/ratingdetails.jsp"></jsp:include>
 
-
-	<h3><i18n:message key="todo.ratingdetails">Ratings details</i18n:message></h3>
-	<ul>
-		<li><i18n:message key="ratings.bookmarkedby">Bookmarked by:</i18n:message> <%= ratings.getBookmarked() %></li>
-		<li><i18n:message key="ratings.authenticated">Authenticated users:</i18n:message> <%= ratings.getNrOfRatings() %></li>
-		<li><i18n:message key="ratings.authenticated_avg">Authenticated users average:</i18n:message> <%= ratings.getAverage() == null ? "-" :  ratings.getAverage() %></li>
-		<li><i18n:message key="ratings.anon">Anon users:</i18n:message> <%= ratings.getNrOfAnonRatings() %></li>
-		<li><i18n:message key="ratings.anon_avg">Anon users average:</i18n:message> <%= ratings.getAnonAverage() == null ? "-" : ratings.getAnonAverage() %></li>
-	</ul>
-	
-	
-	
 	<div id="ratingDetails">
 		<input name="simpleRating" type="radio" class="star"/> 
 		<input name="simpleRating" type="radio" class="star"/> 
