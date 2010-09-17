@@ -510,12 +510,17 @@ login-tab-content {
 	background-color: #909090;
 }
 
-#nrOfListeners {
+#nrOfListeners:hover {
+	color: e0e0ff;
 	cursor: pointer;
 }
 
-#nrOfListeners:hover {
-	color: e0e0ff;
+#nrOfListeners {
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	margin-right: 10px;
+	background-color: #e0e0f0;
+	padding: 2px;
 	cursor: pointer;
 }
 
