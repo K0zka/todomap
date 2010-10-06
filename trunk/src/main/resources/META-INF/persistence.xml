@@ -14,6 +14,10 @@
 		<class>org.todomap.o29.beans.User</class>
 		<class>org.todomap.o29.beans.Link</class>
 		<class>org.todomap.o29.beans.IntegrationMessage</class>
+		<class>org.todomap.o29.beans.RssFeed</class>
+		<class>org.todomap.o29.beans.ProjectRssFeed</class>
+		<class>org.todomap.o29.beans.TodoRssFeed</class>
+		<class>org.todomap.o29.beans.RssEntry</class>
 		<class>org.todomap.minigeoip.impl.jpa.IpDomain</class>
 		<class>org.todomap.o29.utils.security.RememberMeToken</class>
 	</persistence-unit>
