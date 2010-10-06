@@ -71,7 +71,7 @@ public class Project extends BaseBean {
 	@Column(name="status")
 	@Field
 	ProjectStatus status;
-	
+
 	@OneToMany(mappedBy="project")
 	List<ProjectRssFeed> rssfeeds;
 
