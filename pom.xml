@@ -65,7 +65,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>3.5.1-Final</version>
+			<version>3.5.6-Final</version>
 			<exclusions>
 				<exclusion>
 					<groupId>xml-apis</groupId>
@@ -76,7 +76,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-search</artifactId>
-			<version>3.2.0.Final</version>
+			<version>3.2.1.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -306,9 +306,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>net.java.dev.rome</groupId>
-			<artifactId>rome</artifactId>
-			<version>1.0.0</version>
+			<groupId>org.todomap</groupId>
+			<artifactId>feed</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
