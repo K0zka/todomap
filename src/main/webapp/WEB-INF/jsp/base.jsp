@@ -195,7 +195,7 @@ function submitComment() {
 	};
 	$.ajax({
 		type : 'POST',
-		url : 'services/comments/add/<%=item.getId()%>',
+		url : 'services/rest/comments/add/<%=item.getId()%>',
 		data: JSON.stringify(comment),
 		success: function(data, textStatus){
 			refreshComments();
@@ -208,7 +208,7 @@ function submitComment() {
 }
 
 function refreshComments() {
-	$.get('services/comments/get/<%=item.getId()%>','', function(data, status) {
+	$.get('services/rest/comments/get/<%=item.getId()%>','', function(data, status) {
 			$('#comments').empty();
 			editors['commentEditor'].set_content('');
 			$('#newComment').hide(1000);
