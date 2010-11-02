@@ -11,9 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
 import org.todomap.feed.Reader;
-import org.todomap.feed.beans.Channel;
-import org.todomap.feed.beans.Item;
-import org.todomap.feed.beans.Rss;
+import org.todomap.feed.beans.NewsFeed;
+import org.todomap.feed.beans.NewsItem;
 import org.todomap.o29.beans.RssEntry;
 import org.todomap.o29.beans.RssFeed;
 
@@ -46,12 +45,11 @@ public class RssService extends JpaDaoSupport {
 
 	void updateRssFeed(final RssFeed feed) {
 		Reader reader = new Reader();
-		Rss rss;
+		NewsFeed newsFeed;
 		try {
-			rss = reader.read(feed.getFeedUrl());
+			newsFeed = reader.read(feed.getFeedUrl());
 			
-			for (final Channel channel : rss.getChannels()) {
-				for (final Item item : channel.getItems()) {
+				for (final NewsItem item : newsFeed.getNewsItems()) {
 					getJpaTemplate().execute(new JpaCallback<Object>() {
 
 						@Override
@@ -62,14 +60,13 @@ public class RssService extends JpaDaoSupport {
 								RssEntry entry = new RssEntry();
 								entry.setFeed(feed);
 								entry.setGuid(item.getGuid());
-								entry.setLink(item.getLink());
+								entry.setLink(item.getUrl());
 								entry.setTitle(item.getTitle());
 								manager.persist(entry);
 							}
 							return null;
 						}
 					});
-				}
 			}
 		} catch (IOException e) {
 			logger.error(
