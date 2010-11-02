@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="channel")
-public class Channel {
+public class Channel implements NewsFeed{
 	String title;
 	String link;
 	String description;
@@ -159,6 +159,12 @@ public class Channel {
 
 	public void setItems(List<Item> items) {
 		this.items = items;
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public List<NewsItem> getNewsItems() {
+		return ((List)items);
 	}
 
 }

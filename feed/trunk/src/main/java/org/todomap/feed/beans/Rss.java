@@ -1,8 +1,5 @@
 package org.todomap.feed.beans;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -18,13 +15,13 @@ public class Rss {
 	public void setVersion(String version) {
 		this.version = version;
 	}
-	List<Channel> channels = new ArrayList<Channel>();
+	Channel channel;
 	@XmlElement(name="channel")
-	public List<Channel> getChannels() {
-		return channels;
+	public Channel getChannel() {
+		return channel;
 	}
 
-	public void setChannels(List<Channel> channels) {
-		this.channels = channels;
+	public void setChannel(Channel channel) {
+		this.channel = channel;
 	}
 }

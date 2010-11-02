@@ -7,14 +7,23 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.todomap.feed.beans.Feed;
+import org.todomap.feed.beans.NewsFeed;
 import org.todomap.feed.beans.Rss;
 
 public final class Reader {
-	public Rss read(final String url) throws IOException {
+	public NewsFeed read(final String url) throws IOException {
 		try {
 			JAXBContext context = JAXBContext.newInstance(Rss.class.getPackage().getName());
 			Unmarshaller unmarshaller = context.createUnmarshaller();
-			return (Rss)unmarshaller.unmarshal(new URL(url).openStream());
+			Object obj = unmarshaller.unmarshal(new URL(url).openStream());
+			if(obj instanceof Feed) {
+				return (Feed)obj;
+			} else if(obj instanceof Rss){
+				return ((Rss)obj).getChannel();
+			} else {
+				throw new IOException("Brokent feed: "+obj.getClass());
+			}
 		} catch (JAXBException e) {
 			throw new IOException(e.getMessage(), e);
 		}

@@ -7,7 +7,7 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "item")
-public class Item {
+public class Item implements NewsItem {
 	static final String rssDateFormat = "EEE, dd MMM yyyy hh:mm:ss ZZZ";
 	String title;
 	String link;
@@ -92,4 +92,9 @@ public class Item {
 	String guid;
 	Date pubDate;
 	String source;
+
+	@Override
+	public String getUrl() {
+		return link;
+	}
 }
