@@ -84,4 +84,9 @@ public class Entry implements NewsItem {
 		}
 		return null;
 	}
+
+	@Override
+	public String getGuid() {
+		return id;
+	}
 }

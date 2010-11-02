@@ -4,4 +4,5 @@ public interface NewsItem {
 	String getTitle();
 	String getDescription();
 	String getUrl();
+	String getGuid();
 }
