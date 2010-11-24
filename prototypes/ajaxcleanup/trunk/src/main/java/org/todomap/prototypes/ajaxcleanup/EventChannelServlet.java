@@ -30,26 +30,26 @@ public class EventChannelServlet extends WebSocketServlet {
 
 		@Override
 		public void onConnect(Outbound outbound) {
-			System.out.println("connect");
+			logger.debug("connect");
 			this.outbound = outbound;
 			timeThread.add(outbound);
 		}
 
 		@Override
 		public void onDisconnect() {
-			System.out.println("disconnect");
+			logger.debug("disconnect");
 			timeThread.remove(outbound);
 		};
 
 		@Override
 		public void onFragment(final boolean arg0, final byte arg1,
 				final byte[] arg2, int arg3, int arg4) {
-			System.out.println("message fragment: ");
+			logger.debug("message fragment: ");
 		}
 
 		@Override
 		public void onMessage(final byte arg0, final String msg) {
-			System.out.println("message: " + msg);
+			logger.debug("message: " + msg);
 			try {
 				
 				final Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -57,6 +57,8 @@ public class EventChannelServlet extends WebSocketServlet {
 				
 				logger.debug("msg:"+msg);
 				logger.debug(message.getClass().getName());
+				
+				
 				
 			} catch (JAXBException e) {
 				logger.error(e.getMessage(), e);
@@ -66,7 +68,7 @@ public class EventChannelServlet extends WebSocketServlet {
 		@Override
 		public void onMessage(final byte arg0, final byte[] data, int from,
 				int to) {
-			System.out.println("message: " + new String(data, from, to));
+			logger.debug("message: " + new String(data, from, to));
 		}
 	}
 

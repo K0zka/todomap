@@ -6,10 +6,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.eclipse.jetty.websocket.WebSocket.Outbound;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TimeThread extends Thread {
 
 	final ArrayList<Outbound> outbounds = new ArrayList<Outbound>();
+	
+	final static Logger logger = LoggerFactory.getLogger(TimeThread.class);
 	
 	@Override
 	public void run() {
@@ -21,16 +25,14 @@ public class TimeThread extends Thread {
 					object.wait(1000);
 				}
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.debug(e.getMessage(),e);
 			}
 			final String dateStr = sdf.format(new Date());
 			for(final Outbound outbound : outbounds) {
 				try {
 					outbound.sendMessage("<update channel=\"time\">"+dateStr+"</update>");
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					logger.error(e.getMessage(),e);
 				}
 			}
 		}
