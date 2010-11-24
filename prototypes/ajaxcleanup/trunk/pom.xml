@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.todomap.prototypes</groupId>
 	<artifactId>ajaxcleanup</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>war</packaging>
 
 	<name>ajaxcleanup Web App</name>
@@ -123,9 +122,9 @@
 	</distributionManagement>
 
 	<scm>
-		<connection>scm:svn:http://todomap.googlecode.com/svn/prototypes/ajaxcleanup/trunk/</connection>
-		<developerConnection>scm:svn:https://todomap.googlecode.com/svn/prototypes/ajaxcleanup/trunk/</developerConnection>
-		<url>http://code.google.com/p/todomap/source/browse/</url>
+		<connection>scm:svn:http://todomap.googlecode.com/svn/prototypes/ajaxcleanup/tags/ajaxcleanup-0.0.1</connection>
+		<developerConnection>scm:svn:https://todomap.googlecode.com/svn/prototypes/ajaxcleanup/tags/ajaxcleanup-0.0.1</developerConnection>
+		<url>http://code.google.com/p/todomap/source/browse/tags/ajaxcleanup-0.0.1</url>
 	</scm>
 
 </project>
