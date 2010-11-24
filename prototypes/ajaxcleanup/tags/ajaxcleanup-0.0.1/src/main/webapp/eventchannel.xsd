@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/eventchannel" xmlns:tns="http://www.example.org/eventchannel" elementFormDefault="qualified">
+
+    <attribute name="ecid" type="string"></attribute>
+
+    <attribute name="eclistener" type="string"></attribute>
+</schema>
