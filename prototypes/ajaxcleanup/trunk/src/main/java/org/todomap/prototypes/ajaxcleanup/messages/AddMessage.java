@@ -1,4 +1,4 @@
-package org.todomap.prototypes.ajaxcleanup;
+package org.todomap.prototypes.ajaxcleanup.messages;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

@@ -3,6 +3,7 @@ package org.todomap.prototypes.ajaxcleanup;
 import java.io.StringReader;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -12,54 +13,59 @@ import org.eclipse.jetty.websocket.WebSocket;
 import org.eclipse.jetty.websocket.WebSocketServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.todomap.prototypes.ajaxcleanup.channel.MessengerImpl;
+import org.todomap.prototypes.ajaxcleanup.channel.WebSocketSocket;
+import org.todomap.prototypes.ajaxcleanup.messages.SubscribeMessage;
 
+@WebServlet(urlPatterns = { "/ec-websocket" })
 public class EventChannelServlet extends WebSocketServlet {
 
-	final TimeThread timeThread = new TimeThread();
 	final JAXBContext context;
-	final static Logger logger = LoggerFactory.getLogger(EventChannelServlet.class);
+	final static Logger logger = LoggerFactory
+			.getLogger(EventChannelServlet.class);
 
 	public EventChannelServlet() throws JAXBException {
 		super();
-		context = JAXBContext.newInstance(this.getClass().getPackage().getName());
+		context = JAXBContext.newInstance(SubscribeMessage.class.getPackage()
+				.getName());
 	}
 
-
 	private final class WebSuket implements WebSocket {
-		Outbound outbound = null;
+
+		public WebSuket(MessengerImpl messengerImpl) {
+			super();
+			this.messengerImpl = messengerImpl;
+		}
+
+		final MessengerImpl messengerImpl;
+		WebSocketSocket socket = null;
 
 		@Override
 		public void onConnect(Outbound outbound) {
 			logger.debug("connect");
-			this.outbound = outbound;
-			timeThread.add(outbound);
+			socket = new WebSocketSocket(outbound, context);
+			messengerImpl.addSocket(socket);
 		}
 
 		@Override
 		public void onDisconnect() {
 			logger.debug("disconnect");
-			timeThread.remove(outbound);
+			messengerImpl.removeSocket(socket);
 		};
-
-		@Override
-		public void onFragment(final boolean arg0, final byte arg1,
-				final byte[] arg2, int arg3, int arg4) {
-			logger.debug("message fragment: ");
-		}
 
 		@Override
 		public void onMessage(final byte arg0, final String msg) {
 			logger.debug("message: " + msg);
 			try {
-				
+
 				final Unmarshaller unmarshaller = context.createUnmarshaller();
-				final Object message = unmarshaller.unmarshal(new StringReader(msg));
-				
-				logger.debug("msg:"+msg);
+				final Object message = unmarshaller.unmarshal(new StringReader(
+						msg));
+
+				logger.debug("msg:" + msg);
 				logger.debug(message.getClass().getName());
-				
-				
-				
+
 			} catch (JAXBException e) {
 				logger.error(e.getMessage(), e);
 			}
@@ -78,14 +84,16 @@ public class EventChannelServlet extends WebSocketServlet {
 	private static final long serialVersionUID = 1249099624196007384L;
 
 	@Override
-	protected WebSocket doWebSocketConnect(HttpServletRequest arg0, String arg1) {
-		return new WebSuket();
+	protected WebSocket doWebSocketConnect(HttpServletRequest request,
+			String arg1) {
+		return new WebSuket((MessengerImpl) WebApplicationContextUtils
+				.getRequiredWebApplicationContext(request.getServletContext())
+				.getBean("messenger"));
 	}
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		timeThread.start();
 	}
 
 }

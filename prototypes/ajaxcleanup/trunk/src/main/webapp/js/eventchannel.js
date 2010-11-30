@@ -112,10 +112,18 @@ function ec_receive_message(msg) {
 	});
 }
 
+function ec_longpoll_fetch() {
+	$.get('ec-poll', {}, function(val) {
+		debug("returned");
+		debug(val);
+	});
+	setTimeout(function() {ec_longpoll_fetch();}, 50000);
+}
+
 $(document).ready(function() {
 	//try to initialize websocket
 	try {
-		socketUrl = document.URL.replace("http://", "ws://")+'eventchannel';
+		socketUrl = document.URL.replace("http://", "ws://")+'ec-websocket';
 		debug('connecting to '+socketUrl);
 		socket = new WebSocket(socketUrl);
 		socket.onopen = function () {
@@ -131,6 +139,7 @@ $(document).ready(function() {
 	} catch (e) {
 		//no websocket
 		debug('No websocket available. Trying to initialize polling. (TODO)');
+		ec_longpoll_fetch();
 	}
 	
 	debug('initializing event channel');
