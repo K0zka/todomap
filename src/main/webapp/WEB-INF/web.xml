@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<!DOCTYPE web-app
-    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-    "http://java.sun.com/dtd/web-app_2_3.dtd">
-
-
-<web-app>
-
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+      version="3.0"> 
+      
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
@@ -116,7 +114,6 @@
 
 	<servlet>
 		<servlet-name>CXFServlet</servlet-name>
-		<display-name>CXF Servlet</display-name>
 		<servlet-class>
 			org.apache.cxf.transport.servlet.CXFServlet
 		</servlet-class>
@@ -126,6 +123,12 @@
 	<servlet>
 		<servlet-name>geoip</servlet-name>
 		<servlet-class>org.todomap.o29.utils.GeoipServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>spring</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 
 	<servlet-mapping>
@@ -162,12 +165,6 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>rss.xml/*</url-pattern>
 	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>spring</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
 
 	<servlet-mapping>
         <servlet-name>spring</servlet-name>
@@ -208,6 +205,7 @@
 		<location>/WEB-INF/jsp/errors/404.jsp</location>
 	</error-page>
 
+	<!-- 
 	<taglib>
 		<taglib-uri>http://java.sun.com/jsp/jstl/fmt</taglib-uri>
 		<taglib-location>/WEB-INF/fmt.tld</taglib-location>
@@ -217,6 +215,7 @@
 		<taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
 		<taglib-location>/WEB-INF/c.tld</taglib-location>
 	</taglib>
+	 -->
 
 	<resource-env-ref>
 		<resource-env-ref-name>jms/o29intresp</resource-env-ref-name>
@@ -231,7 +230,7 @@
 	<resource-ref>
 		<res-ref-name>jdbc/o29ds</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
-		<res-auth>CONTAINER</res-auth>
+		<res-auth>Container</res-auth>
 	</resource-ref>
 
 	<resource-ref>
