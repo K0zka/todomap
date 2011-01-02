@@ -1,0 +1,1 @@
+<% request.getRequestDispatcher("/monitor").forward(request, response); %>

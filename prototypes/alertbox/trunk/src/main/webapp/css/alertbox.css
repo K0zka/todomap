@@ -1,0 +1,68 @@
+
+body {
+	font-family: monospace;
+}
+
+div .good-resource {
+	background: #DDFFDD;
+	border: 2px solid #AADDAA;
+}
+
+div .failed-resource {
+	background: #FFEEEE;
+	border: 3px solid #FFAAAA;
+}
+
+div .warn-resource {
+	background: #FFFFAA;
+	border: 3px solid #FFFF55;
+}
+
+div .resource {
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	margin: 10px;
+	padding: 10px;
+	width: 128px;
+	height: 196px;
+	float: left;
+	overflow: hidden;
+}
+
+div .resources {
+	float:left;
+}
+
+div .status {
+	position: relative;
+	top: 0px;
+	left: 0px;
+}
+
+div .status img {
+	width: 64px;
+	height: 64px;
+}
+
+div .name {
+	font-size: 10px;
+	font-weight: bold;
+	padding-bottom: 10px;
+}
+
+div .description {
+	font-size: 8px;
+}
+
+div .type {
+}
+
+div .type img {
+	width: 16px;
+	height: 16px;
+}
+
+a img {
+	width: 16px;
+	height: 16px;
+}
