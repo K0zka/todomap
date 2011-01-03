@@ -16,6 +16,7 @@ public class JdbcResource extends BaseMonitorable {
 	String username;
 	String password;
 	String query;
+	String driverClass;
 
 	@Override
 	public String getName() {
@@ -24,6 +25,9 @@ public class JdbcResource extends BaseMonitorable {
 
 	@Override
 	public StatusDescription check() throws Exception {
+		if(driverClass != null) {
+			Class.forName(driverClass);
+		}
 		final Connection connection = DriverManager.getConnection(jdbcUrl,
 				username, password);
 		return new StatusDescription(Status.Ok, getResult(connection));
@@ -90,6 +94,15 @@ public class JdbcResource extends BaseMonitorable {
 
 	public void setQuery(String query) {
 		this.query = query;
+	}
+
+	@XmlAttribute(name="driver-class")
+	public String getDriverClass() {
+		return driverClass;
+	}
+
+	public void setDriverClass(String driverClass) {
+		this.driverClass = driverClass;
 	}
 
 }
