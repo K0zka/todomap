@@ -1,4 +1,9 @@
 
+/* this thing sucks in firefox */
+a img {
+	border: none;
+}
+
 body {
 	font-family: monospace;
 }
@@ -10,12 +15,12 @@ div .good-resource {
 
 div .failed-resource {
 	background: #FFEEEE;
-	border: 3px solid #FFAAAA;
+	border: 2px solid #FFAAAA;
 }
 
 div .warn-resource {
 	background: #FFFFAA;
-	border: 3px solid #FFFF55;
+	border: 2px solid #FFFF55;
 }
 
 div .resource {
