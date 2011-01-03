@@ -67,5 +67,9 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
         	</div>
         <% } %>
         </div>
+        <div id="version">
+        	$HeadURL$
+        	$Id$
+        </div>
     </body>
 </html>
