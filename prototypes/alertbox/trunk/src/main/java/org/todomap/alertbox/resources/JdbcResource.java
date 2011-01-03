@@ -9,7 +9,7 @@ import java.sql.Statement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="jdbc")
+@XmlRootElement(name = "jdbc")
 public class JdbcResource extends BaseMonitorable {
 
 	String jdbcUrl;
@@ -25,12 +25,19 @@ public class JdbcResource extends BaseMonitorable {
 
 	@Override
 	public StatusDescription check() throws Exception {
-		if(driverClass != null) {
+		if (driverClass != null) {
 			Class.forName(driverClass);
 		}
-		final Connection connection = DriverManager.getConnection(jdbcUrl,
-				username, password);
-		return new StatusDescription(Status.Ok, getResult(connection));
+		Connection connection = null;
+		try {
+			connection = DriverManager.getConnection(jdbcUrl, username,
+					password);
+			return new StatusDescription(Status.Ok, getResult(connection));
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+		}
 	}
 
 	private String getResult(final Connection connection) throws SQLException {
@@ -46,10 +53,10 @@ public class JdbcResource extends BaseMonitorable {
 				return "OK";
 			}
 		} finally {
-			if(resultSet != null) {
+			if (resultSet != null) {
 				resultSet.close();
 			}
-			if(statement != null) {
+			if (statement != null) {
 				statement.close();
 			}
 		}
@@ -60,7 +67,7 @@ public class JdbcResource extends BaseMonitorable {
 		return "jdbc";
 	}
 
-	@XmlAttribute(name="url")
+	@XmlAttribute(name = "url")
 	public String getJdbcUrl() {
 		return jdbcUrl;
 	}
@@ -69,7 +76,7 @@ public class JdbcResource extends BaseMonitorable {
 		this.jdbcUrl = jdbcUrl;
 	}
 
-	@XmlAttribute(name="user")
+	@XmlAttribute(name = "user")
 	public String getUsername() {
 		return username;
 	}
@@ -78,7 +85,7 @@ public class JdbcResource extends BaseMonitorable {
 		this.username = username;
 	}
 
-	@XmlAttribute(name="pwd")
+	@XmlAttribute(name = "pwd")
 	public String getPassword() {
 		return password;
 	}
@@ -87,7 +94,7 @@ public class JdbcResource extends BaseMonitorable {
 		this.password = password;
 	}
 
-	@XmlAttribute(name="query")
+	@XmlAttribute(name = "query")
 	public String getQuery() {
 		return query;
 	}
@@ -96,7 +103,7 @@ public class JdbcResource extends BaseMonitorable {
 		this.query = query;
 	}
 
-	@XmlAttribute(name="driver-class")
+	@XmlAttribute(name = "driver-class")
 	public String getDriverClass() {
 		return driverClass;
 	}
