@@ -45,6 +45,10 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
 		    		value = $(val).text();
 	    			$(val).html('<img src="img/'+value.toLowerCase()+'.svg"/>');
 	    		});
+	    		$('div .resource').click(function(target) {
+		    		console.log($(target));
+		    		$(target.currentTarget).toggleClass('details');
+		    	});
             }
         	$(document).ready(function() {
             	decorate();
@@ -53,7 +57,7 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
     </head>
     <body>
         <h1>Resources</h1>
-        <div class="resources">
+        <div id="resources">
         <% for(Map.Entry<Monitorable, StatusDescription> entry : statuses.entrySet()) { %>
         	<div class="resource">
 	        	<% final String doc = entry.getKey().getDocUrl(); 
