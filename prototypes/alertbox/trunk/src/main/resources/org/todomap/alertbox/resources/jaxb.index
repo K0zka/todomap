@@ -4,3 +4,4 @@ JdbcResource
 JvmResource
 Ping
 SystemCommand
+SmtpResource
