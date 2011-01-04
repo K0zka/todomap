@@ -67,7 +67,11 @@
 			<version>6.0</version>
 			<scope>provided</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>jmsn</groupId>
+			<artifactId>msnmlib</artifactId>
+			<version>1.4-20050613</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
