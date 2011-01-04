@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.FileUtils;
 import org.todomap.alertbox.Monitor;
 import org.todomap.alertbox.Monitorable;
+import org.todomap.alertbox.Notifier;
 
 public class MonitorServlet extends HttpServlet {
 
@@ -23,7 +25,7 @@ public class MonitorServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 4380959961948400306L;
-	Monitor monitor = new Monitor();
+	Monitor monitor = null;
 	final Timer timer = new Timer();
 
 	@Override
@@ -39,6 +41,9 @@ public class MonitorServlet extends HttpServlet {
 	public void init(ServletConfig servletConfig) throws ServletException {
 		super.init(servletConfig);
 
+		Notifier notifier = getNotifier();
+		monitor = new Monitor(notifier);
+		
 		try {
 			for (File file : FileUtils.listFiles(
 					new File(System.getProperty("user.home") + "/cnf/"),
@@ -60,11 +65,20 @@ public class MonitorServlet extends HttpServlet {
 				try {
 					monitor.updateAllMonitors();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		}, 1000, 60000);
+	}
+
+	private Notifier getNotifier() {
+		try {
+			JAXBContext context = JAXBContext.newInstance("org.todomap.alertbox.notifiers");
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			return (Notifier) unmarshaller.unmarshal(new File(System.getProperty("user.home"), ".alertbox"));
+		} catch (JAXBException e) {
+			return null;
+		}
 	}
 
 }
