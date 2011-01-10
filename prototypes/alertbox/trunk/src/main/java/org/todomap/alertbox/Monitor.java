@@ -63,7 +63,7 @@ public class Monitor {
 						.getStatus() == Status.Warning))
 				|| (storedDescription != null && storedDescription.getStatus() != desc
 						.getStatus())) {
-			notifier.notify(desc);
+			notifier.notify(monitorable, desc);
 		}
 		statuses.put(monitorable, desc);
 	}

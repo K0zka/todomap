@@ -14,6 +14,7 @@ import net.sf.jml.impl.MsnMessengerFactory;
 import net.sf.jml.message.MsnSystemMessage;
 
 import org.todomap.alertbox.Monitorable.StatusDescription;
+import org.todomap.alertbox.Monitorable;
 import org.todomap.alertbox.Notifier;
 
 @XmlRootElement(name = "msn")
@@ -50,7 +51,7 @@ public class MsnNotifier implements Notifier {
 	}
 
 	@Override
-	public void notify(StatusDescription statusDescription) {
+	public void notify(Monitorable monitorable, StatusDescription statusDescription) {
 		if (loggedin) {
 			for (final String addr : targetAddress) {
 				messenger.sendText(

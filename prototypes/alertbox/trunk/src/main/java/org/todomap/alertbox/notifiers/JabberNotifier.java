@@ -8,10 +8,11 @@ import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
+import org.todomap.alertbox.Monitorable;
 import org.todomap.alertbox.Monitorable.StatusDescription;
 import org.todomap.alertbox.Notifier;
 
-@XmlRootElement(name="xmpp")
+@XmlRootElement(name = "xmpp")
 public class JabberNotifier implements Notifier {
 
 	private String serviceName = "gmail.com";
@@ -33,8 +34,8 @@ public class JabberNotifier implements Notifier {
 
 	@Override
 	public void start() throws XMPPException {
-		final ConnectionConfiguration config = new ConnectionConfiguration(host,
-				port, serviceName);
+		final ConnectionConfiguration config = new ConnectionConfiguration(
+				host, port, serviceName);
 
 		connection = new XMPPConnection(config);
 		connection.connect();
@@ -43,14 +44,17 @@ public class JabberNotifier implements Notifier {
 	}
 
 	@Override
-	public void notify(StatusDescription statusDescription) {
+	public void notify(Monitorable monitorable,
+			StatusDescription statusDescription) {
 		for (final String address : addresses) {
 			final Chat chat = connection.getChatManager().createChat(address,
 					null);
 			try {
-				chat.sendMessage(statusDescription.getStatus() + " " + statusDescription.getDescription());
+				chat.sendMessage(monitorable.getName() + " "
+						+ statusDescription.getStatus() + "\n"
+						+ statusDescription.getDescription());
 			} catch (XMPPException e) {
-				
+
 			}
 		}
 	}
@@ -63,7 +67,7 @@ public class JabberNotifier implements Notifier {
 		this.host = host;
 	}
 
-	@XmlAttribute(name="port")
+	@XmlAttribute(name = "port")
 	public int getPort() {
 		return port;
 	}
@@ -72,7 +76,7 @@ public class JabberNotifier implements Notifier {
 		this.port = port;
 	}
 
-	@XmlAttribute(name="user", required=true)
+	@XmlAttribute(name = "user", required = true)
 	public String getUsername() {
 		return username;
 	}
@@ -81,7 +85,7 @@ public class JabberNotifier implements Notifier {
 		this.username = username;
 	}
 
-	@XmlAttribute(name="pwd", required=true)
+	@XmlAttribute(name = "pwd", required = true)
 	public String getPassword() {
 		return password;
 	}
@@ -90,7 +94,7 @@ public class JabberNotifier implements Notifier {
 		this.password = password;
 	}
 
-	@XmlElement(name="to")
+	@XmlElement(name = "to")
 	public String[] getAddresses() {
 		return addresses;
 	}
