@@ -32,6 +32,10 @@
 	</distributionManagement>
 	<repositories>
 		<repository>
+			<id>java-jml-maven-repository</id>
+			<url>http://java-jml.sourceforge.net/maven</url>
+		</repository>
+		<repository>
 			<id>todomap.org</id>
 			<name>todomap.org maven repository</name>
 			<url>http://www.todomap.org/maven</url>
@@ -68,14 +72,9 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>jmsn</groupId>
-			<artifactId>msnmlib</artifactId>
-			<version>1.4-20050613</version>
-		</dependency>
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.1</version>
+			<version>4.8.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -105,6 +104,16 @@
 			<version>2.2</version>
 			<type>jar</type>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.java-jml</groupId>
+			<artifactId>jml</artifactId>
+			<version>1.0b4</version>
+		</dependency>
+		<dependency>
+			<groupId>jivesoftware</groupId>
+			<artifactId>smack</artifactId>
+			<version>3.1.0</version>
 		</dependency>
 	</dependencies>
 
