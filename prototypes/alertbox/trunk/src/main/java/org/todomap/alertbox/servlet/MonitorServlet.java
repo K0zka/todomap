@@ -42,6 +42,11 @@ public class MonitorServlet extends HttpServlet {
 		super.init(servletConfig);
 
 		Notifier notifier = getNotifier();
+		try {
+			notifier.start();
+		} catch (final Exception e) {
+			throw new ServletException(e);
+		}
 		monitor = new Monitor(notifier);
 		
 		try {
