@@ -1,73 +1,103 @@
 package org.todomap.alertbox.notifiers;
 
-import java.io.IOException;
+import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import net.sf.jml.Email;
+import net.sf.jml.MsnMessenger;
+import net.sf.jml.event.MsnAdapter;
+import net.sf.jml.impl.MsnMessengerFactory;
+import net.sf.jml.message.MsnSystemMessage;
+
 import org.todomap.alertbox.Monitorable.StatusDescription;
 import org.todomap.alertbox.Notifier;
 
-import rath.msnm.MSNMessenger;
-import rath.msnm.entity.MsnFriend;
-import rath.msnm.event.MsnAdapter;
-import rath.msnm.msg.MimeMessage;
-
-@XmlRootElement(name="msn")
+@XmlRootElement(name = "msn")
 public class MsnNotifier implements Notifier {
 	String[] targetAddress;
 	String msnUser;
 	String msnPasswd;
-	@XmlElement(name="to")
+
+	@XmlElement(name = "to")
 	public String[] getTargetAddress() {
 		return targetAddress;
 	}
+
 	public void setTargetAddress(String[] targetAddress) {
 		this.targetAddress = targetAddress;
 	}
+
 	public String getMsnUser() {
 		return msnUser;
 	}
-	@XmlAttribute(name="user")
+
+	@XmlAttribute(name = "user")
 	public void setMsnUser(String msnUser) {
 		this.msnUser = msnUser;
 	}
-	@XmlAttribute(name="pwd")
+
+	@XmlAttribute(name = "pwd")
 	public String getMsnPasswd() {
 		return msnPasswd;
 	}
+
 	public void setMsnPasswd(String msnPasswd) {
 		this.msnPasswd = msnPasswd;
 	}
 
 	@Override
 	public void notify(StatusDescription statusDescription) {
-		final MSNMessenger msnMessenger = new MSNMessenger(msnUser, msnPasswd);
-		msnMessenger.addMsnListener(new MsnAdapter(){
-
-			@Override
-			public void loginComplete(MsnFriend own) {
-				System.err.print(own.getFormattedFriendlyName());
+		if (loggedin) {
+			for (final String addr : targetAddress) {
+				messenger.sendText(
+						Email.parseStr(addr),
+						statusDescription.getStatus() + " "
+								+ statusDescription.getDescription());
 			}
-
-			@Override
-			public void loginError(String header) {
-				System.err.print(header);
-			}});
-		msnMessenger.login();
-		try {
-			msnMessenger.setMyFriendlyName("AlertBox");
-			msnMessenger.setMyStatus("Bad news.");
-			for(String address : targetAddress) {
-				MimeMessage mimeMessage = new MimeMessage();
-				mimeMessage.setMessage(""+statusDescription.getStatus() + " "+statusDescription.getDescription());
-				msnMessenger.sendMessage(address, mimeMessage);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}finally {
-			msnMessenger.logout();
+		} else {
+			messageQueue.add(statusDescription);
 		}
+	}
+
+	MsnMessenger messenger;
+	boolean loggedin = false;
+	Queue<StatusDescription> messageQueue = new ArrayBlockingQueue<StatusDescription>(1024);
+
+	@Override
+	public void start() {
+		messenger = MsnMessengerFactory.createMsnMessenger(msnUser, msnPasswd);
+		messenger.setLogIncoming(true);
+		messenger.setLogOutgoing(true);
+		messenger.addListener(new MsnAdapter(){
+
+			@Override
+			public void ownerStatusChanged(MsnMessenger messenger) {
+				System.out.println(messenger.getOwner().getStatus());
+			}
+
+			@Override
+			public void systemMessageReceived(MsnMessenger messenger,
+					MsnSystemMessage message) {
+				System.out.println(message.getContent());
+			}
+
+			@Override
+			public void loginCompleted(MsnMessenger messenger) {
+				System.out.println("logged on");
+			}
+
+			@Override
+			public void contactListInitCompleted(MsnMessenger messenger) {
+				loggedin = true;
+				for(String addr : targetAddress) {
+					messenger.sendText(Email.parseStr(addr), "Hello!");
+				}
+			}});
+		messenger.login();
+
 	}
 }
