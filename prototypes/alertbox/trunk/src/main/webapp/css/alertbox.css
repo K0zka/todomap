@@ -90,3 +90,40 @@ a img {
 .details div .description {
 	overflow: scroll;
 }
+
+div.labels {
+	display: none;
+}
+
+#labels {
+	float: left;
+	padding-right: 10px;
+}
+
+#labels span {
+	cursor: pointer;
+	padding: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+#labels span:hover {
+	background-color: #DDFFDD;
+}
+
+#labels span:hover .labelcntr {
+	color: #AAAAAA;
+}
+
+div.alltags {
+	
+}
+
+div.alltags span.tagitem {
+	cursor: pointer;
+}
+
+span .labelcntr {
+	text-decoration:none;
+	padding: 5px;
+}

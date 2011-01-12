@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="java.util.Map"%>
 <%@page import="org.todomap.alertbox.Monitorable"%>
 <%@page import="org.todomap.alertbox.Monitorable.StatusDescription"%>
@@ -6,6 +7,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 <%
+@SuppressWarnings("unchecked")
 Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescription>)request.getAttribute("statuses");
 %>
 <html>
@@ -19,7 +21,6 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
     		var nrOfAlerts = 0;
 	        function decorate() {
 		        $.each($('a[rel="documentation"]'), function(i,doc) {
-			        console.log(i);
 			        $(doc).html('<img src="img/txt.svg"/>');
 			        $(doc).attr('target','__blank');
 			    });
@@ -46,9 +47,25 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
 	    			$(val).html('<img src="img/'+value.toLowerCase()+'.svg"/>');
 	    		});
 	    		$('div .resource').click(function(target) {
-		    		console.log($(target));
 		    		$(target.currentTarget).toggleClass('details');
 		    	});
+		    	const labels = new Array();
+		    	$.each($('div .labels span.label'),function(i, label) {
+			    	var labelText = $(label).text();
+			    	var val = labels[labelText];
+			    	if(typeof val != 'undefined') {
+			    		labels[labelText] = val + 1;
+				    } else {
+				    	labels[labelText] = 1;
+					}
+			    });
+			    $('#labels').empty();
+		    	for(val in labels) {
+		    		$('#labels').append('<span>'+val+'<span class="labelcntr">'+labels[val]+'</span>'+'<span>');
+		    	}
+		    	$('#labels span').click(function(event) {
+					console.log($(event.target).text());
+			    });
             }
         	$(document).ready(function() {
             	decorate();
@@ -57,6 +74,7 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
     </head>
     <body>
         <h1>Resources</h1>
+        <div id="labels"></div>
         <div id="resources">
         <% for(Map.Entry<Monitorable, StatusDescription> entry : statuses.entrySet()) { %>
         	<div class="resource">
@@ -68,11 +86,16 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
 	        	<div class="status"><%=entry.getValue().getStatus() %></div>
 	        	<div class="name"><%=entry.getKey().getName() %></div>
 	        	<div class="description"><%=entry.getValue().getDescription()%></div>
+	        	<div class="labels">
+	        	<% for(final String tag : entry.getKey().getTags()) { %>
+	        		<span class="label"><%= tag %></span>
+	        	<% } %>
+	        	</div>
         	</div>
         <% } %>
         </div>
         <div id="version">
-        	$HeadURL$
+        	<%= StringUtils.substringBetween("$HeadURL$", "/alertbox/", "/src/") %>
         	$Id$
         </div>
     </body>
