@@ -39,6 +39,8 @@ public interface Monitorable {
 		}
 	}
 
+	String[] getTags();
+	String getId();
 	String getDocUrl();
 	String getTypeId();
 	String getName();

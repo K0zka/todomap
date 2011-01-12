@@ -103,4 +103,9 @@ public class JabberNotifier implements Notifier {
 		this.addresses = addresses;
 	}
 
+	@Override
+	public void stop() {
+		connection.disconnect();
+	}
+
 }

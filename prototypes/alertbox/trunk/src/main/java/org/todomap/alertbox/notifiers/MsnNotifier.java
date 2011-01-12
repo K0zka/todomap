@@ -101,4 +101,9 @@ public class MsnNotifier implements Notifier {
 		messenger.login();
 
 	}
+
+	@Override
+	public void stop() {
+		messenger.logout();
+	}
 }
