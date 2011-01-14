@@ -107,6 +107,10 @@ div.labels {
 	-webkit-border-radius: 3px;
 }
 
+#nofilter:hover {
+	background-color: #DDFFDD;
+}
+
 #labels span:hover {
 	background-color: #DDFFDD;
 }
