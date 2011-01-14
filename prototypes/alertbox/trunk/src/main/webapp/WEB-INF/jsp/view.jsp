@@ -50,6 +50,7 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
 		    		$(target.currentTarget).toggleClass('details');
 		    	});
 		    	const labels = new Array();
+		    	labels['*'] = $('div .resource').size();
 		    	$.each($('div .labels span.label'),function(i, label) {
 			    	var labelText = $(label).text();
 			    	var val = labels[labelText];
@@ -61,11 +62,26 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
 			    });
 			    $('#labels').empty();
 		    	for(val in labels) {
-		    		$('#labels').append('<span>'+val+'<span class="labelcntr">'+labels[val]+'</span>'+'<span>');
+		    		$('#labels').append('<span><span class="labelname">'+val+'</span><span class="labelcntr">'+labels[val]+'</span>'+'<span>');
 		    	}
-		    	$('#labels span').click(function(event) {
-					console.log($(event.target).text());
+		    	$('#labels span.labelname').click(function(event) {
+			    	$('div .resource').show();
+			    	var label = $(event.target).text()
+		    		$('div .resource').each(function(i, val) {
+			    		var labelFound = (label == '*');
+						if($(val).find('span.label').each(function(i, span){
+							if($(span).text() == label) {
+								labelFound = true;
+							}
+						}));
+						if(!labelFound) {
+							$(val).fadeOut(500);
+						}
+			    	});
 			    });
+			    $('#nofilter').click(function() {
+			    	$('div .resource').fadeIn(500);
+				});
             }
         	$(document).ready(function() {
             	decorate();
