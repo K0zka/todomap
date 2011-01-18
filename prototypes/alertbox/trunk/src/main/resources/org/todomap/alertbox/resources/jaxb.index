@@ -5,3 +5,4 @@ JvmResource
 Ping
 SystemCommand
 SmtpResource
+FtpResource
