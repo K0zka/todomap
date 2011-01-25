@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="java.util.Map"%>
 <%@page import="org.todomap.alertbox.Monitorable"%>
@@ -7,6 +8,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 <%
+
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
 @SuppressWarnings("unchecked")
 Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescription>)request.getAttribute("statuses");
 %>
@@ -16,6 +20,8 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
         <title>AlertBox</title>
         <link href="css/alertbox.css" rel="stylesheet" type="text/css" media="all"/>
         <script type="text/javascript" src="js/jquery-1.4.4.min.js">
+        </script>
+        <script type="text/javascript" src="js/jquery-ui-1.8.8.custom.min.js">
         </script>
         <script type="text/javascript">
     		var nrOfAlerts = 0;
@@ -48,6 +54,7 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
 	    		});
 	    		$('div .resource').click(function(target) {
 		    		$(target.currentTarget).toggleClass('details');
+		    		$(target.currentTarget).resizable();
 		    	});
 		    	const labels = new Array();
 		    	labels['*'] = $('div .resource').size();
@@ -99,9 +106,11 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
 	        	<a href="<%= doc %>" rel="documentation"></a>
 	        	<% } %>
 	        	<div class="type"><%= entry.getKey().getTypeId() %></div>
+	        	<div class="id"><%= entry.getKey().getId() %></div>
 	        	<div class="status"><%=entry.getValue().getStatus() %></div>
 	        	<div class="name"><%=entry.getKey().getName() %></div>
 	        	<div class="description"><%=entry.getValue().getDescription()%></div>
+	        	<div class="lastFail"><%= entry.getValue().getLastFailed() == null ? "" : sdf.format(entry.getValue().getLastFailed()) %></div>
 	        	<div class="labels">
 	        	<% for(final String tag : entry.getKey().getTags()) { %>
 	        		<span class="label"><%= tag %></span>
