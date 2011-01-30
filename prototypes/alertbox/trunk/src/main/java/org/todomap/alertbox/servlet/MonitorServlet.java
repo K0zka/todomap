@@ -14,17 +14,20 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import org.apache.commons.io.FileUtils;
+import org.todomap.alertbox.History;
 import org.todomap.alertbox.Monitor;
-import org.todomap.alertbox.Monitorable;
 import org.todomap.alertbox.Notifier;
 
 public class MonitorServlet extends HttpServlet {
 
+	private static final File alertboxConfigDir = new File(System
+						.getProperty("user.home"), ".alertbox");
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4380959961948400306L;
+	
+	final History history = new History();
 	Monitor monitor = null;
 	final Timer timer = new Timer();
 
@@ -47,21 +50,7 @@ public class MonitorServlet extends HttpServlet {
 		} catch (final Exception e) {
 			throw new ServletException(e);
 		}
-		monitor = new Monitor(notifier);
-		
-		try {
-			for (File file : FileUtils.listFiles(
-					new File(System.getProperty("user.home") + "/cnf/"),
-					new String[] { "xml" }, true)) {
-				JAXBContext context = JAXBContext
-						.newInstance("org.todomap.alertbox.resources");
-				monitor.getMonitorables().add(
-						(Monitorable) context.createUnmarshaller().unmarshal(
-								file));
-			}
-		} catch (JAXBException e1) {
-			throw new ServletException(e1);
-		}
+		monitor = new Monitor(notifier, history);
 
 		timer.schedule(new TimerTask() {
 
@@ -78,12 +67,12 @@ public class MonitorServlet extends HttpServlet {
 
 	private Notifier getNotifier() {
 		try {
-			JAXBContext context = JAXBContext.newInstance("org.todomap.alertbox.notifiers");
+			JAXBContext context = JAXBContext
+					.newInstance("org.todomap.alertbox.notifiers");
 			Unmarshaller unmarshaller = context.createUnmarshaller();
-			return (Notifier) unmarshaller.unmarshal(new File(System.getProperty("user.home"), ".alertbox"));
+			return (Notifier) unmarshaller.unmarshal(new File(alertboxConfigDir, "notifiers.xml"));
 		} catch (JAXBException e) {
 			return null;
 		}
 	}
-
 }
