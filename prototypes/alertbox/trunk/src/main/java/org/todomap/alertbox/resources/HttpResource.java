@@ -20,6 +20,7 @@ public final class HttpResource extends BaseMonitorable {
 	@Override
 	public StatusDescription check() throws Exception {
 		HttpClient client = new HttpClient();
+		client.getHttpConnectionManager().getParams().setParameter("http.socket.timeout", 1000);
 		GetMethod get = new GetMethod(url);
 		client.executeMethod(get);
 		if (statusCode != null && get.getStatusCode() != statusCode) {

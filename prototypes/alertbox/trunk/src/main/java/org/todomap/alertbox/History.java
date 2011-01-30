@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
+import java.util.logging.Logger;
 
 import org.apache.derby.jdbc.EmbeddedDataSource;
 import org.todomap.alertbox.Monitorable.StatusDescription;
@@ -16,6 +18,22 @@ import org.todomap.alertbox.Monitorable.StatusDescription;
 public final class History {
 
 	final EmbeddedDataSource dataSource;
+	private final static Logger logger = Logger.getLogger(History.class
+			.getName());
+
+	interface ConnectionCallback {
+		void doWithConnection(Connection connection) throws SQLException;
+	}
+
+	interface PreparedStatementCallback {
+		void doWithPreparedStatement(PreparedStatement preparedStatement)
+				throws SQLException;
+	}
+
+	interface PreparedStatementCallbackAndReturn<T> {
+		T doWithPreparedStatement(PreparedStatement preparedStatement)
+				throws SQLException;
+	}
 
 	public History() {
 		dataSource = new EmbeddedDataSource();
@@ -29,54 +47,90 @@ public final class History {
 		}
 	}
 
-	void setupDb() throws SQLException {
-		Connection connection = null;
-		Statement statement = null;
+	private void doWithPreparedStatement(final String sql,
+			final PreparedStatementCallback callback) throws SQLException {
+		doWithConnection(new ConnectionCallback() {
 
+			@Override
+			public void doWithConnection(Connection connection)
+					throws SQLException {
+				PreparedStatement statement = null;
+				try {
+					statement = connection.prepareStatement(sql);
+					callback.doWithPreparedStatement(statement);
+				} finally {
+					if (statement != null) {
+						statement.close();
+					}
+				}
+			}
+		});
+	}
+
+	@SuppressWarnings("unchecked")
+	private <T> T doWithPreparedStatementAndReturn(final String sql,
+			final PreparedStatementCallbackAndReturn<T> callback)
+			throws SQLException {
+		final Object[] holder = new Object[1];
+		doWithConnection(new ConnectionCallback() {
+
+			@Override
+			public void doWithConnection(Connection connection)
+					throws SQLException {
+				PreparedStatement statement = null;
+				try {
+					statement = connection.prepareStatement(sql);
+					holder[0] = callback.doWithPreparedStatement(statement);
+				} finally {
+					if (statement != null) {
+						statement.close();
+					}
+				}
+			}
+		});
+		return (T) holder[0];
+	}
+
+	private void doWithConnection(final ConnectionCallback callback)
+			throws SQLException {
+		Connection connection = null;
 		try {
 			connection = dataSource.getConnection();
-			final ArrayList<String> tables = getTableNames(connection
-					.getMetaData());
-			final ArrayList<String> indices = getIndexNames(
-					connection.getMetaData(), tables);
-			statement = connection.createStatement();
-			if (!tables.contains("ab_events")) {
-				statement.execute("create table ab_events("
-						+ "ev_id int generated always as identity, "
-						+ "ev_res varchar(128) not null, "
-						+ "ev_created date not null default CURRENT_DATE, "
-						+ "ev_type int, " + "ev_status int, " + "ev_desc clob "
-						+ ")");
-			}
-			if (!indices.contains("ab_events_idx_types")) {
-				statement
-						.execute("create index ab_events_idx_types on ab_events(ev_type)");
-			}
-			statement
-					.execute("create index ab_events_idx_res on ab_events(ev_res)");
-			statement
-					.execute("create index ab_events_idx_created on ab_events(ev_created)");
-
+			callback.doWithConnection(connection);
 		} finally {
 			if (connection != null) {
 				connection.close();
 			}
 		}
+
 	}
 
-	private ArrayList<String> getIndexNames(DatabaseMetaData metaData,
-			List<String> tables) throws SQLException {
-		ArrayList<String> indexList = new ArrayList<String>();
-		for (String table : tables) {
-			final ResultSet indices = metaData.getIndexInfo(null, null, table,
-					false, true);
+	void setupDb() throws SQLException {
+		doWithConnection(new ConnectionCallback() {
 
-			while (indices.next()) {
-				indexList.add(indices.getString("INDEX_NAME"));
+			@Override
+			public void doWithConnection(Connection connection)
+					throws SQLException {
+				final ArrayList<String> tables = getTableNames(connection
+						.getMetaData());
+				Statement statement = connection.createStatement();
+				if (!tables.contains("ab_events")) {
+					statement.execute("create table ab_events("
+							+ "ev_id int generated always as identity, "
+							+ "ev_res varchar(128) not null, "
+							+ "ev_created timestamp not null default CURRENT_TIMESTAMP, "
+							+ "ev_type int, " + "ev_status int, "
+							+ "ev_desc clob " + ")");
+					statement
+							.execute("create index ab_events_idx_types on ab_events(ev_type)");
+					statement
+							.execute("create index ab_events_idx_res on ab_events(ev_res)");
+					statement
+							.execute("create index ab_events_idx_created on ab_events(ev_created)");
+				}
 			}
-			indices.close();
-		}
-		return indexList;
+		});
+
 	}
 
 	private ArrayList<String> getTableNames(final DatabaseMetaData metaData)
@@ -108,16 +162,93 @@ public final class History {
 	}
 
 	public void recordResourceMonitorStarted(final Monitorable monitorable) {
-		//TODO
+		try {
+			doWithPreparedStatement(
+					"insert into ab_events (ev_res, ev_type) values (?, ?)",
+					new PreparedStatementCallback() {
+
+						@Override
+						public void doWithPreparedStatement(
+								final PreparedStatement preparedStatement)
+								throws SQLException {
+							preparedStatement.setString(1, monitorable.getId());
+							preparedStatement.setInt(2, 1);
+							preparedStatement.execute();
+						}
+					});
+		} catch (SQLException e) {
+			logger.warning(e.getMessage());
+		}
 	}
 
 	public void recordOutageStart(final Monitorable monitorable,
 			final StatusDescription description) {
-		//TODO
+		try {
+			doWithPreparedStatement(
+					"insert into ab_events(ev_res, ev_type, ev_status, ev_desc) values (?, ?, ?, ?)",
+					new PreparedStatementCallback() {
+
+						@Override
+						public void doWithPreparedStatement(
+								PreparedStatement preparedStatement)
+								throws SQLException {
+							preparedStatement.setString(1, monitorable.getId());
+							preparedStatement.setInt(2, 2);
+							preparedStatement.setInt(3, description.getStatus()
+									.ordinal());
+							preparedStatement.setString(4,
+									description.getDescription());
+							preparedStatement.execute();
+						}
+					});
+		} catch (SQLException e) {
+			logger.warning(e.getMessage());
+		}
 	}
 
 	public void recordOutageEnd(final Monitorable monitorable) {
-		//TODO
+		try {
+			doWithPreparedStatement(
+					"insert into ab_events(ev_res, ev_type) values (?, ?)",
+					new PreparedStatementCallback() {
+
+						@Override
+						public void doWithPreparedStatement(
+								PreparedStatement preparedStatement)
+								throws SQLException {
+							preparedStatement.setString(1, monitorable.getId());
+							preparedStatement.setInt(2, 3);
+						}
+					});
+		} catch (SQLException e) {
+			logger.warning(e.getMessage());
+		}
+	}
+
+	public Date getLastFail(final Monitorable monitorable) {
+		try {
+			return doWithPreparedStatementAndReturn(
+					"select ev_created from ab_events where ev_res = ? and ev_type = 2 order by ev_created desc",
+					new PreparedStatementCallbackAndReturn<Date>() {
+
+						@Override
+						public Date doWithPreparedStatement(
+								PreparedStatement preparedStatement)
+								throws SQLException {
+							preparedStatement.setString(1, monitorable.getId());
+							final ResultSet resultSet = preparedStatement
+									.executeQuery();
+							if (resultSet.next()) {
+								return new Date(resultSet.getTimestamp(1).getTime());
+							}
+							return null;
+						}
+
+					});
+		} catch (SQLException e) {
+			logger.warning(e.getMessage());
+			return null;
+		}
 	}
 
 }

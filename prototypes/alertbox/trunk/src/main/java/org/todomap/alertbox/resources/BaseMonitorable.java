@@ -9,6 +9,7 @@ public abstract class BaseMonitorable implements Monitorable {
 	String docUrl;
 	String id;
 	String[] tags = new String[]{};
+	final long created = System.currentTimeMillis();
 
 	@XmlAttribute(name="doc")
 	public final String getDocUrl() {
@@ -34,5 +35,10 @@ public abstract class BaseMonitorable implements Monitorable {
 
 	public final void setTags(final String[] tags) {
 		this.tags = tags;
+	}
+
+	@Override
+	public long lastChanged() {
+		return created;
 	}
 }
