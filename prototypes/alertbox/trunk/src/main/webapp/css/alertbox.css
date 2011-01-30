@@ -46,6 +46,10 @@ div .status img {
 	height: 64px;
 }
 
+div .id {
+	display: none;
+}
+
 div .name {
 	font-size: 10px;
 	font-weight: bold;
@@ -100,18 +104,20 @@ div.labels {
 	padding-right: 10px;
 }
 
+#nofilter:hover {
+	background-color: #DDFFDD;
+}
+
 #labels span {
+	color: #606060;
 	cursor: pointer;
 	padding: 3px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 }
 
-#nofilter:hover {
-	background-color: #DDFFDD;
-}
-
 #labels span:hover {
+	color: #303030;
 	background-color: #DDFFDD;
 }
 

@@ -9,7 +9,7 @@
    "http://www.w3.org/TR/html4/loose.dtd">
 <%
 
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 @SuppressWarnings("unchecked")
 Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescription>)request.getAttribute("statuses");
