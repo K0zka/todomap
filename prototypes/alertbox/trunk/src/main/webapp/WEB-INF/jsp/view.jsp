@@ -21,8 +21,6 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
         <link href="css/alertbox.css" rel="stylesheet" type="text/css" media="all"/>
         <script type="text/javascript" src="js/jquery-1.4.4.min.js">
         </script>
-        <script type="text/javascript" src="js/jquery-ui-1.8.8.custom.min.js">
-        </script>
         <script type="text/javascript">
     		var nrOfAlerts = 0;
 	        function decorate() {
