@@ -100,7 +100,7 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
         <div id="labels"></div>
         <div id="resources">
         <% for(Map.Entry<Monitorable, StatusDescription> entry : statuses.entrySet()) { %>
-        	<div class="resource">
+        	<div class="resource" id="<%= entry.getKey().getId() %>">
 	        	<% final String doc = entry.getKey().getDocUrl(); 
 	        	if(doc != null) { %>
 	        	<a href="<%= doc %>" rel="documentation"></a>
@@ -115,6 +115,9 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
 	        	<% for(final String tag : entry.getKey().getTags()) { %>
 	        		<span class="label"><%= tag %></span>
 	        	<% } %>
+	        	<div id="outages">
+	        		<img alt="" src="outage/<%= entry.getKey().getId() %>">
+	        	</div>
 	        	</div>
         	</div>
         <% } %>
