@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.apache.derby.jdbc.EmbeddedDataSource;
@@ -17,6 +18,8 @@ import org.todomap.alertbox.Monitorable.StatusDescription;
 
 public final class History {
 
+	private static final int type_outage_end = 3;
+	private static final int type_outage_start = 2;
 	final EmbeddedDataSource dataSource;
 	private final static Logger logger = Logger.getLogger(History.class
 			.getName());
@@ -193,7 +196,7 @@ public final class History {
 								PreparedStatement preparedStatement)
 								throws SQLException {
 							preparedStatement.setString(1, monitorable.getId());
-							preparedStatement.setInt(2, 2);
+							preparedStatement.setInt(2, type_outage_start);
 							preparedStatement.setInt(3, description.getStatus()
 									.ordinal());
 							preparedStatement.setString(4,
@@ -217,7 +220,7 @@ public final class History {
 								PreparedStatement preparedStatement)
 								throws SQLException {
 							preparedStatement.setString(1, monitorable.getId());
-							preparedStatement.setInt(2, 3);
+							preparedStatement.setInt(2, type_outage_end);
 						}
 					});
 		} catch (SQLException e) {
@@ -251,4 +254,69 @@ public final class History {
 		}
 	}
 
+	public class Outage {
+		public Date getStart() {
+			return start;
+		}
+		public void setStart(Date start) {
+			this.start = start;
+		}
+		public Date getEnd() {
+			return end;
+		}
+		public void setEnd(Date end) {
+			this.end = end;
+		}
+		public String getReason() {
+			return reason;
+		}
+		public void setReason(String reason) {
+			this.reason = reason;
+		}
+		Date start;
+		Date end;
+		String reason;
+	}
+
+	public List<Outage> listOutages(final Monitorable monitorable, final Date startFrom, final Date untilDate) {
+		try {
+			return doWithPreparedStatementAndReturn("select " +
+					"ev_id, " +
+					"ev_created, " +
+					"ev_res, " +
+					"ev_type, " +
+					"ev_desc " +
+					"from ab_events " +
+					"where ev_res = ? and ev_created between ? and ? " +
+					"order by ev_res desc", new PreparedStatementCallbackAndReturn<List<Outage>>() {
+
+				@Override
+				public List<Outage> doWithPreparedStatement(
+						final PreparedStatement preparedStatement) throws SQLException {
+
+					final ArrayList<History.Outage> outages = new ArrayList<History.Outage>();
+					preparedStatement.setString(1, monitorable.getId());
+					preparedStatement.setDate(2, new java.sql.Date(startFrom.getTime()));
+					preparedStatement.setDate(3, new java.sql.Date(untilDate.getTime()));
+					final ResultSet resultSet = preparedStatement.executeQuery();
+					Outage outage = null;
+					while(resultSet.next()) {
+						final int type = resultSet.getInt("ev_type");
+						if(type == type_outage_start && outage == null) {
+							outage = new Outage();
+							outage.start = resultSet.getDate("ev_created");
+							outages.add(outage);
+						} else if(type == type_outage_end) {
+							outage.end = outage.end;
+						}
+					}
+					return outages;
+				}
+			});
+		} catch (SQLException e) {
+			logger.warning(e.getMessage());
+			return null;
+		}
+	}
+	
 }

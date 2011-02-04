@@ -51,6 +51,8 @@ public class MonitorServlet extends HttpServlet {
 			throw new ServletException(e);
 		}
 		monitor = new Monitor(notifier, history);
+		servletConfig.getServletContext().setAttribute("history", history);
+		servletConfig.getServletContext().setAttribute("monitor", monitor);
 
 		timer.schedule(new TimerTask() {
 
