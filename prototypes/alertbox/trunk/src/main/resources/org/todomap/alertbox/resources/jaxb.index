@@ -6,3 +6,4 @@ Ping
 SystemCommand
 SmtpResource
 FtpResource
+LdapResource
