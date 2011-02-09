@@ -52,7 +52,6 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
 	    		});
 	    		$('div .resource').click(function(target) {
 		    		$(target.currentTarget).toggleClass('details');
-		    		$(target.currentTarget).resizable();
 		    	});
 		    	const labels = new Array();
 		    	labels['*'] = $('div .resource').size();
@@ -113,9 +112,9 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
 	        	<% for(final String tag : entry.getKey().getTags()) { %>
 	        		<span class="label"><%= tag %></span>
 	        	<% } %>
-	        	<div id="outages">
-	        		<img alt="" src="outage/<%= entry.getKey().getId() %>">
 	        	</div>
+	        	<div class="outages">
+	        		<img alt="" src="outage/<%= entry.getKey().getId() %>">
 	        	</div>
         	</div>
         <% } %>
