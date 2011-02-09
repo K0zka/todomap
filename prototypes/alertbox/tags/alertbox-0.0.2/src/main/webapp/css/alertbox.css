@@ -1,0 +1,151 @@
+
+/* this thing sucks in firefox */
+a img {
+	border: none;
+}
+
+body {
+	font-family: monospace;
+}
+
+div .good-resource {
+	background: #DDFFDD;
+	border: 2px solid #AADDAA;
+}
+
+div .failed-resource {
+	background: #FFEEEE;
+	border: 2px solid #FFAAAA;
+}
+
+div .warn-resource {
+	background: #FFFFAA;
+	border: 2px solid #FFFF55;
+}
+
+div .resource {
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	margin: 10px;
+	padding: 10px;
+	width: 128px;
+	height: 196px;
+	float: left;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+div .status {
+	position: relative;
+	top: 0px;
+	left: 0px;
+}
+
+div .status img {
+	width: 64px;
+	height: 64px;
+}
+
+div .id {
+	display: none;
+}
+
+div .name {
+	font-size: 10px;
+	font-weight: bold;
+	padding-bottom: 10px;
+}
+
+div .description {
+	font-size: 8px;
+}
+
+div .lastFail {
+	font-size: 7px;
+}
+
+div .type {
+}
+
+div .type img {
+	width: 16px;
+	height: 16px;
+}
+
+a img {
+	width: 16px;
+	height: 16px;
+}
+
+#resources {
+	width: 100%;
+	float:left;
+	margin: 20px;
+}
+
+div.resource .outages {
+	display : none;
+}
+
+#version {
+	width: 100%;
+	height: 50px;
+	font-size: 8px;
+	padding: 10px;
+	margin-top: 100px;
+}
+
+.details {
+	width: 300px !important;
+}
+
+div.details .outages {
+	display : block;
+}
+
+.details div .description {
+	overflow: scroll;
+}
+
+span.labels {
+	display: none;
+}
+
+#labels {
+	float: left;
+	padding-right: 10px;
+}
+
+#nofilter:hover {
+	background-color: #DDFFDD;
+}
+
+#labels span {
+	color: #606060;
+	cursor: pointer;
+	padding: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+#labels span:hover {
+	color: #303030;
+	background-color: #DDFFDD;
+}
+
+#labels span:hover .labelcntr {
+	color: #AAAAAA;
+}
+
+div.alltags {
+	
+}
+
+div.alltags span.tagitem {
+	cursor: pointer;
+}
+
+span .labelcntr {
+	text-decoration:none;
+	padding: 5px;
+}
