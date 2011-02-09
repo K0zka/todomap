@@ -19,7 +19,7 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>AlertBox</title>
         <link href="css/alertbox.css" rel="stylesheet" type="text/css" media="all"/>
-        <script type="text/javascript" src="js/jquery-1.4.4.min.js">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js">
         </script>
         <script type="text/javascript">
     		var nrOfAlerts = 0;
@@ -73,11 +73,12 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
 			    	var label = $(event.target).text()
 		    		$('div .resource').each(function(i, val) {
 			    		var labelFound = (label == '*');
-						if($(val).find('span.label').each(function(i, span){
+			    		console.log($(val).find('span.label'));
+						$(val).find('span.label').each(function(i, span){
 							if($(span).text() == label) {
 								labelFound = true;
 							}
-						}));
+						});
 						if(!labelFound) {
 							$(val).fadeOut(500);
 						}
@@ -108,11 +109,11 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
 	        	<div class="name"><%=entry.getKey().getName() %></div>
 	        	<div class="description"><%=entry.getValue().getDescription()%></div>
 	        	<div class="lastFail"><%= entry.getValue().getLastFailed() == null ? "" : sdf.format(entry.getValue().getLastFailed()) %></div>
-	        	<div class="labels">
+	        	<span class="labels">
 	        	<% for(final String tag : entry.getKey().getTags()) { %>
 	        		<span class="label"><%= tag %></span>
 	        	<% } %>
-	        	</div>
+	        	</span>
 	        	<!-- 
 	        	<div class="outages">
 	        		<img alt="" src="outage/<%= entry.getKey().getId() %>">
