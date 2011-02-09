@@ -42,19 +42,22 @@ public class OutagesServlet extends HttpServlet {
 			if (id.equals(monitorable.getId())) {
 
 				response.setContentType("image/jpeg");
-				final BufferedImage image = new BufferedImage(350, 50,
+				final BufferedImage image = new BufferedImage(250, 50,
 						BufferedImage.TYPE_INT_RGB);
 				final Graphics2D graphics = image.createGraphics();
 				graphics.setColor(Color.GREEN);
-				graphics.fill3DRect(0, 0, 350, 50, true);
-				
+				graphics.fill3DRect(0, 0, 250, 50, true);
+
 				graphics.setColor(Color.BLACK);
 				final long oneWeekAgo = System.currentTimeMillis() - oneWeek;
-				for (final Outage outage : history.listOutages(monitorable, new Date(
-						oneWeekAgo), new Date())) {
-					long start = outage.getStart().getTime() - oneWeekAgo;
-					long end = 10;
-					
+				for (final Outage outage : history.listOutages(monitorable,
+						new Date(oneWeekAgo), new Date())) {
+					long start = outage.getStart().getTime();
+					long end = outage.getEnd() == null ? System
+							.currentTimeMillis() : outage.getEnd()
+							.getTime();
+					graphics.fillRect((int) (start / (250 * oneWeek)), 0,
+							(int) ((end - start) / (250 * oneWeek)), 50);
 				}
 				ImageIO.write(image, "jpeg", response.getOutputStream());
 				break;
