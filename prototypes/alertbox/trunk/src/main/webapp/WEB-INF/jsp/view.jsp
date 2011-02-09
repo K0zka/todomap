@@ -113,9 +113,11 @@ Map<Monitorable, StatusDescription> statuses = (Map<Monitorable, StatusDescripti
 	        		<span class="label"><%= tag %></span>
 	        	<% } %>
 	        	</div>
+	        	<!-- 
 	        	<div class="outages">
 	        		<img alt="" src="outage/<%= entry.getKey().getId() %>">
 	        	</div>
+	        	 -->
         	</div>
         <% } %>
         </div>
