@@ -1,0 +1,9 @@
+FileSystemResource
+HttpResource
+JdbcResource
+JvmResource
+Ping
+SystemCommand
+SmtpResource
+FtpResource
+LdapResource
