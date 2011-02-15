@@ -3,7 +3,7 @@
 
 	<groupId>org.todomap</groupId>
 	<artifactId>alertbox</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<name>Alertbox Web App</name>
@@ -13,7 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<scm>
-		<developerConnection>scm:svn:https://todomap.googlecode.com/svn/prototypes/alertbox/tags/alertbox-0.0.3</developerConnection>
+		<developerConnection>scm:svn:https://todomap.googlecode.com/svn/prototypes/alertbox/trunk</developerConnection>
 	</scm>
 	<distributionManagement>
 		<repository>
