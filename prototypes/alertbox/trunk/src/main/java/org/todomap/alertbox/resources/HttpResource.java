@@ -16,21 +16,37 @@ public final class HttpResource extends BaseMonitorable {
 	String url;
 	String[] failRegexps = new String[]{};
 	Integer statusCode;
+	Integer timeout;
+	Integer connectionTimeout;
+
+	@XmlAttribute(name="timeout")
+	public Integer getTimeout() {
+		return timeout;
+	}
+
+	public void setTimeout(Integer timeout) {
+		this.timeout = timeout;
+	}
 
 	@Override
 	public StatusDescription check() throws Exception {
-		HttpClient client = new HttpClient();
-		client.getHttpConnectionManager().getParams().setParameter("http.socket.timeout", 1000);
-		GetMethod get = new GetMethod(url);
+		final HttpClient client = new HttpClient();
+		if(getTimeout() != null) {
+			client.getHttpConnectionManager().getParams().setParameter("http.socket.timeout", getTimeout());
+		}
+		if(getConnectionTimeout() != null) {
+			client.getHttpConnectionManager().getParams().setParameter("http.connection.timeout", getConnectionTimeout());
+		}
+		final GetMethod get = new GetMethod(url);
 		client.executeMethod(get);
 		if (statusCode != null && get.getStatusCode() != statusCode) {
 			return new StatusDescription(Status.Fail, "Returned status code "
 					+ get.getStatusCode());
 		}
-		List<String> response = IOUtils
+		final List<String> response = IOUtils
 				.readLines(get.getResponseBodyAsStream());
-		for (String line : response) {
-			for (String failRegexp : failRegexps) {
+		for (final String line : response) {
+			for (final String failRegexp : failRegexps) {
 				if (line.matches(failRegexp)) {
 					return new StatusDescription(Status.Fail,
 							"Matched fail regexp:" + failRegexp);
@@ -75,6 +91,15 @@ public final class HttpResource extends BaseMonitorable {
 
 	public void setStatusCode(Integer statusCode) {
 		this.statusCode = statusCode;
+	}
+
+	@XmlAttribute(name="connection-timeout")
+	public Integer getConnectionTimeout() {
+		return connectionTimeout;
+	}
+
+	public void setConnectionTimeout(Integer connectionTimeout) {
+		this.connectionTimeout = connectionTimeout;
 	}
 
 }
