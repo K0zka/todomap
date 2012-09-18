@@ -26,7 +26,6 @@ public class ReaderTest {
 		check("http://planet.postgresql.org/rss20.xml");
 		check("http://pulispace.com/en/media/blog?format=feed&type=rss");
 		check("http://iwillworkforfood.blogspot.com/feeds/posts/default?alt=rss");
-		check("http://hu.todomap.org/rss.xml/region/HU/Budapest");
 	}
 
 	private void check(String url) throws IOException {
