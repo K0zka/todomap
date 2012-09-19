@@ -19,6 +19,12 @@ public class ReaderTest {
 	@Test
 	public void testAtom() throws IOException {
 		check("http://iwillworkforfood.blogspot.com/feeds/posts/default");
+		check("http://iwillworkforfood.blogspot.com/feeds/posts/default?alt=atom");
+	}
+
+	@Test(expected=IOException.class)
+	public void testFail() throws IOException {
+		check("http://intenitonallynotexistingdomain.dictat.org");
 	}
 
 	@Test
@@ -27,13 +33,11 @@ public class ReaderTest {
 		check("http://pulispace.com/en/media/blog?format=feed&type=rss");
 		check("https://twitter.com/statuses/user_timeline/kozka.rss");
 		check("http://iwillworkforfood.blogspot.com/feeds/posts/default?alt=rss");
-		check("http://iwillworkforfood.blogspot.com/feeds/posts/default?alt=atom");
 		check("http://tifyty.wordpress.com/feed/");
 	}
 
 	private void check(String url) throws IOException {
-		Reader reader = new Reader();
-		NewsFeed feed = reader.read(url);
+		NewsFeed feed = Reader.read(url);
 		Assert.assertNotNull(feed);
 		for(NewsItem item : feed.getNewsItems()) {
 			Assert.assertNotNull(item);

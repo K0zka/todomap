@@ -11,8 +11,8 @@ import org.todomap.feed.beans.Feed;
 import org.todomap.feed.beans.NewsFeed;
 import org.todomap.feed.beans.Rss;
 
-public final class Reader {
-	public NewsFeed read(final String url) throws IOException {
+public class Reader {
+	public static NewsFeed read(final String url) throws IOException {
 		try {
 			JAXBContext context = JAXBContext.newInstance(Rss.class.getPackage().getName());
 			Unmarshaller unmarshaller = context.createUnmarshaller();
