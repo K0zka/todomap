@@ -8,6 +8,8 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.todomap.feed.utils.StringUtils;
+
 @XmlRootElement(name="channel")
 public class Channel implements NewsFeed{
 	String title;
@@ -24,7 +26,7 @@ public class Channel implements NewsFeed{
 	String docs;
 	int ttl;
 	List<Item> items;
-
+	List<Link> links;
 
 	@XmlElement(name = "title", required = true)
 	public String getTitle() {
@@ -165,6 +167,24 @@ public class Channel implements NewsFeed{
 	@Override
 	public List<NewsItem> getNewsItems() {
 		return ((List)items);
+	}
+
+	@Override
+	public String toString() {
+		return "Channel [title=" + StringUtils.max(title, 10) + ", items=" + items.size() + "]";
+	}
+
+	@XmlElement(name="link", namespace="http://www.w3.org/2005/Atom")
+	public List<Link> getLinks() {
+		return links;
+	}
+
+	public void setLinks(List<Link> links) {
+		this.links = links;
+	}
+
+	public void setPubDate(Date pubDate) {
+		this.pubDate = pubDate;
 	}
 
 }

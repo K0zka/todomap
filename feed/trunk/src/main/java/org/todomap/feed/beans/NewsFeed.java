@@ -8,4 +8,5 @@ public interface NewsFeed {
 	String getDescription();
 	Date getLastBuildDate();
 	List<NewsItem> getNewsItems();
+	List<Link> getLinks();
 }

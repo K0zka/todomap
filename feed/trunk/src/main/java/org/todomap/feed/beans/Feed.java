@@ -12,9 +12,11 @@ public class Feed implements NewsFeed{
 	String title;
 	String subtitle;
 	Date updated;
-	
+
+	List<Link> links = new ArrayList<Link>();
+
 	List<Entry> entries = new ArrayList<Entry>();
-	
+
 	@XmlElement(name="title", namespace="http://www.w3.org/2005/Atom")
 	public String getTitle() {
 		return title;
@@ -78,6 +80,13 @@ public class Feed implements NewsFeed{
 	@Override
 	public List<NewsItem> getNewsItems() {
 		return (List)entries;
+	}
+	@XmlElement(name="link", namespace="http://www.w3.org/2005/Atom")
+	public List<Link> getLinks() {
+		return links;
+	}
+	public void setLinks(List<Link> links) {
+		this.links = links;
 	}
 	
 }

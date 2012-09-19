@@ -6,6 +6,8 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.todomap.feed.utils.StringUtils;
+
 @XmlRootElement(name = "item")
 public class Item implements NewsItem {
 	static final String rssDateFormat = "EEE, dd MMM yyyy hh:mm:ss ZZZ";
@@ -96,5 +98,10 @@ public class Item implements NewsItem {
 	@Override
 	public String getUrl() {
 		return link;
+	}
+
+	@Override
+	public String toString() {
+		return "Item [title=" + StringUtils.max(title, 10) + "]";
 	}
 }
