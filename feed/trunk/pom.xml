@@ -35,19 +35,19 @@ Please Do Not Feed The Birds</description>
 	</developers>
 	<distributionManagement>
 		<repository>
-			<id>todomap.org</id>
-			<name>todomap.org maven repository - releases</name>
-			<url>scp://todomap.org:/var/www/mavenrepo/</url>
+			<id>dictat.org</id>
+			<name>dictat.org maven repository - releases</name>
+			<url>dav:https://dictat.org/maven/releases</url>
 		</repository>
 		<snapshotRepository>
-			<id>todomap.org</id>
-			<name>todomap.org maven repository - releases</name>
-			<url>scp://todomap.org:/var/www/mavenrepo-snapshots/</url>
+			<id>dictat.org</id>
+			<name>dictat.org maven repository - snapshots</name>
+			<url>dav:https://dictat.org/maven/snapshots</url>
 		</snapshotRepository>
 		<site>
-			<id>todomap.org</id>
-			<name>todomap.org maven sites place</name>
-			<url>scp://todomap.org:/var/www/mavensites/${artifactId}/</url>
+			<id>dictat.org</id>
+			<name>dictat.org maven sites place</name>
+			<url>dav:https://dictat.org/maven/sites/${artifactId}</url>
 		</site>
 	</distributionManagement>
 	<dependencies>
