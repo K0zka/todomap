@@ -89,4 +89,5 @@ public class Entry implements NewsItem {
 	public String getGuid() {
 		return id;
 	}
+
 }

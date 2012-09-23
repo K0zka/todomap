@@ -104,4 +104,9 @@ public class Item implements NewsItem {
 	public String toString() {
 		return "Item [title=" + StringUtils.max(title, 10) + "]";
 	}
+
+	@Override
+	public Date getPublished() {
+		return pubDate;
+	}
 }
