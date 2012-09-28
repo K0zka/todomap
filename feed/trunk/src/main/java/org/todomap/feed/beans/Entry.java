@@ -7,8 +7,11 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.todomap.feed.utils.StringUtils;
+
 @XmlRootElement(name = "entry")
 public class Entry implements NewsItem {
+
 	String title;
 	String id;
 	Date updated;
@@ -90,4 +93,8 @@ public class Entry implements NewsItem {
 		return id;
 	}
 
+	@Override
+	public String toString() {
+		return "Entry [title=" + StringUtils.max(title, 10) + "]";
+	}
 }
