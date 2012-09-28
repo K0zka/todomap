@@ -5,11 +5,19 @@ import org.todomap.feed.beans.NewsFeed;
 
 public class NewsFeedUtils {
 	public static String getPubSubHub(final NewsFeed feed) {
+		return findLink(feed, "hub");
+	}
+
+	public static String getSelfUrl(final NewsFeed feed) {
+		return findLink(feed, "self");
+	}
+
+	public static String findLink(final NewsFeed feed, final String linkType) {
 		if (feed.getLinks() == null) {
 			return null;
 		}
 		for (Link link : feed.getLinks()) {
-			if ("hub".equalsIgnoreCase(link.getRel())) {
+			if (linkType.equalsIgnoreCase(link.getRel())) {
 				return link.getHref();
 			}
 		}
