@@ -31,7 +31,7 @@ public class ReaderTest {
 	public void testRSS() throws IOException {
 		check("http://planet.postgresql.org/rss20.xml");
 		check("http://pulispace.com/en/media/blog?format=feed&type=rss");
-		check("https://twitter.com/statuses/user_timeline/kozka.rss");
+//		check("https://twitter.com/statuses/user_timeline/kozka.rss");
 		check("http://iwillworkforfood.blogspot.com/feeds/posts/default?alt=rss");
 		check("http://tifyty.wordpress.com/feed/");
 	}
