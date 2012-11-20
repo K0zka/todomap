@@ -57,6 +57,10 @@
 		</site>
 	</distributionManagement>
 
+	<scm>
+		<developerConnection>scm:svn:https://todomap.googlecode.com/svn/feed/trunk/</developerConnection>
+	</scm>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
