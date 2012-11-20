@@ -40,23 +40,24 @@ Please Do Not Feed The Birds</description>
 			<url>http://iwillworkforfood.blogspot.com</url>
 		</developer>
 	</developers>
-	<distributionManagement>
+		<distributionManagement>
 		<repository>
 			<id>dictat.org</id>
 			<name>dictat.org maven repository - releases</name>
-			<url>dav:https://dictat.org/maven/releases</url>
+			<url>scp://dictat.org:/var/www/html/maven/releases</url>
 		</repository>
 		<snapshotRepository>
 			<id>dictat.org</id>
 			<name>dictat.org maven repository - snapshots</name>
-			<url>dav:https://dictat.org/maven/snapshots</url>
+			<url>scp://dictat.org:/var/www/html/maven/snapshots</url>
 		</snapshotRepository>
 		<site>
 			<id>dictat.org</id>
 			<name>dictat.org maven sites place</name>
-			<url>dav:https://dictat.org/maven/sites/${artifactId}</url>
+			<url>scp://dictat.org:/var/www/html/maven/sites/${artifactId}</url>
 		</site>
 	</distributionManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
