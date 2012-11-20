@@ -5,8 +5,7 @@
 	<artifactId>feed</artifactId>
 	<name>Feed</name>
 	<version>0.0.1-SNAPSHOT</version>
-	<description>Experimental RSS and Atom parser.
-Please Do Not Feed The Birds</description>
+	<description>Experimental RSS and Atom parser. Please Do Not Feed The Birds</description>
 	<build>
 		<extensions>
 			<extension>
