@@ -38,7 +38,7 @@
 			<url>http://iwillworkforfood.blogspot.com</url>
 		</developer>
 	</developers>
-		<distributionManagement>
+	<distributionManagement>
 		<repository>
 			<id>dictat.org</id>
 			<name>dictat.org maven repository - releases</name>
