@@ -78,7 +78,11 @@ public class Item implements NewsItem {
 	}
 
 	public void setPubDate(String pubDate) throws ParseException {
-		this.pubDate = new SimpleDateFormat(rssDateFormat).parse(pubDate);
+		try {
+			this.pubDate = new SimpleDateFormat(rssDateFormat).parse(pubDate);
+		} catch (ParseException pe) {
+			//ignore, the rest may have some sense :(
+		}
 	}
 
 	public String getSource() {
