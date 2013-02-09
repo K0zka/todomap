@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="feed", namespace="http://www.w3.org/2005/Atom")
-public class Feed implements NewsFeed{
+public class Feed extends AbstractNewsFeed {
 	String title;
 	String subtitle;
 	Date updated;

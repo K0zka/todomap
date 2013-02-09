@@ -3,6 +3,8 @@ package org.todomap.feed.beans;
 import java.util.Date;
 import java.util.List;
 
+import org.todomap.feed.beans.transport.TransportCacheControl;
+
 public interface NewsFeed {
 	String getTitle();
 
@@ -13,4 +15,6 @@ public interface NewsFeed {
 	List<NewsItem> getNewsItems();
 
 	List<Link> getLinks();
+
+	List<TransportCacheControl> getCacheControl();
 }

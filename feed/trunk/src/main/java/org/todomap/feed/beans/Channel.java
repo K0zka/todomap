@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.todomap.feed.utils.StringUtils;
 
 @XmlRootElement(name="channel")
-public class Channel implements NewsFeed{
+public class Channel extends AbstractNewsFeed {
 	String title;
 	String link;
 	String description;

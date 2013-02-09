@@ -13,4 +13,13 @@ public class HttpClientReaderTest {
 		NewsFeed feed = HttpClientReader.read("http://iwillworkforfood.blogspot.com/feeds/posts/default");
 		Assert.assertNotNull(feed);
 	}
+
+	@Test
+	public void testReread() throws IOException {
+		NewsFeed feed = HttpClientReader.read("http://iwillworkforfood.blogspot.com/feeds/posts/default");
+		Assert.assertNotNull(feed);
+		NewsFeed reReadFeed = HttpClientReader.read("http://iwillworkforfood.blogspot.com/feeds/posts/default", feed.getCacheControl());
+		Assert.assertNull(reReadFeed);
+	}
+
 }
