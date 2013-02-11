@@ -58,6 +58,19 @@ public class HttpClientReader {
 			AbstractNewsFeed feed = (AbstractNewsFeed) Reader.read(response
 					.getEntity().getContent());
 
+
+			setCacheControls(response, feed);
+			return feed;
+		} catch (IllegalStateException e) {
+			throw new IOException(e);
+		} catch (URISyntaxException e) {
+			throw new IOException(e);
+		}
+	}
+
+	private static void setCacheControls(HttpResponse response,
+			AbstractNewsFeed feed) {
+		if(feed != null) {
 			ArrayList<TransportCacheControl> cacheControls = new ArrayList<>();
 			for (Header header : response.getAllHeaders()) {
 				switch (header.getName()) {
@@ -70,13 +83,7 @@ public class HttpClientReader {
 					break;
 				}
 			}
-
 			feed.setCacheControl(cacheControls);
-			return feed;
-		} catch (IllegalStateException e) {
-			throw new IOException(e);
-		} catch (URISyntaxException e) {
-			throw new IOException(e);
 		}
 	}
 }

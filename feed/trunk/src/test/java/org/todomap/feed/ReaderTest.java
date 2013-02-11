@@ -87,4 +87,10 @@ public class ReaderTest {
 
 	}
 
+	@Test
+	public void emptyRss() throws IOException {
+		NewsFeed feed = Reader.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("emptyrss.xml"));
+		Assert.assertNull(feed);
+	}
+	
 }
