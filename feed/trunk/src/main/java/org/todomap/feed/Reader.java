@@ -30,7 +30,7 @@ public class Reader {
 			} else if (obj instanceof Rss) {
 				return ((Rss) obj).getChannel();
 			} else {
-				throw new IOException("Brokent feed: " + obj.getClass());
+				throw new IOException("Broken feed: " + obj.getClass());
 			}
 		} catch (JAXBException e) {
 			throw new IOException(e);
