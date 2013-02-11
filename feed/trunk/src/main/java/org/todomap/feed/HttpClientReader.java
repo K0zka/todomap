@@ -22,18 +22,21 @@ import org.todomap.feed.beans.transport.TransportCacheControl;
 
 public class HttpClientReader {
 	public static NewsFeed read(final String url) throws IOException {
-		final HttpClient client = new DecompressingHttpClient(
-				new AutoRetryHttpClient(new DecompressingHttpClient(
-						new DefaultHttpClient())));
+		final HttpClient client = getDefaultClient();
 		return read(url, client, null);
 	}
 
 	public static NewsFeed read(final String url,
 			List<TransportCacheControl> clientCacheState) throws IOException {
-		final HttpClient client = new DecompressingHttpClient(
-				new AutoRetryHttpClient(new DecompressingHttpClient(
-						new DefaultHttpClient())));
+		final HttpClient client = getDefaultClient();
 		return read(url, client, clientCacheState);
+	}
+
+	private static DecompressingHttpClient getDefaultClient() {
+		DefaultHttpClient client = new DefaultHttpClient();
+		client.getParams().setParameter("http.socket.timeout", 2000);
+		return new DecompressingHttpClient(new AutoRetryHttpClient(
+				new DecompressingHttpClient(client)));
 	}
 
 	public static NewsFeed read(final String url, HttpClient client,
@@ -48,9 +51,9 @@ public class HttpClientReader {
 				}
 			}
 			HttpResponse response = client.execute(get);
-			if(response.getStatusLine().getStatusCode() == HttpStatus.SC_NOT_MODIFIED) {
+			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_NOT_MODIFIED) {
 				return null;
-			} 
+			}
 
 			AbstractNewsFeed feed = (AbstractNewsFeed) Reader.read(response
 					.getEntity().getContent());
