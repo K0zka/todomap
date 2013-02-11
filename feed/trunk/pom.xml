@@ -3,7 +3,7 @@
 	<groupId>org.todomap</groupId>
 	<artifactId>feed</artifactId>
 	<name>Feed</name>
-	<version>0.0.3</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<description>Experimental RSS and Atom parser. Please Do Not Feed The Birds</description>
 	<build>
 		<extensions>
@@ -57,7 +57,7 @@
 	</distributionManagement>
 
 	<scm>
-		<developerConnection>scm:svn:https://todomap.googlecode.com/svn/feed/tags/feed-0.0.3</developerConnection>
+		<developerConnection>scm:svn:https://todomap.googlecode.com/svn/feed/trunk/</developerConnection>
 	</scm>
 
 	<dependencies>
