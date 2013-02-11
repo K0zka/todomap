@@ -13,7 +13,7 @@ public class NewsFeedUtils {
 	}
 
 	public static String findLink(final NewsFeed feed, final String linkType) {
-		if (feed.getLinks() == null) {
+		if (feed == null || feed.getLinks() == null) {
 			return null;
 		}
 		for (Link link : feed.getLinks()) {
