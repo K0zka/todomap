@@ -52,9 +52,14 @@ public class Item implements NewsItem {
 		return link;
 	}
 
+	
 	public String getPubDate() {
-		final SimpleDateFormat format = new SimpleDateFormat(rssDateFormat);
-		return format.format(pubDate);
+		if(pubDate != null) {
+			final SimpleDateFormat format = new SimpleDateFormat(rssDateFormat);
+			return format.format(pubDate);
+		} else {
+			return null;
+		}
 	}
 
 	@Override
