@@ -1,7 +1,7 @@
 package org.todomap.feed.utils;
 
 public class StringUtils {
-	public static String max(String orig, int max) {
+	public static String max(final String orig, final int max) {
 		if (orig == null) {
 			return null;
 		}

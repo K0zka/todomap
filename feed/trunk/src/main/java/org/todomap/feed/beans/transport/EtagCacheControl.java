@@ -2,21 +2,16 @@ package org.todomap.feed.beans.transport;
 
 public class EtagCacheControl implements TransportCacheControl {
 
-	public EtagCacheControl(String etag) {
+	final String etag;
+
+	public EtagCacheControl(final String etag) {
 		super();
 		this.etag = etag;
 	}
 
-	final String etag;
-
 	@Override
-	public String toString() {
-		return "[etag=" + etag + "]";
-	}
-
-	@Override
-	public String responseHeaderName() {
-		return "ETag";
+	public String getValue() {
+		return etag;
 	}
 
 	@Override
@@ -25,8 +20,13 @@ public class EtagCacheControl implements TransportCacheControl {
 	}
 
 	@Override
-	public String getValue() {
-		return etag;
+	public String responseHeaderName() {
+		return "ETag";
+	}
+
+	@Override
+	public String toString() {
+		return "[etag=" + etag + "]";
 	}
 
 }

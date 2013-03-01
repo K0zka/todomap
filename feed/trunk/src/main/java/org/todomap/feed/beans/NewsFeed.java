@@ -6,15 +6,15 @@ import java.util.List;
 import org.todomap.feed.beans.transport.TransportCacheControl;
 
 public interface NewsFeed {
-	String getTitle();
+	List<TransportCacheControl> getCacheControl();
 
 	String getDescription();
 
 	Date getLastBuildDate();
 
-	List<NewsItem> getNewsItems();
-
 	List<Link> getLinks();
 
-	List<TransportCacheControl> getCacheControl();
+	List<NewsItem> getNewsItems();
+
+	String getTitle();
 }

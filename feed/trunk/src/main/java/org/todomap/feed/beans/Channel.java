@@ -10,76 +10,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.todomap.feed.utils.StringUtils;
 
-@XmlRootElement(name="channel")
+@XmlRootElement(name = "channel")
 public class Channel extends AbstractNewsFeed {
-	String title;
-	String link;
-	String description;
-	Date lastBuildDate;
-	String generator;
-	String language;
-	String copyright;
-	String managingEditor;
-	String webMaster;
-	Date pubDate;
 	String category;
+	String copyright;
+	String description;
 	String docs;
-	int ttl;
+	String generator;
 	List<Item> items;
+	String language;
+	Date lastBuildDate;
+	String link;
 	List<Link> links;
+	String managingEditor;
+	Date pubDate;
+	String title;
+	int ttl;
+	String webMaster;
 
-	@XmlElement(name = "title", required = true)
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	@XmlElement(name = "link", required = true)
-	public String getLink() {
-		return link;
-	}
-
-	public void setLink(String link) {
-		this.link = link;
-	}
-
-	@XmlElement(name = "description", required = true)
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	@XmlElement
-	public Date getLastBuildDate() {
-		return lastBuildDate;
-	}
-
-	public void setLastBuildDate(Date lastBuildDate) {
-		this.lastBuildDate = lastBuildDate;
-	}
-
-	@XmlElement
-	public String getGenerator() {
-		return generator;
-	}
-
-	public void setGenerator(String generator) {
-		this.generator = generator;
-	}
-
-	@XmlElement(name="language")
-	public String getLanguage() {
-		return language;
-	}
-
-	public void setLanguage(String language) {
-		this.language = language;
+	@XmlElement(name = "category")
+	public String getCategory() {
+		return category;
 	}
 
 	@XmlElement
@@ -87,8 +38,47 @@ public class Channel extends AbstractNewsFeed {
 		return copyright;
 	}
 
-	public void setCopyright(String copyright) {
-		this.copyright = copyright;
+	@Override
+	@XmlElement(name = "description", required = true)
+	public String getDescription() {
+		return description;
+	}
+
+	@XmlElement(name = "docs")
+	public String getDocs() {
+		return docs;
+	}
+
+	@XmlElement
+	public String getGenerator() {
+		return generator;
+	}
+
+	@XmlElement(name = "item")
+	public List<Item> getItems() {
+		return items;
+	}
+
+	@XmlElement(name = "language")
+	public String getLanguage() {
+		return language;
+	}
+
+	@Override
+	@XmlElement
+	public Date getLastBuildDate() {
+		return lastBuildDate;
+	}
+
+	@XmlElement(name = "link", required = true)
+	public String getLink() {
+		return link;
+	}
+
+	@Override
+	@XmlElement(name = "link", namespace = "http://www.w3.org/2005/Atom")
+	public List<Link> getLinks() {
+		return links;
 	}
 
 	@XmlElement
@@ -96,95 +86,111 @@ public class Channel extends AbstractNewsFeed {
 		return managingEditor;
 	}
 
-	public void setManagingEditor(String managingEditor) {
-		this.managingEditor = managingEditor;
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public List<NewsItem> getNewsItems() {
+		return ((List) items);
 	}
 
-	@XmlElement(name="webMaster")
-	public String getWebMaster() {
-		return webMaster;
-	}
-
-	public void setWebMaster(String webMaster) {
-		this.webMaster = webMaster;
-	}
-
-	@XmlElement(name="pubDate")
+	@XmlElement(name = "pubDate")
 	public String getPubDate() {
-		if(pubDate == null) {
+		if (pubDate == null) {
 			return null;
 		} else {
 			return new SimpleDateFormat(Item.rssDateFormat).format(pubDate);
 		}
 	}
 
-	public void setPubDate(String pubDate) throws ParseException {
-		if(pubDate == null) {
-			this.pubDate = null;
-		} else {
-			this.pubDate = new SimpleDateFormat(Item.rssDateFormat).parse(pubDate);
-		}
-		
+	@Override
+	@XmlElement(name = "title", required = true)
+	public String getTitle() {
+		return title;
 	}
 
-	@XmlElement(name="category")
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-	@XmlElement(name="docs")
-	public String getDocs() {
-		return docs;
-	}
-
-	public void setDocs(String docs) {
-		this.docs = docs;
-	}
-
-	@XmlElement(name="ttl")
+	@XmlElement(name = "ttl")
 	public int getTtl() {
 		return ttl;
 	}
 
-	public void setTtl(int ttl) {
-		this.ttl = ttl;
+	@XmlElement(name = "webMaster")
+	public String getWebMaster() {
+		return webMaster;
 	}
 
-	@XmlElement(name="item")
-	public List<Item> getItems() {
-		return items;
+	public void setCategory(final String category) {
+		this.category = category;
 	}
 
-	public void setItems(List<Item> items) {
+	public void setCopyright(final String copyright) {
+		this.copyright = copyright;
+	}
+
+	public void setDescription(final String description) {
+		this.description = description;
+	}
+
+	public void setDocs(final String docs) {
+		this.docs = docs;
+	}
+
+	public void setGenerator(final String generator) {
+		this.generator = generator;
+	}
+
+	public void setItems(final List<Item> items) {
 		this.items = items;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@Override
-	public List<NewsItem> getNewsItems() {
-		return ((List)items);
+	public void setLanguage(final String language) {
+		this.language = language;
+	}
+
+	public void setLastBuildDate(final Date lastBuildDate) {
+		this.lastBuildDate = lastBuildDate;
+	}
+
+	public void setLink(final String link) {
+		this.link = link;
+	}
+
+	public void setLinks(final List<Link> links) {
+		this.links = links;
+	}
+
+	public void setManagingEditor(final String managingEditor) {
+		this.managingEditor = managingEditor;
+	}
+
+	public void setPubDate(final Date pubDate) {
+		this.pubDate = pubDate;
+	}
+
+	public void setPubDate(final String pubDate) throws ParseException {
+		if (pubDate == null) {
+			this.pubDate = null;
+		} else {
+			this.pubDate = new SimpleDateFormat(Item.rssDateFormat)
+					.parse(pubDate);
+		}
+
+	}
+
+	public void setTitle(final String title) {
+		this.title = title;
+	}
+
+	public void setTtl(final int ttl) {
+		this.ttl = ttl;
+	}
+
+	public void setWebMaster(final String webMaster) {
+		this.webMaster = webMaster;
 	}
 
 	@Override
 	public String toString() {
-		return "Channel [title=" + StringUtils.max(title, 10) + ", items=" + items.size() + "]";
-	}
-
-	@XmlElement(name="link", namespace="http://www.w3.org/2005/Atom")
-	public List<Link> getLinks() {
-		return links;
-	}
-
-	public void setLinks(List<Link> links) {
-		this.links = links;
-	}
-
-	public void setPubDate(Date pubDate) {
-		this.pubDate = pubDate;
+		return "Channel [title=" + StringUtils.max(title, 10) + ", items="
+				+ items.size() + "]";
 	}
 
 }

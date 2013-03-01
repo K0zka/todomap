@@ -13,10 +13,15 @@ import org.todomap.feed.beans.NewsFeed;
 import org.todomap.feed.beans.Rss;
 
 public class Reader {
-	public static NewsFeed read(final String url) throws IOException {
-			try (InputStream stream = new URL(url).openStream();) {
-				return read(stream);
-			}
+	static JAXBContext getContext() throws JAXBException {
+		final JAXBContext context = JAXBContext.newInstance(Rss.class
+				.getPackage().getName());
+		return context;
+	}
+
+	static Unmarshaller getUnmarshaler() throws JAXBException {
+		final Unmarshaller unmarshaller = getContext().createUnmarshaller();
+		return unmarshaller;
 	}
 
 	public static NewsFeed read(final InputStream stream) throws IOException {
@@ -29,19 +34,14 @@ public class Reader {
 			} else {
 				throw new IOException("Broken feed: " + obj.getClass());
 			}
-		} catch (JAXBException e) {
+		} catch (final JAXBException e) {
 			throw new IOException(e);
 		}
 	}
 
-	static Unmarshaller getUnmarshaler() throws JAXBException {
-		final Unmarshaller unmarshaller = getContext().createUnmarshaller();
-		return unmarshaller;
-	}
-
-	static JAXBContext getContext() throws JAXBException {
-		final JAXBContext context = JAXBContext.newInstance(Rss.class
-				.getPackage().getName());
-		return context;
+	public static NewsFeed read(final String url) throws IOException {
+		try (InputStream stream = new URL(url).openStream();) {
+			return read(stream);
+		}
 	}
 }

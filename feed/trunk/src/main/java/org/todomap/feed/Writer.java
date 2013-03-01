@@ -10,17 +10,17 @@ import org.todomap.feed.beans.NewsFeed;
 
 public class Writer {
 
-	public static void write(NewsFeed feed, OutputStream out)
+	static Marshaller getMarshaler() throws JAXBException {
+		return Reader.getContext().createMarshaller();
+	}
+
+	public static void write(final NewsFeed feed, final OutputStream out)
 			throws IOException {
 		try {
 			getMarshaler().marshal(feed, out);
-		} catch (JAXBException e) {
+		} catch (final JAXBException e) {
 			throw new IOException(e);
 		}
-	}
-
-	static Marshaller getMarshaler() throws JAXBException {
-		return Reader.getContext().createMarshaller();
 	}
 
 }

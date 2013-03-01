@@ -12,56 +12,16 @@ import org.todomap.feed.utils.StringUtils;
 @XmlRootElement(name = "entry")
 public class Entry implements NewsItem {
 
-	String title;
-	String id;
-	Date updated;
-	Date published;
 	String content;
+	String id;
 	List<Link> links = new ArrayList<Link>();
-
-	@XmlElement(name = "title", namespace = "http://www.w3.org/2005/Atom")
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	@XmlElement(name = "id", namespace = "http://www.w3.org/2005/Atom")
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	@XmlElement(name = "updated", namespace = "http://www.w3.org/2005/Atom")
-	public Date getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(Date updated) {
-		this.updated = updated;
-	}
-
-	@XmlElement(name = "published", namespace = "http://www.w3.org/2005/Atom")
-	public Date getPublished() {
-		return published;
-	}
-
-	public void setPublished(Date published) {
-		this.published = published;
-	}
+	Date published;
+	String title;
+	Date updated;
 
 	@XmlElement(name = "content", namespace = "http://www.w3.org/2005/Atom")
 	public String getContent() {
 		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
 	}
 
 	@Override
@@ -69,18 +29,41 @@ public class Entry implements NewsItem {
 		return content;
 	}
 
+	@Override
+	public String getGuid() {
+		return id;
+	}
+
+	@XmlElement(name = "id", namespace = "http://www.w3.org/2005/Atom")
+	public String getId() {
+		return id;
+	}
+
 	@XmlElement(name = "link", namespace = "http://www.w3.org/2005/Atom")
 	public List<Link> getLinks() {
 		return links;
 	}
 
-	public void setLinks(List<Link> links) {
-		this.links = links;
+	@Override
+	@XmlElement(name = "published", namespace = "http://www.w3.org/2005/Atom")
+	public Date getPublished() {
+		return published;
+	}
+
+	@Override
+	@XmlElement(name = "title", namespace = "http://www.w3.org/2005/Atom")
+	public String getTitle() {
+		return title;
+	}
+
+	@XmlElement(name = "updated", namespace = "http://www.w3.org/2005/Atom")
+	public Date getUpdated() {
+		return updated;
 	}
 
 	@Override
 	public String getUrl() {
-		for (Link link : links) {
+		for (final Link link : links) {
 			if ("alternate".equals(link.getRel())) {
 				return link.getHref();
 			}
@@ -88,9 +71,28 @@ public class Entry implements NewsItem {
 		return null;
 	}
 
-	@Override
-	public String getGuid() {
-		return id;
+	public void setContent(final String content) {
+		this.content = content;
+	}
+
+	public void setId(final String id) {
+		this.id = id;
+	}
+
+	public void setLinks(final List<Link> links) {
+		this.links = links;
+	}
+
+	public void setPublished(final Date published) {
+		this.published = published;
+	}
+
+	public void setTitle(final String title) {
+		this.title = title;
+	}
+
+	public void setUpdated(final Date updated) {
+		this.updated = updated;
 	}
 
 	@Override

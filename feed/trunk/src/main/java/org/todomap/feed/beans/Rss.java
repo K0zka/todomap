@@ -6,22 +6,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "rss")
 public class Rss {
-	String version = "2.0";
-	@XmlAttribute(name="version")
-	public String getVersion() {
-		return version;
-	}
-
-	public void setVersion(String version) {
-		this.version = version;
-	}
 	Channel channel;
-	@XmlElement(name="channel")
+	String version = "2.0";
+
+	@XmlElement(name = "channel")
 	public Channel getChannel() {
 		return channel;
 	}
 
-	public void setChannel(Channel channel) {
+	@XmlAttribute(name = "version")
+	public String getVersion() {
+		return version;
+	}
+
+	public void setChannel(final Channel channel) {
 		this.channel = channel;
+	}
+
+	public void setVersion(final String version) {
+		this.version = version;
 	}
 }

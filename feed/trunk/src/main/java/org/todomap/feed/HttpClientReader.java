@@ -21,58 +21,59 @@ import org.todomap.feed.beans.transport.LastModifiedCacheControl;
 import org.todomap.feed.beans.transport.TransportCacheControl;
 
 public class HttpClientReader {
-	public static NewsFeed read(final String url) throws IOException {
-		final HttpClient client = getDefaultClient();
-		return read(url, client, null);
-	}
-
-	public static NewsFeed read(final String url,
-			List<TransportCacheControl> clientCacheState) throws IOException {
-		final HttpClient client = getDefaultClient();
-		return read(url, client, clientCacheState);
-	}
-
 	private static DecompressingHttpClient getDefaultClient() {
-		DefaultHttpClient client = new DefaultHttpClient();
+		final DefaultHttpClient client = new DefaultHttpClient();
 		client.getParams().setParameter("http.socket.timeout", 2000);
 		return new DecompressingHttpClient(new AutoRetryHttpClient(
 				new DecompressingHttpClient(client)));
 	}
 
-	public static NewsFeed read(final String url, HttpClient client,
-			List<TransportCacheControl> clientCacheState) throws IOException {
+	public static NewsFeed read(final String url) throws IOException {
+		final HttpClient client = getDefaultClient();
+		return read(url, client, null);
+	}
+
+	public static NewsFeed read(final String url, final HttpClient client,
+			final List<TransportCacheControl> clientCacheState)
+			throws IOException {
 		try {
-			HttpGet get = new HttpGet();
+			final HttpGet get = new HttpGet();
 			get.setURI(new URI(url));
 			if (clientCacheState != null) {
-				for (TransportCacheControl cacheHeader : clientCacheState) {
+				for (final TransportCacheControl cacheHeader : clientCacheState) {
 					get.setHeader(cacheHeader.requestHeaderName(),
 							cacheHeader.getValue());
 				}
 			}
-			HttpResponse response = client.execute(get);
+			final HttpResponse response = client.execute(get);
 			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_NOT_MODIFIED) {
 				return null;
 			}
 
-			AbstractNewsFeed feed = (AbstractNewsFeed) Reader.read(response
-					.getEntity().getContent());
-
+			final AbstractNewsFeed feed = (AbstractNewsFeed) Reader
+					.read(response.getEntity().getContent());
 
 			setCacheControls(response, feed);
 			return feed;
-		} catch (IllegalStateException e) {
+		} catch (final IllegalStateException e) {
 			throw new IOException(e);
-		} catch (URISyntaxException e) {
+		} catch (final URISyntaxException e) {
 			throw new IOException(e);
 		}
 	}
 
-	private static void setCacheControls(HttpResponse response,
-			AbstractNewsFeed feed) {
-		if(feed != null) {
-			ArrayList<TransportCacheControl> cacheControls = new ArrayList<>();
-			for (Header header : response.getAllHeaders()) {
+	public static NewsFeed read(final String url,
+			final List<TransportCacheControl> clientCacheState)
+			throws IOException {
+		final HttpClient client = getDefaultClient();
+		return read(url, client, clientCacheState);
+	}
+
+	private static void setCacheControls(final HttpResponse response,
+			final AbstractNewsFeed feed) {
+		if (feed != null) {
+			final ArrayList<TransportCacheControl> cacheControls = new ArrayList<>();
+			for (final Header header : response.getAllHeaders()) {
 				switch (header.getName()) {
 				case "ETag":
 					cacheControls.add(new EtagCacheControl(header.getValue()));

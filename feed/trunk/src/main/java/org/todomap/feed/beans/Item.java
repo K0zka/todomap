@@ -11,106 +11,113 @@ import org.todomap.feed.utils.StringUtils;
 @XmlRootElement(name = "item")
 public class Item implements NewsItem {
 	static final String rssDateFormat = "EEE, dd MMM yyyy hh:mm:ss ZZZ";
-	String title;
-	String link;
-	String description;
 	String author;
+	String category;
+	String comments;
+	String description;
 
-	public String getTitle() {
-		return title;
-	}
+	String guid;
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+	String link;
 
-	public String getLink() {
-		return link;
-	}
+	Date pubDate;
 
-	public void setLink(String link) {
-		this.link = link;
-	}
+	String source;
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	String title;
 
 	public String getAuthor() {
 		return author;
-	}
-
-	public void setAuthor(String author) {
-		this.author = author;
 	}
 
 	public String getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
 	public String getComments() {
 		return comments;
 	}
 
-	public void setComments(String comments) {
-		this.comments = comments;
+	@Override
+	public String getDescription() {
+		return description;
 	}
 
+	@Override
 	public String getGuid() {
 		return guid;
 	}
 
-	public void setGuid(String guid) {
-		this.guid = guid;
+	public String getLink() {
+		return link;
 	}
 
 	public String getPubDate() {
-		SimpleDateFormat format = new SimpleDateFormat(rssDateFormat);
+		final SimpleDateFormat format = new SimpleDateFormat(rssDateFormat);
 		return format.format(pubDate);
 	}
 
-	public void setPubDate(String pubDate) throws ParseException {
-		try {
-			this.pubDate = new SimpleDateFormat(rssDateFormat).parse(pubDate);
-		} catch (ParseException pe) {
-			//ignore, the rest may have some sense :(
-		}
+	@Override
+	public Date getPublished() {
+		return pubDate;
 	}
 
 	public String getSource() {
 		return source;
 	}
 
-	public void setSource(String source) {
-		this.source = source;
+	@Override
+	public String getTitle() {
+		return title;
 	}
-
-	String category;
-	String comments;
-	String guid;
-	Date pubDate;
-	String source;
 
 	@Override
 	public String getUrl() {
 		return link;
 	}
 
-	@Override
-	public String toString() {
-		return "Item [title=" + StringUtils.max(title, 10) + "]";
+	public void setAuthor(final String author) {
+		this.author = author;
+	}
+
+	public void setCategory(final String category) {
+		this.category = category;
+	}
+
+	public void setComments(final String comments) {
+		this.comments = comments;
+	}
+
+	public void setDescription(final String description) {
+		this.description = description;
+	}
+
+	public void setGuid(final String guid) {
+		this.guid = guid;
+	}
+
+	public void setLink(final String link) {
+		this.link = link;
+	}
+
+	public void setPubDate(final String pubDate) throws ParseException {
+		try {
+			this.pubDate = new SimpleDateFormat(rssDateFormat).parse(pubDate);
+		} catch (final ParseException pe) {
+			// ignore, the rest may have some sense :(
+		}
+	}
+
+	public void setSource(final String source) {
+		this.source = source;
+	}
+
+	public void setTitle(final String title) {
+		this.title = title;
 	}
 
 	@Override
-	public Date getPublished() {
-		return pubDate;
+	public String toString() {
+		return "Item [title=" + StringUtils.max(title, 10) + "]";
 	}
 }
