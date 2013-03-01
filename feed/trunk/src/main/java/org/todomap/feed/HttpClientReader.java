@@ -24,6 +24,7 @@ public class HttpClientReader {
 	private static DecompressingHttpClient getDefaultClient() {
 		final DefaultHttpClient client = new DefaultHttpClient();
 		client.getParams().setParameter("http.socket.timeout", 2000);
+		client.getParams().setParameter("http.connection.timeout", 2000);
 		return new DecompressingHttpClient(new AutoRetryHttpClient(
 				new DecompressingHttpClient(client)));
 	}
