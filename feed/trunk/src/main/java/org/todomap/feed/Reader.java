@@ -21,10 +21,7 @@ public class Reader {
 
 	public static NewsFeed read(final InputStream stream) throws IOException {
 		try {
-			final JAXBContext context = JAXBContext.newInstance(Rss.class
-					.getPackage().getName());
-			final Unmarshaller unmarshaller = context.createUnmarshaller();
-			final Object obj = unmarshaller.unmarshal(stream);
+			final Object obj = getUnmarshaler().unmarshal(stream);
 			if (obj instanceof Feed) {
 				return (Feed) obj;
 			} else if (obj instanceof Rss) {
@@ -35,5 +32,16 @@ public class Reader {
 		} catch (JAXBException e) {
 			throw new IOException(e);
 		}
+	}
+
+	static Unmarshaller getUnmarshaler() throws JAXBException {
+		final Unmarshaller unmarshaller = getContext().createUnmarshaller();
+		return unmarshaller;
+	}
+
+	static JAXBContext getContext() throws JAXBException {
+		final JAXBContext context = JAXBContext.newInstance(Rss.class
+				.getPackage().getName());
+		return context;
 	}
 }
