@@ -20,4 +20,17 @@ public abstract class AbstractNewsFeed implements NewsFeed {
 		this.cacheControl = cacheControl;
 	}
 
+	/**
+	 * Transport compression.
+	 */
+	boolean transportCompressed;
+
+	public boolean isTransportCompressed() {
+		return transportCompressed;
+	}
+
+	public void setTransportCompressed(boolean transportCompressed) {
+		this.transportCompressed = transportCompressed;
+	}
+
 }

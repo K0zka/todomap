@@ -1,10 +1,13 @@
 package org.todomap.feed;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.DeflaterInputStream;
+import java.util.zip.GZIPInputStream;
 
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -51,10 +54,13 @@ public class HttpClientReader {
 				return null;
 			}
 
+			final InputStream content = response.getEntity().getContent();
 			final AbstractNewsFeed feed = (AbstractNewsFeed) Reader
-					.read(response.getEntity().getContent());
+					.read(content);
 
 			setCacheControls(response, feed);
+			//this is a bit smelly, but looks like the only relyable way around httpclient's compression
+			feed.setTransportCompressed(content instanceof GZIPInputStream || content instanceof DeflaterInputStream);
 			return feed;
 		} catch (final IllegalStateException e) {
 			throw new IOException(e);

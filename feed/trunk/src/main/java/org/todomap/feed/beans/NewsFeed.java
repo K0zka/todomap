@@ -17,4 +17,6 @@ public interface NewsFeed {
 	List<NewsItem> getNewsItems();
 
 	String getTitle();
+	
+	boolean isTransportCompressed();
 }
