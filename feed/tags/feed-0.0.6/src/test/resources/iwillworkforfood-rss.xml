@@ -1,0 +1,1519 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:atom='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
+	xmlns:blogger='http://schemas.google.com/blogger/2008' xmlns:georss='http://www.georss.org/georss'
+	xmlns:gd='http://schemas.google.com/g/2005' xmlns:thr='http://purl.org/syndication/thread/1.0'
+	version='2.0'>
+	<channel>
+		<atom:id>tag:blogger.com,1999:blog-3739219755752255838</atom:id>
+		<lastBuildDate>Wed, 12 Sep 2012 13:16:22 +0000</lastBuildDate>
+		<category>virt</category>
+		<category>clustering</category>
+		<category>ws</category>
+		<category>postgresql</category>
+		<category>mule</category>
+		<category>appfuse</category>
+		<category>maven</category>
+		<category>CI</category>
+		<category>mina</category>
+		<category>cowboy coding</category>
+		<category>ovirt</category>
+		<category>todomap</category>
+		<category>chrome</category>
+		<category>agile</category>
+		<category>yikulju</category>
+		<category>python</category>
+		<category>spring</category>
+		<category>browser</category>
+		<category>spam</category>
+		<category>servlet</category>
+		<category>nosql</category>
+		<category>eclipse</category>
+		<category>jee</category>
+		<category>tapestry</category>
+		<category>linux</category>
+		<category>flexclipse</category>
+		<category>hibernate</category>
+		<category>acegi</category>
+		<category>cassandra</category>
+		<category>magyarul</category>
+		<category>java</category>
+		<category>ajax</category>
+		<category>aop</category>
+		<category>lucene</category>
+		<category>gyárlátogatás</category>
+		<category>cloud</category>
+		<category>openlaszlo</category>
+		<category>konf</category>
+		<category>flex</category>
+		<category>paypal</category>
+		<category>jpa</category>
+		<category>groovy</category>
+		<category>bookmark</category>
+		<category>drools</category>
+		<category>off</category>
+		<category>enterprise horror</category>
+		<category>jboss</category>
+		<category>ria</category>
+		<category>testing</category>
+		<category>ide</category>
+		<category>ioc</category>
+		<title>I will work for food</title>
+		<description>public static void main</description>
+		<link>http://iwillworkforfood.blogspot.com/</link>
+		<managingEditor>noreply@blogger.com (Kocka)</managingEditor>
+		<generator>Blogger</generator>
+		<openSearch:totalResults>326</openSearch:totalResults>
+		<openSearch:startIndex>1</openSearch:startIndex>
+		<openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-142031268875534730</guid>
+			<pubDate>Thu, 30 Aug 2012 21:18:00 +0000</pubDate>
+			<atom:updated>2012-08-30T23:18:58.386+02:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>off</category>
+			<title>gondolom</title>
+			<description>Nézzük csak, a következő lehetőségek állnak
+				rendelkezésre a munkahelyed elhagyására:&lt;br
+				/&gt;&lt;ol&gt;&lt;li&gt;Melózolamíg meg nem halsz - nem hangzik
+				nagyon biztatóan.&lt;/li&gt;&lt;li&gt;Nyugdíjba mész - elvi
+				lehetőség, gyakorlatban inkább az 1. lesz, de ezt hivatalosan még
+				senki sem merte bevallani.&lt;/li&gt;&lt;li&gt;Kirúgnak - előfordul,
+				ezer lehetséges okból, és csak az egyik lehetséges ok vagy
+				te.&lt;/li&gt;&lt;li&gt;Felmondassz - ez a legjobb: már többre
+				értékeled az idődet, mint azt a pénzt, amit adnak cserébe. Vagy csak
+				mégtöbbet akarsz kapni érte...&lt;/li&gt;&lt;/ol&gt;Szóval ha
+				kirúgnak, az nem a legrosszabb lehetőség hanem az a második legjobb.
+				Gondoltam ezt felítom ide, hátha egy véletlenszerű pillanatban
+				valaki hasznosnak találja.&lt;br /&gt;&lt;br /&gt;&lt;span
+				style="font-size: xx-small;"&gt;A nap pozítív gondolata a Piros
+				Satyesz bt támogatásával.&lt;/span&gt;&lt;br /&gt;&lt;br
+				/&gt;Egyébként mostanában nagyon kevés szabadidőmben mongodb-ről
+				olvasgattam, tovább kínoztam a drools planner-t mindenféle
+				irányokban, meg wikipédiát szerkesztgetek. Egy csomó ötletem van, de
+				nagyon nehéz időt keríteni rá.&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-142031268875534730?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/08/gondolom.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>0</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-886218765240373960</guid>
+			<pubDate>Tue, 28 Aug 2012 12:59:00 +0000</pubDate>
+			<atom:updated>2012-08-28T14:59:37.166+02:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>off</category>
+			<title>csapatelmélet röviden</title>
+			<description>Úgy tartja a mondás, hogy a pokolba vezető út
+				jószándékkal van kikövezve. Ehhez hasonlóan már évek óta van egy
+				olyan elképzelésem, hogy sok project kudarcáért felelős az, hogy
+				nagyon-nagyon-cefetjó embereket vettek fel rá, akik képtelenek
+				voltak együttműködni és alkudni.&lt;br /&gt;&lt;br /&gt;A "jó"
+				legveszélyesebb ellensége a "tökéletes".&lt;br /&gt;Nem a legjobb
+				kell, hanem elég jó.&lt;br /&gt;&lt;br /&gt;&lt;span
+				style="font-size:
+				xx-small;"&gt;NagyÁltalánosKeletiZenKonfuciuszButhistaBölcsesség
+				csapatunk eheti jelentését olvashattátok.&lt;/span&gt;&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-886218765240373960?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/08/csapatelmelet-roviden.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>3</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-6074411916128101503</guid>
+			<pubDate>Wed, 01 Aug 2012 11:49:00 +0000</pubDate>
+			<atom:updated>2012-08-01T23:42:00.628+02:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>ide</category>
+			<category domain='http://www.blogger.com/atom/ns#'>java</category>
+			<category domain='http://www.blogger.com/atom/ns#'>drools</category>
+			<category domain='http://www.blogger.com/atom/ns#'>eclipse</category>
+			<category domain='http://www.blogger.com/atom/ns#'>ovirt</category>
+			<title>Drools, Planner</title>
+			<description>Mostanában eltöltöttem egy kis időt egy prototipus
+				projecten ami a drools planner integrációját késziti elő az
+				oVirt-be. Ez még nem azt jelenti, hogy valaha benne is lesz, csak
+				azt, hogy megpróbálom feltakarítani a környéket és beintegrálni.
+				Gondoltam pár tapasztalatot megosztanék vele kapcsolatban.&lt;br
+				/&gt;&lt;br /&gt;Ha még nem találkoztál a drools projecttel, ez egy
+				szabály-motor. Leírsz szabályokat, bedobálod a tényeket és bizonyos
+				következtetésekre jut a drools, a következtetésekből pedig további
+				következtetésekre. Egyrészt nagyon egyszerű és szerintem elegáns
+				módja a szabályok leírásának, másrészt bizonyos bonyolult
+				feladatokat egészen egyszerűen oldhatsz meg vele. Pl N királynő,
+				labirintus, satöbbi iskolafeladatok. Na ezeken az iskolafeladatokon
+				túl egész hasznos dolgokra is lehet használni a hétköznapi életben,
+				most például az oVirt-ben (ami egy private cloud rendszer lenne,
+				csak ahhoz még kicsit béna) virtuális gépek szerverekre való
+				kiosztására próbálom használni.&lt;br /&gt;&lt;i&gt;(felemelő dolog
+				szabadidőben is a melón pörögni, biztosan hősi gödörbe fognak
+				elkapálni, ha beledöglök)&lt;/i&gt;&lt;br /&gt;&lt;br
+				/&gt;&lt;h4&gt;IDE&lt;/h4&gt;Szóval a szabályokat egy speciális
+				nyelven írod le, erre van több opciód is. Ez végül sima plain java
+				bytecode-dá fog lefordulni. Szóval ez forráskód, ha tetszik, ha nem.
+				A forráskód, amit írnod kell java-jellegű. Éppenséggel én nem
+				szeretnék ilyeneket írni vim-ben, szóval az IDE támogatásnak utánna
+				kellett járnom.&lt;br /&gt;Eclipse marketplacen ha szétnézel, a
+				JBoss IDE állítja magáról, hogy van benne Drools support. Ez sima
+				mezei &lt;strike&gt;hazugság&lt;/strike&gt; marketing, nincsen benne
+				:-) A drools csomagok közűl kellett letölteni egy lefordított
+				verziót és felinstallálni. Pár varázslót és egy editort kapsz, az
+				editorban van syntax highlighting és egy kevés code completion. A
+				vim-élménynél azért lényegesen jobb, de el tudnék képzelni
+				barátságosabbat.&lt;br /&gt;&lt;br /&gt;&lt;h4&gt;Pár
+				tapasztalat&lt;/h4&gt;Első alapszabály a drools-hoz általában:
+				bármilyen szabályt írsz is, ne legyen benne hálózati/adatbázis
+				interakció! A drools kegyetlenül elkapja és nagyon lassú lesz vagy
+				agyonterheli az adatbázisod. Valószinűleg mindkettő. Csinálj szépen
+				in-memory modelt. Elösször tölt, aztán kiértékel. Sajnos ez nem
+				mindig egyszerű.&lt;br /&gt;&lt;br /&gt;Aztán pl én néha nem
+				szégyellek egy loggert bedobni a drools szabályaimnak, csak hogy
+				meggyőzödjek róla, hogy tényleg kiértékelődnek. Érdemes csak debug
+				szinten hajtani, mert komoly mennyiségű logot le tud termelni.&lt;br
+				/&gt;&lt;br /&gt;&lt;br /&gt;Aztán unit-tesztek: igen, mindenképpen
+				unit-tesztelj! A szabályok csak futásidőben fordulnak le (első
+				futás), szóval az hogy nem kiabált a build, az még a világon semmit
+				sem jelent. És nagyon ajánlott ellenőrizni az eredményeket, mert
+				könnyen előfordul, hogy elírtál egy feltételt a szabálynál és mégsem
+				értékelődött ki.&lt;br /&gt;&lt;br /&gt;A szabályok kiértékelési
+				sorrendjáról pedig ennyit lehet tudni: javaslatot tehetsz rá
+				(salience paraméter) de amúgy a drools nem enged beleugatni senkit
+				se.&lt;br /&gt;&lt;br /&gt;&lt;h4&gt;Planner&lt;/h4&gt;No nézzük mi
+				ez a &lt;a
+				href="http://docs.jboss.org/drools/release/5.4.0.Final/drools-planner-docs/html/"&gt;planner&lt;/a&gt;.
+				A planner optimalizációs feladatokra segít adni valamilyen
+				megoldást, a drools expertre építve. Ez konkrétan úgy történik, hogy
+				pontozási szabályokat írhatsz le drools szabályokkal, írsz hozzá pár
+				sor XML konfigurációt (ne aggódj, java config is van ha még
+				nagyobbat akarsz szívni) és ráengeded a megoldó algoritmust.
+				Visszakapsz egy megoldást jó esetben, és a hozzá tartozó elért
+				pontszámot.&lt;br /&gt;&lt;br /&gt;A pontozásnál több féle pontozást
+				használhatsz, nekem a soft and hard tetszett legjobban.&lt;br
+				/&gt;&lt;br /&gt;Körülbelül ezer módon rúghatod tökön magad a drools
+				plannerrel, kb 20 különbözőképpen nekem is sikerült, ebből párat
+				nektek. Ha esetleg meg akarnátok próbálni :-)&lt;br /&gt;&lt;br
+				/&gt;Kiválló kiindulópont Geoffrey de Smet drools példagyüjteménye,
+				ami a drools csomagok között letölthető. Szerintem a példagyüjtemény
+				nélkül az elején feladatam volna. A dokumentáció az helyenként
+				alulról közelíti a kettes érdemjegy határait. Pl az XML konfiguráció
+				pontos leírását sehol se találtam, végül a forráskódból jöttem rá,
+				hogy mit rontottam el.&lt;br /&gt;&lt;br /&gt;Az egyik fájó
+				különbség a példák és a rögvalóság között, hogy egyes példák egészen
+				sokáig tart, amíg lefutnak. Sokkal tovább tart, mint a felhasználók
+				türelme. A szerencse viszont az, hogy a legjobb megoldás a
+				felhasználók túlnyomó részét teljesen hidegen hagyja, egyszerűen
+				csak egy elég jó megoldást akarnak és persze tegnapra. Ezt sikerült
+				olyan paraméterekkel elérni, mint&lt;br
+				/&gt;&lt;ul&gt;&lt;li&gt;maximumUnimprovedStepCount, azaz ha egy
+				ideig nem talál jobb megoldást, akkor itt hagyjuk
+				abba.&lt;/li&gt;&lt;li&gt;scoreAttained, azaz egy bizonyos minimális
+				szintnél tovább már nem kell tovább
+				menni.&lt;/li&gt;&lt;/ul&gt;Azért a &lt;a
+				href="http://docs.jboss.org/drools/release/5.4.0.Final/drools-planner-docs/html/optimizationAlgorithms.html#d0e4225"&gt;terminációs
+				szabályokhoz&lt;/a&gt; én el tudnék képzelni jobb döntési logikát
+				is, legalábbis az adott feladathoz én valami pontosabbat szeretnék.
+				Majd bizonyíthatom, hogy tényleg van jobb ötletem, mert a drools
+				planner-rel megetethetem a saját implementációmat.&lt;br /&gt;&lt;br
+				/&gt;Aztán nézzük mivel szívtam még meg... Igen, a probléma tények
+				(facts)-hoz például első nekifutásra nem a megfelelő listát adtam
+				vissza. Pár kört lefutottam, mire rájöttem, hogy ennek következtében
+				a pontozási szabályok egyszerűen nem kerülnek kiértékelésre.&lt;br
+				/&gt;&lt;br /&gt;Aztán a &lt;a
+				href="http://docs.jboss.org/drools/release/5.4.0.Final/drools-planner-javadoc/org/drools/planner/core/score/constraint/ConstraintType.html#POSITIVE"&gt;ConstraintType.POSITIVE&lt;/a&gt;-ra
+				nem jöttem még rá, hogy hogyan kell használni, a példák között nincs
+				egy se. Pár dolgot viszont eleinte pozitív állítások formájában
+				próbáltam megfogalmazni. Na erről leszoktam, és csupa negatív
+				pontozás van jelenleg. Nekem furcsa, hogy csak büntetéseket osztok a
+				szabályaimmal, de megszokom. Majd a politikai pályafutásom alatt
+				biztosan sok hasznát veszem ezeknek a tapasztalataimnak.&lt;br
+				/&gt;&lt;br /&gt;Egyébként, ha kicsit belejön az ember, úgy tűnik
+				egészen komplex feladatok optimalizására is egészen könnyen lehet
+				megoldást gyártani vele. A futási ideje igazán nem vészes,
+				amennyiben jól paraméterezted a termináló feltételeket :-)&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-6074411916128101503?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/08/drools-planner.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>1</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-7938345508765429210</guid>
+			<pubDate>Wed, 25 Jul 2012 17:05:00 +0000</pubDate>
+			<atom:updated>2012-07-25T19:05:47.737+02:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>ws</category>
+			<category domain='http://www.blogger.com/atom/ns#'>enterprise horror</category>
+			<title>Integráció - röviden</title>
+			<description>Minden integrációs projectnél végül oda jut a párbeszéd,
+				hogy az integráló fél/kliens felteszi a kérdést: Hogyan oldjuk meg
+				azokat a problémákat, amelyek az én rendszeremben jelentkeznek és a
+				te rendszeredből jönnek?&lt;br /&gt;Erre ez az általános válasz a
+				szolgáltatók részéről: Azok a problémák, amik a te rendszeredben
+				jelentkeznek, azok a tieid.&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-7938345508765429210?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/07/integracio-roviden.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>2</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-1392663155533681974</guid>
+			<pubDate>Tue, 24 Jul 2012 16:35:00 +0000</pubDate>
+			<atom:updated>2012-07-25T21:07:54.068+02:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>cloud</category>
+			<category domain='http://www.blogger.com/atom/ns#'>cassandra</category>
+			<category domain='http://www.blogger.com/atom/ns#'>ovirt</category>
+			<category domain='http://www.blogger.com/atom/ns#'>clustering</category>
+			<title>Cluster - magánvélemény + ötlet</title>
+			<description>Azok a clusterezési technológiák és szoftverek, amik
+				uniform szervereket várnak el futtatókörnyezetként, komoly
+				hátrányban vannak azokkal szemben, amelyek képesek a hardware
+				különbségeit (pl memória méret, elérési sebesség, sustainable és
+				random IO, CPU-k száma és sebessége, hálózat, satöbbi) kezelni.
+				Ugyanis az ügyfelek nem szeretnék évekkel vagy akár csak hónapokkal
+				előre megvenni a hardware kapacítást. Pl egyes projectek esetében
+				nem nagyon lehet kitalálni, hogy mekkora kapacításra van szükség.
+				Meg hát nem is tudják, kapnak egy adott összeget egy üzleti évre és
+				legközelebb majd a következő üzleti évben lehet hardware-t
+				vásárolni. Akkor már más lesz a kinálat. Még ha mindig a listán is
+				van a régi szerver tipus, akkor is valószinűleg más hardware fogja
+				akkor megérni, más az akciós, satöbbi.&lt;br /&gt;&lt;br
+				/&gt;Például nekem a cassandra, &lt;a
+				href="http://dummywarhead.blogspot.com/2011/12/cassandra-on-pile-of-wreck.html"&gt;amikor
+				teszteltem&lt;/a&gt; nagyon makacsul ragaszkodott ahhoz, hogy
+				egyenlően ossza fel a keyspace-t minden alkalommal, amikor új node-t
+				csatlakoztatok.&lt;br /&gt;&lt;br /&gt;Ezt gondoltam csak azért írom
+				ide fel, mert nem olvastam egy könyvben sem eddig, ez amolyan
+				magánvélemény.&lt;br /&gt;&lt;br /&gt;Ötlet: Csak példaként egy
+				private cloud-ba érdekes lehetne olyan logikát írni, ami felstartol
+				mégegy mongodb szervert, ha a cluster átlagos terhelése X főlé nő,
+				lekapcsol egyet, ha Y alá csökken, megtart tartalékba Z-t mindig.
+				Nyilván nem csinál ilyet az oVirt, de más rendszerek biztosan igen.
+				Bocsi, hogy megint oVirt lett belőle...&lt;br /&gt;Ez persze a
+				fizikai vasakon futó rendszereken nem segít, nem "silver bullet", de
+				egy egyszerű megoldás lenne a probléma java részére.&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-1392663155533681974?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/07/cluster-maganvelemeny-otlet.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>3</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-6141589981666282531</guid>
+			<pubDate>Tue, 17 Jul 2012 21:23:00 +0000</pubDate>
+			<atom:updated>2012-07-17T23:23:15.819+02:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>ovirt</category>
+			<category domain='http://www.blogger.com/atom/ns#'>postgresql</category>
+			<title>oVirt or oVirt</title>
+			<description>Néhány további a múltkori dolgokhoz az oVirt-tel
+				kapcsolatban, most nem annyira felhasználói oldalról, kicsit inkáb
+				belülről.&lt;br /&gt;&lt;br /&gt;&lt;h3&gt; Poll&lt;/h3&gt;Az oVirt
+				hogy bármilyen információt beszerezzen a futó VM-ekről, poll-ozgatja
+				a host-gépeken futó agentet (ennek VDSM a neve). Az agenttel csak
+				két problémám van:&lt;br /&gt;&lt;ul&gt;&lt;li&gt;Új szoftvert írni
+				XML-RPC-re? Ez komoly? Akkor már miért nem CORBA?
+				:)&lt;/li&gt;&lt;li&gt;Néha úgy tünik az alatta levő libvirt-tel
+				hamarabb szótértenék. Például oda lehet callback-eket is
+				regisztrálni.&lt;/li&gt;&lt;/ul&gt;A pollozás mellett amit nem
+				szeretek, az az, hogy a leszedett információt egyszerűen belecsapjuk
+				az adatbázisba és nem csinálunk semmit, várjuk hogy valaki
+				megkérdezze. Ezzel kapcsolatban borzasztóan kiváncsi vagyok, hogy
+				vajon miért. Egy tranzakciós adattárolóban tartunk valamit, ami
+				tökre nem tranzakciós. Minden alkalommal amikor kellene tudni, egy
+				Host-on mennyi szabad memória van, az adatbázisból kérdezzük
+				le.&lt;br /&gt;Szóval szerintem:&lt;br /&gt;&lt;ul&gt;&lt;li&gt;A
+				host éppen aktuális állapotát nem adatbázisban kellene tartani,
+				hanem a memóriában vagy elosztott cache-ben. Az adatbázis nem
+				cache!&lt;/li&gt;&lt;li&gt;A hostot lehet hogy kell poll-ozni
+				időnként, hogy életben van-e még, de sokkal hatékonyabb lenne ha
+				streamelné az adatokat, ha már van agent&lt;/li&gt;&lt;li&gt;A
+				streamelt eseményeket akár JMS sorban priorítási sorrendben lehetne
+				feldolgozni, tetszőleges szálon. Ezeknek az eseményeknek kellene
+				elindítania a döntési folyamatokat. (pl hogy a host túlterhelt,
+				valamelyik Vm-et át kell migrálni
+				máshova)&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt; Kereső&lt;/h3&gt;A kereső
+				egy tipikus szent tehén, senki sem mer hozzányúlni. Nagyjából úgy
+				van most, ahogy átportolták .net-ből. A másik nehézség, hogy jó
+				részét megosztv használja a GWT frontend és a backend, így aztán
+				tényleg nehéz is hozzányúlni, de azért egyszerűsítgetni simán lehet
+				benne mert nagyon cifrán redundáns.&lt;br /&gt;A kereső egy apró
+				baja az, hogy SQL lekérdezéseket gyárt, nem holmi lucene vagy
+				hasonló okoskodás. Az SQL se rossz persze, de a postgres-nek
+				rettenetes bajai vannak a generált lekérdezéseivel. Degeneráltak a
+				lekérdezései. Szóval a kereső is jól tökönrúgja az adatbázist, de a
+				kód ami a lekérdezést generálja tényleg nehéz eset, elösször kicsit
+				egyszerűsíteni kellene rajta, de azt nem lehet, mert így
+				"működik".&lt;br /&gt;&lt;h3&gt;Kompenzációs
+				tranzakciók&lt;/h3&gt;Hallottál már olyanról, hogy &lt;a
+				href="http://en.wikipedia.org/wiki/Compensating_transaction"&gt;kompenzációs
+				tranzakciók&lt;/a&gt;? Én csak véletlenül futottam bele régebben, de
+				soha nem láttam alkalmazva. Ez a megoldás azért lett bevezetve, mert
+				a kommunikáció a hostokkal lassú, közben lockolunk rekordokat és a
+				postgresql-nek &lt;a
+				href="http://www.postgresql.org/docs/9.1/static/transaction-iso.html"&gt;nincs
+				read uncommited tranzakció izolációs&lt;/a&gt; szintje. Mondjuk még
+				mielött tiltakozni kezdenél, hogy azért van más épkézláb megoldás:
+				persze van. De mindenesetre valahogy úgy jött ki, hogy egy bizonyos
+				táblába tol az oVirt mindent, és lezárja az adatbázis tranzakciót,
+				egy tranzakciók feletti tranzakciót csinál. Aztán ha N adatbázis
+				tranzakció után belefut egy hibába, akkor megpróbálja visszacsinálni
+				ezek alapján a rekordok alapján.&lt;br /&gt;&lt;ol&gt;&lt;li&gt;Ez
+				kézzel hímzett megoldás, rettenetesen sok kódsor
+				szolgálja&lt;/li&gt;&lt;li&gt;Nem biztos hogy sikerül a kompenzációs
+				tranzakció, és akkor megakadunk ott, ahova nem akartunk
+				eljutni&lt;/li&gt;&lt;li&gt;Ha kompenzáció nem sikerül az engine
+				indításakor, akkor az engine el se indul. A felhasználó meg néz hogy
+				mivan.&lt;/li&gt;&lt;li&gt;Bár a tranzakciókat igazán egyidejű
+				hozzáférésre találták ki, a kompenzációs tranzakcióknál teljesen
+				para az egyidejű hozzáférés.&lt;/li&gt;&lt;/ol&gt;Nem lenne nehéz
+				megoldani, hogy a Host műveleteket az oVirt asszinkron kezelje.
+				Küldözgessen JMS üzeneteket, vagy akármi. Én egyébként szivesebben
+				barátkoznék a gonosz MySQL-lel is akár, mint hogy egy tranzakciós
+				rendszer tetejébe workaroundként mégegy tranzakciós rendszert
+				húzzak.&lt;br /&gt;&lt;h3&gt;Adatbázis&lt;/h3&gt;Á igen, rendesen
+				tökönrúgjuk az adatbázist a HOST/VM státusz adatok örökös
+				írogatásával, a hülye kereső lekérdezésekkel, de ez nem fáj nagyon,
+				amíg nincsen sok VM-ed. (Mondjuk miért használnál olyasmit, mint az
+				oVirt, ha nincs sok VM-ed?)&lt;br /&gt;Viszont helyenként rendesen
+				tökön rúgjuk szegény PostgreSQL-t olyanokkal is, hogy egy ciklusban
+				kérdezünk le valamit belőle, ahelyett, hogy egy értelmes lekérdezést
+				írnánk. Ez nekem az egyik legfájdalmasabb dolog, mert ez direkt van
+				így és nem értem miért kell hogy így legyen. Nemrég kellett egy
+				bugot kijavítsak és első nekifutásra kicsit okosítottam a &lt;a
+				href="http://gerrit.ovirt.org/#/c/5752/3/backend/manager/dbscripts/vds_sp.sql"&gt;lekérdezésen&lt;/a&gt;,
+				de ezt nem fogadta el a reviewer (aki szerintem beletette a bugot).
+				Az &lt;a
+				href="http://gerrit.ovirt.org/#/c/5848/8/backend/manager/modules/bll/src/main/java/org/ovirt/engine/core/bll/VdsSelector.java"&gt;elfogadott&lt;/a&gt;
+				megoldásban kénytelen voltam iterációban kérdezgetni az
+				adatbázisból. Ez a rendszered növekedésével exponenciális
+				terhelésnövekedéshez vezet. Baromi zavaró, amikor ilyeneket
+				csináltatnak velem.&lt;br /&gt;&lt;blockquote
+				class="tr_bq"&gt;"Mindenki más faszával szereti verni a
+				csalánt"&lt;br /&gt;- ZTutto&lt;/blockquote&gt;&lt;br /&gt;&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-6141589981666282531?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/07/ovirt-or-ovirt.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>4</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-1243993732732378804</guid>
+			<pubDate>Fri, 29 Jun 2012 22:51:00 +0000</pubDate>
+			<atom:updated>2012-06-30T10:30:47.373+02:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>cloud</category>
+			<category domain='http://www.blogger.com/atom/ns#'>ovirt</category>
+			<title>"oVirt or no virt"</title>
+			<description>Megint melóval kapcsolatos pár gondolatot szeretnék
+				megosztani magammal, nyugodtan hagyjátok figyelmen kívül. Szóval pár
+				dolog, ami az oVirt-ben nagyon szeretném ha fejlődne, de sajna nem
+				fejlődik akármennyit is túlórázok. Ugyanis teljesen mással vagyok
+				elfoglalva, pl újabban python-ban programozok, legalábbis imitálom,
+				a kedvem viszont rohamosan fogy.&lt;br /&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;&lt;span style="font-size: large;"&gt;VM
+				ütemező&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;Ha van egy adatközpontod -és ne valami
+				CERN-Google-fakebook mega-vastelepre kell gondolni, hanem akár a
+				sufniba bevágott 6-8 leselejtezett asztali gépből összefabrikált
+				teszt clusterre- amin elfut 20-30 különböző virtuális gép. Szóval
+				már a 20-30 gépnek is kimérni hogy melyik gépen fusson, hogy ne pont
+				egyszerre kezdjék agyonhajtani az egyik vincsit, a hálózatot,
+				satöbbi... ez túl sok meló. Az oVirtben ezeket a dolgokat, hogy
+				CPU-pinning, hosthoz kötés, ezek enterprise virtualizáció néven oké
+				(gondolom az enterprise az ökörséget jelenti). De akár már néhány
+				VM-en is kikisérletezgetni az optimális konfigot, nekem se lenne
+				hozzá kedvem. Ez had legyen a droidok
+				sportja.&lt;/div&gt;&lt;div&gt;Az oVirt VM-ütemezője viszont a
+				memória pillanatnyi kihasználtságán kívül kb mindent figyelmen kívül
+				hagy. Egy ütemezőnek figyelembe kellene
+				vennie:&lt;/div&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;a memóriát
+				természetesen&lt;/li&gt;&lt;li&gt;CPU
+				kihasználtság&lt;/li&gt;&lt;li&gt;merevlemez
+				használat&lt;/li&gt;&lt;li&gt;hálózat
+				használat&lt;/li&gt;&lt;li&gt;&lt;b&gt;ÉS&lt;/b&gt; nem csak az
+				éppen aktuálisat, hanem az azon a gépen futó VM-ek tipikus
+				terhelését. Például van éjfélkor elindul pár job az egyik VM-en ami
+				generál némi aktivítást, vajon odafér-e mellé még egy másik gép
+				által generált aktivítás
+				is?&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;div&gt;&lt;span
+				style="background-color: white;"&gt;Persze nem mondom, király, hogy
+				ki tudod jelölni,hogy melyik gépen fusson a szervered. De mennyivel
+				jobb, ha nem kell vele foglalkoznod. Én már akkor a lehetőségről is
+				lemondanék. Miért akarnék én magam migrálgatni VM-eket egyik
+				dobozról a másikra?&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;&lt;span style="font-size:
+				large;"&gt;Power save&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;A másik dolog, amivel nehezen tudok
+				megbarátkozni, hogy az oVirt soha nem kapcsolja ki a hostokat. Ott
+				van minden power management-tel kapcsolatos info, és nem. A
+				használatlan hostokat milyen király lenne egyszerűen kikapcsolni.
+				Kevesebb zaj, nyáron az se rossz ha kevesebbet fűtünk, barátibb
+				villanyszámla, meg addig a csapágy se kopik
+				:-)&lt;/div&gt;&lt;div&gt;Ja és persze kiragaszthatod magadra, hogy
+				zöld vagy mint egy mozgalom és egylet.&lt;/div&gt;&lt;div&gt;Majd ha
+				kell a host, akkor bekapcsolhatjuk
+				automatikusan.&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;Valamint ha egyszer tényleg kikapcsolná
+				a hostokat az oVirt, akkor nagyon királynak tartanám ha nem csak a
+				szokásos IPMI, DRAC, stb interfaceket használnánk, hanem a primitív
+				wake-on-lant is akár. Wake-on-lan a világon mindenben van, amiben
+				van ethernet csatlakozó. Sajnos amennyivel többe kerül egy IPMI-os
+				interface-szel szállított echte Dell szerver, na annyit nem
+				takarítassz meg a villanyszámlán
+				egyhamar.&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;&lt;span style="font-size: large;"&gt;VM
+				pool&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;A VM pool szerintem félbehagyott
+				feature. Pedig király lenne. A VM pool jelenleg ezt csinálja:
+				e&lt;span style="background-color: white;"&gt;gy template-ből csinál
+				neked annyi VM-et amennyit akarsz, és nyilvántartja, hogy azok a
+				pool-ba tartoznak. A pool létrejöttekor illetve módosításakor
+				létrehozza a konkrét
+				VM-eket.&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;&lt;span
+				style="background-color: white;"&gt;Olyan API hivás sincs, hogy
+				"adjál egy VM-et abból a
+				pool-ból"&lt;/span&gt;&lt;/li&gt;&lt;li&gt;A stabil méret helyett
+				szerintem a maximum és minimum érdkesebb
+				lenne.&lt;/li&gt;&lt;li&gt;Olyanok is inkább érdekelnének, hogy az
+				oVirt automatikusan elindítson a pool-ból új VM-eket bizonyos
+				kritériumok esetében. Pl ha minden gép legalább 50 % CPU terhelést
+				kap, stb.&lt;/li&gt;&lt;li&gt;&lt;span style="background-color:
+				white;"&gt;Ha azt mondom pool, akkor olyan dolgok halmazára
+				gondolsz, amik közül mindegy, hogy melyiket kapod meg, mind ugyanazt
+				tudja. Szóval szerintem egy olyan pool esetleg hasznosabb lenne, ami
+				nem hozza előre létre a VM-eket, hanem a template-ből bármikor
+				csinálhat egy újat. Mi a fenének foglalják a helyet
+				addig?&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style="font-size:
+				large;"&gt;VM Set&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span
+				style="background-color: white;"&gt;&lt;br
+				/&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span
+				style="background-color: white;"&gt;Ilyesmi nincs az oVirt-ben,
+				szóval ez egy feature request lenne. Nagyon gyakran van olyan, hogy
+				egy project fejlesztői környezetéhez létrehozol hálózatot, X darab
+				virtuális gépet, amik különböző komponenseket futtatnak a
+				rendszerből. Pl valami load ballancer, X db servlet container vagy
+				app szerver, egy adatbázis szerver, vagy esetleg egy fél tucat
+				NoSQL. Szóval azért lenne őket értelme egyben tartani, mert olyan
+				dolgokat lehetne csinálni velük, mint klónozás, hogy a dev környezet
+				szenvedést ne kelljen megismételni N alkalommal. Vagy akár együtt az
+				egészet learchiválnád és lekapcsolnád, amikor a project végetér.
+				Abban is segítene, hogy a set gépei pl elsősorban egymással
+				kommunikálnak, szóval érdemes lehet őket ennek megfelelően pakolni
+				hostokra.&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;...
+				és így tovább, még van jónéhány ötletem, csak most mingyá
+				hajnalodik.&lt;/div&gt;&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-1243993732732378804?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/06/ovirt-or-no-virt.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>6</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-1865103122685809028</guid>
+			<pubDate>Tue, 19 Jun 2012 11:07:00 +0000</pubDate>
+			<atom:updated>2012-06-19T13:07:24.551+02:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>java</category>
+			<category domain='http://www.blogger.com/atom/ns#'>eclipse</category>
+			<category domain='http://www.blogger.com/atom/ns#'>konf</category>
+			<title>Eclipse democamp pénteken</title>
+			<description>Aki még esetleg nem tudna róla: péntek este &lt;a
+				href="http://wiki.eclipse.org/Eclipse_DemoCamps_Juno_2012/Budapest"&gt;budapesti
+				eclipse democamp&lt;/a&gt;.&lt;div&gt;Leginkáb az &lt;a
+				href="http://www.eclipse.org/xtend/"&gt;XTend&lt;/a&gt; nyelv
+				érdekel az előadások közül, annak ellenére hogy szerintem nem a
+				nyelv a probléma a java környékén.&lt;/div&gt;&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-1865103122685809028?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/06/eclipse-democamp-penteken.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>3</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-5377934745703707050</guid>
+			<pubDate>Wed, 13 Jun 2012 17:02:00 +0000</pubDate>
+			<atom:updated>2012-06-14T11:02:47.608+02:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>java</category>
+			<category domain='http://www.blogger.com/atom/ns#'>ovirt</category>
+			<category domain='http://www.blogger.com/atom/ns#'>gyárlátogatás</category>
+			<title>Gyárlátogatás: KÓD_KONVENCIÓ</title>
+			<description>Hali, ismét gyárlátogatáson vagyunk, zsebrevágott kézzel
+				körbevizslatunk az üzemben, megnézzük mit csinálnak a szakik.
+				Gondoltam ma kicsit mesélnék arról, hogy miket láttam kód konvenciók
+				háza-táján, milyen viták zajlanak, hol és mi fáj. Ne várjatok nagyon
+				objektív megközelítést, ez az egész személyes élmények
+				alapján.&lt;br /&gt;&lt;br /&gt;A legtöbb kód konvenció csak a
+				fejlesztők életét könnyíti vagy nehezíti meg. A forráskód fordítása
+				után a tárgykódban már nincsenek se szóközök, se kommentek, se
+				tabok, C nyelvben még a változód neve is eltűnik, java-ban is inkáb
+				csak a mezőknek van jelentősége. Szóval ilyen szempontból a dolog
+				kevés értéket jelent az ügyfélnek, aki végülis fizetni fog
+				(reméljük) a termékért.&lt;br /&gt;&lt;br /&gt;&lt;span
+				style="font-size: large;"&gt;Nevek&lt;/span&gt;&lt;br /&gt;&lt;br
+				/&gt;&lt;br /&gt;&lt;div&gt;C++-ból és hasonló területekről érkező
+				szoftverfejlesztőktól gyakran láttam&amp;nbsp;&lt;a
+				href="http://en.wikipedia.org/wiki/Hungarian_notation"&gt;hungarian
+				notation&lt;/a&gt;-hoz hasonló neveket. pl a mezőket sokan kedték
+				aláhúzással, mint _name, vagy my prefixszel, pl myName. Régebben
+				sokat láttam szigorúbb hungarian notationt java programozóktól is,
+				pl volt olyan munkahelyem, ahol meg a paramétereket is 'a'-val (mint
+				argumentum) kellet kezdeni.&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;A legviccesebbnek azt a konvenciót
+				találtam, ahol az entitás osztályokat és azoknak a mezőit magyarul
+				kellett elnevezni. Szerencsére ékezeteket nem akartak, de sikerült
+				amolyan kicsi bábelt létrehozni a forráskódban, ugyanis a java többi
+				része és library-k továbbra is angolul
+				vannak.&lt;/div&gt;&lt;blockquote
+				class="tr_bq"&gt;if(fejleszto.isHulye())
+				...&lt;/blockquote&gt;&lt;br /&gt;Egyes konvenciókat a java nyelvben
+				én is teljesen figyelmen kívül hagyok, az egyik ezek közül amit a
+				legtöbbször vágnak a fejemhez, a konstansok NAGY_BETŰS elnevezése,
+				helyette a konstansokat is sima mezei camelCase írom. Akkor pár
+				ok:&lt;br /&gt;&lt;br /&gt;&lt;ul&gt;&lt;li&gt;A NAGY_BETŰS
+				konvenció a C nyelvből érkezett a java nyelvbe. Ott a prepocesszor
+				makrókat ajánlott nagybetűsen írni, ugyanis komoly gubancok
+				származhatnak belőle ha elfelejted. Java-ban udvariasan szól az
+				eclipse vagy amit hajtassz, hogy "komám, az final". Nem mondod
+				komolyan, hogy vim-ben írsz java kódot? Ja emacs, persze, de kis
+				buta vagyok :-D&lt;/li&gt;&lt;li&gt;Enum-okat: Igen, ami az enumban
+				van az effektive public static final, de miért kellene mindent nagy
+				betővel írnunk benne? Mint egy állítólagos nigériai tábornok
+				lányának a takarítónöjének a majma egy
+				e-mailben.&lt;/li&gt;&lt;/ul&gt;&lt;br /&gt;&lt;div&gt;&lt;span
+				style="font-size: large;"&gt;Tab vs
+				space&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;blockquote
+				class="tr_bq"&gt;"te tab-bal tabulálsz?&lt;br /&gt;bnzi-e vagy" -
+				beteg-patkány-ember&lt;/blockquote&gt;&lt;/div&gt;&lt;div&gt;A másik
+				ilyen kérdés a space vs tab hitvita. Nem szeretnék senkit se
+				rábeszélni arra, hogy áttérjen a másikra, de a harcos
+				space-hívőknek:&amp;nbsp;Ha a space a tabulálásra van akkor a tab
+				vajon mire van?&lt;/div&gt;&lt;div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;Ez a tabulálás dolog viszont leginkáb a
+				python fejlesztők között okoz viszályokat, pár hét python buherálás
+				után én így kategorizálom be a python
+				fejlesztőket:&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;tab-os
+				pythonos&lt;/li&gt;&lt;li&gt;4-spaces
+				pythonos&lt;/li&gt;&lt;li&gt;4-től eltérő mennyiségű space-szel
+				tabuláló pythonos&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;És mind meg van
+				győződve róla, hogy ő vágja a témát és a többi falhozvert lófasz. A
+				projectemen többségében 4-spaces pythonosok vannak, szerintük a
+				pythonnak nagyon fontos, hogy pont 4 legyen.&amp;nbsp;Ennek ellenére
+				a kódban tucat helyen el van cseszve és csak 3 space.
+				Sajnos&amp;nbsp;kb azonnal elfelejtettem az indoklást, az összes
+				python scriptem futott a
+				tabokkal.&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;&lt;span style="font-size:
+				large;"&gt;Sorhossz&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;A sorok hossza ami a másik dolog, amivel
+				teljesen értelmetlenül és eredménytelenül lehet vitatkozni egy pár
+				órát. Kezdetekben mindenkinek volt a szép karakteres képernyője, ami
+				képes volt 80x25 karakter megjelenítésére, innen származott az a
+				tradíció, hogy legyünk szivesek 80 karakternél többet ne pakolni egy
+				sorba. Hát azóta eltellt egy kis idő, közben a képernyők közül a 23
+				colos lett a standard. Amennyiben nem a mobil telefonodon
+				fejlesztessz. A sorok szélessége viszont sok projectben megmaradt 80
+				karakter.&lt;/div&gt;&lt;div&gt;Kicsit ez a dolog kapcsolódik a
+				space vs tab vitához, mert a tab méretét lehet változtatni a
+				szerkesztőben.&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;&lt;span style="font-size:
+				large;"&gt;Kommentek&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;Talán ezzel volt a legkevesebb gubanc,
+				mert áltaáában a fejlesztők beérik kevés dokmentációval. Egy
+				ellenpéldával találkoztam, konkrétan az oVirt projecten dobták
+				vissza az egyik patch-emet egy csillag miatt. Ugyanis egy kicsit
+				bonyolultabb kóddarabhoz odaírtam, hogy mi a fészkes fenét csinál ez
+				az egész, és a többsoros /* */ kommentet használtam. Erre valakinek
+				az volt a kifogása, hogy "mi" csak a /** */ -t
+				használjuk.&lt;/div&gt;&lt;div&gt;Akkor kapd be a patch-em
+				:-)&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;&lt;span style="font-size:
+				large;"&gt;Egy kis saját: final
+				paraméterek&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;Á igen, gondoltam a végére csemegének
+				megint egy saját paranoiámat dobnám be. Legalább tudok róla, hogy
+				van :-) sőt már egyszer &lt;a
+				href="http://iwillworkforfood.blogspot.cz/2009/02/final-paranoia.html"&gt;meg
+				is gyóntam&lt;/a&gt;. Szóval amerre járok, hajlamos vagyok főleg a
+				hosszabb metódusok paramétereit átírni final-ra. Ennek
+				funkcionálisan a világon semmilyen következménye nincs: amennyiben
+				lefordul, működni is fog. Azért alakult ki nálam ez a szokás, mert a
+				parameter-reassignment-et teljesen olvashatatlannak
+				tartom.&lt;/div&gt;&lt;div&gt;De én legalább senkivel nem kezdek el
+				cseszekedni, ha nem finalként definiálja a paramétereket a
+				patcheiben :-)&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;&lt;span style="font-size:
+				large;"&gt;Policy Police&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;Pár eszközt említenék meg a kód
+				konvenciók betartatásához illetve
+				figyeléséhez:&lt;/div&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;nagyon
+				szimpatikus a &lt;a
+				href="http://www.sonarsource.org/"&gt;sonar&lt;/a&gt;.&amp;nbsp;Azt
+				is meg lehet oldani vele, hogy elhasaljon a build, ha súlyosabb
+				hibát talál, de ilyen beállítással még nem találkoztam.&amp;nbsp;A
+				sonarral kapcsolatban azt tartom szomorúnak, hogy nagyon kevesen
+				használják ténylegesen, pedig&amp;nbsp;átalában egy csomó dologra
+				hívja fel a figyelmedet, szerintem a használatával tényleg
+				tanulhatsz pár érdekes dolgot, legalábbis én tanultam tőle.&lt;br
+				/&gt;A legfontosabb, hogy időben láthatod a változást. Szerintem az
+				egésznek nagyon kevés értelme van, ha nem a változást
+				figyeled.&lt;/li&gt;&lt;li&gt;nagyon idegesítőnek találtam a
+				maven-checkstyle plugint, ami az ovirtben nem csak pazarolja az
+				időmet, de olyan marhaságokon képes eltörni a buildet, mint trailing
+				spaces. Amikor éppen egy kritikus hibát próbálsz javítani el tudod
+				képzelni mennyire örülsz egy
+				ilyennek.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;Amúgy nekem végülis 8, mondhatnám.
+				Magyar jelöléses 80 karakteres sorhosszú, dokumentálatlan és akár
+				egysorba írt kódot kapunk és nem ettől lesz az eredmény egy stack
+				trace.&lt;/div&gt;&lt;div&gt;A kód konvenciókban engem az zavart
+				&lt;b&gt;mindenhol&lt;/b&gt;, a C/C++-os, Perl-es Python és
+				PL/SQL-es projectekben egyaránt, hogy a kód konvenció személyenként
+				változott. Azaz ha bedobod review-ra a patch-et, akkor attól függően
+				lesz lefikázva vagy elfogadva, hogy ki nézi meg. Kb mint egy
+				vizsgán, hogy melyik tanárnál
+				vizsgázol.&lt;/div&gt;&lt;div&gt;Projectek illetve cégek különböző
+				csoportai között egyre nagyobb véleménykülönbségeket
+				láttam.&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;Ezzel együt lehet élni persze, a
+				probléma akkor következik, amikor az egyik csoport megpróbálja
+				rákényszeríteni a konvencióit a másik csoportra, illetve meg akar
+				határozni egy globálisabb (pl céges)
+				kódkonvenciót.&amp;nbsp;&lt;/div&gt;&lt;div&gt;Na, ez az amiből
+				egyetlen egy sikeres próbálkozást nem láttam, de nagyon hosszú és
+				anyázásig elmenő vitát jópárat.&lt;/div&gt;&lt;blockquote
+				class="tr_bq"&gt;"Persze, hogy benne van a céges policy-ban. Most
+				írtam bele."&lt;/blockquote&gt;&lt;div&gt;Én azt hiszem az lenne egy
+				egyensúly közeli állapot, ha egy-egy projecten együtt dolgozó
+				emberek a nem funkcionális elvárásaikat megbeszélnék nem egy
+				bizottsági üllés keretében hanem inkrementálisan, ahogy jön. Azt is
+				jobbnak hiszem, ha ezeket a szabályokat nem próbálják meg keményen
+				bármi áron betartani. Ha funkconálisan teljesen jó és nem halom
+				ganaj a kinézete, had jöjjön, aztán lesz időnk
+				szépítgetni.&amp;nbsp;&lt;/div&gt;&lt;div&gt;Nyugdíj után bármire
+				:-)&lt;/div&gt;&lt;div&gt;Ezt én sem tarom univerzálisan bevethető
+				dolognak,&amp;nbsp;a demokrácia nem mindenkivel működőképes, egyre
+				több emberrel pedig egyre kevésbé.&lt;/div&gt;&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-5377934745703707050?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/06/gyarlatogatas-kodkonvencio.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>6</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-2253619226124317986</guid>
+			<pubDate>Wed, 06 Jun 2012 15:35:00 +0000</pubDate>
+			<atom:updated>2012-06-06T17:37:42.867+02:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>virt</category>
+			<category domain='http://www.blogger.com/atom/ns#'>cloud</category>
+			<category domain='http://www.blogger.com/atom/ns#'>jee</category>
+			<category domain='http://www.blogger.com/atom/ns#'>enterprise horror</category>
+			<title>Small is beautiful</title>
+			<description>Lassanként minden a felhőben szalad, mert az (többnyire,
+				eleinte, állítólag, stb) olcsóbb, és persze a felhőben fogyasztás
+				alapján számláznak. Azaz megkapod havonta a memória fogyasztásodról
+				a számlát minden hónapban újra és újra. Nem csak akkor, amikor
+				leslattyogsz a boltba megvenni a RAM-ot a gépbe.&lt;br
+				/&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;Szóval vajon ez
+				az újra és újra megjelenő kiadás elegendő motiváció-e arra, hogy
+				kisebb memóriaigényű szoftvereket fejlesszünk és
+				futtassunk?&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;Például a jetty elfut 256 MB memórián.
+				Még egy DB-nek is akad hely, azaz a legkisebb VM-en is simán
+				elszalad. Egy JBoss-t vagy Glassfish-t nem inditasz el azért 1 GB
+				alatti memórián. Illetve ha megveszed minden hónapban a memóriát,
+				nem-e inkáb valami hasznosra használnád? Még az I/O cache is sokkal
+				hasznosabb, mint egy tucat teljesen kihasználatlan feature
+				a&amp;nbsp;kedvenc&amp;nbsp;JEE szerveredben.&lt;/div&gt;&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-2253619226124317986?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/06/small-is-beautiful.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>7</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-8279251433654504367</guid>
+			<pubDate>Tue, 22 May 2012 21:15:00 +0000</pubDate>
+			<atom:updated>2012-05-22T23:15:22.044+02:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>off</category>
+			<title>csapatszétszórás</title>
+			<description>Arra a melóra, amit én csinálok, 4 földrészen lehet
+				jelentkezni. Ennek ellenére a szűkebb csapatból én vagyok az
+				egyetlen, aki nem Tel Avivban dolgozik. A tágabb csapatból se
+				sokan.&amp;nbsp;Néha úgy tűnik, akár maradhattam volna Budapesten
+				is.&amp;nbsp;Egyszer megkérdeztem, hogy miért jó az hogy egy pár
+				ember így a világban elszórva van, de a legtöbb (talán úgy 100
+				ember) egy városban. Hát, erre nem kaptam kielégítő választ :-) de
+				gondoltam megosztanám mindenkivel a véleményemet erről a
+				csapatszétszórásról általában:&lt;br /&gt;&lt;br /&gt;A földrajzilag
+				szétszórt csapatot sokan trendi dolognak tartják, pedig
+				kommunikációs problémák lehetséges forrása. Nem cél, hanem egy
+				probléma.&lt;br /&gt;&lt;br /&gt;Például a gerriten, ircen keresztül
+				pötyögni soha nem lesz olyan hatékony, mint odamenni valakihez és
+				ledumálni &amp;nbsp;az egész problémát. Kicsit olyan, mintha a
+				szervereidet &lt;a
+				href="http://en.wikipedia.org/wiki/Parallel_Line_Internet_Protocol"&gt;plip&lt;/a&gt;-pel
+				kötnéd össze, meg még egy csomót is kötsz rá, aztán csodálkozol hogy
+				lassú meg rossz.&lt;br /&gt;&lt;br /&gt;Amúgy ezt is lehet jobban
+				csinálni, de pl az irc elég rendesen múlt századi technológia. Soha
+				nem is irceztem mielött itt dolgoztam volna.&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-8279251433654504367?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/05/csapatszetszoras.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>2</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-6595950002560945360</guid>
+			<pubDate>Mon, 21 May 2012 07:42:00 +0000</pubDate>
+			<atom:updated>2012-05-21T09:43:02.779+02:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>cowboy coding</category>
+			<category domain='http://www.blogger.com/atom/ns#'>enterprise horror</category>
+			<title>code review</title>
+			<description>A közhiedelem az, hogy a code review során a problémák
+				nagy részét elkapjuk és kitekerjük a nyakát. Ez igaz is lehet egy
+				bizonyos mértékig, de csak egy bizonyos mértékig. Nekem úgy tűnik,
+				hogy a code review során gyakran új bugokat hozunk létre, az alábbi
+				okokból:&lt;br /&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;A reviewer
+				személye mindig más. A mindig más személynek mindig mások a
+				szempontjai. Például van olyan, aki azért dobja vissza a patch-et,
+				mert nem final egy változód benne, van aki azért mert az és neki nem
+				tetszik. "ha van kalapod, azért, ha nincs kalapod, akkor meg azért".
+				Valljuk be, ez a final dolog még bölcsészek között is baszakodásnak
+				számítana.&lt;/li&gt;&lt;li&gt;A patch-ek szétválasztása és
+				egyesítése tulajdonképpen kódolási tevékenység (azaz idővel és
+				kockázatokkal jár) míg a végeredményhez semmilyen értéket nem tesz
+				hozzá.&lt;/li&gt;&lt;li&gt;Teljesen beteg vagyok attól, amikor
+				valamit kétszer kell megcsináljak. Na és az még a jó eset :-) Ha
+				elsőre jó volt, másodszor biztosan
+				elcseszem.&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;Szóval a lefikázás után
+				valami konstruktívat arról, hogy szerintem hogyan kellene használni
+				a
+				gerrit-et:&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;Ha
+				egy patch jobb állapotot hagy maga után, mint elötte, akkor had
+				menjen. Lépjünk tovább, ne szarozzunk!&lt;/li&gt;&lt;li&gt;Ha
+				hiányzik belőle valami (de ugyanakkor attól még jó), akkor esetleg a
+				reviewer hozzáírhat egy patchet és beküldheti, megmutathatja az
+				eredeti patch szerzőjének, hogy ő még ilyesmire gondolt. Lehet
+				vitatkozni, vagy örülni hogy "gyá télleg,
+				köszi!"&lt;/li&gt;&lt;li&gt;A &lt;a
+				href="http://gerrit.googlecode.com/svn/documentation/2.1/project-setup.html#submit_type"&gt;fast
+				forward policy&lt;/a&gt; csak több munkát hoz, gyakorlatban nem
+				védett meg minket semmilyen hibától. Ezt a funkciót egyszerűen
+				kijátszuk, mert nincs más
+				választásunk.&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;Szóval én inkáb
+				piacnak képzelnék el egy jól működő dolgot, mint vizsgabizottságnak.
+				Lehet ezt is jól csinálni, csak mi nem úgy csináljuk. Megpróbáltam
+				demózni az ötletet és egy pár hétig egy-egy embernek végignéztem a
+				patch-setét egyenként ellenőriztem és ha jó volt egyből be is
+				mergeltem. Szépen haladtunk. Mindenki örült, de aztán senki sem
+				kezdte utánozni a módszert :-(&lt;/div&gt;&lt;div&gt;Amúgy a
+				gerritet továbbra sem komállom,
+				mert:&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;A
+				gerrit&amp;nbsp;üzenetei&amp;nbsp;suttyók - pl ezért én soha
+				senkinek nem adok -1-et, mert az olyan bunkó szöveg, hogy inkáb
+				fogalmazok valami barátibbat levélben.&lt;/li&gt;&lt;li&gt;A
+				felhasználói felülete ótvar. Ki hitte volna hogy GWT-ben is lehet
+				ocsmány weboldalakat szerkeszteni? :-)&lt;/li&gt;&lt;li&gt;A
+				használhatósága csekély, pl keresés nagyon hiányzik belőle, de a
+				saját lezárt patcheimet sem tudom átnézni
+				benne.&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;/div&gt;&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-6595950002560945360?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/05/code-review.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>4</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-6247492459984725664</guid>
+			<pubDate>Wed, 25 Apr 2012 17:13:00 +0000</pubDate>
+			<atom:updated>2012-04-25T19:13:26.453+02:00</atom:updated>
+			<title>Java Fight Club, Kanban, Smartphone</title>
+			<description>A JUM-ot sajnos úgy tűnik nem sikerült újraéleszteni.
+				&amp;nbsp;Elek Márton, az eredeti ötletgazda és szervező twitjeit
+				Svájcból lehet hallani hébe-hóba, sokan mások is elköltöztek és
+				végül ennyi lett. Sajnálom, mert egyébként egy nagyon hasznos dolog
+				volt. Mindenesetre köszi azoknak, akik csinálták!&lt;br /&gt;Nekem
+				&lt;a
+				href="http://iwillworkforfood.blogspot.com/2007/04/ennyi.html"&gt;csak
+				kérnem kellett&lt;/a&gt;, és ti &lt;a
+				href="http://jtechnics.anzix.net/2007/04/03/klub/"&gt;megcsináltátok&lt;/a&gt;,
+				bárcsak mindig ilyen könnyen menne.&lt;br /&gt;&lt;br /&gt;Nekem
+				azért hiányzott a klub és nekiláttam egy hasonló találkozónak
+				Brno-ban Java Fight Club néven az iroda csodaszép 5. emeletén.
+				Szóval az alapötlet az annyi, hogy aki van olyan jóarc, hogy
+				valamivel felkészül, azt segítsük meg annyival, hogy nem neki kell
+				az időpontot, helyet, kivetítőt és egyéb technikai dolgokat
+				megoldania, a közönséget ne untassuk azzal, hogy valami marha elkezd
+				kötöszködni az előadóval, kezdjük el idejében a prezentációt
+				satöbbi. Nem voltunk nagyon sokan, úgy nyolcan, az az első alkalomra
+				egész jó.&lt;br /&gt;&lt;br /&gt;Első prezentációként Jelinek Tamás
+				beszélt a Kanban-ról. Egész idáig nem jött át nekem miért jó a
+				kanban, a termelésleállások az egészen hajmeresztőnek hangzanak, a
+				legtöbb munkahelyemen a managerem szerintem leszarta volna a
+				termelésleállás okát, inkáb kirúgtak volna csak ne kelljen
+				foglalkozni azzal hogy mi a gebasz.&lt;br /&gt;&lt;br /&gt;A második
+				prezit Szöcs Vojtech nyomta Smartphone fejlesztésről, ugyanis
+				szeretne egy mobil klienst az oVirt-hez (én is nagyon szeretnék)
+				Piaci összehasonlítás android vs ios, alkalmazásfejleszés költégei,
+				illetve html5 appok.&lt;br /&gt;&lt;br /&gt;Egyébként egészen jó
+				szakmai élet van a Vörös Satyesz Vasgyárban, legalábbis ami a
+				linuxereket illeti, de én nem vagyok igazán linuxer. Nekem a linux
+				csak egy az operációs rendszerek között.&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-6247492459984725664?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/04/java-fight-club-kanban-smartphone.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>3</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-1194162214722215050</guid>
+			<pubDate>Wed, 18 Apr 2012 16:27:00 +0000</pubDate>
+			<atom:updated>2012-04-18T18:27:20.747+02:00</atom:updated>
+			<title>iwiw must die</title>
+			<description>Ma kitudja mennyi idő után elösször jelentkeztem be az
+				iwiw-be, de most is csak hogy megkeressem a regisztráció törlése
+				gombot. (Ugyanis nekiláttak spamelni.) Elszüttyögtem egy kicsit
+				rajta, jól elrejtették a gombot, de nem annyira, mint a faszbook. Ez
+				a kis howto segített, mert totál nem igazodtam ki rajta, hogy mi
+				merre van:&amp;nbsp;&lt;a
+				href="http://www.evenorbert.net/2010/10/iwiw-profil-torlese/"&gt;http://www.evenorbert.net/2010/10/iwiw-profil-torlese/&lt;/a&gt;&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-1194162214722215050?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/04/iwiw-must-die.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>0</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-7840924552016579785</guid>
+			<pubDate>Tue, 17 Apr 2012 18:09:00 +0000</pubDate>
+			<atom:updated>2012-04-17T20:09:44.380+02:00</atom:updated>
+			<title>esti mese: kicsi mock és a memory leakek</title>
+			<description>Hol volt, hol nem volt...&lt;br /&gt;Az &lt;a
+				href="http://www.ovirt.org/"&gt;oVirt&lt;/a&gt; engine-ben egészen
+				félelmetes mennyiségű statikus kódunk van, statikus változókkal. Ez
+				önmagában még nem lenne baj, persze egy tipikus Util osztály csak
+				statikus metódusokból áll, ilyet kb mindenki csinál. A gubanc talán
+				ott kezdődött, hogy IoC helyett is statikus metódusokat használunk.
+				Pl ha szükséged van egy Dao objektumra, akkor így kéred el:
+				DbFacade.getKakukkDao(), ami egy statikus metódus. Na most mi van
+				akkor, amikor egy olyan kódot tesztelnél, ami ilyen módon szeretne
+				egy DAO-t használni?&lt;br /&gt;Mondjuk egy dummy DAO-t gyorsan
+				összemockolsz easymock-kal, de hogyan tömöd bele abba a statikus
+				metódusba, amit a tesztelendő kódod meg fog hívni? A válasz
+				általában az az lenne, hogy sehogy, dögöljön meg aki írta.&lt;br
+				/&gt;No itt jön a képbe a PowerMock, ami arra az elvetemültségre
+				képes, hogy a classloadered buherációjával lecseréli a statikus
+				metódust. Ez a dolog tette lehetővé azt, hogy az egyébként
+				tesztelhetetlen kódot módosítás nélkül mégiscsak tesztelni tudjuk
+				unit-tesztekkel. Majdnem mindenki boldog volt, amíg N-nél több
+				tesztig el nem jutottunk. Azt hiszem én vettem észre elsőként, mert
+				én buheráltam a sonar-t az oVirt-en. Erről jut eszembe hogy kitettem
+				&lt;a href="http://sonar.dictat.org/"&gt;egy openshift-es
+				gépre&lt;/a&gt; a fél évig gyüjtött kódanalízist, ha kedved szottyan
+				olvasgatni elalvás elött. Csak aztán ne nekem panaszkodj, ha rosszat
+				álmodsz :-)&lt;br /&gt;Szóval a Powermock-nak van egy nagyon rossz
+				szokása: rettenetes memory leak-eket csinál a permgen space-ben.
+				Párat talán kijavítottak a srácok, pár új meg talán jött útközben,
+				de akármire is próbáltam felűberelni a Powermock + Mockito párost,
+				mindi maradt egy szép nagy leak. Én viszont akkor is le akartam
+				futtatni a teszteket, szóval a következőket heggesztettem rá a maven
+				buildre:&lt;br /&gt;&lt;br /&gt;&lt;ul&gt;&lt;li&gt;A surefire
+				plugin startolja el a teszteket úgy, hogy mindhez külön VM-et
+				futtasson (forkmode: always)&lt;/li&gt;&lt;li&gt;A forkolt VM extra
+				paraméterek között kapjon 2.5 GB memóriát, ebből 2 GB a permgen - na
+				ez agyhalott, de kevesebbel nem futott
+				le&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;Nos, ez idáig gondolom egy kicsit zavaró
+				volt, de még koránt sincs vége :-D Pár munkatárs arról kezdett
+				panaszkodni, hogy a fejlesztőkörnyezetükben nem megy le a teszt,
+				pedig junkins-ban igen, illetve fordítva, ráadásul hol sikerül, hol
+				nem. Totál összevisszaság :) Nos erről az derült ki, hogy a úgy
+				hozzászokott a drága nép a forkmode=always beállításhoz, hogy egyes
+				tesztek összemocskolták más tesztek futás környezetét, ja és persze
+				a surefire alapbeállítása az, hogy a ahogy felszedte a
+				filerendszerről a teszteket, abban a sorrendben fogja végrehajtani.
+				Ez kicsit hülyébb a random sorrendnél
+				:-)&lt;/div&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;A
+				jelenlegi helyzet az, hogy az embereknek lerúgta az agya a láncot és
+				visszadobják a teszt patcheket, ha powermock van benne. Szopódás,
+				egyre nehezebb patcheket átverni a
+				bürokrácián.&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;A tanulság: írj tesztelhető kódot,
+				csínján a statikus dolgokkal.&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;No... itt a vége, fuss el véle.
+				Aludjatok jól, álmodjatok EJB-ket. (vagy mi a
+				f.szt)&lt;/div&gt;&lt;div class="blogger-post-footer"&gt;&lt;img
+				width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-7840924552016579785?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/04/esti-mese-kicsi-mock-es-memory-leakek.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>3</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-5421521666191807308</guid>
+			<pubDate>Fri, 06 Apr 2012 08:11:00 +0000</pubDate>
+			<atom:updated>2012-04-06T10:12:05.593+02:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>off</category>
+			<title>komplexitás - röviden</title>
+			<description>&lt;span style="font-size: large;"&gt;A komplexitás nem
+				az érték része, hanem az áré.&lt;/span&gt;&lt;br /&gt;&lt;br
+				/&gt;Szerintem. Csak ennyit akartam mondani, kérem kapcsolja
+				ki.&amp;nbsp;Boldog pénteket!&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-5421521666191807308?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/04/komplexitas-roviden.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>0</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-2970685014766461838</guid>
+			<pubDate>Sun, 18 Mar 2012 21:25:00 +0000</pubDate>
+			<atom:updated>2012-03-18T22:26:17.649+01:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>java</category>
+			<category domain='http://www.blogger.com/atom/ns#'>testing</category>
+			<title>Bzip2 buhera</title>
+			<description>Az angol wikipedia dump feldolgozásával bíbelődök
+				szabadidőmben, a dump egy egyszerű XML formátumú file Bzip2
+				tömörítéssel. Csak a legutolsó ellenőrzött oldal szöveg van benne,
+				de még így is 15 GB tömörítve. Az első ötletem az volt, hogy a &lt;a
+				href="http://commons.apache.org/compress/"&gt;commons-compress&lt;/a&gt;&amp;nbsp;&lt;a
+				href="http://commons.apache.org/compress/apidocs/org/apache/commons/compress/compressors/bzip2/BZip2CompressorInputStream.html"&gt;BZip2CompressorInputStream&lt;/a&gt;
+				osztályával egyszerűen meghajtom. Az első teszt-futtatásakkor
+				kezdett kiderülni, hogy nem muzsikál valami szépen, elég lassúcska
+				az import. Az első ötletem az volt, hogy akkor többszálúsítom és az
+				egyik szál csak Bzip2 kitömörítést hajt és PipedOutputStream-en
+				keresztül átdobja egy másik szálnak, ami csak XML-t parsol és a
+				mongodb-be mentést egy executor csinálja néhány szállal, hogy ott
+				biztosan ne legyen fennakadás. Hát... nagyon büszke voltam az
+				architektúrális szörnyszülöttemre egészen addig, amíg elösször le
+				nem futtattam ugyanis az elbonyolítás eredményeként csak 3
+				százalékkal javult a feldolgozás sebessége. A magyarázat egyszerű, a
+				bzip2 tömörítés annyira elviszi a processzoridőt, hogy ahhoz képest
+				az XML feldolgozás és mongodb interanciók szinte semmi. Egészen
+				pontosan összesen a 3 százaléka. Na ekkor töröltem le az
+				elbonyolítást teljesen mert 3 százalékért nem érdemes kétszeresen
+				elbonyolítani.&lt;br /&gt;&lt;br /&gt;Azért egy "gyors"
+				összehasonlítás érdekelt a bzip2 implementációk között:&lt;br
+				/&gt;&lt;ul&gt;&lt;li&gt;A linux bzip2 programja 40 perc alatt
+				tömörítette ki a 15 GB-os dumpot&lt;/li&gt;&lt;li&gt;a pbzip2 (&lt;a
+				href="http://compression.ca/pbzip2/"&gt;parallel bzip2&lt;/a&gt;) 4
+				szálon meghajtva 20 perc lett (2 core x 2 thread van a laptopomban,
+				szóval ez logikus) Ez nem rossz, de a pbzip2 nem része az
+				alaprendszereknek általában&lt;/li&gt;&lt;li&gt;Ugyanehhez a
+				commons-compress-nek 100 percre volt szüksége. Véletlenül ilyen szép
+				kerek szám, nem én találtam ki.&lt;/li&gt;&lt;li&gt;Mennyi lenne ha
+				csak IO lenne az egész: egy sata vincsi általában másodpercenként
+				100 megát fel tud olvasni szekvenciális olvasásnál, az 150 másodperc
+				lenne elvileg, a gyakorlati teszt hajszál pontosan igazolta az
+				elméletet :-)&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;Szóval azt találtam
+				ki, hogy akkor beintegrálom a bzip2-t egy InputStream-ként és akkor
+				a feldolgozást lehúztam kereken 40 százalékra. A bzip2-vel érdemes
+				lenne még buherálni, csak ahhoz be kell lőni a procik számát, szóval
+				kicsit komplikáltabb...&lt;/div&gt;&lt;div&gt;&lt;br /&gt;A szomorú
+				az, hogy ez így csak linuxon fut, szóval jó lenne egy olyan
+				InputStream, ami elmegy a bzip2-vel és fallbackel
+				commons-collections-ra.&lt;br /&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;Ennyi lett a &lt;a
+				href="http://pastebin.com/qTjzGFmn"&gt;kód&lt;/a&gt;,&amp;nbsp;és
+				végülis ezzel sikerült kibékülnöm egyelőre.&lt;br /&gt;&lt;br
+				/&gt;Na, érdekességként az angol wikipédia adathalmazából azoknak,
+				akik idáig eljutottak:&lt;br /&gt;&lt;br
+				/&gt;&lt;ul&gt;&lt;li&gt;162396 állat és növényfaj, illetve
+				rendszertani akármi&lt;/li&gt;&lt;li&gt;239847
+				település&lt;/li&gt;&lt;li&gt;26312 hajó - ez teljesen
+				beteg...&lt;/li&gt;&lt;li&gt;11902 tudós,&amp;nbsp;7762 sportoló,
+				2679 verekedő,&amp;nbsp;91871 "egyéb
+				személy"&lt;/li&gt;&lt;li&gt;13172 író és&amp;nbsp;20084
+				könyv&lt;/li&gt;&lt;li&gt;7508 folyó&lt;/li&gt;&lt;li&gt;3003
+				politikai párt - és vajon mennyi
+				korrupció?&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;/div&gt;&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-2970685014766461838?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/03/bzip2-buhera.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>3</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-5414006667185831956</guid>
+			<pubDate>Thu, 15 Mar 2012 14:34:00 +0000</pubDate>
+			<atom:updated>2012-03-15T15:34:39.018+01:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>off</category>
+			<category domain='http://www.blogger.com/atom/ns#'>ovirt</category>
+			<title>Kicsi a patched?</title>
+			<description>A Belgának van az a zseniális száma "&lt;a
+				href="http://www.youtube.com/watch?v=6UAcYzbilbw"&gt;Az a
+				baj&lt;/a&gt;" címmel, pár apróbb módosítással tök jól leírja, hogy
+				miért megy lassan az oVirt fdejlesztése. Ezer dolgon akadhat el
+				minden, és persze el is akad. És ezek nem a szoftverfejlesztési
+				kihívások mert az nem lenne gond, azért vagyunk itt.
+				&amp;nbsp;Egyébként vannak csodák, csak nagyon ritkán, különben nem
+				hívnák őket csodának :-)&lt;br /&gt;&lt;br /&gt;Ha nem fetcheltél
+				origint az a baj&lt;br /&gt;Ha nem rebaseltél az a baj&lt;br /&gt;Ha
+				rossz branchen vagy az a baj&lt;br /&gt;Ha kurva sok branched van az
+				a baj&lt;br /&gt;Ha a tököd kivan a gittel az a baj&lt;br /&gt;Ha
+				nem megy a gerrit az a baj&lt;br /&gt;Ha nincs reviewer az a
+				baj&lt;br /&gt;Ha más patchen dependelsz az a baj&lt;br /&gt;Ha túl
+				nagy a patched az a baj&lt;br /&gt;Ha nem írtál junit-tesztet az a
+				baj&lt;br /&gt;Ha rossz patchbe tetted az a baj&lt;br /&gt;Ha az
+				ezredik patchnél elbaszod az a baj&lt;br /&gt;Én ezt a refactort
+				másik patchbe tenném az a baj&lt;br /&gt;Mindenki csak +1-et ad az a
+				baj&lt;br /&gt;Fastforward-policy az a baj&lt;br /&gt;Kezdheted
+				előről az a baj&lt;br /&gt;Ettől nem lesz semmi se jobb az a
+				baj&lt;br /&gt;&lt;br /&gt;Szóval mégis mitől lenne gyors?&lt;br
+				/&gt;&lt;br /&gt;&lt;div class="blogger-post-footer"&gt;&lt;img
+				width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-5414006667185831956?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/03/kicsi-patched.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>0</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-1612118032022871147</guid>
+			<pubDate>Tue, 13 Mar 2012 15:24:00 +0000</pubDate>
+			<atom:updated>2012-03-13T16:24:35.459+01:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>off</category>
+			<title>OFF: meló-sztori</title>
+			<description>2000-ben és 2001-ben egy C++ fejlesztő cégnél dolgoztam
+				és ott találkoztam egy kezdő programozóval. Hát nem volt fiatal,
+				akkor is már 40 körül lehetett, doktorija volt vegyészetből és
+				egyébként egy nagyon értelmes arc volt. A csákó kapott egy desktop
+				gépet és Bjorne Strostrup C++ könyvét (ami szvsz egy
+				szerencsétlenség) és elkezdte megtanulni azt a &lt;i&gt;csodálatos
+				nyelvet&lt;/i&gt; :) merthogy elötte nem C++ban tolta. Egy hét után
+				érdekes kérdéseket kezdett feltenni, két hét múlva érdekes
+				ötletekkel kezdett előállni, fantasztikusan haladt, én zseninek
+				tartottam. Az 1 hónapos próbaidő végén már komolyan a kezét
+				rázogattuk, amikor megjött a főnök a központból (jól hangzik mi? két
+				iroda volt... csak ennyi) és megdöbbenésemre nemcsak hogy kirúgrta
+				az embert, de ocsmány megalázó módon rúgta ki, mindenki elött.&lt;br
+				/&gt;&lt;br /&gt;Totálisan semmi lövésem nem volt arról, hogy mi
+				állt a dolog mögött, de pár archiktektúrális kérdés mögötti okot sem
+				értettem (a szoftverünk is egy halom szerencsétlenség volt) szóval
+				munkaadóm egy nagy halom rejtély volt számomra is. Na és akkor pár
+				hónappal később jött egy űber programozó megintcsak a központból,
+				este kimentünk a városban mászkáltunk és közben megkérdeztem tőle
+				hogy tud-e valamit arról, hogy miért rúgták ki a "srácot". Kiderült
+				hogy pont ez a programozó nézte át a munkáját és azt a
+				következtetést vonta le belőle hogy 100 % biztosan összemásolta
+				valahonnan, mert az egyik fele zseniális a másik fele meg tiszta
+				láma, ezt írta vissza a főnöknek és hát ez lett belőle.&lt;br
+				/&gt;&lt;br /&gt;A cégről annyit, hogy kb 3-4 hónappal később behalt
+				és kirúgtak mindenkit. Ez nem azt jelenti, hogy mégiscsak van
+				igazság, egyszerűen csak természetes szelekció in action. Addigra
+				kiderült hogy az architektúra kérdésekben is hasonlóan zseniális
+				döntések játszottak.&lt;br /&gt;&lt;br /&gt;&lt;blockquote
+				class="tr_bq"&gt;A nyolcadik hibámat csak&amp;nbsp;nehezen mondom
+				el&lt;br /&gt;Kaptam a központból egy tojást&amp;nbsp;és várni
+				kellett hogy kikel&lt;br /&gt;Kelt és rögtön megvert&amp;nbsp;aztán
+				bedobott egy kútba&lt;br /&gt;Azóta ő helyettesít,&amp;nbsp;ő visz
+				titeket tévútra&lt;/blockquote&gt;&lt;blockquote class="tr_bq"&gt;-
+				Kispál és a Borz még régen amikor még jó
+				volt&lt;/blockquote&gt;&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-1612118032022871147?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/03/off-melo-sztori.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>0</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-5067833643367429014</guid>
+			<pubDate>Sun, 19 Feb 2012 02:02:00 +0000</pubDate>
+			<atom:updated>2012-02-19T03:10:50.047+01:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>java</category>
+			<category domain='http://www.blogger.com/atom/ns#'>ovirt</category>
+			<category domain='http://www.blogger.com/atom/ns#'>konf</category>
+			<category domain='http://www.blogger.com/atom/ns#'>jboss</category>
+			<title>Developer Conference 2012 Brno, második nap</title>
+			<description>A fedora konferencia második napjáról jelentjük. Ma
+				főleg (de nem kizárólag) JBoss előadásokat hallgattunk meg. Voltunk
+				páran magyarok, többnyire magyarországi magyarok, a brnoiak csak
+				néha tolták elő az orrukat :-)&lt;br /&gt;&lt;br /&gt;&lt;span
+				class="Apple-style-span" style="font-size: large;"&gt;Swimming
+				Upstream - Jared Smith&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;A fedora
+				project vezetője arról beszélt, hogy milyen egy ilyen linux disztró
+				fejlesztését irányítani, igen ezzel az opensource dologgal nem
+				zavarnálak titeket, de megemlítette valahol a java-t, beszéltünk az
+				egyik szünetben és azt hiszem hasonlóan látjuk a helyzetet a
+				fronvonal két szembenálló lövészárkából:&lt;br /&gt;&lt;u&gt;A java
+				fejlesztők és a linux fejlesztők valamit kapni akarnak egymástól, de
+				nem értik meg egymást és a végén senki nem kap semmit.&lt;/u&gt;
+				Bukó, nem? Nyomozok a dologgal kapcsolatban, vannak fejlemények,
+				majd mesélek egy másik posztban.&lt;br /&gt;&lt;br /&gt;&lt;span
+				class="Apple-style-span" style="font-size: large;"&gt;oVirt overview
+				- Alan Pavec&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;Ez a munkám,
+				imádatom és gyűlöletem tárgya, úgyhogy beültem hogy meghallgassam.
+				Majdnem teltház volt a nagyteremben, örültem neki hogy ekkora
+				érdeklődés volt. Sokan kérdeztek is. Remélem a hibákat sikerül
+				kijavítani mielött ők is megtalálják...&lt;br /&gt;&lt;br
+				/&gt;&lt;span class="Apple-style-span" style="font-size:
+				large;"&gt;RHQ4 - Lukás Krejci&lt;/span&gt;&lt;br /&gt;&lt;br
+				/&gt;Igen, a JBoss a redhaten belül egy külön ország. A java
+				általában már csak így van. Szóval a &lt;a
+				href="http://rhq-project.org/display/RHQ/Home"&gt;RHQ&lt;/a&gt;-val
+				java szervereket lehet igazgatni, több platformon keresztül. Lukás
+				csinált jópár demót is, néha volt egy kis izgalom hogy most mi
+				történik, de mindig jól sült el, pedig baromi nehéz live demót
+				csinálni.&lt;br /&gt;&lt;br /&gt;&lt;span class="Apple-style-span"
+				style="font-size: large;"&gt;Whats new in JBDS 5.0? - Martin
+				Malina&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;JBoss Developer Studio.
+				Jaja, erről &amp;nbsp;a srácról csinálták ezt a &lt;a
+				href="https://twitter.com/#!/radoslavhusar/status/170837997946806272/photo/1"&gt;vicces
+				képet&lt;/a&gt; az üresnek látszó teremmel. Senki nem ült közel,
+				mert akkor nagyon felfele kell nézni a kivetítőre. Közben én
+				laptopon próbálgattam amit a srác mutatott (ugyanis nem vagyok
+				pillanatnyilag képben jboss IDE-ből), meg is akadtam kicsit a forge
+				konzolon, nekem ez ugyanaz volt, mint a springsource roo nevű
+				cucca.&lt;br /&gt;&lt;br /&gt;&lt;span class="Apple-style-span"
+				style="font-size: large;"&gt;HornetQ - fastest JMS provider -
+				Niroslav Novak&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;Ideje, hogy
+				erdemben foglalkozzak a HornetQ-val. Ahogy néztem, könnyen
+				beágyazható és szépen muzsikál. Igazából nem a sebesség az első és
+				legfontosabb dolog, amit egy JMS szerver előnyei között fel tudok
+				sorolni, de nem árt egyáltalán. Mondjuk nem annyira gyorsabb az
+				ActiveMQ-nál. Érdekes lenne egy friss összehasonlítás, mit tudhat az
+				ActiveMQ csapat új cucca.&lt;br /&gt;&lt;br /&gt;&lt;span
+				class="Apple-style-span" style="font-size: large;"&gt;Tomcat 7 and
+				Tomcat 8 - Mladen Turk&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;Mit
+				kaptunk a tomcat 7-től és mit kapunk majd a tomcat 8-tól? Állítólag
+				a tomcat 7 sokkal jobb minőségű, mint a 6-os széria és ez a
+				legfontosabb a legtöbb fejlesztőnek. (még nem találkoztam senkivel
+				aki az async apit használta volna, annak ellenére hogy nagyon nagy
+				dobásnak tartottam) A tomcat 8 olyan dolgokat tartogat, mint
+				websockets... amire semmilyen standard api nincs, de legalább
+				történik valami.&lt;br /&gt;&lt;br /&gt;&lt;span
+				class="Apple-style-span" style="font-size:
+				large;"&gt;Egyéb...&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;Egyébként
+				volt kaja, volt innivaló (kólás pohárból kofola, király), esti parti
+				és voltak magyarok is, Magyarországról jöttek hárman. Páran nem
+				mertek elindulni a hazai úthelyzet miatt sajnos. De akik jöttek,
+				azokkal jót vitatkoztunk pár kérdésben :-)&lt;br /&gt;&lt;br /&gt;A
+				'Presentation Skills' tanárnőt láttam mászkálni a kamerájával,
+				aligha a linux kernel érdekelte, szerintem megpróbálja majd a
+				geek-eket kicsit rocksztárosabbra faragni. Nem baj, rájuk fér
+				:-)&lt;br /&gt;&lt;br /&gt;&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-5067833643367429014?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/02/developer-conference-2012-brno-masodik.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>0</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-3572846433068914958</guid>
+			<pubDate>Sat, 18 Feb 2012 07:15:00 +0000</pubDate>
+			<atom:updated>2012-02-18T08:16:50.158+01:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>virt</category>
+			<category domain='http://www.blogger.com/atom/ns#'>hibernate</category>
+			<category domain='http://www.blogger.com/atom/ns#'>jpa</category>
+			<category domain='http://www.blogger.com/atom/ns#'>cloud</category>
+			<category domain='http://www.blogger.com/atom/ns#'>linux</category>
+			<category domain='http://www.blogger.com/atom/ns#'>ovirt</category>
+			<category domain='http://www.blogger.com/atom/ns#'>nosql</category>
+			<category domain='http://www.blogger.com/atom/ns#'>konf</category>
+			<title>Developer Conference 2012 Brno, első nap</title>
+			<description>Tegnap a brnoi fejlesztői napon voltam, csak pár
+				prezentációról, ami nagyon tetszett...&lt;br /&gt;&lt;br
+				/&gt;&lt;span class="Apple-style-span" style="font-size:
+				large;"&gt;Towards Unified Messaging - Frantisek
+				Reznicek&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;A csákó az AMQP
+				protokolról és az &lt;a href="http://qpid.apache.org/"&gt;apache
+				qpid&lt;/a&gt;-ról beszélt. Az &lt;a
+				href="http://www.amqp.org/"&gt;AMQP&lt;/a&gt; egy szabvány message
+				queue-knak, nekünk a JMS protokol miatt nem volt különösebben
+				fontos, hogy protokol szinten szabványos legyen. Elég volt
+				kicserélni a drivert és kis szerencsével működött. Mindenesetre egy
+				egész tucat JMS szerver implementálja ezt a szabványt most már. Pl
+				az ActiveMQ és a &amp;nbsp;is.&lt;br /&gt;&lt;br /&gt;&lt;span
+				class="Apple-style-span" style="font-size: large;"&gt;Richfaces:
+				testing on mobil devices - Pavel Pitonak&lt;/span&gt;&lt;br
+				/&gt;&lt;br /&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;Érdekes demó a QE csapattól arról, hogy
+				hogyan automatizálják a tesztjeiket mobil eszközökre virtualizált
+				szerverekkel.&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;&lt;span class="Apple-style-span"
+				style="font-size: large;"&gt;What are Drools, Guvnor and Planner -
+				Geoffrey De Smet&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;Java témában kb etalonnak számító rules
+				engine és a köré épített projektek. Semmi új nem volt nekem,
+				decemberben elkezdtem egy prototipis projektet az oVirt mellett
+				kisérletezésre és az egészen Drools-ra épül. Geofrey viszont jó
+				előadó és a többiekkel ellentétben nem akadozik és nem dadog. Ja meg
+				cseh akcentusa sincs :)&lt;/div&gt;&lt;div&gt;A &lt;a
+				href="http://www.jboss.org/drools"&gt;drools&lt;/a&gt; érdemel talán
+				egy kicsit nagyobb figyelmet, szerintem sok gyakori problémát le
+				lehet vele egyszerűsíteni.&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;&lt;span class="Apple-style-span"
+				style="font-size: large;"&gt;Hibernate OGM - Michal
+				Linhard&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;Ez egy jelenleg alpha állapotú project
+				arra, hogy sima JPA apival és annotációkkal ne csak hagyományos
+				relációs, hanem NoSQL jellegű adatbázisokba is lehessen
+				perzisztálni. Jelenleg csak az infinispannal megy, de az infinispan
+				mögött lehet akármi is: cassandra, mongo, akár relácis adatbázis
+				vagy filerendszer is.&lt;/div&gt;&lt;div&gt;Ez nagyon tetszett, nem
+				tudom hogy fog elsülni ez a próbálkozás, de marha jó ötletnek
+				tartom. Kiváncsi vagyok tényleg sikerülhet-e a gyakorlatban, hogy
+				kihúzod az appod alól a relációs adatbbázist és kicseréled valami
+				NoSQL-re.&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;&lt;span class="Apple-style-span"
+				style="font-size: large;"&gt;Continuous integration with Jenkins CI
+				- Vojtech Juranek&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;Trükkök Jenkinssel. Virtuális
+				szervereken futó agentek, egzotikus nyelvek (php például), bug
+				detektor pluginok. Mondjuk a statikus analízisre én a sonar-t tartom
+				a legjobbnak, az nagyon pöpec.&lt;/div&gt;&lt;div&gt;Csak én tartom
+				igénytelennek a jenkins webes felületét? Jó, úgyis csak
+				fejlesztóknek kell, de ha ennyien használjuk, nincs egy designer
+				köztünk?&lt;/div&gt;&lt;div&gt;&lt;br
+				/&gt;&lt;/div&gt;&lt;div&gt;No, most jön a második nap, ma oVirt,
+				GlusterFS, SPICE további JBOSS előadásokat fogok
+				hallgatni.&lt;/div&gt;&lt;div class="blogger-post-footer"&gt;&lt;img
+				width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-3572846433068914958?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/02/developer-conference-2012-brno-elso-nap.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>4</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-7536251137725284389</guid>
+			<pubDate>Wed, 15 Feb 2012 16:58:00 +0000</pubDate>
+			<atom:updated>2012-02-16T15:47:04.945+01:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>gyárlátogatás</category>
+			<title>Gyárlátogatás: BuzzwordClass</title>
+			<description>Egy kis lista arról, hogy milyen ködösítő jelzőket
+				szedtem össze, amik nem valami design pattern alkalmazását jelzik,
+				hanem csak valahogy belekerülnek osztályok nevébe.&lt;br /&gt;&lt;br
+				/&gt;&lt;ol&gt;&lt;li&gt;&lt;b&gt;Domain&lt;/b&gt; - Ez általában
+				olyasmit akar, hogy sokminden lehet benne és úgy ahogy van egészben
+				van. Hát ezt akármire is mondhatnánk. pl weblogic domain, storage
+				domain, satöbbi...&lt;/li&gt;&lt;li&gt;&lt;b&gt;Business&lt;/b&gt; -
+				Hát ez fogalmam sincs mit jelent, többnyire semmit, simán
+				behelyettesítem
+				BLF-re.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Enterprise&lt;/b&gt; - Ez azt
+				jelenti, hogy a józan paraszti logika szerint marhaság-gyanús, de
+				&lt;strike&gt;karriercélokkal&lt;/strike&gt;&amp;nbsp;architektúrális
+				okokkal jól
+				alátámasztható.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Manager&lt;/b&gt; - Ez
+				néha ugyanaz, mint a valódi életben: konkrétan nem ő oldja meg a
+				problémát, de ismeri azt, aki
+				igen.&lt;/li&gt;&lt;li&gt;&lt;b&gt;Entity / Bean&lt;/b&gt; - Ez
+				egyszerűen csak azt jelenti hogy ő az adat, de ez sajnos nem jelenti
+				a történet végét.&lt;/li&gt;&lt;/ol&gt;&lt;div&gt;Mit szólnál ehhez
+				az osztálynévhez: EnterpriseBusinessManagerDomainEntityBean? Kemény
+				bullshit, nem? :-)&lt;/div&gt;&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-7536251137725284389?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/02/gyarlatogatas-buzzwordclass.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>5</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-1626827847764558295</guid>
+			<pubDate>Tue, 07 Feb 2012 07:02:00 +0000</pubDate>
+			<atom:updated>2012-02-16T15:47:40.907+01:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>nosql</category>
+			<title>mongo - eddig</title>
+			<description>A hétvégén kipróbáltam a &lt;a
+				href="http://www.mongodb.org/"&gt;mongodb&lt;/a&gt;-t és az igazság
+				az, hogy nagyon tetszik. Írtam rá egy kis java webappot, és kicsit
+				meghajtottam, a webapp 3000 request/sec-et simán elvitt mindenféle
+				tuning és cache nélkül egy 1.5 GB-os adatbázissal. Na jó be volt
+				indexelve, de az mondjuk a minimum... A processzorídő túlnyomó
+				részét a jvm vitte el (nyilván mert neki parsolgatnia kellett, meg
+				serializálnia, ami sebesség szempontjából elég haszontalan). Pedig
+				még egy youtube film is fogott a processzoridőből. Szóval sikerült
+				meglepni, nemgondoltam hogy ilyen jól fog pörögni.&lt;br /&gt;A
+				cassandrához képest az is nagyon tetszik, hogy&amp;nbsp;nagyon
+				könnyen&amp;nbsp;ki lehet deríteni egy collection méretét.
+				Cassandrában nem is tudom hogy lehet...&lt;br /&gt;Aztán a &lt;a
+				href="http://www.springsource.org/spring-data/mongodb"&gt;springes
+				API&lt;/a&gt; is egész klassz hozzá. A &lt;a
+				href="http://api.mongodb.org/java/2.7.2/"&gt;plain API&lt;/a&gt; se
+				valami bonyolult, a &lt;a
+				href="http://docs.oracle.com/javase/6/docs/api/java/sql/package-summary.html"&gt;JDBC&lt;/a&gt;-hez
+				képest pedig ultraegyszerű.&lt;br /&gt;Egészen kiváncsi lettem,
+				megpróbálom valamikor a &lt;a
+				href="http://dummywarhead.blogspot.com/2011/12/cassandra-on-pile-of-wreck.html"&gt;cassandrára
+				írt tesztemet&lt;/a&gt; átírni mongo-ra hogy lássam hogy néz ki több
+				node-on.&lt;div class="blogger-post-footer"&gt;&lt;img width='1'
+				height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-1626827847764558295?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/02/mongo-eddig.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>3</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-6119907936699879207</guid>
+			<pubDate>Wed, 01 Feb 2012 20:00:00 +0000</pubDate>
+			<atom:updated>2012-02-01T21:00:11.645+01:00</atom:updated>
+			<title>project reset</title>
+			<description>&lt;div&gt;Nem egyszer állítottam azt utóbbi X évben,
+				hogy egy bizonyos szoftvert egyszerűbb lenne újraírni, mint
+				debugerrel piszkálgatni nagyon sokáig, hamarabb lenne belőle simán
+				futó rendszer. Biztosan
+				nem&amp;nbsp;volt&amp;nbsp;mindig&amp;nbsp;igazam, de ilyesmi nagyon
+				nagyon ritkán történik, így ez ilyen "mi lenne akkor" maradt
+				jobbára. A parát
+				megértem:&lt;/div&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;Mi a garancia
+				arra, hogy az újraírt rendszer jobb lesz? Nem csak valami trendibb
+				izét akarnak a fejlesztők? Pl valami NoSQL-t az Oracle
+				rojszrojsz-adatbázis helyére. (btw éppen mongo-t
+				tanulok)&lt;/li&gt;&lt;li&gt;Az újraírás idejét miből gazdálkodja ki
+				a fejlesztő cég? (inkáb kiscégeknél)&lt;/li&gt;&lt;li&gt;Illetve az
+				eddig beleölt időt és pénzt hogyan írjuk le? (tipikisan nagy
+				cégeknél)&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;Ennek ellenére biztos
+				vagyok benne, hogy&lt;br /&gt;&lt;ul&gt;&lt;li&gt;A legtöbb
+				informatikai project&amp;nbsp;építget&amp;nbsp;olyan
+				komplexitásokat, ami nem kell egy megrendelőnek sem.&lt;br /&gt;Ide
+				tartoznak azok a feature-k, amiket senki se használ és az olyan
+				kódszervezési megoldások, amik a design patterns könyvben UML
+				diagrammon jól néztek ki de az editorban már kicsit
+				átláthatatlanok.&lt;/li&gt;&lt;li&gt;A szükségtelen bonyolítások
+				jelentős részétől általában gyakorlatilag nincs lehetőség
+				megszabadulni, a fejlesztést pedig rémesen
+				lelassítják.&lt;/li&gt;&lt;li&gt;Ebből következőleg egy from scratch
+				project gyorsabban képes fejlődni, ha tanult az elődje hibáiból és
+				nem próbál meg újabb trendi ingyombingyomokból
+				építkezni.&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;Jó megoldás nincs. Vagy
+				megszabadulsz a technológiai adósságodtól, vagy az egész project
+				alatt fizetheted a költségeit. Egyszerűen kiszámolható. Napi 8 óra
+				munkám 8 kiló banánba kerül, de ebból a nyolc órából 2-t
+				rebuild-redeploy, akkor napi 2 kiló banánért a cég nem értéket kap,
+				hanem a technológiai adósság fizetésére fordít.&lt;br /&gt;Ha így
+				nézzük a jrebel a legtöbb JEE projectben a legfontosabb program a
+				javac után. Azért lehet élni nélküle is, otthon elő nem
+				veszem...&lt;br /&gt;&lt;br /&gt;Ötlet megoldásra:&lt;br /&gt;&lt;br
+				/&gt;&lt;ul&gt;&lt;li&gt;Ismertesd meg a főnököd a &lt;a
+				href="http://en.wikipedia.org/wiki/Technical_debt"&gt;tech
+				debt&lt;/a&gt; fogalmával. Nem kell szégyellni, mindenkinek
+				van!&lt;/li&gt;&lt;li&gt;Tartsátok rajta a szemeteket, tudjátok hogy
+				mi mennyi időbe (tehát mennyi pénzbe) kerül A &lt;a
+				href="http://www.sonarsource.org/"&gt;sonar&lt;/a&gt; szerintem
+				klassz kis játék ehhez is, csak persze be kell
+				paraméterezni...&lt;/li&gt;&lt;/ul&gt;&lt;br /&gt;Egy tipushiba,
+				amit megfigyeltem, az az volt hogy amit a beszállító hozott, azt
+				elfogadták amennyiben a funkcionális követelményeknek megfelelt. Így
+				aztán pl groovy-ban írt csoda is érkezett, amikor a srácok többsége
+				még életében nem látott groovy-t. A beszállító elfutott a pénzével,
+				az üzemeltetés meg járkálhatott körbe, hogy "helló, valaki hallott
+				már groovy programnyelvről?" Aztán újraírták más nyelven, de abba se
+				vonták bele cég szoftverfejlesztőit tudtommal. Vajon ismétli magát a
+				történelem? Vagy csak bizonyos problémák időnként jelentkeznek ha
+				egyfajta hibát nem tudunk megérteni? :-)&lt;br /&gt;&lt;br
+				/&gt;Egészen pontosan egyszer történt velem az, hogy a management
+				beleegyezett egy újraírásba, de elöbb ki kellett javítanom az előző
+				rendszer kritikus hibáit, hogy legalább az újraírás alatt legyen
+				valami. Ezt mondjuk gondoltam előre, de ez a hibajavítás úgy fél
+				évet vett igénybe, az újraírt verziót is ugyanennyi idő alatt
+				fejlesztettük le, a 6 hónapnyi áthidalt időben viszont senki sem
+				merte használni a régi alkalmazást. Szóval a javítgatással nem
+				nyertünk semmit.&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-6119907936699879207?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/02/project-reset.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>1</thr:total>
+		</item>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-8101515053488736272</guid>
+			<pubDate>Thu, 26 Jan 2012 19:54:00 +0000</pubDate>
+			<atom:updated>2012-01-26T21:04:06.675+01:00</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>java</category>
+			<category domain='http://www.blogger.com/atom/ns#'>agile</category>
+			<category domain='http://www.blogger.com/atom/ns#'>cowboy coding</category>
+			<category domain='http://www.blogger.com/atom/ns#'>enterprise horror</category>
+			<title>Java Architekt - a gyakorlatban</title>
+			<description>&lt;a
+				href="http://jtechlog.blogspot.com/"&gt;István&lt;/a&gt; múlt heti
+				&lt;a
+				href="http://jtechlog.blogspot.com/2012/01/ki-is-az-java-architect.html"&gt;postjára&lt;/a&gt;
+				szeretnék egy kicsit bővebben reagálni, mint ahogy kifér egy pár
+				soros kommentben. Technikailag nagyon korrekt definíció egyébként,
+				de egy két dolgot hiányolok belőle és pár dologban buktatót
+				látok.&lt;br /&gt;&lt;br /&gt;Szóval
+				&lt;b&gt;szerintem&lt;/b&gt;...&lt;br /&gt;&lt;br /&gt;Elösször is
+				azt tenném hozzá, hogy amennyiben valaki - az architekt pl -
+				meghatározza a szoftver archiktetkúrát, amiben a szoftver-fejlesztők
+				dolgozni fognak, akkor &lt;b&gt;annak az embernek a
+				felelőssége&lt;/b&gt; az is, hogy a szoftverfejlesztők mennyire
+				tudják hatékonyan végezni a feladatukat. Amikor egy java architekt
+				dolgozik, akkor arra kellene koncentrálnia, hogy minnél egyszerűbb
+				és hatékonyabb eszközöket adjon a fejlesztőknek és minden
+				komplexitást csak valami megfelelő haszonért cserébe
+				(customer-value) engedjen be. Én ezzel szemben nagyon sok
+				fejlesztésben láttam valami totálisan elszállt marhaságot. A 97
+				things - és István is - ezt javasolja architekteknek: &lt;a
+				href="http://97things.oreilly.com/wiki/index.php/Don%27t_put_your_resume_ahead_of_the_requirements"&gt;ne
+				az önéletrajzodat fejleszd&lt;/a&gt;. Persze nem ez az egyetlen oka
+				annak, hogy egyes java projectek krónikusan &lt;a
+				href="http://iwillworkforfood.blogspot.com/2011/05/halalcsillag-design-pattern.html"&gt;halálcsillaggá&lt;/a&gt;
+				nőnek, van a dologban némi buta ego-fejlesztés is.&lt;br /&gt;&lt;br
+				/&gt;Többmillió java szoftverfejlesztő nevében követelem, hogy
+				amikor kiderül, hogy egy java rendszer elcseszett ökörség lett, az
+				architekt szüleit legalább annyira emlegessék meg, mint a
+				szoftverfejlesztőkét!&lt;br /&gt;A hegesztőmunkás is el tudja
+				cseszni, de általában ezek az hibák általában nagyon könnyen
+				javíthatóak. Ellenben architektúrális hibák
+				többnyire&amp;nbsp;végigkisérik&amp;nbsp;a szoftver életét.&lt;br
+				/&gt;&lt;br /&gt;A másik észrevételem az lenne, hogy István
+				definíciója nehezen illeszthető össze egy akármilyen agilis,
+				iteratív szoftverfejlesztéssel. Elösször is azért, mert az architekt
+				a definícióban elvágja a fejlesztőket a klienstől. Láttam már olyan
+				embert, aki egész jól játszotta az információfiltert, de ez nagyon
+				ritka, valamennyi infót mindenki elszór, a delay pedig minden
+				embernél nagyobb, mint a másfél másodperces csúszás a
+				telefonvonalban. Másrészt az agilis szoftverfejlesztés nem különít
+				el hosszú tervezési szakaszt. A tervezési szakasz nálam a waterfall
+				modell szinonímája. Aki ezzel jön elő, az általában valami olyasmit
+				forgat a fejében. Aztán tipikusan a fejlesztés alatt kiderül hogy
+				jajj, az úgy finoman fogalmazva is szuboptimális lesz, de akkor már
+				bukó van, mert implementálni köll.&lt;br /&gt;&lt;br /&gt;Aztán a
+				harmadik észrevétel: egy-egy cég szokásait és procedúráit kitanulni
+				időnként évekig is eltart, de legalább hónapokig. Én ha nagycég
+				lennék, inkáb a belső emberek között keresném a leendő architektek
+				legalább egy részét. Persze nagyon jól jöhet a más cégtől érkező
+				tapasztalat is, de annak még jó sok idő, amíg kitapasztalja, hogy mi
+				működik és mi nem működik valójában az új helyén.&lt;br /&gt;&lt;br
+				/&gt;Aztán még egy utolsó észrevétel a tanulással kapcsolatban:
+				Nagyon jó, ha valakinek volt rá pár milkája hogy meghallgassa az
+				Oracle/IBM/SAP/RedHat/Anyámtyúkja kurzusát, de az katasztrófa,
+				amikor ezek után a kurzusok után, a fenti cégek technológiáit és
+				termékeit lenyomkodja a fejlesztők, a cég, a kliens és a
+				felhasználók torkán, ha jó, ha nem jó. Ilyet pedig már mindannyian
+				láttunk. Én inkáb olyan emberrel dolgoznék együtt szivesen, aki nem
+				csak az Anyámtyúkja technológiáit és termékeit ismeri, nem nyalta be
+				a marketinget, hanem gyakorlati tapasztalatai vannak, látott
+				elcseszett és pöpec projecteket. És ha ez megvan, akkor az architekt
+				kurzus valószinűleg nem éri meg a pénzét.&lt;br /&gt;&lt;br
+				/&gt;Ö... oszt ennyi, na kitomboltam magam :-)&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-8101515053488736272?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/01/java-architekt-gyakorlatban.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>5</thr:total>
+		</item>
+	</channel>
+</rss>

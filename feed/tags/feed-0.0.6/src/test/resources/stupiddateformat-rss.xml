@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:atom='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/'
+	xmlns:blogger='http://schemas.google.com/blogger/2008' xmlns:georss='http://www.georss.org/georss'
+	xmlns:gd='http://schemas.google.com/g/2005' xmlns:thr='http://purl.org/syndication/thread/1.0'
+	version='2.0'>
+	<channel>
+		<atom:id>tag:blogger.com,1999:blog-3739219755752255838</atom:id>
+		<lastBuildDate>2012 Sep 12 13:16:22</lastBuildDate>
+		<category>virt</category>
+		<category>clustering</category>
+		<category>ws</category>
+		<category>postgresql</category>
+		<category>mule</category>
+		<category>appfuse</category>
+		<category>maven</category>
+		<category>CI</category>
+		<category>mina</category>
+		<category>cowboy coding</category>
+		<category>ovirt</category>
+		<category>todomap</category>
+		<category>chrome</category>
+		<category>agile</category>
+		<category>yikulju</category>
+		<category>python</category>
+		<category>spring</category>
+		<category>browser</category>
+		<category>spam</category>
+		<category>servlet</category>
+		<category>nosql</category>
+		<category>eclipse</category>
+		<category>jee</category>
+		<category>tapestry</category>
+		<category>linux</category>
+		<category>flexclipse</category>
+		<category>hibernate</category>
+		<category>acegi</category>
+		<category>cassandra</category>
+		<category>magyarul</category>
+		<category>java</category>
+		<category>ajax</category>
+		<category>aop</category>
+		<category>lucene</category>
+		<category>gyárlátogatás</category>
+		<category>cloud</category>
+		<category>openlaszlo</category>
+		<category>konf</category>
+		<category>flex</category>
+		<category>paypal</category>
+		<category>jpa</category>
+		<category>groovy</category>
+		<category>bookmark</category>
+		<category>drools</category>
+		<category>off</category>
+		<category>enterprise horror</category>
+		<category>jboss</category>
+		<category>ria</category>
+		<category>testing</category>
+		<category>ide</category>
+		<category>ioc</category>
+		<title>I will work for food</title>
+		<description>public static void main</description>
+		<link>http://iwillworkforfood.blogspot.com/</link>
+		<managingEditor>noreply@blogger.com (Kocka)</managingEditor>
+		<generator>Blogger</generator>
+		<openSearch:totalResults>326</openSearch:totalResults>
+		<openSearch:startIndex>1</openSearch:startIndex>
+		<openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+		<item>
+			<guid isPermaLink='false'>tag:blogger.com,1999:blog-3739219755752255838.post-142031268875534730</guid>
+			<pubDate>Thu, 30 Aug 2012 21:18:00 +0000</pubDate>
+			<atom:updated>2012 Sep 12 13:16:22</atom:updated>
+			<category domain='http://www.blogger.com/atom/ns#'>off</category>
+			<title>gondolom</title>
+			<description>Nézzük csak, a következő lehetőségek állnak
+				rendelkezésre a munkahelyed elhagyására:&lt;br
+				/&gt;&lt;ol&gt;&lt;li&gt;Melózolamíg meg nem halsz - nem hangzik
+				nagyon biztatóan.&lt;/li&gt;&lt;li&gt;Nyugdíjba mész - elvi
+				lehetőség, gyakorlatban inkább az 1. lesz, de ezt hivatalosan még
+				senki sem merte bevallani.&lt;/li&gt;&lt;li&gt;Kirúgnak - előfordul,
+				ezer lehetséges okból, és csak az egyik lehetséges ok vagy
+				te.&lt;/li&gt;&lt;li&gt;Felmondassz - ez a legjobb: már többre
+				értékeled az idődet, mint azt a pénzt, amit adnak cserébe. Vagy csak
+				mégtöbbet akarsz kapni érte...&lt;/li&gt;&lt;/ol&gt;Szóval ha
+				kirúgnak, az nem a legrosszabb lehetőség hanem az a második legjobb.
+				Gondoltam ezt felítom ide, hátha egy véletlenszerű pillanatban
+				valaki hasznosnak találja.&lt;br /&gt;&lt;br /&gt;&lt;span
+				style="font-size: xx-small;"&gt;A nap pozítív gondolata a Piros
+				Satyesz bt támogatásával.&lt;/span&gt;&lt;br /&gt;&lt;br
+				/&gt;Egyébként mostanában nagyon kevés szabadidőmben mongodb-ről
+				olvasgattam, tovább kínoztam a drools planner-t mindenféle
+				irányokban, meg wikipédiát szerkesztgetek. Egy csomó ötletem van, de
+				nagyon nehéz időt keríteni rá.&lt;div
+				class="blogger-post-footer"&gt;&lt;img width='1' height='1'
+				src='https://blogger.googleusercontent.com/tracker/3739219755752255838-142031268875534730?l=iwillworkforfood.blogspot.com'
+				alt='' /&gt;&lt;/div&gt;</description>
+			<link>http://iwillworkforfood.blogspot.com/2012/08/gondolom.html</link>
+			<author>noreply@blogger.com (Kocka)</author>
+			<thr:total>0</thr:total>
+		</item>
+	</channel>
+</rss>
