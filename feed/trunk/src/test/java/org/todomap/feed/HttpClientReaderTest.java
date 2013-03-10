@@ -1,10 +1,13 @@
 package org.todomap.feed;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import junit.framework.Assert;
 
+import org.apache.http.HttpResponse;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.todomap.feed.beans.NewsFeed;
 
 public class HttpClientReaderTest {
@@ -28,5 +31,15 @@ public class HttpClientReaderTest {
 		NewsFeed reReadFeed = HttpClientReader.read("http://iwillworkforfood.blogspot.com/feeds/posts/default", feed.getCacheControl());
 		Assert.assertNull(reReadFeed);
 	}
+	@Test
+	public void testSetCacheControls() {
+		HttpClientReader.setCacheControls(Mockito.mock(HttpResponse.class), null);
+		//TODO: test with non null feed
+	}
 
+	@Test
+	public void testSetTransportCompression() {
+		HttpClientReader.setTransportCompression(Mockito.mock(InputStream.class), null);
+		//TODO: test witj non null feed
+	}
 }

@@ -59,13 +59,22 @@ public class HttpClientReader {
 					.read(content);
 
 			setCacheControls(response, feed);
-			//this is a bit smelly, but looks like the only relyable way around httpclient's compression
-			feed.setTransportCompressed(content instanceof GZIPInputStream || content instanceof DeflaterInputStream);
+			setTransportCompression(content, feed);
 			return feed;
 		} catch (final IllegalStateException e) {
 			throw new IOException(e);
 		} catch (final URISyntaxException e) {
 			throw new IOException(e);
+		}
+	}
+
+	static void setTransportCompression(final InputStream content,
+			final AbstractNewsFeed feed) {
+		if (feed != null) {
+			// this is a bit smelly, but looks like the only relyable way around
+			// httpclient's compression
+			feed.setTransportCompressed(content instanceof GZIPInputStream
+					|| content instanceof DeflaterInputStream);
 		}
 	}
 
@@ -76,7 +85,7 @@ public class HttpClientReader {
 		return read(url, client, clientCacheState);
 	}
 
-	private static void setCacheControls(final HttpResponse response,
+	static void setCacheControls(final HttpResponse response,
 			final AbstractNewsFeed feed) {
 		if (feed != null) {
 			final ArrayList<TransportCacheControl> cacheControls = new ArrayList<>();
