@@ -13,8 +13,6 @@ public class Feed extends AbstractNewsFeed {
 	String generator;
 	String id;
 
-	List<Link> links = new ArrayList<Link>();
-
 	String rights;
 
 	String subtitle;
@@ -43,12 +41,6 @@ public class Feed extends AbstractNewsFeed {
 	@Override
 	public Date getLastBuildDate() {
 		return updated;
-	}
-
-	@Override
-	@XmlElement(name = "link", namespace = "http://www.w3.org/2005/Atom")
-	public List<Link> getLinks() {
-		return links;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -87,10 +79,6 @@ public class Feed extends AbstractNewsFeed {
 
 	public void setId(final String id) {
 		this.id = id;
-	}
-
-	public void setLinks(final List<Link> links) {
-		this.links = links;
 	}
 
 	public void setRights(final String rights) {

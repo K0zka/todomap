@@ -8,9 +8,11 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.todomap.feed.beans.Channel;
 import org.todomap.feed.beans.Feed;
 import org.todomap.feed.beans.NewsFeed;
 import org.todomap.feed.beans.Rss;
+import org.todomap.feed.utils.NewsFeedUtils;
 
 public class Reader {
 	static JAXBContext getContext() throws JAXBException {
@@ -31,6 +33,8 @@ public class Reader {
 				return (Feed) obj;
 			} else if (obj instanceof Rss) {
 				return ((Rss) obj).getChannel();
+			} else if (obj instanceof Channel) {
+				return (Channel) obj;
 			} else {
 				throw new IOException("Broken feed: " + obj.getClass());
 			}
@@ -41,7 +45,11 @@ public class Reader {
 
 	public static NewsFeed read(final String url) throws IOException {
 		try (InputStream stream = new URL(url).openStream();) {
-			return read(stream);
+			NewsFeed feed = read(stream);
+			if(feed != null && NewsFeedUtils.getSelfUrl(feed) == null) {
+				NewsFeedUtils.setSelfLink(feed, url);
+			}
+			return feed;
 		}
 	}
 }

@@ -9,6 +9,7 @@ import org.apache.http.HttpResponse;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.todomap.feed.beans.NewsFeed;
+import org.todomap.feed.utils.NewsFeedUtils;
 
 public class HttpClientReaderTest {
 	@Test
@@ -17,6 +18,14 @@ public class HttpClientReaderTest {
 		Assert.assertNotNull(feed);
 	}
 
+	@Test
+	public void testReadNoLink() throws IOException {
+		NewsFeed feed = HttpClientReader.read("http://pulispace.com/en/media/blog?format=feed&type=rss");
+		Assert.assertNotNull(feed);
+		Assert.assertNotNull(feed.getLinks());
+		Assert.assertNotNull(NewsFeedUtils.getSelfUrl(feed));
+	}
+	
 	@Test
 	public void testReadWithGzip() throws IOException {
 		NewsFeed feed = HttpClientReader.read("http://blog.dictat.org/?feed=rss2");

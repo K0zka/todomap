@@ -22,6 +22,7 @@ import org.todomap.feed.beans.NewsFeed;
 import org.todomap.feed.beans.transport.EtagCacheControl;
 import org.todomap.feed.beans.transport.LastModifiedCacheControl;
 import org.todomap.feed.beans.transport.TransportCacheControl;
+import org.todomap.feed.utils.NewsFeedUtils;
 
 public class HttpClientReader {
 	private static DecompressingHttpClient getDefaultClient() {
@@ -58,6 +59,9 @@ public class HttpClientReader {
 			final AbstractNewsFeed feed = (AbstractNewsFeed) Reader
 					.read(content);
 
+			if (feed != null && NewsFeedUtils.getSelfUrl(feed) == null) {
+				NewsFeedUtils.setSelfLink(feed, url);
+			}
 			setCacheControls(response, feed);
 			setTransportCompression(content, feed);
 			return feed;

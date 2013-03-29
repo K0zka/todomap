@@ -21,7 +21,6 @@ public class Channel extends AbstractNewsFeed {
 	String language;
 	Date lastBuildDate;
 	String link;
-	List<Link> links;
 	String managingEditor;
 	Date pubDate;
 	String title;
@@ -73,12 +72,6 @@ public class Channel extends AbstractNewsFeed {
 	@XmlElement(name = "link", required = true)
 	public String getLink() {
 		return link;
-	}
-
-	@Override
-	@XmlElement(name = "link", namespace = "http://www.w3.org/2005/Atom")
-	public List<Link> getLinks() {
-		return links;
 	}
 
 	@XmlElement
@@ -151,10 +144,6 @@ public class Channel extends AbstractNewsFeed {
 
 	public void setLink(final String link) {
 		this.link = link;
-	}
-
-	public void setLinks(final List<Link> links) {
-		this.links = links;
 	}
 
 	public void setManagingEditor(final String managingEditor) {
